@@ -9,6 +9,6 @@ namespace DraftKings.LineupGenerator.Business.Interfaces
     {
         bool CanGenerate(RulesModel rules);
 
-        Task<LineupsModel> GenerateAsync(RulesModel rules, DraftablesModel draftables);
+        Task<LineupsModel> GenerateAsync(LineupRequestModel request, RulesModel rules, DraftablesModel draftables);
     }
 }

@@ -7,6 +7,8 @@ namespace DraftKings.LineupGenerator.Models.Lineups
     {
         public string Description { get; set; }
 
-        public List<DraftablesDisplayModel> Draftables { get; set; }
+        public int Salary { get; set; }
+
+        public List<DraftableDisplayModel> Draftables { get; set; }
     }
 }

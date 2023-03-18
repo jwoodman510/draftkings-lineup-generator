@@ -1,6 +1,6 @@
 ﻿namespace DraftKings.LineupGenerator.Models.Draftables
 {
-    public class DraftablesDisplayModel
+    public class DraftableDisplayModel
     {
         public string Name { get; set; }
 
@@ -8,11 +8,14 @@
 
         public string Position { get; set; }
 
-        public DraftablesDisplayModel(string name, string position, decimal fppg)
+        public int Salary { get; set; }
+
+        public DraftableDisplayModel(string name, string position, decimal fppg, int salary)
         {
             Name = name;
             FPPG = fppg;
             Position = position;
+            Salary = salary;
         }
     }
 }

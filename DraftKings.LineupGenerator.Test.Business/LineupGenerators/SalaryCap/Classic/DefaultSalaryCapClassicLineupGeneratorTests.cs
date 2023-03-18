@@ -1,5 +1,6 @@
 using DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic;
 using DraftKings.LineupGenerator.Constants;
+using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
 using System.Threading.Tasks;
 using Xunit;
@@ -39,7 +40,7 @@ namespace DraftKings.LineupGenerator.Test.Business
             var rules = await JsonContentProvider.GetSalaryCapXflClassicRulesAsync();
             var draftables = await JsonContentProvider.GetSalaryCapXflClassicDraftablesAsync();
 
-            var lineup = await _generator.GenerateAsync(rules, draftables);
+            var lineup = await _generator.GenerateAsync(new LineupRequestModel(1), rules, draftables);
 
             Assert.NotNull(lineup);
         }

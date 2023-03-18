@@ -4,26 +4,8 @@ namespace DraftKings.LineupGenerator.Models.Draftables
 {
     public class DraftablesModel
     {
-        public int DraftableId { get; set; }
+        public List<DraftableModel> Draftables { get; set; }
 
-        public int RosterSlotId { get; set; }
-
-        public int Salary { get; set; }
-
-        public bool IsDisabled { get; set; }
-
-        public string Position { get; set; }
-
-        public string Status { get; set; }
-
-        public int TeamId { get; set; }
-
-        public string DisplayName { get; set; }
-
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public List<DraftStatAttributeModel> DraftStatAttributes { get; set; }
+        public List<DraftStatModel> DraftStats { get; set; }
     }
 }

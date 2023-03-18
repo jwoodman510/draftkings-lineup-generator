@@ -32,7 +32,7 @@ namespace DraftKings.LineupGenerator.Business.Services
 
             var generateLineups = _lineupGenerators
                 .Where(x => x.CanGenerate(rules))
-                .Select(x => x.GenerateAsync(rules, draftables));
+                .Select(x => x.GenerateAsync(request, rules, draftables));
 
             var lineups = await Task.WhenAll(generateLineups);
 

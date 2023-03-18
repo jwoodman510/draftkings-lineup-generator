@@ -1,4 +1,5 @@
 ﻿using DraftKings.LineupGenerator.Api;
+using DraftKings.LineupGenerator.Business.Filters;
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Constants;
 using DraftKings.LineupGenerator.Models.Draftables;
@@ -25,25 +26,32 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
             return rules.GameTypeName == GameTypes.NflClassic || rules.GameTypeName == GameTypes.XflClassic;
         }
 
-        public async Task<LineupsModel> GenerateAsync(RulesModel rules, DraftablesModel draftables)
+        public async Task<LineupsModel> GenerateAsync(LineupRequestModel request, RulesModel rules, DraftablesModel draftables)
         {
             await Task.Yield();
 
-            // TODO: The logic...
+            var filteredDraftables = draftables.Draftables
+                .ExcludeOut()
+                .ExcludeDisabled()
+                .ExcludeZeroSalary()
+                .ExcludeInjuredReserve()
+                .ExcludeZeroSalary();
 
-            // Remove Disabled
-            // Remove 0 FPPG
-            // Remove Inactive
-            // Remove Questionable
+            if (!request.IncludeQuestionable)
+            {
+                filteredDraftables.ExcludeQuestionable();
+            }
+
+            var salaryCap = rules.SalaryCap.MaxValue;
 
             return new LineupsModel
             {
-                Description = "Default FPPG Lineup (Excluding Questionables)",
+                Description = "Default FPPG Lineup",
                 Lineups = new List<LineupModel>
                 {
                     new LineupModel
                     {
-                        Draftables = new List<DraftablesDisplayModel>()
+                        Draftables = new List<DraftableDisplayModel>()
                     }
                 }
             };
