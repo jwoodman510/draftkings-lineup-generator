@@ -12,5 +12,7 @@ namespace DraftKings.LineupGenerator.Models.Lineups
         [Required]
         [Range(1, int.MaxValue)]
         public int ContestId { get; init; }
+
+        public bool IncludeQuestionable { get; set; }
     }
 }

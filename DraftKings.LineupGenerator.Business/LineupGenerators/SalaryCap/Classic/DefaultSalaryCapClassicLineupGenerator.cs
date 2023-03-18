@@ -43,7 +43,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 {
                     new LineupModel
                     {
-                        Draftables = new List<DraftablesModel>()
+                        Draftables = new List<DraftablesDisplayModel>()
                     }
                 }
             };

@@ -7,6 +7,6 @@ namespace DraftKings.LineupGenerator.Models.Lineups
     {
         public string Description { get; set; }
 
-        public List<DraftablesModel> Draftables { get; set; }
+        public List<DraftablesDisplayModel> Draftables { get; set; }
     }
 }

@@ -30,7 +30,10 @@ namespace DraftKings.LineupGenerator.Api
 
             var response = await HttpClientFactory.CreateClient().GetAsync(url);
 
-            response.EnsureSuccessStatusCode();
+            if (!response.IsSuccessStatusCode)
+            {
+                return default;
+            }
 
             var responseJson = await response.Content.ReadAsStringAsync();
 
