@@ -1,13 +1,12 @@
 ﻿using DraftKings.LineupGenerator.Business;
 using DraftKings.LineupGenerator.Business.Interfaces;
-using DraftKings.LineupGenerator.Console;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 using System.CommandLine;
 using System.Threading.Tasks;
 
-namespace draftkings_lineup_generator
+namespace DraftKings.LineupGenerator
 {
     internal class Program
     {

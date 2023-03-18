@@ -2,7 +2,7 @@
 using System.CommandLine;
 using System.CommandLine.Binding;
 
-namespace DraftKings.LineupGenerator.Console
+namespace DraftKings.LineupGenerator
 {
     public class LineupRequestModelBinder : BinderBase<LineupRequestModel>
     {
