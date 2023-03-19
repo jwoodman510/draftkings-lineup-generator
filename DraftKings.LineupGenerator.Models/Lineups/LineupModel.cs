@@ -10,6 +10,6 @@ namespace DraftKings.LineupGenerator.Models.Lineups
 
         public int Salary => Draftables?.Sum(x => x.Salary) ?? default;
 
-        public List<DraftableDisplayModel> Draftables { get; set; }
+        public IEnumerable<DraftableDisplayModel> Draftables { get; set; }
     }
 }

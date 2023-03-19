@@ -3,6 +3,9 @@ using DraftKings.LineupGenerator.Business.Services;
 using DraftKings.LineupGenerator.Constants;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
+using FluentAssertions;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -45,9 +48,34 @@ namespace DraftKings.LineupGenerator.Test.Business
             var rules = await JsonContentProvider.GetSalaryCapXflClassicRulesAsync();
             var draftables = await JsonContentProvider.GetSalaryCapXflClassicDraftablesAsync();
 
-            var lineup = await _generator.GenerateAsync(new LineupRequestModel(1), rules, draftables);
+            var result = await _generator.GenerateAsync(new LineupRequestModel(1), rules, draftables);
 
-            Assert.NotNull(lineup);
+            result.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task HonorsRosterSlotTemplate()
+        {
+            var rules = await JsonContentProvider.GetSalaryCapXflClassicRulesAsync();
+            var draftables = await JsonContentProvider.GetSalaryCapXflClassicDraftablesAsync();
+
+            var result = await _generator.GenerateAsync(new LineupRequestModel(1), rules, draftables);
+
+            var expectedPositions = new List<string>
+            {
+                "QB",
+                "RB",
+                "WR/TE",
+                "WR/TE",
+                "FLEX",
+                "FLEX",
+                "DST"
+            };
+
+            result.Lineups.Should().NotBeEmpty();
+
+            result.Lineups.First().Draftables.Select(x => x.RosterPosition)
+                .Should().BeEquivalentTo(expectedPositions, opts => opts.WithoutStrictOrdering());
         }
     }
 }

@@ -6,6 +6,6 @@ namespace DraftKings.LineupGenerator.Models.Lineups
     {
         public string Description { get; set; }
 
-        public List<LineupModel> Lineups { get; set; }
+        public IEnumerable<LineupModel> Lineups { get; set; }
     }
 }

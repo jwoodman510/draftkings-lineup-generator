@@ -1,10 +1,11 @@
-﻿using DraftKings.LineupGenerator.Business.Filters;
+﻿using DraftKings.LineupGenerator.Business.Constants;
+using DraftKings.LineupGenerator.Business.Extensions;
+using DraftKings.LineupGenerator.Business.Filters;
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Constants;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -61,13 +62,25 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var possibleLineups = _classicLineupService.GetAllPossibleLineups(rules, draftables, eligiblePlayers);
 
+            var fppgDraftStat = draftables.DraftStats.Single(x => x.Name == DraftStats.FantasyPointsPerGame);
+
+            var count = possibleLineups.Count();
+
             result.Lineups = possibleLineups
-                .Where(x => x.Salary <= rules.SalaryCap.MaxValue)
-                .Where(x => x.Salary >= rules.SalaryCap.MinValue)
-                .GroupBy(x => x.Salary)
-                .OrderByDescending(x => x.Key)
-                .FirstOrDefault()
-                ?.ToList() ?? new List<LineupModel>();
+                .Select(x => new { Lineup = x, Salary = x.Sum(y => y.Salary) })
+                .Where(x => x.Salary <= rules.SalaryCap.MaxValue && x.Salary >= rules.SalaryCap.MinValue)
+                .OrderByDescending(x => x.Salary)
+                .Take(1)
+                .Select(x => x.Lineup)
+                .Select(lineup => new LineupModel
+                {
+                    Draftables = lineup
+                        .Select(player => new DraftableDisplayModel(
+                            player.DisplayName,
+                            player.GetDraftStatAttribute(fppgDraftStat),
+                            player.Salary,
+                            player.GetRosterPosition(rules)))
+                });
 
             return result;
         }

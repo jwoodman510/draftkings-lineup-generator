@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DraftKings.LineupGenerator.Business.Extensions
@@ -26,13 +27,46 @@ namespace DraftKings.LineupGenerator.Business.Extensions
             }
         }
 
-        public static IEnumerable<IEnumerable<T>> CombinePermutations<T>(this IEnumerable<IEnumerable<T>> first, IEnumerable<IEnumerable<T>> second)
+        /// <summary>
+        /// Aggregates two permutations into a single k-combination enumerable.
+        /// </summary>
+        /// <param name="filterPredicate">An optional filter applied to determine whether permutation items should be combined.</param>
+        public static IEnumerable<IEnumerable<T>> CombinePermutations<T>(
+            this IEnumerable<IEnumerable<T>> first,
+            IEnumerable<IEnumerable<T>> second,
+            Func<IEnumerable<T>, IEnumerable<T>, bool> filterPredicate = null)
         {
-            foreach (var permutation in second)
+            var inner = first;
+            var outter = second;
+
+            var innerIterated = false;
+            var outerIterated = false;
+
+            foreach (var outerPermutation in outter)
             {
-                foreach (var innerPermutation in first)
+                outerIterated = true;
+
+                foreach (var innerPermutation in inner)
                 {
-                    yield return innerPermutation.Concat(permutation);
+                    innerIterated = true;
+
+                    if (filterPredicate == null || filterPredicate(innerPermutation, outerPermutation))
+                    {
+                        yield return innerPermutation.Concat(outerPermutation);
+                    }
+                }
+
+                if (!innerIterated)
+                {
+                    yield return outerPermutation;
+                }
+            }
+
+            if (!outerIterated)
+            {
+                foreach (var permutation in inner)
+                {
+                    yield return permutation;
                 }
             }
         }

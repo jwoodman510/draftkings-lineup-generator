@@ -1,8 +1,6 @@
-﻿using DraftKings.LineupGenerator.Business.Constants;
-using DraftKings.LineupGenerator.Business.Extensions;
+﻿using DraftKings.LineupGenerator.Business.Extensions;
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Models.Draftables;
-using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,76 +9,56 @@ namespace DraftKings.LineupGenerator.Business.Services
 {
     public class ClassicLineupService : IClassicLineupService
     {
-        public IEnumerable<LineupModel> GetAllPossibleLineups(
+        public IEnumerable<IEnumerable<DraftableModel>> GetAllPossibleLineups(
             RulesModel rules,
-            DraftablesModel draftables)
-        {
-            return GetAllPossibleLineups(rules, draftables, draftables.Draftables);
-        }
+            DraftablesModel draftables) => GetAllPossibleLineups(rules, draftables, draftables.Draftables);
 
-        public IEnumerable<LineupModel> GetAllPossibleLineups(
+        public IEnumerable<IEnumerable<DraftableModel>> GetAllPossibleLineups(
             RulesModel rules,
             DraftablesModel draftables,
-            IEnumerable<DraftableModel> eligiblePlayers)
-        {
-            var salaryCap = rules.SalaryCap.MaxValue;
-            var fppgDraftStat = draftables.DraftStats.Single(x => x.Name == DraftStats.FantasyPointsPerGame);
-
-            var permuations = GetPermutations(rules, eligiblePlayers);
-
-            var validTemplateRosterIds = rules.LineupTemplate
-                .Select(x => x.RosterSlot.Id)
-                .OrderBy(x => x)
-                .ToList();
-
-            var validPermutations = permuations.Where(x =>
-                x.Select(p => p.RosterSlotId)
-                .OrderBy(id => id)
-                .SequenceEqual(validTemplateRosterIds));
-
-            return validPermutations.Select(permutation => new LineupModel
-            {
-                Draftables = permutation
-                    .Select(player => new DraftableDisplayModel(
-                        player.DisplayName,
-                        player.GetDraftStatAttribute(fppgDraftStat),
-                        player.Salary,
-                        player.GetRosterPosition(rules)))
-                    .ToList()
-            });
-        }
+            IEnumerable<DraftableModel> eligiblePlayers) => GetPermutations(rules, eligiblePlayers);
 
         private static IEnumerable<IEnumerable<DraftableModel>> GetPermutations(RulesModel rules, IEnumerable<DraftableModel> eligiblePlayers)
         {
-            var singleRosterSlots = rules.LineupTemplate
+            var rosterSlotGroups = rules.LineupTemplate
                 .GroupBy(x => x.RosterSlot.Id)
-                .Where(x => x.Count() == 1)
-                .Select(x => x.Key)
-                .ToHashSet();
-
-            if (singleRosterSlots.Count == 0)
-            {
-                return eligiblePlayers.GetPermutations(rules.LineupTemplate.Count);
-            }
+                .Select(x => new { RosterSlotId = x.Key, Count = x.Count() })
+                .GroupBy(x => x.Count)
+                .OrderBy(x => x.Key);
 
             var permutations = Enumerable.Empty<IEnumerable<DraftableModel>>();
 
-            var singleSlotPlayers = eligiblePlayers
-                .Where(x => singleRosterSlots.Contains(x.RosterSlotId))
-                .ToList();
+            foreach (var rosterSlotGroup in rosterSlotGroups)
+            {
+                var slotCount = rosterSlotGroup.Key;
+                var rosterSlotIds = rosterSlotGroup.Select(x => x.RosterSlotId).ToHashSet();
 
-            var nonSingleSlotPlayers = eligiblePlayers
-                .Where(x => !singleRosterSlots.Contains(x.RosterSlotId))
-                .ToList();
+                var rosterSlotPlayers = eligiblePlayers.Where(x => rosterSlotIds.Contains(x.RosterSlotId));
+                var rosterSlotPermutations = GetPermutationsForSlots(rosterSlotIds, rosterSlotPlayers, slotCount);
 
-            var singleSlotPermutations = singleSlotPlayers.GetPermutations(singleSlotPlayers.Count);
-            var nonSingleSlotPermutations = nonSingleSlotPlayers.GetPermutations(rules.LineupTemplate.Count - singleRosterSlots.Count);
+                permutations = permutations.CombinePermutations(rosterSlotPermutations, filterPredicate: ShouldCombinePermutations);
+            }
 
-            var second = nonSingleSlotPermutations.ToList();
-            var first = singleSlotPermutations.ToList();
-            var combined = first.CombinePermutations(second).ToList();
+            return permutations;
+        }
 
-            return singleSlotPermutations.CombinePermutations(nonSingleSlotPermutations);
+        private static IEnumerable<IEnumerable<DraftableModel>> GetPermutationsForSlots(HashSet<int> rosterSlotIds, IEnumerable<DraftableModel> slotPlayers, int slotCount)
+        {
+            var rosterSlotPermutations = rosterSlotIds.Select(x => slotPlayers.Where(p => p.RosterSlotId == x).GetPermutations(slotCount));
+
+            return rosterSlotPermutations.Aggregate(Enumerable.Empty<IEnumerable<DraftableModel>>(), (rosterSlotPermutation, aggregate) =>
+            {
+                return rosterSlotPermutation.CombinePermutations(aggregate, filterPredicate: ShouldCombinePermutations);
+            });
+        }
+
+        private static bool ShouldCombinePermutations(IEnumerable<DraftableModel> first, IEnumerable<DraftableModel> second)
+        {
+            var secondPlayerIds = second.Select(x => x.PlayerId).ToHashSet();
+
+            var hasDuplicate = first.Select(x => x.PlayerId).Any(x => secondPlayerIds.Contains(x));
+
+            return !hasDuplicate;
         }
     }
 }
