@@ -6,6 +6,7 @@ using DraftKings.LineupGenerator.Constants;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -51,22 +52,54 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var eligiblePlayers = GetEligiblePlayers(request, draftables);
 
-            var possibleLineups = _classicLineupService.GetPotentialLineups(rules, draftables, eligiblePlayers.ToList());
+            var potentialLineups = _classicLineupService.GetPotentialLineups(rules, draftables, eligiblePlayers);
 
-            result.Lineups = possibleLineups
-                .Select(lineup => new LineupModel
+            var lineupsBag = new ConcurrentBag<LineupModel>();
+
+            potentialLineups.AsParallel().ForAll(potentialLineup =>
+            {
+                var lineup = new LineupModel
                 {
-                    Draftables = lineup
+                    Draftables = potentialLineup
                         .Select(player => new DraftableDisplayModel(
                             player.DisplayName,
                             player.GetFppg(draftables.DraftStats),
                             player.Salary,
                             player.GetRosterPosition(rules)))
-                })
-                .Where(x => x.Salary <= rules.SalaryCap.MaxValue && x.Salary >= rules.SalaryCap.MinValue)
-                .GroupBy(x => x.Fppg)
-                .OrderByDescending(x => x.Key)
-                .First();
+                        .ToList()
+                };
+
+                if (lineup.Salary >= rules.SalaryCap.MaxValue || lineup.Salary <= rules.SalaryCap.MinValue)
+                {
+                    return;
+                }
+
+                if (lineupsBag.IsEmpty)
+                {
+                    lineupsBag.Add(lineup);
+
+                    return;
+                }
+
+                if (!lineupsBag.TryPeek(out var existing))
+                {
+                    return;
+                }
+
+                if (existing.Fppg > lineup.Fppg)
+                {
+                    return;
+                }
+
+                if (existing.Fppg < lineup.Fppg)
+                {
+                    lineupsBag.Clear();
+                }
+
+                lineupsBag.Add(lineup);
+            });
+
+            result.Lineups.AddRange(lineupsBag);
 
             return result;
         }
@@ -79,11 +112,17 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 .ExcludeZeroSalary()
                 .ExcludeInjuredReserve()
                 .ExcludeZeroSalary()
-                .ExcludeZeroFppg(draftables.DraftStats);
+                .ExcludeZeroFppg(draftables.DraftStats)
+                .MinimumFppg(draftables.DraftStats, request.MinFppg);
 
             if (!request.IncludeQuestionable)
             {
                 eligiblePlayers.ExcludeQuestionable();
+            }
+
+            if (!request.IncludeBaseSalary)
+            {
+                eligiblePlayers.ExcludeBaseSalary();
             }
 
             return eligiblePlayers.ToList();

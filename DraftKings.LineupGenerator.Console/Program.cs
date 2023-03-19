@@ -15,12 +15,20 @@ namespace DraftKings.LineupGenerator
             var rootCommand = new RootCommand();
 
             var contestIdOption = new Option<int>("--contestId", "[REQUIRED] The DraftKings contest identifier.");
-            var includeQuestionableOption = new Option<bool>("--include-questionable", "Includes draftables with a questionable status.");
+            var includeQuestionableOption = new Option<bool>("--include-questionable", "[default=false] Includes draftables with a questionable status.");
+            var includeBaseSalaryOption = new Option<bool>("--include-base-salary", "[default=false] Includes draftables with the base salary (lowest possible).");
+            var minFppgOption = new Option<decimal>("--min-fppg", "[default=5.0] Minimum fantasy points per game (per player).");
 
             rootCommand.AddOption(contestIdOption);
             rootCommand.AddOption(includeQuestionableOption);
+            rootCommand.AddOption(includeBaseSalaryOption);
+            rootCommand.AddOption(minFppgOption);
 
-            var modelBinder = new LineupRequestModelBinder(contestIdOption, includeQuestionableOption);
+            var modelBinder = new LineupRequestModelBinder(
+                contestIdOption,
+                includeQuestionableOption,
+                includeBaseSalaryOption,
+                minFppgOption);
 
             rootCommand.SetHandler(async request =>
             {

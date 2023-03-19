@@ -13,6 +13,10 @@ namespace DraftKings.LineupGenerator.Models.Lineups
         [Range(1, int.MaxValue)]
         public int ContestId { get; init; }
 
-        public bool IncludeQuestionable { get; set; }
+        public bool IncludeQuestionable { get; set; } = false;
+
+        public bool IncludeBaseSalary { get; set; } = false;
+
+        public decimal MinFppg { get; set; } = 5.0m;
     }
 }

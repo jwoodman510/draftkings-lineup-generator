@@ -11,5 +11,10 @@ namespace DraftKings.LineupGenerator.Business.Filters
         {
             return draftables.Where(x => x.GetFppg(draftStats) > 0);
         }
+
+        public static IEnumerable<DraftableModel> MinimumFppg(this IEnumerable<DraftableModel> draftables, List<DraftStatModel> draftStats, decimal fppg)
+        {
+            return draftables.Where(x => x.GetFppg(draftStats) >= fppg);
+        }
     }
 }

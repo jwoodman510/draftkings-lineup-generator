@@ -7,3 +7,5 @@
     - `--contestId {int}`
   - Optional:
     - `--include-questionable`
+    - `--include-base-salary`
+    - `--min-fppg`
