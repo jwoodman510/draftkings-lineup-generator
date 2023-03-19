@@ -33,7 +33,10 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 return false;
             }
 
-            return rules.GameTypeName == GameTypes.NflClassic || rules.GameTypeName == GameTypes.XflClassic;
+            return
+                rules.GameTypeName == GameTypes.NflClassic ||
+                rules.GameTypeName == GameTypes.XflClassic ||
+                rules.GameTypeName == GameTypes.MaddenClassic;
         }
 
         public async Task<LineupsModel> GenerateAsync(LineupRequestModel request, RulesModel rules, DraftablesModel draftables)
@@ -50,7 +53,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 return result;
             }
 
-            var eligiblePlayers = GetEligiblePlayers(request, draftables);
+            var eligiblePlayers = GetEligiblePlayers(request, rules, draftables);
 
             var potentialLineups = _classicLineupService.GetPotentialLineups(rules, draftables, eligiblePlayers);
 
@@ -104,7 +107,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
             return result;
         }
 
-        private static List<DraftableModel> GetEligiblePlayers(LineupRequestModel request, DraftablesModel draftables)
+        private static List<DraftableModel> GetEligiblePlayers(LineupRequestModel request, RulesModel rules, DraftablesModel draftables)
         {
             var eligiblePlayers = draftables.Draftables
                 .ExcludeOut()
@@ -112,8 +115,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 .ExcludeZeroSalary()
                 .ExcludeInjuredReserve()
                 .ExcludeZeroSalary()
-                .ExcludeZeroFppg(draftables.DraftStats)
-                .MinimumFppg(draftables.DraftStats, request.MinFppg);
+                .ExcludeZeroFppg(draftables.DraftStats);
 
             if (!request.IncludeQuestionable)
             {
@@ -125,7 +127,15 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 eligiblePlayers.ExcludeBaseSalary();
             }
 
-            return eligiblePlayers.ToList();
+            var dstRosterSlot = rules.LineupTemplate.Single(x => x.RosterSlot.Name == RosterSlots.Dst).RosterSlot;
+
+            var nonDstPlayers = eligiblePlayers
+                .Where(x => x.RosterSlotId != dstRosterSlot.Id)
+                .MinimumFppg(draftables.DraftStats, request.MinFppg);
+
+            var dstPlayers = eligiblePlayers.Where(x => x.RosterSlotId == dstRosterSlot.Id);
+
+            return nonDstPlayers.Concat(dstPlayers).ToList();
         }
     }
 }

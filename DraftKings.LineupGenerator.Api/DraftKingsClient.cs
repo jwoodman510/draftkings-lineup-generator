@@ -7,14 +7,18 @@ namespace DraftKings.LineupGenerator.Api
     {
         public DraftKingsClient(
             IRulesClient rulesClient,
-            IDraftablesClient draftablesClient)
+            IDraftablesClient draftablesClient,
+            IContestsClient contests)
         {
             Rules = rulesClient;
             Draftables = draftablesClient;
+            Contests = contests;
         }
 
         public IRulesClient Rules { get; init; }
 
         public IDraftablesClient Draftables { get; init; }
+
+        public IContestsClient Contests { get; init; }
     }
 }

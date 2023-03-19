@@ -17,6 +17,6 @@ namespace DraftKings.LineupGenerator.Models.Lineups
 
         public bool IncludeBaseSalary { get; set; } = false;
 
-        public decimal MinFppg { get; set; } = 5.0m;
+        public decimal MinFppg { get; set; } = 10.0m;
     }
 }

@@ -17,6 +17,7 @@ namespace DraftKings.LineupGenerator.Business
                 .AddHttpClient()
                 .AddMemoryCache()
                 .AddTransient<IRulesClient, RulesClient>()
+                .AddTransient<IContestsClient, ContestsClient>()
                 .AddTransient<IDraftablesClient, DraftablesClient>()
                 .AddTransient<IDraftKingsClient, DraftKingsClient>();
 

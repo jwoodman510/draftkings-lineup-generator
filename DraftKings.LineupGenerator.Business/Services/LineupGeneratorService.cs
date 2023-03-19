@@ -22,8 +22,15 @@ namespace DraftKings.LineupGenerator.Business.Services
 
         public async Task<List<LineupsModel>> GetAsync(LineupRequestModel request)
         {
-            var rules = await _draftKingsClient.Rules.GetAsync(request.ContestId);
-            var draftables = await _draftKingsClient.Draftables.GetAsync(request.ContestId);
+            var contest = await _draftKingsClient.Contests.GetAsync(request.ContestId);
+
+            if (contest == null)
+            {
+                return new List<LineupsModel>();
+            }
+
+            var rules = await _draftKingsClient.Rules.GetAsync(contest.ContestDetail.GameTypeId);
+            var draftables = await _draftKingsClient.Draftables.GetAsync(contest.ContestDetail.DraftGroupId);
 
             if (rules == null || draftables == null)
             {

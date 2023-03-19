@@ -1,5 +1,6 @@
 ﻿using DraftKings.LineupGenerator.Business;
 using DraftKings.LineupGenerator.Business.Interfaces;
+using DraftKings.LineupGenerator.Models.Lineups;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
@@ -14,10 +15,16 @@ namespace DraftKings.LineupGenerator
         {
             var rootCommand = new RootCommand();
 
-            var contestIdOption = new Option<int>("--contestId", "[REQUIRED] The DraftKings contest identifier.");
+            var contestIdOption = new Option<int>("--contestId", "[REQUIRED] The DraftKings contest identifier.")
+            {
+                IsRequired = true
+            };
+
             var includeQuestionableOption = new Option<bool>("--include-questionable", "[default=false] Includes draftables with a questionable status.");
             var includeBaseSalaryOption = new Option<bool>("--include-base-salary", "[default=false] Includes draftables with the base salary (lowest possible).");
-            var minFppgOption = new Option<decimal>("--min-fppg", "[default=5.0] Minimum fantasy points per game (per player).");
+            var minFppgOption = new Option<decimal>("--min-fppg", "[default=10.0] Minimum fantasy points per game (per player - excluding defense & kickers).");
+
+            minFppgOption.SetDefaultValue(new LineupRequestModel(default).MinFppg);
 
             rootCommand.AddOption(contestIdOption);
             rootCommand.AddOption(includeQuestionableOption);

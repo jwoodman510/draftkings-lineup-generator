@@ -8,5 +8,7 @@ namespace DraftKings.LineupGenerator.Api
         IRulesClient Rules { get; }
 
         IDraftablesClient Draftables { get; }
+
+        IContestsClient Contests { get; }
     }
 }

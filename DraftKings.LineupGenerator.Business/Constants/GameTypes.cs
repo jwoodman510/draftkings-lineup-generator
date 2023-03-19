@@ -9,5 +9,7 @@
         public const string XflShowDown = "XFL Showdown";
 
         public const string XflClassic = "XFL Classic";
+
+        public const string MaddenClassic = "Madden Classic";
     }
 }
