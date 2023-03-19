@@ -6,6 +6,7 @@ using DraftKings.LineupGenerator.Constants;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -48,41 +49,44 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 return result;
             }
 
+            var eligiblePlayers = GetEligiblePlayers(request, draftables);
+
+            var possibleLineups = _classicLineupService.GetPotentialLineups(rules, draftables, eligiblePlayers.ToList());
+
+            result.Lineups = possibleLineups
+                .Select(lineup => new LineupModel
+                {
+                    Draftables = lineup
+                        .Select(player => new DraftableDisplayModel(
+                            player.DisplayName,
+                            player.GetFppg(draftables.DraftStats),
+                            player.Salary,
+                            player.GetRosterPosition(rules)))
+                })
+                .Where(x => x.Salary <= rules.SalaryCap.MaxValue && x.Salary >= rules.SalaryCap.MinValue)
+                .GroupBy(x => x.Fppg)
+                .OrderByDescending(x => x.Key)
+                .First();
+
+            return result;
+        }
+
+        private static List<DraftableModel> GetEligiblePlayers(LineupRequestModel request, DraftablesModel draftables)
+        {
             var eligiblePlayers = draftables.Draftables
                 .ExcludeOut()
                 .ExcludeDisabled()
                 .ExcludeZeroSalary()
                 .ExcludeInjuredReserve()
-                .ExcludeZeroSalary();
+                .ExcludeZeroSalary()
+                .ExcludeZeroFppg(draftables.DraftStats);
 
             if (!request.IncludeQuestionable)
             {
                 eligiblePlayers.ExcludeQuestionable();
             }
 
-            var possibleLineups = _classicLineupService.GetAllPossibleLineups(rules, draftables, eligiblePlayers);
-
-            var fppgDraftStat = draftables.DraftStats.Single(x => x.Name == DraftStats.FantasyPointsPerGame);
-
-            var count = possibleLineups.Count();
-
-            result.Lineups = possibleLineups
-                .Select(x => new { Lineup = x, Salary = x.Sum(y => y.Salary) })
-                .Where(x => x.Salary <= rules.SalaryCap.MaxValue && x.Salary >= rules.SalaryCap.MinValue)
-                .OrderByDescending(x => x.Salary)
-                .Take(1)
-                .Select(x => x.Lineup)
-                .Select(lineup => new LineupModel
-                {
-                    Draftables = lineup
-                        .Select(player => new DraftableDisplayModel(
-                            player.DisplayName,
-                            player.GetDraftStatAttribute(fppgDraftStat),
-                            player.Salary,
-                            player.GetRosterPosition(rules)))
-                });
-
-            return result;
+            return eligiblePlayers.ToList();
         }
     }
 }

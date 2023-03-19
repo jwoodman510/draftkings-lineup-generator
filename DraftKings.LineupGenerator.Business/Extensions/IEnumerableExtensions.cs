@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace DraftKings.LineupGenerator.Business.Extensions
@@ -30,19 +29,15 @@ namespace DraftKings.LineupGenerator.Business.Extensions
         /// <summary>
         /// Aggregates two permutations into a single k-combination enumerable.
         /// </summary>
-        /// <param name="filterPredicate">An optional filter applied to determine whether permutation items should be combined.</param>
-        public static IEnumerable<IEnumerable<T>> CombinePermutations<T>(
-            this IEnumerable<IEnumerable<T>> first,
-            IEnumerable<IEnumerable<T>> second,
-            Func<IEnumerable<T>, IEnumerable<T>, bool> filterPredicate = null)
+        public static IEnumerable<IEnumerable<T>> CombinePermutations<T>(this IEnumerable<IEnumerable<T>> first, IEnumerable<IEnumerable<T>> second)
         {
             var inner = first;
-            var outter = second;
+            var outer = second;
 
             var innerIterated = false;
             var outerIterated = false;
 
-            foreach (var outerPermutation in outter)
+            foreach (var outerPermutation in outer)
             {
                 outerIterated = true;
 
@@ -50,10 +45,7 @@ namespace DraftKings.LineupGenerator.Business.Extensions
                 {
                     innerIterated = true;
 
-                    if (filterPredicate == null || filterPredicate(innerPermutation, outerPermutation))
-                    {
-                        yield return innerPermutation.Concat(outerPermutation);
-                    }
+                    yield return innerPermutation.Concat(outerPermutation);
                 }
 
                 if (!innerIterated)

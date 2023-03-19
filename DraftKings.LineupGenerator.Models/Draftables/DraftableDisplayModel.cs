@@ -4,13 +4,13 @@
     {
         public string Name { get; set; }
 
-        public string Fppg { get; set; }
+        public decimal Fppg { get; set; }
 
         public int Salary { get; set; }
 
         public string RosterPosition { get; set; }
 
-        public DraftableDisplayModel(string name, string fppg, int salary, string rosterPosition)
+        public DraftableDisplayModel(string name, decimal fppg, int salary, string rosterPosition)
         {
             Name = name;
             Fppg = fppg;

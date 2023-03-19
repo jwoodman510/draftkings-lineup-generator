@@ -9,16 +9,10 @@ namespace DraftKings.LineupGenerator.Business.Services
 {
     public class ClassicLineupService : IClassicLineupService
     {
-        public IEnumerable<IEnumerable<DraftableModel>> GetAllPossibleLineups(
-            RulesModel rules,
-            DraftablesModel draftables) => GetAllPossibleLineups(rules, draftables, draftables.Draftables);
-
-        public IEnumerable<IEnumerable<DraftableModel>> GetAllPossibleLineups(
+        public IEnumerable<IEnumerable<DraftableModel>> GetPotentialLineups(
             RulesModel rules,
             DraftablesModel draftables,
-            IEnumerable<DraftableModel> eligiblePlayers) => GetPermutations(rules, eligiblePlayers);
-
-        private static IEnumerable<IEnumerable<DraftableModel>> GetPermutations(RulesModel rules, IEnumerable<DraftableModel> eligiblePlayers)
+            List<DraftableModel> eligiblePlayers)
         {
             var rosterSlotGroups = rules.LineupTemplate
                 .GroupBy(x => x.RosterSlot.Id)
@@ -36,7 +30,9 @@ namespace DraftKings.LineupGenerator.Business.Services
                 var rosterSlotPlayers = eligiblePlayers.Where(x => rosterSlotIds.Contains(x.RosterSlotId));
                 var rosterSlotPermutations = GetPermutationsForSlots(rosterSlotIds, rosterSlotPlayers, slotCount);
 
-                permutations = permutations.CombinePermutations(rosterSlotPermutations, filterPredicate: ShouldCombinePermutations);
+                permutations = permutations
+                    .CombinePermutations(rosterSlotPermutations)
+                    .Where(x => x.DistinctBy(y => y.PlayerId).SequenceEqual(x));
             }
 
             return permutations;
@@ -44,21 +40,16 @@ namespace DraftKings.LineupGenerator.Business.Services
 
         private static IEnumerable<IEnumerable<DraftableModel>> GetPermutationsForSlots(HashSet<int> rosterSlotIds, IEnumerable<DraftableModel> slotPlayers, int slotCount)
         {
-            var rosterSlotPermutations = rosterSlotIds.Select(x => slotPlayers.Where(p => p.RosterSlotId == x).GetPermutations(slotCount));
+            var rosterSlotPermutations = rosterSlotIds
+                .Select(x => slotPlayers.Where(p => p.RosterSlotId == x)
+                .GetPermutations(slotCount));
 
             return rosterSlotPermutations.Aggregate(Enumerable.Empty<IEnumerable<DraftableModel>>(), (rosterSlotPermutation, aggregate) =>
             {
-                return rosterSlotPermutation.CombinePermutations(aggregate, filterPredicate: ShouldCombinePermutations);
+                return rosterSlotPermutation
+                    .CombinePermutations(aggregate)
+                    .Where(x => x.DistinctBy(y => y.PlayerId).SequenceEqual(x));
             });
-        }
-
-        private static bool ShouldCombinePermutations(IEnumerable<DraftableModel> first, IEnumerable<DraftableModel> second)
-        {
-            var secondPlayerIds = second.Select(x => x.PlayerId).ToHashSet();
-
-            var hasDuplicate = first.Select(x => x.PlayerId).Any(x => secondPlayerIds.Contains(x));
-
-            return !hasDuplicate;
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using DraftKings.LineupGenerator.Models.Draftables;
+﻿using DraftKings.LineupGenerator.Business.Constants;
+using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Rules;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DraftKings.LineupGenerator.Business.Extensions
@@ -22,6 +24,15 @@ namespace DraftKings.LineupGenerator.Business.Extensions
                 .Select(x => x.RosterSlot)
                 .First(x => x.Id == player.RosterSlotId)
                 .Name;
+        }
+
+        public static decimal GetFppg(this DraftableModel player, List<DraftStatModel> draftStats)
+        {
+            var fppgDraftStat = draftStats.Single(x => x.Name == DraftStats.FantasyPointsPerGame);
+
+            var stat = player.GetDraftStatAttribute(fppgDraftStat);
+
+            return decimal.TryParse(stat, out var val) ? val : default;
         }
     }
 }

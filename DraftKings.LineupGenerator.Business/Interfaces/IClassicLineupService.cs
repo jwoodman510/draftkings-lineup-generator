@@ -6,13 +6,9 @@ namespace DraftKings.LineupGenerator.Business.Interfaces
 {
     public interface IClassicLineupService
     {
-        IEnumerable<IEnumerable<DraftableModel>> GetAllPossibleLineups(
-            RulesModel rules,
-            DraftablesModel draftables);
-
-        IEnumerable<IEnumerable<DraftableModel>> GetAllPossibleLineups(
+        IEnumerable<IEnumerable<DraftableModel>> GetPotentialLineups(
             RulesModel rules,
             DraftablesModel draftables,
-            IEnumerable<DraftableModel> eligiblePlayers);
+            List<DraftableModel> eligiblePlayers);
     }
 }
