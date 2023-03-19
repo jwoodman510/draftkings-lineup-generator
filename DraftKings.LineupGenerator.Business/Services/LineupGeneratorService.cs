@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace DraftKings.LineupGenerator.Business.Services
 {
-    public class LineupsService : ILineupsService
+    public class LineupGeneratorService : ILineupGeneratorService
     {
         private readonly IDraftKingsClient _draftKingsClient;
         private readonly IEnumerable<ILineupGenerator> _lineupGenerators;
 
-        public LineupsService(
+        public LineupGeneratorService(
             IDraftKingsClient draftKingsClient,
             IEnumerable<ILineupGenerator> lineupGenerators)
         {

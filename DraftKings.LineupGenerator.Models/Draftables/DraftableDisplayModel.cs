@@ -4,18 +4,18 @@
     {
         public string Name { get; set; }
 
-        public decimal FPPG { get; set; }
-
-        public string Position { get; set; }
+        public string Fppg { get; set; }
 
         public int Salary { get; set; }
 
-        public DraftableDisplayModel(string name, string position, decimal fppg, int salary)
+        public string RosterPosition { get; set; }
+
+        public DraftableDisplayModel(string name, string fppg, int salary, string rosterPosition)
         {
             Name = name;
-            FPPG = fppg;
-            Position = position;
+            Fppg = fppg;
             Salary = salary;
+            RosterPosition = rosterPosition;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace DraftKings.LineupGenerator
                 var lineups = await new ServiceCollection()
                     .RegisterServices()
                     .BuildServiceProvider()
-                    .GetRequiredService<ILineupsService>()
+                    .GetRequiredService<ILineupGeneratorService>()
                     .GetAsync(request);
 
                 var json = JsonConvert.SerializeObject(lineups, Formatting.Indented);

@@ -1,11 +1,11 @@
-﻿using DraftKings.LineupGenerator.Api;
-using DraftKings.LineupGenerator.Business.Filters;
+﻿using DraftKings.LineupGenerator.Business.Filters;
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Constants;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
@@ -16,9 +16,16 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
     /// </summary>
     public class DefaultSalaryCapClassicLineupGenerator : ILineupGenerator
     {
+        private readonly IClassicLineupService _classicLineupService;
+
+        public DefaultSalaryCapClassicLineupGenerator(IClassicLineupService classicLineupService)
+        {
+            _classicLineupService = classicLineupService;
+        }
+
         public bool CanGenerate(RulesModel rules)
         {
-            if (rules?.DraftType != DraftTypes.SalaryCap)
+            if (rules.DraftType != DraftTypes.SalaryCap || !rules.SalaryCap.IsEnabled)
             {
                 return false;
             }
@@ -30,7 +37,17 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
         {
             await Task.Yield();
 
-            var filteredDraftables = draftables.Draftables
+            var result = new LineupsModel
+            {
+                Description = "Default FPPG Lineup"
+            };
+
+            if (draftables.Draftables.All(x => x.Salary == default))
+            {
+                return result;
+            }
+
+            var eligiblePlayers = draftables.Draftables
                 .ExcludeOut()
                 .ExcludeDisabled()
                 .ExcludeZeroSalary()
@@ -39,22 +56,20 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             if (!request.IncludeQuestionable)
             {
-                filteredDraftables.ExcludeQuestionable();
+                eligiblePlayers.ExcludeQuestionable();
             }
 
-            var salaryCap = rules.SalaryCap.MaxValue;
+            var possibleLineups = _classicLineupService.GetAllPossibleLineups(rules, draftables, eligiblePlayers);
 
-            return new LineupsModel
-            {
-                Description = "Default FPPG Lineup",
-                Lineups = new List<LineupModel>
-                {
-                    new LineupModel
-                    {
-                        Draftables = new List<DraftableDisplayModel>()
-                    }
-                }
-            };
+            result.Lineups = possibleLineups
+                .Where(x => x.Salary <= rules.SalaryCap.MaxValue)
+                .Where(x => x.Salary >= rules.SalaryCap.MinValue)
+                .GroupBy(x => x.Salary)
+                .OrderByDescending(x => x.Key)
+                .FirstOrDefault()
+                ?.ToList() ?? new List<LineupModel>();
+
+            return result;
         }
     }
 }

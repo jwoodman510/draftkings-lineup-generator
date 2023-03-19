@@ -1,4 +1,5 @@
 using DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic;
+using DraftKings.LineupGenerator.Business.Services;
 using DraftKings.LineupGenerator.Constants;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
@@ -13,7 +14,7 @@ namespace DraftKings.LineupGenerator.Test.Business
 
         public DefaultSalaryCapClassicLineupGeneratorTests()
         {
-            _generator = new DefaultSalaryCapClassicLineupGenerator();
+            _generator = new DefaultSalaryCapClassicLineupGenerator(new ClassicLineupService());
         }
 
         [Theory]
@@ -21,12 +22,16 @@ namespace DraftKings.LineupGenerator.Test.Business
         [InlineData(DraftTypes.SalaryCap, GameTypes.NflShowDown, false)]
         [InlineData(DraftTypes.SalaryCap, GameTypes.XflClassic, true)]
         [InlineData(DraftTypes.SalaryCap, GameTypes.XflShowDown, false)]
-        public void CanGenerateContest(string draftType, string gameType, bool expected)
+        public void CanGenerateGameTypes(string draftType, string gameType, bool expected)
         {
             var rules = new RulesModel
             {
                 DraftType = draftType,
                 GameTypeName = gameType,
+                SalaryCap = new SalaryCapModel
+                {
+                    IsEnabled = true
+                }
             };
 
             var canGenerate = _generator.CanGenerate(rules);

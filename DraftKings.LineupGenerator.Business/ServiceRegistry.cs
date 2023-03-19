@@ -22,7 +22,8 @@ namespace DraftKings.LineupGenerator.Business
 
             // Add Business Services
             services
-                .AddTransient<ILineupsService, LineupsService>();
+                .AddTransient<IClassicLineupService, ClassicLineupService>()
+                .AddTransient<ILineupGeneratorService, LineupGeneratorService>();
 
             // Add Lineup Generators
             services

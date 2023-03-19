@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace DraftKings.LineupGenerator.Business.Interfaces
 {
-    public interface ILineupsService
+    public interface ILineupGeneratorService
     {
         Task<List<LineupsModel>> GetAsync(LineupRequestModel request);
     }

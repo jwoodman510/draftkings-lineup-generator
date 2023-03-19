@@ -1,5 +1,6 @@
 ﻿using DraftKings.LineupGenerator.Models.Draftables;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DraftKings.LineupGenerator.Models.Lineups
 {
@@ -7,7 +8,7 @@ namespace DraftKings.LineupGenerator.Models.Lineups
     {
         public string Description { get; set; }
 
-        public int Salary { get; set; }
+        public int Salary => Draftables?.Sum(x => x.Salary) ?? default;
 
         public List<DraftableDisplayModel> Draftables { get; set; }
     }
