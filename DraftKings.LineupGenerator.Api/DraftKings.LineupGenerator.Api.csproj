@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DraftKings.LineupGenerator.Caching\DraftKings.LineupGenerator.Caching.csproj" />
     <ProjectReference Include="..\DraftKings.LineupGenerator.Models\DraftKings.LineupGenerator.Models.csproj" />
   </ItemGroup>
 

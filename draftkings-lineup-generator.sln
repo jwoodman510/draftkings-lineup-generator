@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DraftKings.LineupGenerator.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DraftKings.LineupGenerator.Console", "DraftKings.LineupGenerator.Console\DraftKings.LineupGenerator.Console.csproj", "{1A17D728-1C6F-4121-BDE5-290BB29355F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DraftKings.LineupGenerator.Caching", "DraftKings.LineupGenerator.Caching\DraftKings.LineupGenerator.Caching.csproj", "{6AF557C9-F57E-40D1-AAAA-C282D028C774}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{1A17D728-1C6F-4121-BDE5-290BB29355F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A17D728-1C6F-4121-BDE5-290BB29355F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A17D728-1C6F-4121-BDE5-290BB29355F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AF557C9-F57E-40D1-AAAA-C282D028C774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AF557C9-F57E-40D1-AAAA-C282D028C774}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AF557C9-F57E-40D1-AAAA-C282D028C774}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AF557C9-F57E-40D1-AAAA-C282D028C774}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

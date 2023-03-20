@@ -4,6 +4,8 @@ using DraftKings.LineupGenerator.Api.Rules;
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic;
 using DraftKings.LineupGenerator.Business.Services;
+using DraftKings.LineupGenerator.Caching;
+using DraftKings.LineupGenerator.Caching.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DraftKings.LineupGenerator.Business
@@ -12,10 +14,15 @@ namespace DraftKings.LineupGenerator.Business
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
+            // Add Caching
+            services
+                .AddMemoryCache()
+                .AddTransient<ICacheService, InMemoryCacheService>()
+                .AddTransient<ICacheService, FileBasedCacheService>();
+
             // Add Api Services
             services
                 .AddHttpClient()
-                .AddMemoryCache()
                 .AddTransient<IRulesClient, RulesClient>()
                 .AddTransient<IContestsClient, ContestsClient>()
                 .AddTransient<IDraftablesClient, DraftablesClient>()

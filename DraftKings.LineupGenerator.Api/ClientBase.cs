@@ -1,5 +1,6 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using DraftKings.LineupGenerator.Caching;
 using Newtonsoft.Json;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -7,15 +8,14 @@ namespace DraftKings.LineupGenerator.Api
 {
     public class ClientBase
     {
-        private readonly IMemoryCache _memoryCache;
-
+        private readonly ICacheService _cache;
         protected readonly IHttpClientFactory HttpClientFactory;
 
         public ClientBase(
-            IMemoryCache memoryCache,
+            ICacheService cache,
             IHttpClientFactory httpClientFactory)
         {
-            _memoryCache = memoryCache;
+            _cache = cache;
             HttpClientFactory = httpClientFactory;
         }
 
@@ -23,30 +23,26 @@ namespace DraftKings.LineupGenerator.Api
         {
             var cacheKey = url;
 
-            if (_memoryCache.TryGetValue<T>(url, out var cachedValue))
+            return await _cache.GetOrCreateAsync<T>(url, TimeSpan.FromMinutes(5), async () =>
             {
-                return cachedValue;
-            }
+                var response = await HttpClientFactory.CreateClient().GetAsync(url);
 
-            var response = await HttpClientFactory.CreateClient().GetAsync(url);
+                if (!response.IsSuccessStatusCode)
+                {
+                    return default;
+                }
 
-            if (!response.IsSuccessStatusCode)
-            {
-                return default;
-            }
+                var responseJson = await response.Content.ReadAsStringAsync();
 
-            var responseJson = await response.Content.ReadAsStringAsync();
+                if (string.IsNullOrEmpty(responseJson))
+                {
+                    return default;
+                }
 
-            if (string.IsNullOrEmpty(responseJson))
-            {
-                return default;
-            }
+                var result = JsonConvert.DeserializeObject<T>(responseJson);
 
-            var result = JsonConvert.DeserializeObject<T>(responseJson);
-
-            _memoryCache.CreateEntry(cacheKey);
-
-            return result;
+                return result;
+            });
         }
     }
 }
