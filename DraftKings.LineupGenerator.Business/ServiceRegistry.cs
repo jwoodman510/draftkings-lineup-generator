@@ -24,11 +24,13 @@ namespace DraftKings.LineupGenerator.Business
             // Add Business Services
             services
                 .AddTransient<IClassicLineupService, ClassicLineupService>()
+                .AddTransient<IShowdownLineupService, ShowdownLineupService>()
                 .AddTransient<ILineupGeneratorService, LineupGeneratorService>();
 
             // Add Lineup Generators
             services
-                .AddTransient<ILineupGenerator, DefaultSalaryCapClassicLineupGenerator>();
+                .AddTransient<ILineupGenerator, DefaultSalaryCapClassicLineupGenerator>()
+                .AddTransient<ILineupGenerator, DefaultSalaryCapShowdownLineupGenerator>();
 
             return services;
         }

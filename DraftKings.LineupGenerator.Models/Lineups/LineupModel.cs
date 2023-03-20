@@ -8,7 +8,7 @@ namespace DraftKings.LineupGenerator.Models.Lineups
     {
         public string Description { get; set; }
 
-        public int Salary => Draftables.Sum(x => x.Salary);
+        public decimal Salary => Draftables.Sum(x => x.Salary);
 
         public decimal Fppg => Draftables.Sum(x => x.Fppg);
 

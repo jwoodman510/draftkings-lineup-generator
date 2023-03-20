@@ -23,5 +23,11 @@ namespace DraftKings.LineupGenerator.Test.Business
 
         public static Task<DraftablesModel> GetSalaryCapXflClassicDraftablesAsync() =>
             GetAsync<DraftablesModel>("salarycap_xfl_classic_draftables.json");
+
+        public static Task<RulesModel> GetSalaryCapMaddenShowdownRulesAsync() =>
+            GetAsync<RulesModel>("salarycap_madden_showdown_rules.json");
+
+        public static Task<DraftablesModel> GetSalaryCapMaddenShowdownDraftablesAsync() =>
+            GetAsync<DraftablesModel>("salarycap_madden_showdown_draftables.json");
     }
 }

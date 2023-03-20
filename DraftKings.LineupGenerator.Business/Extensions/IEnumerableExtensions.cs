@@ -26,6 +26,16 @@ namespace DraftKings.LineupGenerator.Business.Extensions
             }
         }
 
+        public static IEnumerable<IEnumerable<T>> GetPermutationsWithRepetition<T>(this IEnumerable<T> items, int count)
+        {
+            if (count == 1)
+            {
+                return items.Select(x => new T[] { x });
+            }
+
+            return items.GetPermutationsWithRepetition(count - 1).SelectMany(t => items, (a, b) => a.Concat(new T[] { b }));
+        }
+
         /// <summary>
         /// Aggregates two permutations into a single k-combination enumerable.
         /// </summary>

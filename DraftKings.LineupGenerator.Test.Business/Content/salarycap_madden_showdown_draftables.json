@@ -1,0 +1,7280 @@
+{
+  "draftables": [
+    {
+      "draftableId": 27139077,
+      "firstName": "Justin",
+      "lastName": "Fields",
+      "displayName": "Justin Fields",
+      "shortName": "J. Fields",
+      "playerId": 1110681,
+      "playerDkId": 560065,
+      "position": "QB",
+      "rosterSlotId": 511,
+      "salary": 16200,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/560065.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/560065.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "22.0",
+          "sortValue": "22.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1110681-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139078,
+      "firstName": "Joe",
+      "lastName": "Burrow",
+      "displayName": "Joe Burrow",
+      "shortName": "J. Burrow",
+      "playerId": 878785,
+      "playerDkId": 485441,
+      "position": "QB",
+      "rosterSlotId": 511,
+      "salary": 15600,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/485441.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/485441.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "21.4",
+          "sortValue": "21.4"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "878785-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139079,
+      "firstName": "Ja'Marr",
+      "lastName": "Chase",
+      "displayName": "Ja'Marr Chase",
+      "shortName": "J. Chase",
+      "playerId": 1109979,
+      "playerDkId": 557826,
+      "position": "WR",
+      "rosterSlotId": 511,
+      "salary": 15000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/557826.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/557826.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "18.9",
+          "sortValue": "18.9"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1109979-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139080,
+      "firstName": "Joe",
+      "lastName": "Mixon",
+      "displayName": "Joe Mixon",
+      "shortName": "J. Mixon",
+      "playerId": 820727,
+      "playerDkId": 13893,
+      "position": "RB",
+      "rosterSlotId": 511,
+      "salary": 14100,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/13893.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/13893.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "20.0",
+          "sortValue": "20.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "820727-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139081,
+      "firstName": "Tee",
+      "lastName": "Higgins",
+      "displayName": "Tee Higgins",
+      "shortName": "T. Higgins",
+      "playerId": 978579,
+      "playerDkId": 468715,
+      "position": "WR",
+      "rosterSlotId": 511,
+      "salary": 12600,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/468715.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/468715.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "13.9",
+          "sortValue": "13.9"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "978579-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139082,
+      "firstName": "Byron",
+      "lastName": "Pringle",
+      "displayName": "Byron Pringle",
+      "shortName": "B. Pringle",
+      "playerId": 913826,
+      "playerDkId": 11813,
+      "position": "WR",
+      "rosterSlotId": 511,
+      "salary": 11700,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/11813.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/11813.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "11.6",
+          "sortValue": "11.6"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "913826-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139035,
+      "firstName": "Justin",
+      "lastName": "Fields",
+      "displayName": "Justin Fields",
+      "shortName": "J. Fields",
+      "playerId": 1110681,
+      "playerDkId": 560065,
+      "position": "QB",
+      "rosterSlotId": 512,
+      "salary": 10800,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/560065.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/560065.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "22.0",
+          "sortValue": "22.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1110681-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139083,
+      "firstName": "Hayden",
+      "lastName": "Hurst",
+      "displayName": "Hayden Hurst",
+      "shortName": "H. Hurst",
+      "playerId": 881956,
+      "playerDkId": 17156,
+      "position": "TE",
+      "rosterSlotId": 511,
+      "salary": 10800,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/17156.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/17156.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "12.4",
+          "sortValue": "12.4"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "881956-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139036,
+      "firstName": "Joe",
+      "lastName": "Burrow",
+      "displayName": "Joe Burrow",
+      "shortName": "J. Burrow",
+      "playerId": 878785,
+      "playerDkId": 485441,
+      "position": "QB",
+      "rosterSlotId": 512,
+      "salary": 10400,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/485441.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/485441.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "21.4",
+          "sortValue": "21.4"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "878785-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139084,
+      "firstName": "Tyler",
+      "lastName": "Boyd",
+      "displayName": "Tyler Boyd",
+      "shortName": "T. Boyd",
+      "playerId": 742387,
+      "playerDkId": 13398,
+      "position": "WR",
+      "rosterSlotId": 511,
+      "salary": 10200,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/13398.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/13398.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "9.9",
+          "sortValue": "9.9"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "742387-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139037,
+      "firstName": "Ja'Marr",
+      "lastName": "Chase",
+      "displayName": "Ja'Marr Chase",
+      "shortName": "J. Chase",
+      "playerId": 1109979,
+      "playerDkId": 557826,
+      "position": "WR",
+      "rosterSlotId": 512,
+      "salary": 10000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/557826.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/557826.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "18.9",
+          "sortValue": "18.9"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1109979-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139085,
+      "firstName": "Cole",
+      "lastName": "Kmet",
+      "displayName": "Cole Kmet",
+      "shortName": "C. Kmet",
+      "playerId": 1066765,
+      "playerDkId": 485483,
+      "position": "TE",
+      "rosterSlotId": 511,
+      "salary": 9600,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/485483.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/485483.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "10.8",
+          "sortValue": "10.8"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1066765-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139038,
+      "firstName": "Joe",
+      "lastName": "Mixon",
+      "displayName": "Joe Mixon",
+      "shortName": "J. Mixon",
+      "playerId": 820727,
+      "playerDkId": 13893,
+      "position": "RB",
+      "rosterSlotId": 512,
+      "salary": 9400,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/13893.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/13893.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "20.0",
+          "sortValue": "20.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "820727-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139086,
+      "firstName": "David",
+      "lastName": "Montgomery",
+      "displayName": "David Montgomery",
+      "shortName": "D. Montgomery",
+      "playerId": 946739,
+      "playerDkId": 12882,
+      "position": "RB",
+      "rosterSlotId": 511,
+      "salary": 9300,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/12882.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/12882.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "7.2",
+          "sortValue": "7.2"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "946739-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139087,
+      "firstName": "Trevor",
+      "lastName": "Siemian",
+      "displayName": "Trevor Siemian",
+      "shortName": "T. Siemian",
+      "playerId": 546184,
+      "playerDkId": 19689,
+      "position": "QB",
+      "rosterSlotId": 511,
+      "salary": 9000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19689.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19689.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "546184-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139088,
+      "firstName": "Brandon",
+      "lastName": "Allen",
+      "displayName": "Brandon Allen",
+      "shortName": "B. Allen",
+      "playerId": 604390,
+      "playerDkId": 18356,
+      "position": "QB",
+      "rosterSlotId": 511,
+      "salary": 9000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/18356.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/18356.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "604390-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139039,
+      "firstName": "Tee",
+      "lastName": "Higgins",
+      "displayName": "Tee Higgins",
+      "shortName": "T. Higgins",
+      "playerId": 978579,
+      "playerDkId": 468715,
+      "position": "WR",
+      "rosterSlotId": 512,
+      "salary": 8400,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/468715.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/468715.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "13.9",
+          "sortValue": "13.9"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "978579-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139089,
+      "firstName": "Darnell",
+      "lastName": "Mooney",
+      "displayName": "Darnell Mooney",
+      "shortName": "D. Mooney",
+      "playerId": 912027,
+      "playerDkId": 485596,
+      "position": "WR",
+      "rosterSlotId": 511,
+      "salary": 8400,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/485596.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/485596.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "8.1",
+          "sortValue": "8.1"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "912027-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139040,
+      "firstName": "Byron",
+      "lastName": "Pringle",
+      "displayName": "Byron Pringle",
+      "shortName": "B. Pringle",
+      "playerId": 913826,
+      "playerDkId": 11813,
+      "position": "WR",
+      "rosterSlotId": 512,
+      "salary": 7800,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/11813.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/11813.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "11.6",
+          "sortValue": "11.6"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "913826-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139090,
+      "firstName": "Velus",
+      "lastName": "Jones Jr.",
+      "displayName": "Velus Jones Jr.",
+      "shortName": "V. Jones Jr.",
+      "playerId": 919304,
+      "playerDkId": 640903,
+      "position": "WR",
+      "rosterSlotId": 511,
+      "salary": 7500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/640903.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/640903.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "4.9",
+          "sortValue": "4.9"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "919304-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139041,
+      "firstName": "Hayden",
+      "lastName": "Hurst",
+      "displayName": "Hayden Hurst",
+      "shortName": "H. Hurst",
+      "playerId": 881956,
+      "playerDkId": 17156,
+      "position": "TE",
+      "rosterSlotId": 512,
+      "salary": 7200,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/17156.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/17156.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "12.4",
+          "sortValue": "12.4"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "881956-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139091,
+      "firstName": "Khalil",
+      "lastName": "Herbert",
+      "displayName": "Khalil Herbert",
+      "shortName": "K. Herbert",
+      "playerId": 935104,
+      "playerDkId": 560913,
+      "position": "RB",
+      "rosterSlotId": 511,
+      "salary": 6900,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/560913.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/560913.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "4.4",
+          "sortValue": "4.4"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "935104-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139042,
+      "firstName": "Tyler",
+      "lastName": "Boyd",
+      "displayName": "Tyler Boyd",
+      "shortName": "T. Boyd",
+      "playerId": 742387,
+      "playerDkId": 13398,
+      "position": "WR",
+      "rosterSlotId": 512,
+      "salary": 6800,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/13398.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/13398.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "9.9",
+          "sortValue": "9.9"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "742387-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139043,
+      "firstName": "Cole",
+      "lastName": "Kmet",
+      "displayName": "Cole Kmet",
+      "shortName": "C. Kmet",
+      "playerId": 1066765,
+      "playerDkId": 485483,
+      "position": "TE",
+      "rosterSlotId": 512,
+      "salary": 6400,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/485483.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/485483.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "10.8",
+          "sortValue": "10.8"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1066765-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139092,
+      "firstName": "Evan",
+      "lastName": "McPherson",
+      "displayName": "Evan McPherson",
+      "shortName": "E. McPherson",
+      "playerId": 1122995,
+      "playerDkId": 560845,
+      "position": "K",
+      "rosterSlotId": 511,
+      "salary": 6300,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/560845.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/560845.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "6.3",
+          "sortValue": "6.3"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1122995-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139044,
+      "firstName": "David",
+      "lastName": "Montgomery",
+      "displayName": "David Montgomery",
+      "shortName": "D. Montgomery",
+      "playerId": 946739,
+      "playerDkId": 12882,
+      "position": "RB",
+      "rosterSlotId": 512,
+      "salary": 6200,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/12882.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/12882.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "7.2",
+          "sortValue": "7.2"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "946739-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139045,
+      "firstName": "Trevor",
+      "lastName": "Siemian",
+      "displayName": "Trevor Siemian",
+      "shortName": "T. Siemian",
+      "playerId": 546184,
+      "playerDkId": 19689,
+      "position": "QB",
+      "rosterSlotId": 512,
+      "salary": 6000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19689.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19689.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "546184-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139046,
+      "firstName": "Brandon",
+      "lastName": "Allen",
+      "displayName": "Brandon Allen",
+      "shortName": "B. Allen",
+      "playerId": 604390,
+      "playerDkId": 18356,
+      "position": "QB",
+      "rosterSlotId": 512,
+      "salary": 6000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/18356.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/18356.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "604390-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139093,
+      "firstName": "Cairo",
+      "lastName": "Santos",
+      "displayName": "Cairo Santos",
+      "shortName": "C. Santos",
+      "playerId": 546669,
+      "playerDkId": 19999,
+      "position": "K",
+      "rosterSlotId": 511,
+      "salary": 6000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19999.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19999.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "5.5",
+          "sortValue": "5.5"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "546669-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139094,
+      "firstName": "Bengals",
+      "lastName": "",
+      "displayName": "Bengals",
+      "shortName": "Bengals",
+      "playerId": 327,
+      "playerDkId": 18320,
+      "position": "DST",
+      "rosterSlotId": 511,
+      "salary": 5700,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "playerImage50": "https://dkn.gs/sports/images/nfl/teams/50/18320.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/teams/160/18320.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "2.9",
+          "sortValue": "2.9"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "327-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139047,
+      "firstName": "Darnell",
+      "lastName": "Mooney",
+      "displayName": "Darnell Mooney",
+      "shortName": "D. Mooney",
+      "playerId": 912027,
+      "playerDkId": 485596,
+      "position": "WR",
+      "rosterSlotId": 512,
+      "salary": 5600,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/485596.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/485596.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "8.1",
+          "sortValue": "8.1"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "912027-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139095,
+      "firstName": "Bears",
+      "lastName": "",
+      "displayName": "Bears",
+      "shortName": "Bears",
+      "playerId": 326,
+      "playerDkId": 18312,
+      "position": "DST",
+      "rosterSlotId": 511,
+      "salary": 5400,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "playerImage50": "https://dkn.gs/sports/images/nfl/teams/50/18312.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/teams/160/18312.png",
+      "altPlayerImage50": "https://dkn.gs/sports/images/nfl/teams/50/d/18312.png",
+      "altPlayerImage160": "https://dkn.gs/sports/images/nfl/teams/160/d/18312.png",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "2.2",
+          "sortValue": "2.2"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "326-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139048,
+      "firstName": "Velus",
+      "lastName": "Jones Jr.",
+      "displayName": "Velus Jones Jr.",
+      "shortName": "V. Jones Jr.",
+      "playerId": 919304,
+      "playerDkId": 640903,
+      "position": "WR",
+      "rosterSlotId": 512,
+      "salary": 5000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/640903.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/640903.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "4.9",
+          "sortValue": "4.9"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "919304-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139049,
+      "firstName": "Khalil",
+      "lastName": "Herbert",
+      "displayName": "Khalil Herbert",
+      "shortName": "K. Herbert",
+      "playerId": 935104,
+      "playerDkId": 560913,
+      "position": "RB",
+      "rosterSlotId": 512,
+      "salary": 4600,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/560913.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/560913.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "4.4",
+          "sortValue": "4.4"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "935104-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139050,
+      "firstName": "Evan",
+      "lastName": "McPherson",
+      "displayName": "Evan McPherson",
+      "shortName": "E. McPherson",
+      "playerId": 1122995,
+      "playerDkId": 560845,
+      "position": "K",
+      "rosterSlotId": 512,
+      "salary": 4200,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/560845.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/560845.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "6.3",
+          "sortValue": "6.3"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1122995-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139051,
+      "firstName": "Cairo",
+      "lastName": "Santos",
+      "displayName": "Cairo Santos",
+      "shortName": "C. Santos",
+      "playerId": 546669,
+      "playerDkId": 19999,
+      "position": "K",
+      "rosterSlotId": 512,
+      "salary": 4000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19999.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19999.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "5.5",
+          "sortValue": "5.5"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "546669-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139052,
+      "firstName": "Bengals",
+      "lastName": "",
+      "displayName": "Bengals",
+      "shortName": "Bengals",
+      "playerId": 327,
+      "playerDkId": 18320,
+      "position": "DST",
+      "rosterSlotId": 512,
+      "salary": 3800,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "playerImage50": "https://dkn.gs/sports/images/nfl/teams/50/18320.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/teams/160/18320.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "2.9",
+          "sortValue": "2.9"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "327-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139053,
+      "firstName": "Bears",
+      "lastName": "",
+      "displayName": "Bears",
+      "shortName": "Bears",
+      "playerId": 326,
+      "playerDkId": 18312,
+      "position": "DST",
+      "rosterSlotId": 512,
+      "salary": 3600,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "playerImage50": "https://dkn.gs/sports/images/nfl/teams/50/18312.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/teams/160/18312.png",
+      "altPlayerImage50": "https://dkn.gs/sports/images/nfl/teams/50/d/18312.png",
+      "altPlayerImage160": "https://dkn.gs/sports/images/nfl/teams/160/d/18312.png",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "2.2",
+          "sortValue": "2.2"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "326-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139096,
+      "firstName": "Drew",
+      "lastName": "Sample",
+      "displayName": "Drew Sample",
+      "shortName": "D. Sample",
+      "playerId": 837824,
+      "playerDkId": 14047,
+      "position": "TE",
+      "rosterSlotId": 511,
+      "salary": 3600,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/14047.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/14047.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "2.0",
+          "sortValue": "2.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "837824-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139097,
+      "firstName": "Equanimeous",
+      "lastName": "St. Brown",
+      "displayName": "Equanimeous St. Brown",
+      "shortName": "E. St. Brown",
+      "playerId": 884601,
+      "playerDkId": 19779,
+      "position": "WR",
+      "rosterSlotId": 511,
+      "salary": 3000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19779.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19779.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "2.1",
+          "sortValue": "2.1"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "884601-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139098,
+      "firstName": "Dante",
+      "lastName": "Pettis",
+      "displayName": "Dante Pettis",
+      "shortName": "D. Pettis",
+      "playerId": 837820,
+      "playerDkId": 19635,
+      "position": "WR",
+      "rosterSlotId": 511,
+      "salary": 2700,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19635.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19635.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "1.9",
+          "sortValue": "1.9"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "837820-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139054,
+      "firstName": "Drew",
+      "lastName": "Sample",
+      "displayName": "Drew Sample",
+      "shortName": "D. Sample",
+      "playerId": 837824,
+      "playerDkId": 14047,
+      "position": "TE",
+      "rosterSlotId": 512,
+      "salary": 2400,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/14047.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/14047.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "2.0",
+          "sortValue": "2.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "837824-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139099,
+      "firstName": "Mitchell",
+      "lastName": "Wilcox",
+      "displayName": "Mitchell Wilcox",
+      "shortName": "M. Wilcox",
+      "playerId": 885394,
+      "playerDkId": 486165,
+      "position": "TE",
+      "rosterSlotId": 511,
+      "salary": 2400,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/486165.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/486165.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "1.4",
+          "sortValue": "1.4"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "885394-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139100,
+      "firstName": "Ryan",
+      "lastName": "Griffin",
+      "displayName": "Ryan Griffin",
+      "shortName": "R. Griffin",
+      "playerId": 465129,
+      "playerDkId": 19526,
+      "position": "TE",
+      "rosterSlotId": 511,
+      "salary": 2100,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19526.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19526.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.8",
+          "sortValue": "0.8"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "465129-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139055,
+      "firstName": "Equanimeous",
+      "lastName": "St. Brown",
+      "displayName": "Equanimeous St. Brown",
+      "shortName": "E. St. Brown",
+      "playerId": 884601,
+      "playerDkId": 19779,
+      "position": "WR",
+      "rosterSlotId": 512,
+      "salary": 2000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19779.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19779.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "2.1",
+          "sortValue": "2.1"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "884601-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139056,
+      "firstName": "Dante",
+      "lastName": "Pettis",
+      "displayName": "Dante Pettis",
+      "shortName": "D. Pettis",
+      "playerId": 837820,
+      "playerDkId": 19635,
+      "position": "WR",
+      "rosterSlotId": 512,
+      "salary": 1800,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19635.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19635.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "1.9",
+          "sortValue": "1.9"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "837820-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139057,
+      "firstName": "Mitchell",
+      "lastName": "Wilcox",
+      "displayName": "Mitchell Wilcox",
+      "shortName": "M. Wilcox",
+      "playerId": 885394,
+      "playerDkId": 486165,
+      "position": "TE",
+      "rosterSlotId": 512,
+      "salary": 1600,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/486165.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/486165.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "1.4",
+          "sortValue": "1.4"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "885394-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139101,
+      "firstName": "Samaje",
+      "lastName": "Perine",
+      "displayName": "Samaje Perine",
+      "shortName": "S. Perine",
+      "playerId": 820734,
+      "playerDkId": 13936,
+      "position": "RB",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/13936.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/13936.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.3",
+          "sortValue": "0.3"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "820734-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139102,
+      "firstName": "Mike",
+      "lastName": "Thomas",
+      "displayName": "Mike Thomas",
+      "shortName": "M. Thomas",
+      "playerId": 835086,
+      "playerDkId": 14138,
+      "position": "WR",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/14138.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/14138.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "835086-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139103,
+      "firstName": "David",
+      "lastName": "Moore",
+      "displayName": "David Moore",
+      "shortName": "D. Moore",
+      "playerId": 1049915,
+      "playerDkId": 19931,
+      "position": "WR",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19931.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19931.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1049915-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139104,
+      "firstName": "N'Keal",
+      "lastName": "Harry",
+      "displayName": "N'Keal Harry",
+      "shortName": "N. Harry",
+      "playerId": 910431,
+      "playerDkId": 17785,
+      "position": "WR",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/17785.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/17785.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "910431-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139105,
+      "firstName": "Cal",
+      "lastName": "Adomitis",
+      "displayName": "Cal Adomitis",
+      "shortName": "C. Adomitis",
+      "playerId": 1061591,
+      "playerDkId": 642616,
+      "position": "TE",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/642616.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/642616.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1061591-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139106,
+      "firstName": "Trent",
+      "lastName": "Taylor",
+      "displayName": "Trent Taylor",
+      "shortName": "T. Taylor",
+      "playerId": 733849,
+      "playerDkId": 19699,
+      "position": "WR",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19699.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19699.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "733849-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139107,
+      "firstName": "Trestan",
+      "lastName": "Ebner",
+      "displayName": "Trestan Ebner",
+      "shortName": "T. Ebner",
+      "playerId": 1066869,
+      "playerDkId": 641098,
+      "position": "RB",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/641098.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/641098.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1066869-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139108,
+      "firstName": "Trayveon",
+      "lastName": "Williams",
+      "displayName": "Trayveon Williams",
+      "shortName": "T. Williams",
+      "playerId": 910605,
+      "playerDkId": 14277,
+      "position": "RB",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/14277.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/14277.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "910605-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139109,
+      "firstName": "Ihmir",
+      "lastName": "Smith-Marsette",
+      "displayName": "Ihmir Smith-Marsette",
+      "shortName": "I. Smith-Marsette",
+      "playerId": 1059221,
+      "playerDkId": 560853,
+      "position": "WR",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/560853.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/560853.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1059221-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139110,
+      "firstName": "Jake",
+      "lastName": "Tonges",
+      "displayName": "Jake Tonges",
+      "shortName": "J. Tonges",
+      "playerId": 1068872,
+      "playerDkId": 641713,
+      "position": "TE",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/641713.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/641713.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1068872-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139111,
+      "firstName": "Chris",
+      "lastName": "Evans",
+      "displayName": "Chris Evans",
+      "shortName": "C. Evans",
+      "playerId": 946019,
+      "playerDkId": 560898,
+      "position": "RB",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/560898.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/560898.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "946019-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139112,
+      "firstName": "Devin",
+      "lastName": "Asiasi",
+      "displayName": "Devin Asiasi",
+      "shortName": "D. Asiasi",
+      "playerId": 946008,
+      "playerDkId": 485521,
+      "position": "TE",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/485521.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/485521.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.1",
+          "sortValue": "0.1"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "946008-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139113,
+      "firstName": "Trevon",
+      "lastName": "Wesco",
+      "displayName": "Trevon Wesco",
+      "shortName": "T. Wesco",
+      "playerId": 919456,
+      "playerDkId": 19724,
+      "position": "TE",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19724.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19724.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "919456-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139114,
+      "firstName": "Khari",
+      "lastName": "Blasingame",
+      "displayName": "Khari Blasingame",
+      "shortName": "K. Blasingame",
+      "playerId": 835845,
+      "playerDkId": 15074,
+      "position": "RB",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/15074.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/15074.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.5",
+          "sortValue": "0.5"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "835845-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139115,
+      "firstName": "Elijah",
+      "lastName": "Holyfield",
+      "displayName": "Elijah Holyfield",
+      "shortName": "E. Holyfield",
+      "playerId": 922028,
+      "playerDkId": 20383,
+      "position": "RB",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/20383.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/20383.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "922028-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139116,
+      "firstName": "Patrick",
+      "lastName": "Scales",
+      "displayName": "Patrick Scales",
+      "shortName": "P. Scales",
+      "playerId": 402162,
+      "playerDkId": 13028,
+      "position": "TE",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/13028.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/13028.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "402162-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139117,
+      "firstName": "Stanley",
+      "lastName": "Morgan",
+      "displayName": "Stanley Morgan",
+      "shortName": "S. Morgan",
+      "playerId": 866112,
+      "playerDkId": 13905,
+      "position": "WR",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/13905.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/13905.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.1",
+          "sortValue": "0.1"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "866112-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139118,
+      "firstName": "Clark",
+      "lastName": "Harris",
+      "displayName": "Clark Harris",
+      "shortName": "C. Harris",
+      "playerId": 216309,
+      "playerDkId": 13678,
+      "position": "TE",
+      "rosterSlotId": 511,
+      "salary": 1500,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/13678.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/13678.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "216309-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139058,
+      "firstName": "Ryan",
+      "lastName": "Griffin",
+      "displayName": "Ryan Griffin",
+      "shortName": "R. Griffin",
+      "playerId": 465129,
+      "playerDkId": 19526,
+      "position": "TE",
+      "rosterSlotId": 512,
+      "salary": 1400,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19526.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19526.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.8",
+          "sortValue": "0.8"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "465129-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139059,
+      "firstName": "Samaje",
+      "lastName": "Perine",
+      "displayName": "Samaje Perine",
+      "shortName": "S. Perine",
+      "playerId": 820734,
+      "playerDkId": 13936,
+      "position": "RB",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/13936.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/13936.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.3",
+          "sortValue": "0.3"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "820734-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139060,
+      "firstName": "Mike",
+      "lastName": "Thomas",
+      "displayName": "Mike Thomas",
+      "shortName": "M. Thomas",
+      "playerId": 835086,
+      "playerDkId": 14138,
+      "position": "WR",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/14138.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/14138.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "835086-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139061,
+      "firstName": "David",
+      "lastName": "Moore",
+      "displayName": "David Moore",
+      "shortName": "D. Moore",
+      "playerId": 1049915,
+      "playerDkId": 19931,
+      "position": "WR",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19931.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19931.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1049915-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139062,
+      "firstName": "N'Keal",
+      "lastName": "Harry",
+      "displayName": "N'Keal Harry",
+      "shortName": "N. Harry",
+      "playerId": 910431,
+      "playerDkId": 17785,
+      "position": "WR",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/17785.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/17785.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "910431-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139063,
+      "firstName": "Cal",
+      "lastName": "Adomitis",
+      "displayName": "Cal Adomitis",
+      "shortName": "C. Adomitis",
+      "playerId": 1061591,
+      "playerDkId": 642616,
+      "position": "TE",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/642616.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/642616.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1061591-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139064,
+      "firstName": "Trent",
+      "lastName": "Taylor",
+      "displayName": "Trent Taylor",
+      "shortName": "T. Taylor",
+      "playerId": 733849,
+      "playerDkId": 19699,
+      "position": "WR",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19699.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19699.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "733849-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139065,
+      "firstName": "Trestan",
+      "lastName": "Ebner",
+      "displayName": "Trestan Ebner",
+      "shortName": "T. Ebner",
+      "playerId": 1066869,
+      "playerDkId": 641098,
+      "position": "RB",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/641098.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/641098.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1066869-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139066,
+      "firstName": "Trayveon",
+      "lastName": "Williams",
+      "displayName": "Trayveon Williams",
+      "shortName": "T. Williams",
+      "playerId": 910605,
+      "playerDkId": 14277,
+      "position": "RB",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "Breaking",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/14277.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/14277.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "910605-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139067,
+      "firstName": "Ihmir",
+      "lastName": "Smith-Marsette",
+      "displayName": "Ihmir Smith-Marsette",
+      "shortName": "I. Smith-Marsette",
+      "playerId": 1059221,
+      "playerDkId": 560853,
+      "position": "WR",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/560853.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/560853.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1059221-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139068,
+      "firstName": "Jake",
+      "lastName": "Tonges",
+      "displayName": "Jake Tonges",
+      "shortName": "J. Tonges",
+      "playerId": 1068872,
+      "playerDkId": 641713,
+      "position": "TE",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/641713.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/641713.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "1068872-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139069,
+      "firstName": "Chris",
+      "lastName": "Evans",
+      "displayName": "Chris Evans",
+      "shortName": "C. Evans",
+      "playerId": 946019,
+      "playerDkId": 560898,
+      "position": "RB",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/560898.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/560898.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "946019-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139070,
+      "firstName": "Devin",
+      "lastName": "Asiasi",
+      "displayName": "Devin Asiasi",
+      "shortName": "D. Asiasi",
+      "playerId": 946008,
+      "playerDkId": 485521,
+      "position": "TE",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/485521.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/485521.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.1",
+          "sortValue": "0.1"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "946008-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139071,
+      "firstName": "Trevon",
+      "lastName": "Wesco",
+      "displayName": "Trevon Wesco",
+      "shortName": "T. Wesco",
+      "playerId": 919456,
+      "playerDkId": 19724,
+      "position": "TE",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/19724.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/19724.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "919456-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139072,
+      "firstName": "Khari",
+      "lastName": "Blasingame",
+      "displayName": "Khari Blasingame",
+      "shortName": "K. Blasingame",
+      "playerId": 835845,
+      "playerDkId": 15074,
+      "position": "RB",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/15074.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/15074.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.5",
+          "sortValue": "0.5"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "835845-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139073,
+      "firstName": "Elijah",
+      "lastName": "Holyfield",
+      "displayName": "Elijah Holyfield",
+      "shortName": "E. Holyfield",
+      "playerId": 922028,
+      "playerDkId": 20383,
+      "position": "RB",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/20383.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/20383.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "922028-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139074,
+      "firstName": "Patrick",
+      "lastName": "Scales",
+      "displayName": "Patrick Scales",
+      "shortName": "P. Scales",
+      "playerId": 402162,
+      "playerDkId": 13028,
+      "position": "TE",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/13028.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/13028.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI",
+            "isEmphasized": true
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN"
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI",
+              "isEmphasized": true
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN"
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 326,
+      "teamAbbreviation": "CHI",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "402162-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139075,
+      "firstName": "Stanley",
+      "lastName": "Morgan",
+      "displayName": "Stanley Morgan",
+      "shortName": "S. Morgan",
+      "playerId": 866112,
+      "playerDkId": 13905,
+      "position": "WR",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/13905.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/13905.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.1",
+          "sortValue": "0.1"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "866112-5935039",
+      "externalRequirements": {
+
+      }
+    },
+    {
+      "draftableId": 27139076,
+      "firstName": "Clark",
+      "lastName": "Harris",
+      "displayName": "Clark Harris",
+      "shortName": "C. Harris",
+      "playerId": 216309,
+      "playerDkId": 13678,
+      "position": "TE",
+      "rosterSlotId": 512,
+      "salary": 1000,
+      "status": "None",
+      "isSwappable": true,
+      "isDisabled": false,
+      "newsStatus": "None",
+      "playerImage50": "https://dkn.gs/sports/images/nfl/players/50/13678.png",
+      "playerImage160": "https://dkn.gs/sports/images/nfl/players/160/13678.png",
+      "altPlayerImage50": "",
+      "altPlayerImage160": "",
+      "competition": {
+        "competitionId": 5935039,
+        "name": "CHI @ CIN",
+        "nameDisplay": [
+          {
+            "value": "CHI"
+          },
+          {
+            "value": " @ "
+          },
+          {
+            "value": "CIN",
+            "isEmphasized": true
+          }
+        ],
+        "startTime": "2023-03-20T18:00:00.0000000Z"
+      },
+      "competitions": [
+        {
+          "competitionId": 5935039,
+          "name": "CHI @ CIN",
+          "nameDisplay": [
+            {
+              "value": "CHI"
+            },
+            {
+              "value": " @ "
+            },
+            {
+              "value": "CIN",
+              "isEmphasized": true
+            }
+          ],
+          "startTime": "2023-03-20T18:00:00.0000000Z"
+        }
+      ],
+      "draftStatAttributes": [
+        {
+          "id": 90,
+          "value": "0.0",
+          "sortValue": "0.0"
+        },
+        {
+          "id": -2,
+          "value": "-",
+          "sortValue": ""
+        }
+      ],
+      "playerAttributes": [
+
+      ],
+      "teamLeagueSeasonAttributes": [
+
+      ],
+      "playerGameAttributes": [
+
+      ],
+      "teamId": 327,
+      "teamAbbreviation": "CIN",
+      "draftAlerts": [
+
+      ],
+      "playerGameHash": "216309-5935039",
+      "externalRequirements": {
+
+      }
+    }
+  ],
+  "competitions": [
+    {
+      "competitionId": 5935039,
+      "sport": "NFL",
+      "sportId": 1,
+      "homeTeam": {
+        "teamId": 327,
+        "teamName": "Bengals",
+        "abbreviation": "CIN",
+        "city": "Cincinnati"
+      },
+      "awayTeam": {
+        "teamId": 326,
+        "teamName": "Bears",
+        "abbreviation": "CHI",
+        "city": "Chicago"
+      },
+      "startTime": "2023-03-20T18:00:00.0000000Z",
+      "name": "CHI @ CIN",
+      "startingLineupsAvailable": false,
+      "depthChartsAvailable": true,
+      "competitionState": "Upcoming",
+      "competitionStateDetail": "",
+      "competitionStartedEarly": false,
+      "competitionAttributes": [
+        {
+          "typeId": 22,
+          "value": "46"
+        }
+      ]
+    }
+  ],
+  "teamsWithoutCompetitions": [
+
+  ],
+  "draftAlerts": [
+
+  ],
+  "draftStats": [
+    {
+      "id": 90,
+      "abbr": "FPPG",
+      "name": "Fantasy Points Per Game",
+      "order": 11
+    },
+    {
+      "id": -2,
+      "abbr": "OPRK",
+      "name": "Opponent Rank",
+      "order": 20
+    }
+  ],
+  "playerGameAttributes": [
+
+  ],
+  "errorStatus": {
+
+  }
+}

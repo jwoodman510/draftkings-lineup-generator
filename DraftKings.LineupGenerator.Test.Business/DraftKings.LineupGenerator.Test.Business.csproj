@@ -4,14 +4,10 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Content\salarycap_xfl_classic_draftables.json" />
-    <None Remove="Content\salarycap_xfl_classic_rules.json" />
+    <None Remove="Content\*.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\salarycap_xfl_classic_draftables.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\salarycap_xfl_classic_rules.json">
+    <Content Include="Content\*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

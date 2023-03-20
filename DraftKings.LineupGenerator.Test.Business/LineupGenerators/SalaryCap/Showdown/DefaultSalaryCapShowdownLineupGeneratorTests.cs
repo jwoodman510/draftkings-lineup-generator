@@ -11,22 +11,22 @@ using Xunit;
 
 namespace DraftKings.LineupGenerator.Test.Business
 {
-    public class DefaultSalaryCapClassicLineupGeneratorTests
+    public class DefaultSalaryCapShowdownLineupGeneratorTests
     {
-        private readonly DefaultSalaryCapClassicLineupGenerator _generator;
+        private readonly DefaultSalaryCapShowdownLineupGenerator _generator;
 
-        public DefaultSalaryCapClassicLineupGeneratorTests()
+        public DefaultSalaryCapShowdownLineupGeneratorTests()
         {
-            _generator = new DefaultSalaryCapClassicLineupGenerator(new ClassicLineupService());
+            _generator = new DefaultSalaryCapShowdownLineupGenerator(new ShowdownLineupService());
         }
 
         [Theory]
-        [InlineData(DraftTypes.SalaryCap, GameTypes.NflClassic, true)]
-        [InlineData(DraftTypes.SalaryCap, GameTypes.NflShowdown, false)]
-        [InlineData(DraftTypes.SalaryCap, GameTypes.XflClassic, true)]
-        [InlineData(DraftTypes.SalaryCap, GameTypes.XflShowdown, false)]
-        [InlineData(DraftTypes.SalaryCap, GameTypes.MaddenClassic, true)]
-        [InlineData(DraftTypes.SalaryCap, GameTypes.MaddenShowdown, false)]
+        [InlineData(DraftTypes.SalaryCap, GameTypes.NflClassic, false)]
+        [InlineData(DraftTypes.SalaryCap, GameTypes.NflShowdown, true)]
+        [InlineData(DraftTypes.SalaryCap, GameTypes.XflClassic, false)]
+        [InlineData(DraftTypes.SalaryCap, GameTypes.XflShowdown, true)]
+        [InlineData(DraftTypes.SalaryCap, GameTypes.MaddenClassic, false)]
+        [InlineData(DraftTypes.SalaryCap, GameTypes.MaddenShowdown, true)]
         public void CanGenerateGameTypes(string draftType, string gameType, bool expected)
         {
             var rules = new RulesModel
@@ -47,8 +47,8 @@ namespace DraftKings.LineupGenerator.Test.Business
         [Fact]
         public async Task GeneratesLineup()
         {
-            var rules = await JsonContentProvider.GetSalaryCapXflClassicRulesAsync();
-            var draftables = await JsonContentProvider.GetSalaryCapXflClassicDraftablesAsync();
+            var rules = await JsonContentProvider.GetSalaryCapMaddenShowdownRulesAsync();
+            var draftables = await JsonContentProvider.GetSalaryCapMaddenShowdownDraftablesAsync();
 
             var result = await _generator.GenerateAsync(new LineupRequestModel(1), rules, draftables);
 
@@ -58,20 +58,19 @@ namespace DraftKings.LineupGenerator.Test.Business
         [Fact]
         public async Task HonorsRosterSlotTemplate()
         {
-            var rules = await JsonContentProvider.GetSalaryCapXflClassicRulesAsync();
-            var draftables = await JsonContentProvider.GetSalaryCapXflClassicDraftablesAsync();
+            var rules = await JsonContentProvider.GetSalaryCapMaddenShowdownRulesAsync();
+            var draftables = await JsonContentProvider.GetSalaryCapMaddenShowdownDraftablesAsync();
 
-            var result = await _generator.GenerateAsync(new LineupRequestModel(1), rules, draftables);
+            var result = await _generator.GenerateAsync(new LineupRequestModel(1) { MinFppg = 5.0m }, rules, draftables);
 
             var expectedPositions = new List<string>
             {
-                "QB",
-                "RB",
-                "WR/TE",
-                "WR/TE",
+                "CPT",
                 "FLEX",
                 "FLEX",
-                "DST"
+                "FLEX",
+                "FLEX",
+                "FLEX"
             };
 
             result.Lineups.Should().NotBeEmpty();

@@ -14,16 +14,18 @@ using System.Threading.Tasks;
 namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 {
     /// <summary>
-    /// The default lineup generator for salary cap classic contests based on FPPG.
+    /// The default lineup generator for salary cap showdown contests based on FPPG.
     /// Currently only supports Madden, NFL, and XFL game types.
     /// </summary>
-    public class DefaultSalaryCapClassicLineupGenerator : ILineupGenerator
+    public class DefaultSalaryCapShowdownLineupGenerator : ILineupGenerator
     {
-        private readonly IClassicLineupService _classicLineupService;
+        private const decimal CaptainMultiplier = 1.5m;
 
-        public DefaultSalaryCapClassicLineupGenerator(IClassicLineupService classicLineupService)
+        private readonly IShowdownLineupService _showdownLineupService;
+
+        public DefaultSalaryCapShowdownLineupGenerator(IShowdownLineupService showdownLineupService)
         {
-            _classicLineupService = classicLineupService;
+            _showdownLineupService = showdownLineupService;
         }
 
         public bool CanGenerate(RulesModel rules)
@@ -34,9 +36,9 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
             }
 
             return
-                rules.GameTypeName == GameTypes.NflClassic ||
-                rules.GameTypeName == GameTypes.XflClassic ||
-                rules.GameTypeName == GameTypes.MaddenClassic;
+                rules.GameTypeName == GameTypes.NflShowdown ||
+                rules.GameTypeName == GameTypes.XflShowdown ||
+                rules.GameTypeName == GameTypes.MaddenShowdown;
         }
 
         public async Task<LineupsModel> GenerateAsync(LineupRequestModel request, RulesModel rules, DraftablesModel draftables)
@@ -55,7 +57,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var eligiblePlayers = GetEligiblePlayers(request, rules, draftables);
 
-            var potentialLineups = _classicLineupService.GetPotentialLineups(rules, draftables, eligiblePlayers);
+            var potentialLineups = _showdownLineupService.GetPotentialLineups(rules, draftables, eligiblePlayers);
 
             var lineupsBag = new ConcurrentBag<LineupModel>();
 
@@ -64,7 +66,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 var lineup = new LineupModel
                 {
                     Draftables = potentialLineup
-                        .Select(player => new DraftableDisplayModel(
+                        .Select((player, index) => new DraftableDisplayModel(
                             player.DisplayName,
                             player.GetFppg(draftables.DraftStats),
                             player.Salary,
@@ -127,15 +129,10 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 eligiblePlayers.ExcludeBaseSalary();
             }
 
-            var dstRosterSlot = rules.LineupTemplate.Single(x => x.RosterSlot.Name == RosterSlots.Dst).RosterSlot;
+            // TODO: This may need to exclude Defenses & Kickers
+            eligiblePlayers = eligiblePlayers.MinimumFppg(draftables.DraftStats, request.MinFppg);
 
-            var nonDstPlayers = eligiblePlayers
-                .Where(x => x.RosterSlotId != dstRosterSlot.Id)
-                .MinimumFppg(draftables.DraftStats, request.MinFppg);
-
-            var dstPlayers = eligiblePlayers.Where(x => x.RosterSlotId == dstRosterSlot.Id);
-
-            return nonDstPlayers.Concat(dstPlayers).ToList();
+            return eligiblePlayers.ToList();
         }
     }
 }
