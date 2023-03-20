@@ -21,29 +21,32 @@ namespace DraftKings.LineupGenerator.Caching.Services
         {
             await _keySemaphore.WaitAsync();
 
-            var fileName = await GetKeyMetadataAsync(key, CacheKeysFilepath, () => $"{Guid.NewGuid()}.json");
-            var absoluteExpiration = await GetKeyMetadataAsync(key, CacheExpirationsFilepath, () => DateTime.UtcNow.Add(expiration).ToString());
-
-            var filepath = Path.Combine(CacheDirectory, fileName);
-
-            if (File.Exists(filepath) && DateTime.UtcNow <= DateTime.Parse(absoluteExpiration))
+            try
             {
-                var text = await File.ReadAllTextAsync(filepath);
+                var fileName = await GetKeyMetadataAsync(key, CacheKeysFilepath, () => $"{Guid.NewGuid()}.json");
+                var absoluteExpiration = await GetKeyMetadataAsync(key, CacheExpirationsFilepath, () => DateTime.UtcNow.Add(expiration).ToString());
 
-                _keySemaphore.Release();
+                var filepath = Path.Combine(CacheDirectory, fileName);
 
-                return JsonConvert.DeserializeObject<T>(text);
+                if (File.Exists(filepath) && DateTime.UtcNow <= DateTime.Parse(absoluteExpiration))
+                {
+                    var text = await File.ReadAllTextAsync(filepath);
+
+                    return JsonConvert.DeserializeObject<T>(text);
+                }
+
+                var value = await valueFactory();
+                var json = JsonConvert.SerializeObject(value);
+                await File.WriteAllTextAsync(filepath, json);
+
+                await WriteKeyMetadataAsync(key, CacheExpirationsFilepath, absoluteExpiration.ToString());
+
+                return value;
             }
-
-            var value = await valueFactory();
-            var json = JsonConvert.SerializeObject(value);
-            await File.WriteAllTextAsync(filepath, json);
-
-            await WriteKeyMetadataAsync(key, CacheExpirationsFilepath, absoluteExpiration.ToString());
-
-            _keySemaphore.Release();
-
-            return value;
+            finally
+            {
+                _keySemaphore.Release();
+            }
         }
 
         private async Task<string> GetKeyMetadataAsync(string key, string metadataFilepath, Func<string> metadataValueFactory)
