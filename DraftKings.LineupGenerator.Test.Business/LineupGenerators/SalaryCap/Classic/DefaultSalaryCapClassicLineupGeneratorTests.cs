@@ -1,6 +1,8 @@
+using DraftKings.LineupGenerator.Business.Constants;
 using DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic;
 using DraftKings.LineupGenerator.Business.Services;
 using DraftKings.LineupGenerator.Constants;
+using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
 using FluentAssertions;
@@ -29,6 +31,14 @@ namespace DraftKings.LineupGenerator.Test.Business
         [InlineData(DraftTypes.SalaryCap, GameTypes.MaddenShowdown, false)]
         public void CanGenerateGameTypes(string draftType, string gameType, bool expected)
         {
+            var contest = new ContestModel
+            {
+                ContestDetail = new ContestDetailModel
+                {
+                    Sport = Sports.Nfl
+                }
+            };
+
             var rules = new RulesModel
             {
                 DraftType = draftType,
@@ -39,7 +49,7 @@ namespace DraftKings.LineupGenerator.Test.Business
                 }
             };
 
-            var canGenerate = _generator.CanGenerate(rules);
+            var canGenerate = _generator.CanGenerate(contest, rules);
 
             Assert.Equal(expected, canGenerate);
         }
