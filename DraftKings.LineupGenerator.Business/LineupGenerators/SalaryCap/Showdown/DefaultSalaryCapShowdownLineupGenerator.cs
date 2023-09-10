@@ -66,7 +66,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var potentialLineups = _showdownLineupService.GetPotentialLineups(rules, draftables, eligiblePlayers);
 
-            var lineupsBag = new ConcurrentBag<LineupModel>();
+            var lineupsBag = new ConcurrentDictionary<decimal, ConcurrentBag<LineupModel>>();
 
             long iterationCount = 0;
             long validLineupCount = 0;
@@ -110,32 +110,27 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
                 Interlocked.Add(ref validLineupCount, 1);
 
-                if (lineupsBag.IsEmpty)
-                {
-                    lineupsBag.Add(lineup);
+                var minKey = lineupsBag.Keys.Count == 0 ? 0 : lineupsBag.Keys.Min();
 
-                    return;
-                }
-
-                if (!lineupsBag.TryPeek(out var existing))
+                if (lineup.Salary < minKey)
                 {
                     return;
                 }
 
-                if (existing.Fppg > lineup.Fppg)
+                var lineups = lineupsBag.GetOrAdd(lineup.Salary, _ => new ConcurrentBag<LineupModel>());
+
+                if (lineups.Count < 5)
                 {
-                    return;
+                    lineups.Add(lineup);
                 }
 
-                if (existing.Fppg < lineup.Fppg)
+                if (lineupsBag.Keys.Count > 5) 
                 {
-                    lineupsBag.Clear();
+                    lineupsBag.TryRemove(minKey, out _);
                 }
-
-                lineupsBag.Add(lineup);
             });
 
-            result.Lineups.AddRange(lineupsBag);
+            result.Lineups.AddRange(lineupsBag.Values.SelectMany(x => x).OrderByDescending(x => x.Fppg).Take(5));
 
             cancellationTokenSource.Cancel();
 
