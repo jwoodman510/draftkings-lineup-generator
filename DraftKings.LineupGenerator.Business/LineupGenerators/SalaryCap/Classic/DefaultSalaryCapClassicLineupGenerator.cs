@@ -7,9 +7,13 @@ using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
@@ -67,8 +71,34 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var lineupsBag = new ConcurrentBag<LineupModel>();
 
+            long iterationCount = 0;
+            long validLineupCount = 0;
+
+            var cancellationTokenSource = new CancellationTokenSource();
+
+            var outputTask = Task.Factory.StartNew(async () =>
+            {
+                LineupModel lineupModel = null;
+
+                while (!cancellationTokenSource.Token.IsCancellationRequested)
+                {
+                    await Task.Delay(10000);
+
+                    Console.WriteLine($"Iterations: {iterationCount:n0} | Valid Lineups: {validLineupCount:n0}");
+
+                    if (lineupsBag.TryPeek(out var lineup) && lineup != lineupModel)
+                    {
+                        lineupModel = lineup;
+                        Console.WriteLine("Best Current Lineup:");
+                        Console.WriteLine(JsonConvert.SerializeObject(lineup, Formatting.Indented));
+                    }
+                }
+            }, TaskCreationOptions.LongRunning);
+
             potentialLineups.AsParallel().ForAll(potentialLineup =>
             {
+                Interlocked.Add(ref iterationCount, 1);
+
                 var lineup = new LineupModel
                 {
                     Draftables = potentialLineup
@@ -84,6 +114,8 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 {
                     return;
                 }
+
+                Interlocked.Add(ref validLineupCount, 1);
 
                 if (lineupsBag.IsEmpty)
                 {
@@ -111,6 +143,10 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
             });
 
             result.Lineups.AddRange(lineupsBag);
+
+            cancellationTokenSource.Cancel();
+
+            await outputTask.ConfigureAwait(false);
 
             return result;
         }
