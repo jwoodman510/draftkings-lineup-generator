@@ -4,6 +4,8 @@
     {
         public const string Classic = "Classic";
 
+        public const string Showdown = "Showdown Captain Mode";
+
         public const string MaddenClassic = "Madden Classic";
 
         public const string MaddenShowdown = "Madden ShowDown Captain Mode";

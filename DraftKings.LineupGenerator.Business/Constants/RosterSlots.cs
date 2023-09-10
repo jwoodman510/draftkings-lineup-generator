@@ -3,5 +3,6 @@
     public static class RosterSlots
     {
         public const string Dst = "DST";
+        public const string Kicker = "K";
     }
 }

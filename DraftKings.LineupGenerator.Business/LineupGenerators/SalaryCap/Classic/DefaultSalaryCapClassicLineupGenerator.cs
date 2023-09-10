@@ -168,7 +168,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             if (!request.IncludeBaseSalary)
             {
-                eligiblePlayers.ExcludeBaseSalary();
+                eligiblePlayers.ExcludeBaseSalaryByPosition();
             }
 
             var dstRosterSlot = rules.LineupTemplate.Single(x => x.RosterSlot.Name == RosterSlots.Dst).RosterSlot;

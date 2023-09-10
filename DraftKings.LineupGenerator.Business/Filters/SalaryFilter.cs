@@ -11,6 +11,13 @@ namespace DraftKings.LineupGenerator.Business.Filters
 
         public static IEnumerable<DraftableModel> ExcludeBaseSalary(this IEnumerable<DraftableModel> draftables)
         {
+            var baseSalary = draftables.Min(x => x.Salary);
+
+            return draftables.Where(x => x.Salary > baseSalary);
+        }
+
+        public static IEnumerable<DraftableModel> ExcludeBaseSalaryByPosition(this IEnumerable<DraftableModel> draftables)
+        {
             var baseSalaries = draftables.GroupBy(x => x.RosterSlotId).ToDictionary(x => x.Key, x => x.Min(y => y.Salary));
 
             return draftables.Where(x => x.Salary > baseSalaries[x.RosterSlotId]);
