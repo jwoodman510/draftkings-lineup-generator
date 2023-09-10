@@ -84,6 +84,11 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 {
                     await Task.Delay(10000);
 
+                    if (cancellationTokenSource.IsCancellationRequested)
+                    {
+                        break;
+                    }
+
                     Console.WriteLine($"[{DateTime.Now:T}]\tIterations: {iterationCount:n0} | Valid Lineups: {validLineupCount:n0}");
 
                     if (lineupsBag.TryPeek(out var lineup) && lineup != lineupModel)
