@@ -2,6 +2,8 @@
 {
     public static class GameTypes
     {
+        public const string Classic = "Classic";
+
         public const string MaddenClassic = "Madden Classic";
 
         public const string MaddenShowdown = "Madden ShowDown Captain Mode";

@@ -5,5 +5,7 @@
         public int DraftGroupId { get; set; }
 
         public int GameTypeId { get; set; }
+
+        public string Sport { get; set; }
     }
 }

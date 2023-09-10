@@ -38,7 +38,7 @@ namespace DraftKings.LineupGenerator.Business.Services
             }
 
             var generateLineups = _lineupGenerators
-                .Where(x => x.CanGenerate(rules))
+                .Where(x => x.CanGenerate(contest, rules))
                 .Select(x => x.GenerateAsync(request, rules, draftables));
 
             var lineups = await Task.WhenAll(generateLineups);

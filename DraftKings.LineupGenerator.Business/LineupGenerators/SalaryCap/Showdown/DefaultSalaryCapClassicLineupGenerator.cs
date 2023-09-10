@@ -3,9 +3,11 @@ using DraftKings.LineupGenerator.Business.Extensions;
 using DraftKings.LineupGenerator.Business.Filters;
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Constants;
+using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,8 +30,13 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
             _showdownLineupService = showdownLineupService;
         }
 
-        public bool CanGenerate(RulesModel rules)
+        public bool CanGenerate(ContestModel contest, RulesModel rules)
         {
+            if (contest.ContestDetail.Sport != Sports.Nfl)
+            {
+                return false;
+            }
+
             if (rules.DraftType != DraftTypes.SalaryCap || !rules.SalaryCap.IsEnabled)
             {
                 return false;
