@@ -184,6 +184,8 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var dstPlayers = eligiblePlayers.Where(x => x.RosterSlotId == dstRosterSlot.Id);
 
+            // TODO: Filter out backup QBs
+
             return nonDstPlayers.Concat(dstPlayers).ToList();
         }
     }
