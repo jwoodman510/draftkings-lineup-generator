@@ -177,15 +177,17 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var dstRosterSlot = rules.LineupTemplate.Single(x => x.RosterSlot.Name == RosterSlots.Dst).RosterSlot;
 
-            var nonDstPlayers = eligiblePlayers
+            var remainingPlayers = eligiblePlayers
                 .Where(x => x.RosterSlotId != dstRosterSlot.Id)
+                .Where(x => x.Position != RosterSlots.Quarterback)
                 .MinimumFppg(draftables.DraftStats, request.MinFppg);
 
             var dstPlayers = eligiblePlayers.Where(x => x.RosterSlotId == dstRosterSlot.Id);
+            var quarterbacks = eligiblePlayers.Where(x => x.Position == RosterSlots.Quarterback);
 
-            // TODO: Filter out backup QBs
+            var highestSalaryQuarterbacksByTeam = quarterbacks.GroupBy(x => x.TeamId).Select(x => x.OrderByDescending(y => y.Salary).First());
 
-            return nonDstPlayers.Concat(dstPlayers).ToList();
+            return remainingPlayers.Concat(dstPlayers).Concat(highestSalaryQuarterbacksByTeam).ToList();
         }
     }
 }

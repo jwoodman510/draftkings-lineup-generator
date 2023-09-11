@@ -4,5 +4,6 @@
     {
         public const string Dst = "DST";
         public const string Kicker = "K";
+        public const string Quarterback = "QB";
     }
 }
