@@ -99,7 +99,8 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                             player.DisplayName,
                             player.GetFppg(draftables.DraftStats),
                             player.Salary,
-                            player.GetRosterPosition(rules)))
+                            player.GetRosterPosition(rules),
+                            GetProjectedSalary(draftables, player, rules)))
                         .ToList()
                 };
 
@@ -112,12 +113,12 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
                 var minKey = lineupsBag.Keys.Count == 0 ? 0 : lineupsBag.Keys.Min();
 
-                if (lineup.Salary < minKey)
+                if (lineup.ProjectedFppg < minKey)
                 {
                     return;
                 }
 
-                var lineups = lineupsBag.GetOrAdd(lineup.Salary, _ => new ConcurrentBag<LineupModel>());
+                var lineups = lineupsBag.GetOrAdd(lineup.ProjectedFppg, _ => new ConcurrentBag<LineupModel>());
 
                 if (lineups.Count < 5)
                 {
@@ -130,11 +131,21 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 }
             });
 
-            result.Lineups.AddRange(lineupsBag.Values.SelectMany(x => x).OrderByDescending(x => x.Fppg).Take(5));
+            result.Lineups.AddRange(lineupsBag.Values.SelectMany(x => x).OrderBy(x => x.ProjectedFppg).Take(5));
 
             cancellationTokenSource.Cancel();
 
             return result;
+        }
+
+        private static decimal GetProjectedSalary(DraftablesModel draftables, DraftableModel draftable, RulesModel rules)
+        {
+            var captainSlot = rules.LineupTemplate.First(x => x.RosterSlot.Name == RosterSlots.Captain);
+            var projectedFppg = draftable.GetFppg(draftables.DraftStats);
+
+            return draftable.RosterSlotId == captainSlot.RosterSlot.Id
+                ? projectedFppg * 1.5m
+                : projectedFppg;
         }
 
         private static List<DraftableModel> GetEligiblePlayers(LineupRequestModel request, RulesModel rules, DraftablesModel draftables)

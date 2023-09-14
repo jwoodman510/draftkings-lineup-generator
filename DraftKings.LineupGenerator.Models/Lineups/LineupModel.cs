@@ -12,6 +12,8 @@ namespace DraftKings.LineupGenerator.Models.Lineups
 
         public decimal Fppg => Draftables.Sum(x => x.Fppg);
 
+        public decimal ProjectedFppg => Draftables.Sum(x => x.ProjectedFppg);
+
         public List<DraftableDisplayModel> Draftables { get; set; }
     }
 }
