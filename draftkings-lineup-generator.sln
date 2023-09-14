@@ -13,7 +13,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DraftKings.LineupGenerator.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DraftKings.LineupGenerator.Console", "DraftKings.LineupGenerator.Console\DraftKings.LineupGenerator.Console.csproj", "{1A17D728-1C6F-4121-BDE5-290BB29355F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DraftKings.LineupGenerator.Caching", "DraftKings.LineupGenerator.Caching\DraftKings.LineupGenerator.Caching.csproj", "{6AF557C9-F57E-40D1-AAAA-C282D028C774}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DraftKings.LineupGenerator.Caching", "DraftKings.LineupGenerator.Caching\DraftKings.LineupGenerator.Caching.csproj", "{6AF557C9-F57E-40D1-AAAA-C282D028C774}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{A2E42C09-4FC1-4C32-896F-BCF8932EE981}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

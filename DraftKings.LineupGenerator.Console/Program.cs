@@ -22,7 +22,9 @@ namespace DraftKings.LineupGenerator
 
             var includeQuestionableOption = new Option<bool>("--include-questionable", "[default=false] Includes draftables with a questionable status.");
             var includeBaseSalaryOption = new Option<bool>("--include-base-salary", "[default=false] Includes draftables with the base salary (lowest possible).");
-            var minFppgOption = new Option<decimal>("--min-fppg", "[default=10.0] Minimum fantasy points per game (per player - excluding defense & kickers).");
+            var minFppgOption = new Option<decimal>("--min-fppg", "(Classic Only) [default=10.0] Minimum fantasy points per game (per player - excluding defense & kickers).");
+            var excludeDefenseOption = new Option<bool>("--exclude-defense", "(Showdown Only) [default: false] Excludes DST positions from lineups.");
+            var excludeKickersOption = new Option<bool>("--exclude-kickers", "(Showdown Only) [default=false] Excludes Kicker positions from lineups.");
 
             minFppgOption.SetDefaultValue(new LineupRequestModel(default).MinFppg);
 
@@ -30,12 +32,16 @@ namespace DraftKings.LineupGenerator
             rootCommand.AddOption(includeQuestionableOption);
             rootCommand.AddOption(includeBaseSalaryOption);
             rootCommand.AddOption(minFppgOption);
+            rootCommand.AddOption(excludeDefenseOption);
+            rootCommand.AddOption(excludeKickersOption);
 
             var modelBinder = new LineupRequestModelBinder(
                 contestIdOption,
                 includeQuestionableOption,
                 includeBaseSalaryOption,
-                minFppgOption);
+                minFppgOption,
+                excludeDefenseOption,
+                excludeKickersOption);
 
             rootCommand.SetHandler(async request =>
             {

@@ -8,4 +8,8 @@
   - Optional:
     - `--include-questionable` *[default: false]* Includes draftables with a questionable status.
     - `--include-base-salary` *[default: false]* Includes draftables with the base salary (lowest possible).
+  - Option (Classic Only):
     - `--min-fppg` *[default: 10.0]* Minimum fantasy points per game (per player - excluding DST).
+  - Option (Showdown Only):
+    - `--exclude-defense` *[default: false]* Excludes DST positions from lineups.
+    - `--exclude-kickers` *[default: false]* Excludes Kicker positions from lineups.

@@ -168,6 +168,16 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 eligiblePlayers = eligiblePlayers.ExcludeBaseSalary();
             }
 
+            if (request.ExcludeDefense)
+            {
+                eligiblePlayers = eligiblePlayers.Where(x => x.Position != RosterSlots.Dst);
+            }
+
+            if (request.ExcludeKickers)
+            {
+                eligiblePlayers = eligiblePlayers.Where(x => x.Position != RosterSlots.Kicker);
+            }
+
             return eligiblePlayers.ToList();
         }
     }
