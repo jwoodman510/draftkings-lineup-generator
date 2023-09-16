@@ -24,10 +24,14 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
     public class DefaultSalaryCapClassicLineupGenerator : ILineupGenerator
     {
         private readonly IClassicLineupService _classicLineupService;
+        private readonly IEnumerable<IOutputFormatter> _outputFormatters;
 
-        public DefaultSalaryCapClassicLineupGenerator(IClassicLineupService classicLineupService)
+        public DefaultSalaryCapClassicLineupGenerator(
+            IClassicLineupService classicLineupService,
+            IEnumerable<IOutputFormatter> outputFormatters)
         {
             _classicLineupService = classicLineupService;
+            _outputFormatters = outputFormatters;
         }
 
         public bool CanGenerate(ContestModel contest, RulesModel rules)
@@ -52,7 +56,8 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
         public async Task<LineupsModel> GenerateAsync(LineupRequestModel request, RulesModel rules, DraftablesModel draftables)
         {
-            await Task.Yield();
+            var outputFormatter = _outputFormatters.FirstOrDefault(x => x.Type.Equals(request.OutputFormat))
+                ?? _outputFormatters.FirstOrDefault();
 
             var result = new LineupsModel
             {
@@ -93,8 +98,15 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                     if (lineupsBag.TryPeek(out var lineup) && lineup != lineupModel)
                     {
                         lineupModel = lineup;
-                        Console.WriteLine("Best Current Lineup:");
-                        Console.WriteLine(JsonConvert.SerializeObject(lineup, Formatting.Indented));
+
+                        if (outputFormatter != null)
+                        {
+                            Console.WriteLine("Best Current Lineup:");
+
+                            var lineupOutput = await outputFormatter.FormatAsync(new[] { lineup }, cancellationTokenSource.Token);
+
+                            Console.WriteLine(lineupOutput);
+                        }
                     }
                 }
             }, TaskCreationOptions.LongRunning);

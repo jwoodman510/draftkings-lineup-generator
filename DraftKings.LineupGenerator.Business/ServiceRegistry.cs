@@ -42,8 +42,8 @@ namespace DraftKings.LineupGenerator.Business
 
             // Add Formatters
             services
-                .AddTransient<IOutputFormatter, JsonOutputFormatter>()
-                .AddTransient<IOutputFormatter, TextOutputFormatter>();
+                .AddTransient<IOutputFormatter, TextOutputFormatter>()
+                .AddTransient<IOutputFormatter, JsonOutputFormatter>();
 
             return services;
         }

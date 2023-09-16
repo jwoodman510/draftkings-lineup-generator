@@ -10,5 +10,7 @@ namespace DraftKings.LineupGenerator.Business.Interfaces
         string Type { get; }
 
         Task<string> FormatAsync(IEnumerable<LineupsModel> lineups, CancellationToken cancellationToken = default);
+
+        Task<string> FormatAsync(IEnumerable<LineupModel> lineups, CancellationToken cancellationToken = default);
     }
 }
