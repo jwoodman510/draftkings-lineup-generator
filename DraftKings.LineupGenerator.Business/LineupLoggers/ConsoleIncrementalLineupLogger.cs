@@ -79,11 +79,11 @@ namespace DraftKings.LineupGenerator.Business.LineupLoggers
             var outputFormatter = _outputFormatters.FirstOrDefault(x => x.Type.Equals(format))
                 ?? _outputFormatters.FirstOrDefault();
 
-            Console.WriteLine(description);
+            WriteLine(description, ConsoleColor.Yellow);
 
-            var lineupOutput = await outputFormatter?.FormatAsync(new[] { lineup }, cancellationToken);
+            var lineupOutput = await outputFormatter?.FormatLineupAsync(new[] { lineup }, cancellationToken);
 
-            Console.WriteLine(lineupOutput);
+            WriteLine(lineupOutput, ConsoleColor.Magenta);
         }
 
         private Task LogIterationAsync(CancellationToken cancellationToken)
@@ -91,6 +91,17 @@ namespace DraftKings.LineupGenerator.Business.LineupLoggers
             Console.WriteLine($"[{DateTime.Now:T}]\tIterations: {_iterationCount:n0} | Valid Lineups: {_validLineupCount:n0}");
 
             return Task.CompletedTask;
+        }
+
+        private static void WriteLine(string message, ConsoleColor foregroundColor)
+        {
+            var defaultColor = Console.ForegroundColor;
+
+            Console.ForegroundColor = foregroundColor;
+
+            Console.WriteLine(message);
+
+            Console.ForegroundColor = defaultColor;
         }
     }
 }

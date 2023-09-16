@@ -27,7 +27,7 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
             return Task.FromResult(output.ToString());
         }
 
-        public Task<string> FormatAsync(IEnumerable<LineupsModel> lineups, CancellationToken cancellationToken = default)
+        public Task<string> FormatLineupAsync(IEnumerable<LineupsModel> lineups, CancellationToken cancellationToken = default)
         {
             var lineupsModel = lineups.ToList();
 
@@ -46,7 +46,7 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
             return Task.FromResult(output);
         }
 
-        public Task<string> FormatAsync(IEnumerable<LineupModel> lineups, CancellationToken cancellationToken = default)
+        public Task<string> FormatLineupAsync(IEnumerable<LineupModel> lineups, CancellationToken cancellationToken = default)
         {
             var lineupsList = lineups.ToList();
 

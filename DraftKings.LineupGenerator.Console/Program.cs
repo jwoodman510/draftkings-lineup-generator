@@ -58,23 +58,34 @@ namespace DraftKings.LineupGenerator
                 var formatters = serviceProvider.GetServices<IOutputFormatter>();
                 var formatter = formatters.FirstOrDefault(x => x.Type.Equals(request.OutputFormat, StringComparison.OrdinalIgnoreCase)) ?? formatters.First();
 
-                Console.WriteLine("Generating Lineups for Configuration:");
+                WriteLine("Generating Lineups for Configuration:", ConsoleColor.Green);
 
-                Console.WriteLine(await formatter.FormatAsync(request));
+                WriteLine(await formatter.FormatAsync(request), ConsoleColor.Cyan);
 
                 var lineups = await serviceProvider
                     .GetRequiredService<ILineupGeneratorService>()
                     .GetAsync(request);
 
-                Console.WriteLine("Lineups Generated:");
+                WriteLine("Lineups Generated:", ConsoleColor.Green);
 
-                Console.WriteLine(await formatter.FormatAsync(lineups));
+                Console.WriteLine(await formatter.FormatLineupAsync(lineups));
 
             }, modelBinder);
 
             await rootCommand.InvokeAsync(args);
 
             Console.ReadLine();
+        }
+
+        private static void WriteLine(string message, ConsoleColor foregroundColor)
+        {
+            var defaultColor = Console.ForegroundColor;
+
+            Console.ForegroundColor = foregroundColor;
+
+            Console.WriteLine(message);
+
+            Console.ForegroundColor = defaultColor;
         }
     }
 }
