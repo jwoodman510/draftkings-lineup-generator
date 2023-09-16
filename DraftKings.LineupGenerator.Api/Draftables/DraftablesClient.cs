@@ -1,6 +1,7 @@
 ﻿using DraftKings.LineupGenerator.Caching;
 using DraftKings.LineupGenerator.Models.Draftables;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DraftKings.LineupGenerator.Api.Draftables
@@ -12,7 +13,7 @@ namespace DraftKings.LineupGenerator.Api.Draftables
             IHttpClientFactory httpClientFactory)
             : base(cacheService, httpClientFactory) { }
 
-        public Task<DraftablesModel> GetAsync(int contestId) =>
-            GetAsync<DraftablesModel>($"https://api.draftkings.com/draftgroups/v1/draftgroups/{contestId}/draftables?format=json");
+        public Task<DraftablesModel> GetAsync(int contestId, CancellationToken cancellationToken) =>
+            GetAsync<DraftablesModel>($"https://api.draftkings.com/draftgroups/v1/draftgroups/{contestId}/draftables?format=json", cancellationToken);
     }
 }

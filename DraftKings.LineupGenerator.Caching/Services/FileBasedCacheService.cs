@@ -16,30 +16,30 @@ namespace DraftKings.LineupGenerator.Caching.Services
         private static string CacheExpirationsFilepath => Path.Combine(CacheDirectory, "_expirations.json");
         private static string CacheDirectory => Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "cache");
 
-        public async Task<T> GetOrCreateAsync<T>(string key, TimeSpan expiration, Func<Task<T>> valueFactory)
+        public async Task<T> GetOrCreateAsync<T>(string key, TimeSpan expiration, Func<Task<T>> valueFactory, CancellationToken cancellationToken)
             where T : class
         {
-            await _keySemaphore.WaitAsync();
+            await _keySemaphore.WaitAsync(cancellationToken);
 
             try
             {
-                var fileName = await GetKeyMetadataAsync(key, CacheKeysFilepath, () => $"{Guid.NewGuid()}.json");
-                var absoluteExpiration = await GetKeyMetadataAsync(key, CacheExpirationsFilepath, () => DateTime.UtcNow.Add(expiration).ToString());
+                var fileName = await GetKeyMetadataAsync(key, CacheKeysFilepath, () => $"{Guid.NewGuid()}.json", cancellationToken);
+                var absoluteExpiration = await GetKeyMetadataAsync(key, CacheExpirationsFilepath, () => DateTime.UtcNow.Add(expiration).ToString(), cancellationToken);
 
                 var filepath = Path.Combine(CacheDirectory, fileName);
 
                 if (File.Exists(filepath) && DateTime.UtcNow <= DateTime.Parse(absoluteExpiration))
                 {
-                    var text = await File.ReadAllTextAsync(filepath);
+                    var text = await File.ReadAllTextAsync(filepath, cancellationToken);
 
                     return JsonConvert.DeserializeObject<T>(text);
                 }
 
                 var value = await valueFactory();
                 var json = JsonConvert.SerializeObject(value);
-                await File.WriteAllTextAsync(filepath, json);
+                await File.WriteAllTextAsync(filepath, json, cancellationToken);
 
-                await WriteKeyMetadataAsync(key, CacheExpirationsFilepath, absoluteExpiration.ToString());
+                await WriteKeyMetadataAsync(key, CacheExpirationsFilepath, absoluteExpiration.ToString(), cancellationToken);
 
                 return value;
             }
@@ -49,7 +49,7 @@ namespace DraftKings.LineupGenerator.Caching.Services
             }
         }
 
-        private async Task<string> GetKeyMetadataAsync(string key, string metadataFilepath, Func<string> metadataValueFactory)
+        private async Task<string> GetKeyMetadataAsync(string key, string metadataFilepath, Func<string> metadataValueFactory, CancellationToken cancellationToken)
         {
             if (!Directory.Exists(CacheDirectory))
             {
@@ -60,10 +60,11 @@ namespace DraftKings.LineupGenerator.Caching.Services
             {
                 await File.WriteAllTextAsync(
                     metadataFilepath,
-                    JsonConvert.SerializeObject(new Dictionary<string, object>()));
+                    JsonConvert.SerializeObject(new Dictionary<string, object>()),
+                    cancellationToken);
             }
 
-            var text = await File.ReadAllTextAsync(metadataFilepath);
+            var text = await File.ReadAllTextAsync(metadataFilepath, cancellationToken);
 
             var keysLookup = JsonConvert.DeserializeObject<Dictionary<string, string>>(text);
 
@@ -73,22 +74,22 @@ namespace DraftKings.LineupGenerator.Caching.Services
 
                 var json = JsonConvert.SerializeObject(keysLookup);
 
-                await File.WriteAllTextAsync(metadataFilepath, json);
+                await File.WriteAllTextAsync(metadataFilepath, json, cancellationToken);
             }
 
             return keysLookup[key];
         }
 
-        private async Task WriteKeyMetadataAsync(string key, string metadataFilepath, string value)
+        private async Task WriteKeyMetadataAsync(string key, string metadataFilepath, string value, CancellationToken cancellationToken)
         {
-            var text = await File.ReadAllTextAsync(metadataFilepath);
+            var text = await File.ReadAllTextAsync(metadataFilepath, cancellationToken);
             var keysLookup = JsonConvert.DeserializeObject<Dictionary<string, string>>(text);
 
             keysLookup[key] = value;
 
             var json = JsonConvert.SerializeObject(keysLookup);
 
-            await File.WriteAllTextAsync(metadataFilepath, json);
+            await File.WriteAllTextAsync(metadataFilepath, json, cancellationToken);
         }
     }
 }

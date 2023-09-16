@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DraftKings.LineupGenerator.Caching.Services
@@ -13,7 +14,7 @@ namespace DraftKings.LineupGenerator.Caching.Services
             _cache = cache;
         }
 
-        public async Task<T> GetOrCreateAsync<T>(string key, TimeSpan expiration, Func<Task<T>> valueFactory)
+        public async Task<T> GetOrCreateAsync<T>(string key, TimeSpan expiration, Func<Task<T>> valueFactory, CancellationToken cancellationToken)
             where T : class
         {
             if (_cache.TryGetValue<T>(key, out var cachedValue))

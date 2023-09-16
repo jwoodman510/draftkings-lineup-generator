@@ -3,6 +3,7 @@ using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Models.Lineups;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DraftKings.LineupGenerator.Business.Services
@@ -20,17 +21,17 @@ namespace DraftKings.LineupGenerator.Business.Services
             _lineupGenerators = lineupGenerators;
         }
 
-        public async Task<List<LineupsModel>> GetAsync(LineupRequestModel request)
+        public async Task<List<LineupsModel>> GetAsync(LineupRequestModel request, CancellationToken cancellationToken)
         {
-            var contest = await _draftKingsClient.Contests.GetAsync(request.ContestId);
+            var contest = await _draftKingsClient.Contests.GetAsync(request.ContestId, cancellationToken);
 
             if (contest == null)
             {
                 return new List<LineupsModel>();
             }
 
-            var rules = await _draftKingsClient.Rules.GetAsync(contest.ContestDetail.GameTypeId);
-            var draftables = await _draftKingsClient.Draftables.GetAsync(contest.ContestDetail.DraftGroupId);
+            var rules = await _draftKingsClient.Rules.GetAsync(contest.ContestDetail.GameTypeId, cancellationToken);
+            var draftables = await _draftKingsClient.Draftables.GetAsync(contest.ContestDetail.DraftGroupId, cancellationToken);
 
             if (rules == null || draftables == null)
             {
@@ -39,7 +40,7 @@ namespace DraftKings.LineupGenerator.Business.Services
 
             var generateLineups = _lineupGenerators
                 .Where(x => x.CanGenerate(contest, rules))
-                .Select(x => x.GenerateAsync(request, rules, draftables));
+                .Select(x => x.GenerateAsync(request, rules, draftables, cancellationToken));
 
             var lineups = await Task.WhenAll(generateLineups);
 

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DraftKings.LineupGenerator.Api
@@ -19,20 +20,20 @@ namespace DraftKings.LineupGenerator.Api
             HttpClientFactory = httpClientFactory;
         }
 
-        protected async Task<T> GetAsync<T>(string url) where T : class
+        protected async Task<T> GetAsync<T>(string url, CancellationToken cancellationToken) where T : class
         {
             var cacheKey = url;
 
             return await _cache.GetOrCreateAsync<T>(url, TimeSpan.FromMinutes(5), async () =>
             {
-                var response = await HttpClientFactory.CreateClient().GetAsync(url);
+                var response = await HttpClientFactory.CreateClient().GetAsync(url, cancellationToken);
 
                 if (!response.IsSuccessStatusCode)
                 {
                     return default;
                 }
 
-                var responseJson = await response.Content.ReadAsStringAsync();
+                var responseJson = await response.Content.ReadAsStringAsync(cancellationToken);
 
                 if (string.IsNullOrEmpty(responseJson))
                 {
@@ -42,7 +43,7 @@ namespace DraftKings.LineupGenerator.Api
                 var result = JsonConvert.DeserializeObject<T>(responseJson);
 
                 return result;
-            });
+            }, cancellationToken);
         }
     }
 }

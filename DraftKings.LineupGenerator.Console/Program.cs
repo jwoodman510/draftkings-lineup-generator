@@ -5,12 +5,15 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.CommandLine;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DraftKings.LineupGenerator
 {
     internal class Program
     {
+        static readonly CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
+
         static async Task Main(string[] args)
         {
             var rootCommand = new RootCommand();
@@ -78,7 +81,7 @@ namespace DraftKings.LineupGenerator
 
                 var lineups = await serviceProvider
                     .GetRequiredService<ILineupGeneratorService>()
-                    .GetAsync(request);
+                    .GetAsync(request, CancellationTokenSource.Token);
 
                 WriteLine("Lineups Generated:", ConsoleColor.Green);
 
@@ -86,9 +89,17 @@ namespace DraftKings.LineupGenerator
 
             }, modelBinder);
 
+            _ = Task.Factory.StartNew(() =>
+            {
+                if (Console.ReadKey().KeyChar is 'q')
+                {
+                    CancellationTokenSource.Cancel();
+                }
+            });
+
             await rootCommand.InvokeAsync(args);
 
-            Console.ReadLine();
+            Console.ReadKey();
         }
 
         private static void WriteLine(string message, ConsoleColor foregroundColor)

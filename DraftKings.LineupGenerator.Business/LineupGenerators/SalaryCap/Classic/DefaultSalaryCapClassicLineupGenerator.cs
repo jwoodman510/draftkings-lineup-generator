@@ -8,8 +8,10 @@ using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
@@ -51,7 +53,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 rules.GameTypeName == GameTypes.MaddenClassic;
         }
 
-        public async Task<LineupsModel> GenerateAsync(LineupRequestModel request, RulesModel rules, DraftablesModel draftables)
+        public async Task<LineupsModel> GenerateAsync(LineupRequestModel request, RulesModel rules, DraftablesModel draftables, CancellationToken cancellationToken)
         {
             var result = new LineupsModel
             {
@@ -69,37 +71,42 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var lineupsBag = new ProjectedPointsLineupsBag();
 
-            await _incrementalLogger.StartAsync(request.OutputFormat, lineupsBag, default);
+            await _incrementalLogger.StartAsync(request.OutputFormat, lineupsBag, cancellationToken);
 
-            potentialLineups.AsParallel().ForAll(potentialLineup =>
+            try
             {
-                _incrementalLogger.IncrementIterations();
 
-                var lineup = new LineupModel
+                potentialLineups.AsParallel().WithCancellation(cancellationToken).ForAll(potentialLineup =>
                 {
-                    Draftables = potentialLineup
-                        .Select(player => new DraftableDisplayModel(
-                            player.DisplayName,
-                            player.GetFppg(draftables.DraftStats),
-                            player.Salary,
-                            player.GetRosterPosition(rules),
-                            player.GetProjectedSalary(draftables, rules)))
-                        .ToList()
-                };
+                    _incrementalLogger.IncrementIterations();
 
-                if (lineup.Salary >= rules.SalaryCap.MaxValue || lineup.Salary <= rules.SalaryCap.MinValue)
-                {
-                    return;
-                }
+                    var lineup = new LineupModel
+                    {
+                        Draftables = potentialLineup
+                            .Select(player => new DraftableDisplayModel(
+                                player.DisplayName,
+                                player.GetFppg(draftables.DraftStats),
+                                player.Salary,
+                                player.GetRosterPosition(rules),
+                                player.GetProjectedSalary(draftables, rules)))
+                            .ToList()
+                    };
 
-                _incrementalLogger.IncrementValidLineups();
+                    if (lineup.Salary >= rules.SalaryCap.MaxValue || lineup.Salary <= rules.SalaryCap.MinValue)
+                    {
+                        return;
+                    }
 
-                lineupsBag.UpdateLineups(lineup, request.LineupCount);
-            });
+                    _incrementalLogger.IncrementValidLineups();
+
+                    lineupsBag.UpdateLineups(lineup, request.LineupCount);
+                });
+            }
+            catch (OperationCanceledException) { }
 
             result.Lineups.AddRange(lineupsBag.GetBestLineups(request.LineupCount));
 
-            await _incrementalLogger.StopAsync(default);
+            await _incrementalLogger.StopAsync(cancellationToken);
 
             return result;
         }
