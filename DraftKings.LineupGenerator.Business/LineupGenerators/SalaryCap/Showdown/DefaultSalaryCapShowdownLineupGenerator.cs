@@ -35,7 +35,8 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
         public bool CanGenerate(ContestModel contest, RulesModel rules)
         {
-            if (contest.ContestDetail.Sport != Sports.Nfl)
+            if (contest.ContestDetail.Sport != Sports.Nfl &&
+                contest.ContestDetail.Sport != Sports.Xfl)
             {
                 return false;
             }
