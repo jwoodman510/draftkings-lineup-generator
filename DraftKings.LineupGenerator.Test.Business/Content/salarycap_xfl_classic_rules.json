@@ -6,7 +6,7 @@
   "salaryCap": {
     "isEnabled": true,
     "minValue": 0,
-    "maxValue": 50000
+    "maxValue": 60000
   },
   "gameCount": {
     "isEnabled": true,

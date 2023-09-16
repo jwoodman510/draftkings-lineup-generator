@@ -149,7 +149,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             cancellationTokenSource.Cancel();
 
-            await outputTask.ConfigureAwait(false);
+            await outputTask;
 
             return result;
         }
