@@ -81,14 +81,9 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
 
             records.Add($"Projected Points: {lineup.Draftables.Sum(x => x.ProjectedFppg)}");
 
-            var draftables = lineup.Draftables.OrderBy(x => x.RosterPosition).ToList();
+            var draftables = lineup.Draftables.OrderBy(x => x.RosterPositionSortOrdinal);
 
-            for (var i = 0; i < lineup.Draftables.Count; i++)
-            {
-                var draftable = draftables[i];
-
-                records.Add($"[{draftable.RosterPosition}]\t{draftable.Name} ({draftable.ProjectedFppg})");
-            }
+            records.AddRange(draftables.Select(draftable => $"[{draftable.RosterPosition}]\t{draftable.Name} ({draftable.ProjectedFppg})"));
 
             return records;
         }
