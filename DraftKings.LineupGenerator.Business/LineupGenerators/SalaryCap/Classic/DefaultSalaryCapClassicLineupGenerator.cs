@@ -73,7 +73,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var potentialLineups = _classicLineupService.GetPotentialLineups(rules, draftables, eligiblePlayers);
 
-            var lineupsBag = new ConcurrentBag<LineupModel>();
+            var lineupsBag = new ConcurrentDictionary<decimal, ConcurrentBag<LineupModel>>();
 
             long iterationCount = 0;
             long validLineupCount = 0;
@@ -82,11 +82,11 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var outputTask = Task.Factory.StartNew(async () =>
             {
-                LineupModel lineupModel = null;
+                LineupModel bestLineup = null;
 
                 while (!cancellationTokenSource.Token.IsCancellationRequested)
                 {
-                    await Task.Delay(10000);
+                    await Task.Delay(TimeSpan.FromSeconds(10));
 
                     if (cancellationTokenSource.IsCancellationRequested)
                     {
@@ -95,17 +95,20 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
                     Console.WriteLine($"[{DateTime.Now:T}]\tIterations: {iterationCount:n0} | Valid Lineups: {validLineupCount:n0}");
 
-                    if (lineupsBag.TryPeek(out var lineup) && lineup != lineupModel)
+                    if (lineupsBag.Count > 0)
                     {
-                        lineupModel = lineup;
+                        var maxKey = lineupsBag.Keys.Max();
+                        var lineup = lineupsBag[maxKey].OrderByDescending(x => x.ProjectedFppg).First();
 
-                        if (outputFormatter != null)
+                        if (lineup != bestLineup)
                         {
                             Console.WriteLine("Best Current Lineup:");
 
                             var lineupOutput = await outputFormatter.FormatAsync(new[] { lineup }, cancellationTokenSource.Token);
 
                             Console.WriteLine(lineupOutput);
+
+                            bestLineup = lineup;
                         }
                     }
                 }
@@ -133,32 +136,27 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
                 Interlocked.Add(ref validLineupCount, 1);
 
-                if (lineupsBag.IsEmpty)
-                {
-                    lineupsBag.Add(lineup);
+                var minKey = lineupsBag.Keys.Count == 0 ? 0 : lineupsBag.Keys.Min();
 
-                    return;
-                }
-
-                if (!lineupsBag.TryPeek(out var existing))
+                if (lineup.ProjectedFppg < minKey)
                 {
                     return;
                 }
 
-                if (existing.Fppg > lineup.Fppg)
+                var lineups = lineupsBag.GetOrAdd(lineup.ProjectedFppg, _ => new ConcurrentBag<LineupModel>());
+
+                if (lineups.Count < 5)
                 {
-                    return;
+                    lineups.Add(lineup);
                 }
 
-                if (existing.Fppg < lineup.Fppg)
+                if (lineupsBag.Keys.Count > 5)
                 {
-                    lineupsBag.Clear();
+                    lineupsBag.TryRemove(minKey, out _);
                 }
-
-                lineupsBag.Add(lineup);
             });
 
-            result.Lineups.AddRange(lineupsBag);
+            result.Lineups.AddRange(lineupsBag.Values.SelectMany(x => x).OrderBy(x => x.ProjectedFppg).Take(5));
 
             cancellationTokenSource.Cancel();
 

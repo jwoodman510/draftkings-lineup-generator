@@ -50,8 +50,6 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
         public async Task<LineupsModel> GenerateAsync(LineupRequestModel request, RulesModel rules, DraftablesModel draftables)
         {
-            await Task.Yield();
-
             var result = new LineupsModel
             {
                 Description = "Default FPPG Lineup"
@@ -134,6 +132,8 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
             result.Lineups.AddRange(lineupsBag.Values.SelectMany(x => x).OrderBy(x => x.ProjectedFppg).Take(5));
 
             cancellationTokenSource.Cancel();
+
+            await outputTask;
 
             return result;
         }
