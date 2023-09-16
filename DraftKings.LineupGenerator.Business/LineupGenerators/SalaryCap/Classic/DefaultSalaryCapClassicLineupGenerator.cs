@@ -115,7 +115,8 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                             player.DisplayName,
                             player.GetFppg(draftables.DraftStats),
                             player.Salary,
-                            player.GetRosterPosition(rules)))
+                            player.GetRosterPosition(rules),
+                            player.GetProjectedSalary(draftables, rules)))
                         .ToList()
                 };
 

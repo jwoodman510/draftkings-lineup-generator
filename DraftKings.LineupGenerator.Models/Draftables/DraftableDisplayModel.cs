@@ -12,15 +12,6 @@
 
         public string RosterPosition { get; set; }
 
-        public DraftableDisplayModel(string name, decimal fppg, decimal salary, string rosterPosition)
-        {
-            Name = name;
-            Fppg = fppg;
-            Salary = salary;
-            ProjectedFppg = fppg;
-            RosterPosition = rosterPosition;
-        }
-
         public DraftableDisplayModel(string name, decimal fppg, decimal salary, string rosterPosition, decimal projectedFppg)
         {
             Name = name;

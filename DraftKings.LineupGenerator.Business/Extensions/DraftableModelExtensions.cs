@@ -34,5 +34,16 @@ namespace DraftKings.LineupGenerator.Business.Extensions
 
             return decimal.TryParse(stat, out var val) ? val : default;
         }
+
+        public static decimal GetProjectedSalary(this DraftableModel player, DraftablesModel draftables, RulesModel rules)
+        {
+            var captainSlot = rules.LineupTemplate.FirstOrDefault(x => x.RosterSlot.Name == RosterSlots.Captain);
+
+            var projectedFppg = player.GetFppg(draftables.DraftStats);
+
+            return captainSlot != null && player.RosterSlotId == captainSlot.RosterSlot.Id
+                ? projectedFppg * 1.5m
+                : projectedFppg;
+        }
     }
 }
