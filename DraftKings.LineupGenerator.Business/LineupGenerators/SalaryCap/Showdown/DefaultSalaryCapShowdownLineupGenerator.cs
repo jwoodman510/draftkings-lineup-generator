@@ -75,7 +75,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
             {
                 while (!cancellationTokenSource.Token.IsCancellationRequested)
                 {
-                    await Task.Delay(10000);
+                    await Task.Delay(TimeSpan.FromSeconds(10));
 
                     if (cancellationTokenSource.IsCancellationRequested)
                     {
