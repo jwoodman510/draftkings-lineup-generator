@@ -1,4 +1,5 @@
-﻿using DraftKings.LineupGenerator.Business.Interfaces;
+﻿using DraftKings.LineupGenerator.Business.Comparers;
+using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Models.Lineups;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,9 +82,9 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
 
             records.Add($"Projected Points: {lineup.Draftables.Sum(x => x.ProjectedFppg)}");
 
-            var draftables = lineup.Draftables.OrderBy(x => x.RosterPositionSortOrdinal);
+            lineup.Draftables.Sort(new DraftableRosterPositionComparer());
 
-            records.AddRange(draftables.Select(draftable => $"[{draftable.RosterPosition}]\t{draftable.Name} ({draftable.ProjectedFppg})"));
+            records.AddRange(lineup.Draftables.Select(draftable => $"[{draftable.RosterPosition}]\t{draftable.Name} ({draftable.ProjectedFppg})"));
 
             return records;
         }

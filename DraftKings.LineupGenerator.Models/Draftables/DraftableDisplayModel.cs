@@ -12,17 +12,6 @@
 
         public string RosterPosition { get; set; }
 
-        public int RosterPositionSortOrdinal => RosterPosition switch
-        {
-            "QB" => 0,
-            "RB" => 1,
-            "WR" => 2,
-            "TE" => 4,
-            "FLEX" => 5,
-            "DST" => 6,
-            _ => int.MaxValue,
-        };
-
         public DraftableDisplayModel(string name, decimal fppg, decimal salary, string rosterPosition)
         {
             Name = name;

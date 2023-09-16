@@ -6,5 +6,9 @@
         public const string Kicker = "K";
         public const string Quarterback = "QB";
         public const string Captain = "CPT";
+        public const string Flex = "FLEX";
+        public const string TightEnd = "TE";
+        public const string RunningBack = "RB";
+        public const string WideReceiver = "WR";
     }
 }
