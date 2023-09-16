@@ -8,6 +8,7 @@ using DraftKings.LineupGenerator.Business.Services;
 using DraftKings.LineupGenerator.Caching;
 using DraftKings.LineupGenerator.Caching.Services;
 using Microsoft.Extensions.DependencyInjection;
+using DraftKings.LineupGenerator.Business.LineupLoggers;
 
 namespace DraftKings.LineupGenerator.Business
 {
@@ -44,6 +45,10 @@ namespace DraftKings.LineupGenerator.Business
             services
                 .AddTransient<IOutputFormatter, TextOutputFormatter>()
                 .AddTransient<IOutputFormatter, JsonOutputFormatter>();
+
+            // Add Lineup Loggers
+            services
+                .AddTransient<IIncrementalLineupLogger, ConsoleIncrementalLineupLogger>();
 
             return services;
         }

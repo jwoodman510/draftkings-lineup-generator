@@ -1,6 +1,7 @@
 using DraftKings.LineupGenerator.Business.Constants;
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic;
+using DraftKings.LineupGenerator.Business.LineupLoggers;
 using DraftKings.LineupGenerator.Business.Services;
 using DraftKings.LineupGenerator.Constants;
 using DraftKings.LineupGenerator.Models.Contests;
@@ -20,7 +21,9 @@ namespace DraftKings.LineupGenerator.Test.Business
 
         public DefaultSalaryCapClassicLineupGeneratorTests()
         {
-            _generator = new DefaultSalaryCapClassicLineupGenerator(new ClassicLineupService(), Enumerable.Empty<IOutputFormatter>());
+            _generator = new DefaultSalaryCapClassicLineupGenerator(
+                new ClassicLineupService(),
+                new ConsoleIncrementalLineupLogger(Enumerable.Empty<IOutputFormatter>()));
         }
 
         [Theory]

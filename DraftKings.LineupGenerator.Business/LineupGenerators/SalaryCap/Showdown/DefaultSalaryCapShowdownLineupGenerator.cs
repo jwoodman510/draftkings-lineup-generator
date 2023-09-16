@@ -23,10 +23,14 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
     public class DefaultSalaryCapShowdownLineupGenerator : ILineupGenerator
     {
         private readonly IShowdownLineupService _showdownLineupService;
+        private readonly IIncrementalLineupLogger _incrementalLogger;
 
-        public DefaultSalaryCapShowdownLineupGenerator(IShowdownLineupService showdownLineupService)
+        public DefaultSalaryCapShowdownLineupGenerator(
+            IShowdownLineupService showdownLineupService,
+            IIncrementalLineupLogger incrementalLogger)
         {
             _showdownLineupService = showdownLineupService;
+            _incrementalLogger = incrementalLogger;
         }
 
         public bool CanGenerate(ContestModel contest, RulesModel rules)
@@ -66,9 +70,6 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var lineupsBag = new ConcurrentDictionary<decimal, ConcurrentBag<LineupModel>>();
 
-            long iterationCount = 0;
-            long validLineupCount = 0;
-
             var cancellationTokenSource = new CancellationTokenSource();
 
             var outputTask = Task.Factory.StartNew(async () =>
@@ -82,13 +83,13 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                         break;
                     }
 
-                    Console.WriteLine($"[{DateTime.Now:T}]\tIterations: {iterationCount:n0} | Valid Lineups: {validLineupCount:n0}");
+                    await _incrementalLogger.LogIterationAsync(cancellationTokenSource.Token);
                 }
             }, TaskCreationOptions.LongRunning);
 
             potentialLineups.AsParallel().ForAll(potentialLineup =>
             {
-                Interlocked.Add(ref iterationCount, 1);
+                _incrementalLogger.IncrementIterations();
 
                 var lineup = new LineupModel
                 {
@@ -107,7 +108,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                     return;
                 }
 
-                Interlocked.Add(ref validLineupCount, 1);
+                _incrementalLogger.IncrementValidLineups();
 
                 var minKey = lineupsBag.Keys.Count == 0 ? 0 : lineupsBag.Keys.Min();
 

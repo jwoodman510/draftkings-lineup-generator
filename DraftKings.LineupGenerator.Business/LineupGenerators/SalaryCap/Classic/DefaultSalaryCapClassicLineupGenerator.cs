@@ -7,7 +7,6 @@ using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -24,14 +23,14 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
     public class DefaultSalaryCapClassicLineupGenerator : ILineupGenerator
     {
         private readonly IClassicLineupService _classicLineupService;
-        private readonly IEnumerable<IOutputFormatter> _outputFormatters;
+        private readonly IIncrementalLineupLogger _incrementalLogger;
 
         public DefaultSalaryCapClassicLineupGenerator(
             IClassicLineupService classicLineupService,
-            IEnumerable<IOutputFormatter> outputFormatters)
+            IIncrementalLineupLogger incrementalLogger)
         {
             _classicLineupService = classicLineupService;
-            _outputFormatters = outputFormatters;
+            _incrementalLogger = incrementalLogger;
         }
 
         public bool CanGenerate(ContestModel contest, RulesModel rules)
@@ -56,9 +55,6 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
         public async Task<LineupsModel> GenerateAsync(LineupRequestModel request, RulesModel rules, DraftablesModel draftables)
         {
-            var outputFormatter = _outputFormatters.FirstOrDefault(x => x.Type.Equals(request.OutputFormat))
-                ?? _outputFormatters.FirstOrDefault();
-
             var result = new LineupsModel
             {
                 Description = "Default FPPG Lineup"
@@ -75,9 +71,6 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var lineupsBag = new ConcurrentDictionary<decimal, ConcurrentBag<LineupModel>>();
 
-            long iterationCount = 0;
-            long validLineupCount = 0;
-
             var cancellationTokenSource = new CancellationTokenSource();
 
             var outputTask = Task.Factory.StartNew(async () =>
@@ -93,7 +86,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                         break;
                     }
 
-                    Console.WriteLine($"[{DateTime.Now:T}]\tIterations: {iterationCount:n0} | Valid Lineups: {validLineupCount:n0}");
+                    await _incrementalLogger.LogIterationAsync(cancellationTokenSource.Token);
 
                     if (lineupsBag.Count > 0)
                     {
@@ -102,13 +95,9 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
                         if (lineup != bestLineup)
                         {
-                            Console.WriteLine("Best Current Lineup:");
-
-                            var lineupOutput = await outputFormatter.FormatAsync(new[] { lineup }, cancellationTokenSource.Token);
-
-                            Console.WriteLine(lineupOutput);
-
                             bestLineup = lineup;
+
+                            await _incrementalLogger.LogLineupAsync(request.OutputFormat, "Best Current Lineup:", bestLineup, cancellationTokenSource.Token);
                         }
                     }
                 }
@@ -116,7 +105,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             potentialLineups.AsParallel().ForAll(potentialLineup =>
             {
-                Interlocked.Add(ref iterationCount, 1);
+                _incrementalLogger.IncrementIterations();
 
                 var lineup = new LineupModel
                 {
@@ -134,7 +123,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                     return;
                 }
 
-                Interlocked.Add(ref validLineupCount, 1);
+                _incrementalLogger.IncrementValidLineups();
 
                 var minKey = lineupsBag.Keys.Count == 0 ? 0 : lineupsBag.Keys.Min();
 
