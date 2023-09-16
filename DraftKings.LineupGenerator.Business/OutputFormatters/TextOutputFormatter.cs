@@ -15,6 +15,18 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
 
         private const string LineSeperator = "=====================================================";
 
+        public Task<string> FormatAsync<T>(T value, CancellationToken cancellationToken = default) where T : class
+        {
+            var output = new StringBuilder();
+
+            foreach (var property in typeof(T).GetProperties())
+            {
+                output.AppendLine($"{property.Name}: {property.GetValue(value)}");
+            }
+
+            return Task.FromResult(output.ToString());
+        }
+
         public Task<string> FormatAsync(IEnumerable<LineupsModel> lineups, CancellationToken cancellationToken = default)
         {
             var lineupsModel = lineups.ToList();

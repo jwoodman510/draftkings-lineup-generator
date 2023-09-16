@@ -6,12 +6,12 @@ namespace DraftKings.LineupGenerator.Business.Interfaces
 {
     public interface IIncrementalLineupLogger
     {
+        Task StartAsync(string format, LineupsBag lineupsBag, CancellationToken cancellationToken);
+
+        Task StopAsync(CancellationToken cancellationToken);
+
         void IncrementIterations();
 
         void IncrementValidLineups();
-
-        Task LogIterationAsync(CancellationToken cancellationToken);
-
-        Task LogLineupAsync(string format, string description, LineupModel lineup, CancellationToken cancellationToken);
     }
 }

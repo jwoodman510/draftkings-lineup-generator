@@ -30,6 +30,7 @@ namespace DraftKings.LineupGenerator
             var outputFormatOption = new Option<string>("--output-format", "[default=text] The console output format. One of (json | text)");
 
             minFppgOption.SetDefaultValue(new LineupRequestModel(default).MinFppg);
+            outputFormatOption.SetDefaultValue(new LineupRequestModel(default).OutputFormat);
 
             rootCommand.AddOption(contestIdOption);
             rootCommand.AddOption(includeQuestionableOption);
@@ -50,12 +51,16 @@ namespace DraftKings.LineupGenerator
 
             rootCommand.SetHandler(async request =>
             {
-                Console.WriteLine("Generating Lineups for Configuration:");
-                Console.WriteLine(JsonConvert.SerializeObject(request, Formatting.Indented));
-
                 var serviceProvider = new ServiceCollection()
                     .RegisterServices()
                     .BuildServiceProvider();
+
+                var formatters = serviceProvider.GetServices<IOutputFormatter>();
+                var formatter = formatters.FirstOrDefault(x => x.Type.Equals(request.OutputFormat, StringComparison.OrdinalIgnoreCase)) ?? formatters.First();
+
+                Console.WriteLine("Generating Lineups for Configuration:");
+
+                Console.WriteLine(await formatter.FormatAsync(request));
 
                 var lineups = await serviceProvider
                     .GetRequiredService<ILineupGeneratorService>()
@@ -63,13 +68,7 @@ namespace DraftKings.LineupGenerator
 
                 Console.WriteLine("Lineups Generated:");
 
-                var formatters = serviceProvider.GetServices<IOutputFormatter>();
-
-                var formatter = formatters.FirstOrDefault(x => x.Type.Equals(request.OutputFormat, StringComparison.OrdinalIgnoreCase)) ?? formatters.First();
-
-                var output = await formatter.FormatAsync(lineups);
-
-                Console.WriteLine(output);
+                Console.WriteLine(await formatter.FormatAsync(lineups));
 
             }, modelBinder);
 

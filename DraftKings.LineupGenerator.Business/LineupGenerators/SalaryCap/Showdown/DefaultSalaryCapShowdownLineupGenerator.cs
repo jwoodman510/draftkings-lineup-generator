@@ -7,11 +7,9 @@ using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
-using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
@@ -69,24 +67,9 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var potentialLineups = _showdownLineupService.GetPotentialLineups(rules, draftables, eligiblePlayers);
 
-            var lineupsBag = new ConcurrentDictionary<decimal, ConcurrentBag<LineupModel>>();
+            var lineupsBag = new LineupsBag();
 
-            var cancellationTokenSource = new CancellationTokenSource();
-
-            var outputTask = Task.Factory.StartNew(async () =>
-            {
-                while (!cancellationTokenSource.Token.IsCancellationRequested)
-                {
-                    await Task.Delay(TimeSpan.FromSeconds(10));
-
-                    if (cancellationTokenSource.IsCancellationRequested)
-                    {
-                        break;
-                    }
-
-                    await _incrementalLogger.LogIterationAsync(cancellationTokenSource.Token);
-                }
-            }, TaskCreationOptions.LongRunning);
+            await _incrementalLogger.StartAsync(request.OutputFormat, lineupsBag, default);
 
             potentialLineups.AsParallel().ForAll(potentialLineup =>
             {
@@ -133,9 +116,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             result.Lineups.AddRange(lineupsBag.Values.SelectMany(x => x).OrderBy(x => x.ProjectedFppg).Take(5));
 
-            cancellationTokenSource.Cancel();
-
-            await outputTask;
+            await _incrementalLogger.StopAsync(default);
 
             return result;
         }
