@@ -2,12 +2,12 @@
 using DraftKings.LineupGenerator.Business.Extensions;
 using DraftKings.LineupGenerator.Business.Filters;
 using DraftKings.LineupGenerator.Business.Interfaces;
+using DraftKings.LineupGenerator.Business.LineupBags;
 using DraftKings.LineupGenerator.Constants;
 using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -67,7 +67,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var potentialLineups = _classicLineupService.GetPotentialLineups(rules, draftables, eligiblePlayers);
 
-            var lineupsBag = new LineupsBag();
+            var lineupsBag = new ProjectedPointsLineupsBag();
 
             await _incrementalLogger.StartAsync(request.OutputFormat, lineupsBag, default);
 
@@ -94,24 +94,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
                 _incrementalLogger.IncrementValidLineups();
 
-                var minKey = lineupsBag.Keys.Count == 0 ? 0 : lineupsBag.Keys.Min();
-
-                if (lineup.ProjectedFppg < minKey)
-                {
-                    return;
-                }
-
-                var lineups = lineupsBag.GetOrAdd(lineup.ProjectedFppg, _ => new ConcurrentBag<LineupModel>());
-
-                if (lineups.Count < 5)
-                {
-                    lineups.Add(lineup);
-                }
-
-                if (lineupsBag.Keys.Count > 5)
-                {
-                    lineupsBag.TryRemove(minKey, out _);
-                }
+                lineupsBag.UpdateLineups(lineup);
             });
 
             result.Lineups.AddRange(lineupsBag.Values.SelectMany(x => x).OrderBy(x => x.ProjectedFppg).Take(5));

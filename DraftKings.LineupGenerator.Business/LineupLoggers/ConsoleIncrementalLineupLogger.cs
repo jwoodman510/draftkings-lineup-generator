@@ -1,4 +1,5 @@
 ﻿using DraftKings.LineupGenerator.Business.Interfaces;
+using DraftKings.LineupGenerator.Business.LinupBags;
 using DraftKings.LineupGenerator.Models.Lineups;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace DraftKings.LineupGenerator.Business.LineupLoggers
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
-        public Task StartAsync(string format, LineupsBag lineupsBag, CancellationToken cancellationToken)
+        public Task StartAsync(string format, BaseLineupsBag lineupsBag, CancellationToken cancellationToken)
         {
             _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
@@ -31,8 +32,6 @@ namespace DraftKings.LineupGenerator.Business.LineupLoggers
             {
                 while (!_cancellationTokenSource.Token.IsCancellationRequested)
                 {
-                    LineupModel bestLineup = null;
-
                     await Task.Delay(TimeSpan.FromSeconds(10));
 
                     if (_cancellationTokenSource.IsCancellationRequested)
@@ -42,17 +41,11 @@ namespace DraftKings.LineupGenerator.Business.LineupLoggers
 
                     await LogIterationAsync(_cancellationTokenSource.Token);
 
-                    if (lineupsBag?.Count > 0)
+                    var bestLineup = lineupsBag.GetBestLineup();
+
+                    if (bestLineup != null)
                     {
-                        var maxKey = lineupsBag.Keys.Max();
-                        var lineup = lineupsBag[maxKey].OrderByDescending(x => x.ProjectedFppg).First();
-
-                        if (lineup != bestLineup)
-                        {
-                            bestLineup = lineup;
-
-                            await LogLineupAsync(format, "Best Current Lineup:", bestLineup, _cancellationTokenSource.Token);
-                        }
+                        await LogLineupAsync(format, "Best Current Lineup:", bestLineup, _cancellationTokenSource.Token);
                     }
                 }
             }, TaskCreationOptions.LongRunning);
