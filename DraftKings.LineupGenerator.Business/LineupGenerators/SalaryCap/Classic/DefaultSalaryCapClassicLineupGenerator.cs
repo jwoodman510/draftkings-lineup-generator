@@ -110,6 +110,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 .ExcludeOut()
                 .ExcludeDisabled()
                 .ExcludeZeroSalary()
+                .ExcludeDoubtful()
                 .ExcludeInjuredReserve()
                 .ExcludeZeroSalary()
                 .ExcludeZeroFppg(draftables.DraftStats);
