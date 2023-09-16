@@ -23,12 +23,10 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
                 return Task.FromResult(string.Empty);
             }
 
-            var uniquePositions = GetUniquePositions(lineupsModel.Select(x => x.Lineups.First()));
-
             var records = lineupsModel
                 .SelectMany(x => x.Lineups)
                 .OrderByDescending(x => x.Draftables.Sum(x => x.ProjectedFppg))
-                .Select(x => GetRecords(x, uniquePositions));
+                .Select(GetRecords);
 
             var output = Format(records);
 
@@ -44,11 +42,9 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
                 return Task.FromResult(string.Empty);
             }
 
-            var uniquePositions = GetUniquePositions(lineupsList);
-
             var records = lineupsList
                 .OrderByDescending(x => x.Draftables.Sum(x => x.ProjectedFppg))
-                .Select(x => GetRecords(x, uniquePositions));
+                .Select(GetRecords);
 
             var output = Format(records);
 
@@ -74,7 +70,7 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
             return output.ToString();
         }
 
-        private static IEnumerable<string> GetRecords(LineupModel lineup, List<string> uniquePositions)
+        private static IEnumerable<string> GetRecords(LineupModel lineup)
         {
             var records = new List<string>();
 
@@ -90,37 +86,11 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
             for (var i = 0; i < lineup.Draftables.Count; i++)
             {
                 var draftable = draftables[i];
-                var position = uniquePositions[i];
 
-                records.Add($"[{position}]\t{draftable.Name} ({draftable.ProjectedFppg})");
+                records.Add($"[{draftable.RosterPosition}]\t{draftable.Name} ({draftable.ProjectedFppg})");
             }
 
             return records;
-        }
-
-        private static List<string> GetUniquePositions(IEnumerable<LineupModel> lineupsModel)
-        {
-            var positions = lineupsModel
-                .First().Draftables
-                .Select(x => x.RosterPosition.ToString())
-                .OrderBy(x => x)
-                .ToList();
-
-            var uniquePositions = new List<string>();
-            var positionMatches = positions.Distinct().ToDictionary(x => x, _ => 0);
-
-            foreach (var position in positions)
-            {
-                var positionCount = positionMatches[position];
-
-                var uniquePosition = positionCount > 0 ? $"{position}{positionCount}" : position;
-
-                uniquePositions.Add(uniquePosition);
-
-                positionMatches[position] = positionMatches[position] + 1;
-            }
-
-            return uniquePositions;
         }
     }
 }
