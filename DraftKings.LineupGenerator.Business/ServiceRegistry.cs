@@ -1,6 +1,7 @@
 ﻿using DraftKings.LineupGenerator.Api;
 using DraftKings.LineupGenerator.Api.Draftables;
 using DraftKings.LineupGenerator.Api.Rules;
+using DraftKings.LineupGenerator.Business.OutputFormatters;
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic;
 using DraftKings.LineupGenerator.Business.Services;
@@ -38,6 +39,11 @@ namespace DraftKings.LineupGenerator.Business
             services
                 .AddTransient<ILineupGenerator, DefaultSalaryCapClassicLineupGenerator>()
                 .AddTransient<ILineupGenerator, DefaultSalaryCapShowdownLineupGenerator>();
+
+            // Add Formatters
+            services
+                .AddTransient<IOutputFormatter, JsonOutputFormatter>()
+                .AddTransient<IOutputFormatter, TextOutputFormatter>();
 
             return services;
         }

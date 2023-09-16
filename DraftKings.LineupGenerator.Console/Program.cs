@@ -4,7 +4,9 @@ using DraftKings.LineupGenerator.Models.Lineups;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.CommandLine;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DraftKings.LineupGenerator
@@ -25,6 +27,7 @@ namespace DraftKings.LineupGenerator
             var minFppgOption = new Option<decimal>("--min-fppg", "(Classic Only) [default=10.0] Minimum fantasy points per game (per player - excluding defense & kickers).");
             var excludeDefenseOption = new Option<bool>("--exclude-defense", "(Showdown Only) [default: false] Excludes DST positions from lineups.");
             var excludeKickersOption = new Option<bool>("--exclude-kickers", "(Showdown Only) [default=false] Excludes Kicker positions from lineups.");
+            var outputFormatOption = new Option<string>("--output-format", "[default=text] The console output format. One of (json | text)");
 
             minFppgOption.SetDefaultValue(new LineupRequestModel(default).MinFppg);
 
@@ -34,6 +37,7 @@ namespace DraftKings.LineupGenerator
             rootCommand.AddOption(minFppgOption);
             rootCommand.AddOption(excludeDefenseOption);
             rootCommand.AddOption(excludeKickersOption);
+            rootCommand.AddOption(outputFormatOption);
 
             var modelBinder = new LineupRequestModelBinder(
                 contestIdOption,
@@ -41,24 +45,31 @@ namespace DraftKings.LineupGenerator
                 includeBaseSalaryOption,
                 minFppgOption,
                 excludeDefenseOption,
-                excludeKickersOption);
+                excludeKickersOption,
+                outputFormatOption);
 
             rootCommand.SetHandler(async request =>
             {
                 Console.WriteLine("Generating Lineups for Configuration:");
                 Console.WriteLine(JsonConvert.SerializeObject(request, Formatting.Indented));
 
-                var lineups = await new ServiceCollection()
+                var serviceProvider = new ServiceCollection()
                     .RegisterServices()
-                    .BuildServiceProvider()
+                    .BuildServiceProvider();
+
+                var lineups = await serviceProvider
                     .GetRequiredService<ILineupGeneratorService>()
                     .GetAsync(request);
 
-                var json = JsonConvert.SerializeObject(lineups, Formatting.Indented);
-
                 Console.WriteLine("Lineups Generated:");
 
-                Console.WriteLine(json);
+                var formatters = serviceProvider.GetServices<IOutputFormatter>();
+
+                var formatter = formatters.FirstOrDefault(x => x.Type.Equals(request.OutputFormat, StringComparison.OrdinalIgnoreCase)) ?? formatters.First();
+
+                var output = await formatter.FormatAsync(lineups);
+
+                Console.WriteLine(output);
 
             }, modelBinder);
 
