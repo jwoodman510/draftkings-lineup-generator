@@ -2,9 +2,7 @@
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Models.Lineups;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.CommandLine;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,9 +26,23 @@ namespace DraftKings.LineupGenerator
             var excludeDefenseOption = new Option<bool>("--exclude-defense", "(Showdown Only) [default: false] Excludes DST positions from lineups.");
             var excludeKickersOption = new Option<bool>("--exclude-kickers", "(Showdown Only) [default=false] Excludes Kicker positions from lineups.");
             var outputFormatOption = new Option<string>("--output-format", "[default=text] The console output format. One of (json | text)");
+            var lineupCountOption = new Option<int>("--lineup-count", "[default=5] The number of lineups to output for each generator (max is 100).");
 
             minFppgOption.SetDefaultValue(new LineupRequestModel(default).MinFppg);
             outputFormatOption.SetDefaultValue(new LineupRequestModel(default).OutputFormat);
+            lineupCountOption.SetDefaultValue(new LineupRequestModel(default).LineupCount);
+            lineupCountOption.AddValidator(result =>
+            {
+                if (result.GetValueForOption(lineupCountOption) < 1)
+                {
+                    result.ErrorMessage = "Must be greater than zero.";
+                }
+
+                if (result.GetValueForOption(lineupCountOption) > 100)
+                {
+                    result.ErrorMessage = "Must be less than 100.";
+                }
+            });
 
             rootCommand.AddOption(contestIdOption);
             rootCommand.AddOption(includeQuestionableOption);
@@ -39,6 +51,7 @@ namespace DraftKings.LineupGenerator
             rootCommand.AddOption(excludeDefenseOption);
             rootCommand.AddOption(excludeKickersOption);
             rootCommand.AddOption(outputFormatOption);
+            rootCommand.AddOption(lineupCountOption);
 
             var modelBinder = new LineupRequestModelBinder(
                 contestIdOption,
@@ -47,7 +60,8 @@ namespace DraftKings.LineupGenerator
                 minFppgOption,
                 excludeDefenseOption,
                 excludeKickersOption,
-                outputFormatOption);
+                outputFormatOption,
+                lineupCountOption);
 
             rootCommand.SetHandler(async request =>
             {

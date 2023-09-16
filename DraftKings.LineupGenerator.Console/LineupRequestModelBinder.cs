@@ -13,6 +13,7 @@ namespace DraftKings.LineupGenerator
         private readonly Option<bool> _excludeDefense;
         private readonly Option<bool> _excludeKickers;
         private readonly Option<string> _outputFormat;
+        private readonly Option<int> _lineupCountOption;
 
         public LineupRequestModelBinder(
             Option<int> contestIdOption,
@@ -21,7 +22,8 @@ namespace DraftKings.LineupGenerator
             Option<decimal> minFppgOption,
             Option<bool> excludeDefense,
             Option<bool> excludeKickers,
-            Option<string> outputFormat)
+            Option<string> outputFormat,
+            Option<int> lineupCountOption)
         {
             _contestIdOption = contestIdOption;
             _includeQuestionableOption = includeQuestionableOption;
@@ -30,6 +32,7 @@ namespace DraftKings.LineupGenerator
             _excludeDefense = excludeDefense;
             _excludeKickers = excludeKickers;
             _outputFormat = outputFormat;
+            _lineupCountOption = lineupCountOption;
         }
 
         protected override LineupRequestModel GetBoundValue(BindingContext bindingContext)
@@ -43,7 +46,8 @@ namespace DraftKings.LineupGenerator
                 MinFppg = bindingContext.ParseResult.GetValueForOption(_minFppgOption),
                 ExcludeDefense = bindingContext.ParseResult.GetValueForOption(_excludeDefense),
                 ExcludeKickers = bindingContext.ParseResult.GetValueForOption(_excludeKickers),
-                OutputFormat = bindingContext.ParseResult.GetValueForOption(_outputFormat)
+                OutputFormat = bindingContext.ParseResult.GetValueForOption(_outputFormat),
+                LineupCount = bindingContext.ParseResult.GetValueForOption(_lineupCountOption)
             };
         }
     }

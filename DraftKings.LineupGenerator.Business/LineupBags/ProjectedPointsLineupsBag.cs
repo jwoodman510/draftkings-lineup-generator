@@ -1,6 +1,7 @@
 ﻿using DraftKings.LineupGenerator.Business.LinupBags;
 using DraftKings.LineupGenerator.Models.Lineups;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DraftKings.LineupGenerator.Business.LineupBags
@@ -13,7 +14,12 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
             return this[maxKey].OrderByDescending(x => x.ProjectedFppg).FirstOrDefault();
         }
 
-        public void UpdateLineups(LineupModel lineup)
+        public override IEnumerable<LineupModel> GetBestLineups(int count)
+        {
+            return Values.SelectMany(x => x).OrderBy(x => x.ProjectedFppg).Take(count);
+        }
+
+        public void UpdateLineups(LineupModel lineup, int max)
         {
             var minKey = Keys.Count == 0 ? 0 : Keys.Min();
 
@@ -24,12 +30,12 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
 
             var lineups = GetOrAdd(lineup.ProjectedFppg, _ => new ConcurrentBag<LineupModel>());
 
-            if (lineups.Count < 5)
+            if (lineups.Count < max)
             {
                 lineups.Add(lineup);
             }
 
-            if (Keys.Count > 5)
+            if (Keys.Count > max)
             {
                 TryRemove(minKey, out _);
             }

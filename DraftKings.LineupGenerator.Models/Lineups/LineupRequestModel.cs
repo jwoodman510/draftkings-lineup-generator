@@ -24,5 +24,7 @@ namespace DraftKings.LineupGenerator.Models.Lineups
         public bool ExcludeKickers { get; set; } = false;
 
         public string OutputFormat { get; set; } = "text";
+
+        public int LineupCount { get; set; } = 5;
     }
 }

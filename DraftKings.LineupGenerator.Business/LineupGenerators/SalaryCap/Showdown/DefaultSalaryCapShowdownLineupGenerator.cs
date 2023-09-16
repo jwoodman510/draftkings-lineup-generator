@@ -94,10 +94,10 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
                 _incrementalLogger.IncrementValidLineups();
 
-                lineupsBag.UpdateLineups(lineup);
+                lineupsBag.UpdateLineups(lineup, request.LineupCount);
             });
 
-            result.Lineups.AddRange(lineupsBag.Values.SelectMany(x => x).OrderBy(x => x.ProjectedFppg).Take(5));
+            result.Lineups.AddRange(lineupsBag.GetBestLineups(request.LineupCount));
 
             await _incrementalLogger.StopAsync(default);
 
