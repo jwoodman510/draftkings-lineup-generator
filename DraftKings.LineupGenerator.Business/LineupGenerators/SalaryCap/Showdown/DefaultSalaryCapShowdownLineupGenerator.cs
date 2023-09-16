@@ -100,7 +100,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                             player.GetFppg(draftables.DraftStats),
                             player.Salary,
                             player.GetRosterPosition(rules),
-                            GetProjectedSalary(draftables, player, rules)))
+                            player.GetProjectedSalary(draftables, rules)))
                         .ToList()
                 };
 
@@ -138,16 +138,6 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
             await outputTask;
 
             return result;
-        }
-
-        private static decimal GetProjectedSalary(DraftablesModel draftables, DraftableModel draftable, RulesModel rules)
-        {
-            var captainSlot = rules.LineupTemplate.First(x => x.RosterSlot.Name == RosterSlots.Captain);
-            var projectedFppg = draftable.GetFppg(draftables.DraftStats);
-
-            return draftable.RosterSlotId == captainSlot.RosterSlot.Id
-                ? projectedFppg * 1.5m
-                : projectedFppg;
         }
 
         private static List<DraftableModel> GetEligiblePlayers(LineupRequestModel request, RulesModel rules, DraftablesModel draftables)
