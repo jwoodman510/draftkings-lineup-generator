@@ -58,7 +58,7 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
 
         private static string GetUniqueLineupId(LineupModel lineup)
         {
-            return string.Join(".", lineup.Draftables.Select(x => x.Id));
+            return string.Join(".", lineup.Draftables.Select(x => x.Id).OrderBy(x => x));
         }
     }
 }
