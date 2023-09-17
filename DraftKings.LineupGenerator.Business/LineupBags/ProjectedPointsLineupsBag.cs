@@ -11,14 +11,14 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
         public override LineupModel GetBestLineup()
         {
             var maxKey = Keys.Max();
-            return this[maxKey].OrderByDescending(x => x.ProjectedFppg).FirstOrDefault();
+            return this[maxKey].OrderByDescending(x => x.Value.ProjectedFppg).FirstOrDefault().Value;
         }
 
         public override IEnumerable<LineupModel> GetBestLineups(int count)
         {
             var bestLineups = new List<LineupModel>();
 
-            foreach (var lineup in Values.SelectMany(x => x).OrderByDescending(x => x.ProjectedFppg))
+            foreach (var lineup in Values.SelectMany(x => x.Values).OrderByDescending(x => x.ProjectedFppg))
             {
                 if (bestLineups.Count == count)
                 {
@@ -43,22 +43,14 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
                 return;
             }
 
-            var lineups = GetOrAdd(lineup.ProjectedFppg, _ => new ConcurrentBag<LineupModel>());
+            var lineups = GetOrAdd(lineup.ProjectedFppg, _ => new ConcurrentDictionary<string, LineupModel>());
 
-            if (lineups.Count < max && !lineups.Any(x => GetUniqueLineupId(x) == GetUniqueLineupId(lineup)))
-            {
-                lineups.Add(lineup);
-            }
+            lineups.TryAdd(GetUniqueLineupId(lineup), lineup);
 
             if (Keys.Count > max)
             {
                 TryRemove(minKey, out _);
             }
-        }
-
-        private static string GetUniqueLineupId(LineupModel lineup)
-        {
-            return string.Join(".", lineup.Draftables.Select(x => x.Id).OrderBy(x => x));
         }
     }
 }
