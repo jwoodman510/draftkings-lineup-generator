@@ -16,7 +16,22 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
 
         public override IEnumerable<LineupModel> GetBestLineups(int count)
         {
-            return Values.SelectMany(x => x).OrderByDescending(x => x.ProjectedFppg).Take(count);
+            var bestLineups = new List<LineupModel>();
+
+            foreach (var lineup in Values.SelectMany(x => x).OrderByDescending(x => x.ProjectedFppg))
+            {
+                if (bestLineups.Count == count)
+                {
+                    break;
+                }
+
+                if (!bestLineups.Any(x => GetUniqueLineupId(x) == GetUniqueLineupId(lineup)))
+                {
+                    bestLineups.Add(lineup);
+                }
+            }
+
+            return bestLineups;
         }
 
         public void UpdateLineups(LineupModel lineup, int max)
@@ -30,7 +45,7 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
 
             var lineups = GetOrAdd(lineup.ProjectedFppg, _ => new ConcurrentBag<LineupModel>());
 
-            if (lineups.Count < max)
+            if (lineups.Count < max && !lineups.Any(x => GetUniqueLineupId(x) == GetUniqueLineupId(lineup)))
             {
                 lineups.Add(lineup);
             }
@@ -39,6 +54,11 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
             {
                 TryRemove(minKey, out _);
             }
+        }
+
+        private static string GetUniqueLineupId(LineupModel lineup)
+        {
+            return string.Join(".", lineup.Draftables.Select(x => x.Id));
         }
     }
 }

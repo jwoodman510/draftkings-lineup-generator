@@ -83,6 +83,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                     {
                         Draftables = potentialLineup
                             .Select((player, index) => new DraftableDisplayModel(
+                                player.PlayerId,
                                 player.DisplayName,
                                 player.GetFppg(draftables.DraftStats),
                                 player.Salary,

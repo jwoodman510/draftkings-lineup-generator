@@ -98,8 +98,6 @@ namespace DraftKings.LineupGenerator
             });
 
             await rootCommand.InvokeAsync(args);
-
-            Console.ReadKey();
         }
 
         private static void WriteLine(string message, ConsoleColor foregroundColor)
