@@ -102,10 +102,12 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 });
             }
             catch (OperationCanceledException) { }
+            finally
+            {
+                await _incrementalLogger.StopAsync(cancellationToken);
+            }
 
             result.Lineups.AddRange(lineupsBag.GetBestLineups(request.LineupCount));
-
-            await _incrementalLogger.StopAsync(cancellationToken);
 
             return result;
         }
