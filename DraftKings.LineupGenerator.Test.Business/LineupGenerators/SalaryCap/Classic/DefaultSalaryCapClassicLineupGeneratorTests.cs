@@ -64,7 +64,7 @@ namespace DraftKings.LineupGenerator.Test.Business
             var rules = await JsonContentProvider.GetSalaryCapXflClassicRulesAsync();
             var draftables = await JsonContentProvider.GetSalaryCapXflClassicDraftablesAsync();
 
-            var result = await _generator.GenerateAsync(new LineupRequestModel(1), rules, draftables);
+            var result = await _generator.GenerateAsync(new LineupRequestModel(1), rules, draftables, default);
 
             result.Should().NotBeNull();
         }
@@ -75,7 +75,7 @@ namespace DraftKings.LineupGenerator.Test.Business
             var rules = await JsonContentProvider.GetSalaryCapXflClassicRulesAsync();
             var draftables = await JsonContentProvider.GetSalaryCapXflClassicDraftablesAsync();
 
-            var result = await _generator.GenerateAsync(new LineupRequestModel(1), rules, draftables);
+            var result = await _generator.GenerateAsync(new LineupRequestModel(1), rules, draftables, default);
 
             var expectedPositions = new List<string>
             {
