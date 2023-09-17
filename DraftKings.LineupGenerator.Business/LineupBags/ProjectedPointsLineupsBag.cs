@@ -16,7 +16,7 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
 
         public override IEnumerable<LineupModel> GetBestLineups(int count)
         {
-            return Values.SelectMany(x => x).OrderBy(x => x.ProjectedFppg).Take(count);
+            return Values.SelectMany(x => x).OrderByDescending(x => x.ProjectedFppg).Take(count);
         }
 
         public void UpdateLineups(LineupModel lineup, int max)
