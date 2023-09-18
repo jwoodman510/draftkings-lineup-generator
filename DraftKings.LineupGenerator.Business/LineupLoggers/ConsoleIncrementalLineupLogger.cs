@@ -53,11 +53,14 @@ namespace DraftKings.LineupGenerator.Business.LineupLoggers
             return Task.CompletedTask;
         }
 
-        public Task StopAsync(CancellationToken cancellationToken)
+        public async Task StopAsync(CancellationToken cancellationToken)
         {
             _cancellationTokenSource?.Cancel();
 
-            return Task.CompletedTask;
+            if (_consoleLoggerTask != null)
+            {
+                await _consoleLoggerTask;
+            }
         }
 
         public void IncrementIterations() => Interlocked.Add(ref _iterationCount, 1);

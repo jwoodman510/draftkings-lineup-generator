@@ -10,6 +10,11 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
     {
         public override LineupModel GetBestLineup()
         {
+            if (Keys.Count == 0)
+            {
+                return null;
+            }
+
             var maxKey = Keys.Max();
             return this[maxKey].OrderByDescending(x => x.Value.ProjectedFppg).FirstOrDefault().Value;
         }

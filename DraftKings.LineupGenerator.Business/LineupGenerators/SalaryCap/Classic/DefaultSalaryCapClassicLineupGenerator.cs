@@ -75,7 +75,12 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             try
             {
-                potentialLineups.AsParallel().WithCancellation(cancellationToken).ForAll(potentialLineup =>
+                var opts = new ParallelOptions
+                {
+                    CancellationToken = cancellationToken
+                };
+
+                Parallel.ForEach(potentialLineups, opts, potentialLineup =>
                 {
                     _incrementalLogger.IncrementIterations();
 
