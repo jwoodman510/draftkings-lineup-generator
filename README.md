@@ -9,6 +9,7 @@
     - `--include-questionable` *[default: false]* Includes draftables with a questionable status.
     - `--include-base-salary` *[default: false]* Includes draftables with the base salary (lowest possible).
     - `--output-format` *[default=text]* The console output format. One of (json | text).
+    - `--give-me` The names of players to include in generated lineups (comma delimited) e.g. `--give-me "mahomes, travis kelce"`
   - Option (Classic Only):
     - `--min-fppg` *[default: 10.0]* Minimum fantasy points per game (per player - excluding DST).
   - Option (Showdown Only):

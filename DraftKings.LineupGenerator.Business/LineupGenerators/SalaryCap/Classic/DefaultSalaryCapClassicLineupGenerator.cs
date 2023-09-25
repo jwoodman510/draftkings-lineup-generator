@@ -87,17 +87,16 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                     var lineup = new LineupModel
                     {
                         Draftables = potentialLineup
-                            .Select(player => new DraftableDisplayModel(
-                                player.PlayerId,
-                                player.DisplayName,
-                                player.GetFppg(draftables.DraftStats),
-                                player.Salary,
-                                player.GetRosterPosition(rules),
-                                player.GetProjectedSalary(draftables, rules)))
+                            .Select(player => player.ToDisplayModel(rules, draftables))
                             .ToList()
                     };
 
-                    if (lineup.Salary >= rules.SalaryCap.MaxValue || lineup.Salary <= rules.SalaryCap.MinValue)
+                    if (!lineup.MeetsSalaryCap(rules))
+                    {
+                        return;
+                    }
+
+                    if (!lineup.IncludesPlayerRequests(request.PlayerRequests))
                     {
                         return;
                     }

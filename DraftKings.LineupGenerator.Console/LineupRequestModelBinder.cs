@@ -1,6 +1,9 @@
 ﻿using DraftKings.LineupGenerator.Models.Lineups;
+using System;
+using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Binding;
+using System.Linq;
 
 namespace DraftKings.LineupGenerator
 {
@@ -14,6 +17,7 @@ namespace DraftKings.LineupGenerator
         private readonly Option<bool> _excludeKickers;
         private readonly Option<string> _outputFormat;
         private readonly Option<int> _lineupCountOption;
+        private readonly Option<string> _giveMeOption;
 
         public LineupRequestModelBinder(
             Option<int> contestIdOption,
@@ -23,7 +27,8 @@ namespace DraftKings.LineupGenerator
             Option<bool> excludeDefense,
             Option<bool> excludeKickers,
             Option<string> outputFormat,
-            Option<int> lineupCountOption)
+            Option<int> lineupCountOption,
+            Option<string> giveMeOption)
         {
             _contestIdOption = contestIdOption;
             _includeQuestionableOption = includeQuestionableOption;
@@ -33,6 +38,7 @@ namespace DraftKings.LineupGenerator
             _excludeKickers = excludeKickers;
             _outputFormat = outputFormat;
             _lineupCountOption = lineupCountOption;
+            _giveMeOption = giveMeOption;
         }
 
         protected override LineupRequestModel GetBoundValue(BindingContext bindingContext)
@@ -47,7 +53,16 @@ namespace DraftKings.LineupGenerator
                 ExcludeDefense = bindingContext.ParseResult.GetValueForOption(_excludeDefense),
                 ExcludeKickers = bindingContext.ParseResult.GetValueForOption(_excludeKickers),
                 OutputFormat = bindingContext.ParseResult.GetValueForOption(_outputFormat),
-                LineupCount = bindingContext.ParseResult.GetValueForOption(_lineupCountOption)
+                LineupCount = bindingContext.ParseResult.GetValueForOption(_lineupCountOption),
+                PlayerRequests = new PlayerRequestsModel
+                {
+                    PlayerNameRequests = bindingContext.ParseResult.GetValueForOption(_giveMeOption)
+                        ?.Split(',')
+                        ?.Select(x => x.Trim())
+                        ?.Where(x => !string.IsNullOrEmpty(x))
+                        ?.ToHashSet(StringComparer.OrdinalIgnoreCase)
+                        ?? new HashSet<string>()
+                }
             };
         }
     }

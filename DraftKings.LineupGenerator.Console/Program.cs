@@ -30,6 +30,7 @@ namespace DraftKings.LineupGenerator
             var excludeKickersOption = new Option<bool>("--exclude-kickers", "(Showdown Only) [default=false] Excludes Kicker positions from lineups.");
             var outputFormatOption = new Option<string>("--output-format", "[default=text] The console output format. One of (json | text)");
             var lineupCountOption = new Option<int>("--lineup-count", "[default=5] The number of lineups to output for each generator (max is 100).");
+            var giveMeOption = new Option<string>("--give-me", "The names of players to include in generated lineups (comma delimited)");
 
             minFppgOption.SetDefaultValue(new LineupRequestModel(default).MinFppg);
             outputFormatOption.SetDefaultValue(new LineupRequestModel(default).OutputFormat);
@@ -55,6 +56,7 @@ namespace DraftKings.LineupGenerator
             rootCommand.AddOption(excludeKickersOption);
             rootCommand.AddOption(outputFormatOption);
             rootCommand.AddOption(lineupCountOption);
+            rootCommand.AddOption(giveMeOption);
 
             var modelBinder = new LineupRequestModelBinder(
                 contestIdOption,
@@ -64,7 +66,8 @@ namespace DraftKings.LineupGenerator
                 excludeDefenseOption,
                 excludeKickersOption,
                 outputFormatOption,
-                lineupCountOption);
+                lineupCountOption,
+                giveMeOption);
 
             rootCommand.SetHandler(async request =>
             {

@@ -7,9 +7,9 @@
     <ToolCommandName>dkgen</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <PackageId>Woodman.DKGen</PackageId>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.1.0</PackageVersion>
     <RepositoryUrl>https://github.com/jwoodman510/draftkings-lineup-generator</RepositoryUrl>
-    <ReleaseNotes>Updated min fppg filter to ensure at least one player per position is included in lineups</ReleaseNotes>
+    <ReleaseNotes>Added player request option</ReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />

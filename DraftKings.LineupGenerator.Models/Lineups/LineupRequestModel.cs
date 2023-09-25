@@ -26,5 +26,7 @@ namespace DraftKings.LineupGenerator.Models.Lineups
         public string OutputFormat { get; set; } = "text";
 
         public int LineupCount { get; set; } = 5;
+
+        public PlayerRequestsModel PlayerRequests { get; set; }
     }
 }
