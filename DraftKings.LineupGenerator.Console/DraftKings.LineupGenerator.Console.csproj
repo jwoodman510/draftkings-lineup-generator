@@ -7,9 +7,12 @@
     <ToolCommandName>dkgen</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <PackageId>Woodman.DKGen</PackageId>
-    <PackageVersion>1.1.0</PackageVersion>
+    <PackageVersion>1.2.0</PackageVersion>
     <RepositoryUrl>https://github.com/jwoodman510/draftkings-lineup-generator</RepositoryUrl>
-    <ReleaseNotes>Added player request option</ReleaseNotes>
+    <ReleaseNotes>
+      Performance improvements when generating lineups with player requests.
+      Added ability to print all current lineups ('p') through the console.
+    </ReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />

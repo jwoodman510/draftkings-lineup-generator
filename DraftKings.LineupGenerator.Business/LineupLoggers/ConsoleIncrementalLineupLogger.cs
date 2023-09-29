@@ -1,9 +1,5 @@
 ﻿using DraftKings.LineupGenerator.Business.Interfaces;
-using DraftKings.LineupGenerator.Business.LinupBags;
-using DraftKings.LineupGenerator.Models.Lineups;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,15 +12,12 @@ namespace DraftKings.LineupGenerator.Business.LineupLoggers
         private Task _consoleLoggerTask;
         private CancellationTokenSource _cancellationTokenSource;
 
-        private readonly IEnumerable<IOutputFormatter> _outputFormatters;
-
-        public ConsoleIncrementalLineupLogger(IEnumerable<IOutputFormatter> outputFormatters)
+        public ConsoleIncrementalLineupLogger()
         {
-            _outputFormatters = outputFormatters;
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
-        public Task StartAsync(string format, BaseLineupsBag lineupsBag, CancellationToken cancellationToken)
+        public Task StartAsync(CancellationToken cancellationToken)
         {
             _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
@@ -40,13 +33,6 @@ namespace DraftKings.LineupGenerator.Business.LineupLoggers
                     }
 
                     await LogIterationAsync(_cancellationTokenSource.Token);
-
-                    var bestLineup = lineupsBag.GetBestLineup();
-
-                    if (bestLineup != null)
-                    {
-                        await LogLineupAsync(format, "Best Current Lineup:", bestLineup, _cancellationTokenSource.Token);
-                    }
                 }
             }, TaskCreationOptions.LongRunning);
 
@@ -66,18 +52,6 @@ namespace DraftKings.LineupGenerator.Business.LineupLoggers
         public void IncrementIterations() => Interlocked.Add(ref _iterationCount, 1);
 
         public void IncrementValidLineups() => Interlocked.Add(ref _validLineupCount, 1);
-
-        private async Task LogLineupAsync(string format, string description, LineupModel lineup, CancellationToken cancellationToken)
-        {
-            var outputFormatter = _outputFormatters.FirstOrDefault(x => x.Type.Equals(format))
-                ?? _outputFormatters.FirstOrDefault();
-
-            WriteLine(description, ConsoleColor.Yellow);
-
-            var lineupOutput = await outputFormatter?.FormatLineupAsync(new[] { lineup }, cancellationToken);
-
-            WriteLine(lineupOutput, ConsoleColor.Magenta);
-        }
 
         private Task LogIterationAsync(CancellationToken cancellationToken)
         {
