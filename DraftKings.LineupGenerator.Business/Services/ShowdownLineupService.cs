@@ -1,6 +1,7 @@
 ﻿using DraftKings.LineupGenerator.Business.Extensions;
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Models.Draftables;
+using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace DraftKings.LineupGenerator.Business.Services
     public class ShowdownLineupService : IShowdownLineupService
     {
         public IEnumerable<IEnumerable<DraftableModel>> GetPotentialLineups(
+            LineupRequestModel request,
             RulesModel rules,
             DraftablesModel draftables,
             List<DraftableModel> eligiblePlayers)

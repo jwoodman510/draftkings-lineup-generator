@@ -1,6 +1,7 @@
 ﻿using DraftKings.LineupGenerator.Business.Extensions;
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Models.Draftables;
+using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,77 @@ namespace DraftKings.LineupGenerator.Business.Services
     public class ClassicLineupService : IClassicLineupService
     {
         public IEnumerable<IEnumerable<DraftableModel>> GetPotentialLineups(
+            LineupRequestModel request,
             RulesModel rules,
             DraftablesModel draftables,
             List<DraftableModel> eligiblePlayers)
+        {
+            if (request.PlayerRequests?.PlayerNameRequests?.Count > 0)
+            {
+                return GetPotentialLineupsWithPlayerRequests(request.PlayerRequests.PlayerNameRequests, rules, eligiblePlayers);
+            }
+
+            return GetAllPotentialLineups(rules, eligiblePlayers);
+        }
+
+        public IEnumerable<IEnumerable<DraftableModel>> GetPotentialLineupsWithPlayerRequests(
+            HashSet<string> playerRequests,
+            RulesModel rules,
+            List<DraftableModel> eligiblePlayers)
+        {
+            // This is meant to speed things up for a player request with a single roster slot.
+            var singleRosterSlots = rules.LineupTemplate
+                .GroupBy(x => x.RosterSlot.Id)
+                .Where(x => x.Count() == 1)
+                .Select(x => x.Key)
+                .ToHashSet();
+
+            if (!singleRosterSlots.Any())
+            {
+                return GetAllPotentialLineups(rules, eligiblePlayers);
+            }
+
+            var singleSlotRequestedPlayers = eligiblePlayers
+                .Where(x => singleRosterSlots.Contains(x.RosterSlotId))
+                .Where(x => playerRequests.Contains(x.FirstName) ||
+                        playerRequests.Contains(x.LastName) ||
+                        playerRequests.Contains(x.DisplayName))
+                .ToList();
+
+            var matchedSingleRosterSlots = singleSlotRequestedPlayers.Select(x => x.RosterSlotId).ToHashSet();
+
+            var remainingPlayers = eligiblePlayers.Except(singleSlotRequestedPlayers).ToList();
+
+            var remainingSlotGroups = rules.LineupTemplate
+                .GroupBy(x => x.RosterSlot.Id)
+                .Where(x => !matchedSingleRosterSlots.Contains(x.Key))
+                .Select(x => new { RosterSlotId = x.Key, Count = x.Count() })
+                .GroupBy(x => x.Count)
+                .OrderBy(x => x.Key);
+
+            var permutations = Enumerable.Empty<IEnumerable<DraftableModel>>();
+
+            foreach (var rosterSlotGroup in remainingSlotGroups)
+            {
+                var slotCount = rosterSlotGroup.Key;
+                var rosterSlotIds = rosterSlotGroup.Select(x => x.RosterSlotId).ToHashSet();
+
+                var rosterSlotPlayers = remainingPlayers.Where(x => rosterSlotIds.Contains(x.RosterSlotId));
+                var rosterSlotPermutations = GetPermutationsForSlots(rosterSlotIds, rosterSlotPlayers, slotCount);
+
+                permutations = permutations
+                    .CombinePermutations(rosterSlotPermutations)
+                    .Where(x => x.DistinctBy(y => y.PlayerId).SequenceEqual(x));
+            }
+
+            permutations = permutations
+                    .CombinePermutations(new[] { singleSlotRequestedPlayers })
+                    .Where(x => x.DistinctBy(y => y.PlayerId).SequenceEqual(x));
+
+            return permutations;
+        }
+
+        private static IEnumerable<IEnumerable<DraftableModel>> GetAllPotentialLineups(RulesModel rules, List<DraftableModel> eligiblePlayers)
         {
             var rosterSlotGroups = rules.LineupTemplate
                 .GroupBy(x => x.RosterSlot.Id)

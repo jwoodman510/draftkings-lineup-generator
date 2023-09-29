@@ -7,6 +7,13 @@ namespace DraftKings.LineupGenerator.Business.LinupBags
 {
     public abstract class BaseLineupsBag : ConcurrentDictionary<decimal, ConcurrentDictionary<string, LineupModel>>
     {
+        public string Description { get; }
+
+        public BaseLineupsBag(string description)
+        {
+            Description = description;
+        }
+
         public abstract LineupModel GetBestLineup();
 
         public abstract IEnumerable<LineupModel> GetBestLineups(int count);

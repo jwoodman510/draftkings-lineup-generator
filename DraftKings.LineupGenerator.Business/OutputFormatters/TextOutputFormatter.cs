@@ -1,6 +1,7 @@
 ﻿using DraftKings.LineupGenerator.Business.Comparers;
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Models.Lineups;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,13 +22,13 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
 
             foreach (var property in typeof(T).GetProperties())
             {
-                output.AppendLine($"{property.Name}: {property.GetValue(value)}");
+                output.AppendLine($"{property.Name}: {JsonConvert.SerializeObject(property.GetValue(value))}");
             }
 
             return Task.FromResult(output.ToString());
         }
 
-        public Task<string> FormatLineupAsync(IEnumerable<LineupsModel> lineups, CancellationToken cancellationToken = default)
+        public Task<string> FormatLineupsAsync(IEnumerable<LineupsModel> lineups, CancellationToken cancellationToken = default)
         {
             var lineupsModel = lineups.ToList();
 
@@ -46,7 +47,7 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
             return Task.FromResult(output);
         }
 
-        public Task<string> FormatLineupAsync(IEnumerable<LineupModel> lineups, CancellationToken cancellationToken = default)
+        public Task<string> FormatLineupsAsync(IEnumerable<LineupModel> lineups, CancellationToken cancellationToken = default)
         {
             var lineupsList = lineups.ToList();
 

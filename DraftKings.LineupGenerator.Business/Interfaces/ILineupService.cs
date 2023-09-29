@@ -1,4 +1,5 @@
 ﻿using DraftKings.LineupGenerator.Models.Draftables;
+using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
 using System.Collections.Generic;
 
@@ -7,6 +8,7 @@ namespace DraftKings.LineupGenerator.Business.Interfaces
     public interface ILineupService
     {
         IEnumerable<IEnumerable<DraftableModel>> GetPotentialLineups(
+            LineupRequestModel request,
             RulesModel rules,
             DraftablesModel draftables,
             List<DraftableModel> eligiblePlayers);

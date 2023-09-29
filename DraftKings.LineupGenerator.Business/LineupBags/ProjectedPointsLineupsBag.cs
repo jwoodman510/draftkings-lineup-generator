@@ -8,6 +8,8 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
 {
     public class ProjectedPointsLineupsBag : BaseLineupsBag
     {
+        public ProjectedPointsLineupsBag() : base("Projected FPPG") { }
+
         public override LineupModel GetBestLineup()
         {
             if (Keys.Count == 0)

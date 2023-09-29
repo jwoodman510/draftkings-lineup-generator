@@ -18,8 +18,6 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
     /// </summary>
     public class DefaultSalaryCapShowdownLineupGenerator : BaseLineupGenerator
     {
-        protected override string Description => "Projected FPPG";
-
         public DefaultSalaryCapShowdownLineupGenerator(
             IShowdownLineupService showdownLineupService,
             IIncrementalLineupLogger incrementalLogger)

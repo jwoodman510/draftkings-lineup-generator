@@ -18,8 +18,6 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
     /// </summary>
     public class DefaultSalaryCapClassicLineupGenerator : BaseLineupGenerator
     {
-        protected override string Description => "Projected FPPG";
-
         public DefaultSalaryCapClassicLineupGenerator(
             IClassicLineupService classicLineupService,
             IIncrementalLineupLogger incrementalLogger)
@@ -47,6 +45,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 rules.GameTypeName == GameTypes.XflClassic ||
                 rules.GameTypeName == GameTypes.MaddenClassic;
         }
+
         protected override List<DraftableModel> GetEligiblePlayers(LineupRequestModel request, RulesModel rules, DraftablesModel draftables)
         {
             var eligiblePlayers = draftables.Draftables

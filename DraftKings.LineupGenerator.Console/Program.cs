@@ -82,23 +82,59 @@ namespace DraftKings.LineupGenerator
 
                 WriteLine(await formatter.FormatAsync(request), ConsoleColor.Cyan);
 
-                var lineups = await serviceProvider
-                    .GetRequiredService<ILineupGeneratorService>()
+                _ = Task.Factory.StartNew(async () =>
+                {
+                    var key = Console.ReadKey().KeyChar;
+
+                    while (!CancellationTokenSource.IsCancellationRequested)
+                    {
+                        if (key is 'q')
+                        {
+                            Console.WriteLine();
+                            CancellationTokenSource.Cancel();
+                        }
+                        else if (key is 'p')
+                        {
+                            Console.WriteLine();
+
+                            var lineupsModels = serviceProvider.GetServices<ILineupGenerator>()
+                                .Select(x => x.GetCurrentLineups())
+                                .Where(x => x?.Lineups?.Count > 0)
+                                .ToList();
+
+                            if (lineupsModels.Count > 0)
+                            {
+                                foreach (var lineupsModel in lineupsModels)
+                                {
+                                    WriteLine($"Generator: {lineupsModel.Description}", ConsoleColor.Green);
+                                    WriteLine(await formatter.FormatLineupsAsync(lineupsModel.Lineups), ConsoleColor.Cyan);
+                                }
+                            }
+                            else
+                            {
+                                WriteLine("No Lineups Found.", ConsoleColor.Yellow);
+                            }
+                        }
+
+                        key = Console.ReadKey().KeyChar;
+                    }
+                });
+
+                var lineups = await serviceProvider.GetRequiredService<ILineupGeneratorService>()
                     .GetAsync(request, CancellationTokenSource.Token);
 
-                WriteLine("Lineups Generated:", ConsoleColor.Green);
+                if (lineups.Any(x => x.Lineups?.Count > 0))
+                {
+                    WriteLine("Lineups Generated:", ConsoleColor.Green);
+                    Console.WriteLine(await formatter.FormatLineupsAsync(lineups));
+                }
+                else
+                {
+                    WriteLine("No Lineups Found.", ConsoleColor.Red);
+                }
 
-                Console.WriteLine(await formatter.FormatLineupAsync(lineups));
 
             }, modelBinder);
-
-            _ = Task.Factory.StartNew(() =>
-            {
-                if (Console.ReadKey().KeyChar is 'q')
-                {
-                    CancellationTokenSource.Cancel();
-                }
-            });
 
             await rootCommand.InvokeAsync(args);
         }

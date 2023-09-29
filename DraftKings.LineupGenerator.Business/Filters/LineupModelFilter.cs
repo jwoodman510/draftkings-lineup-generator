@@ -9,6 +9,11 @@ namespace DraftKings.LineupGenerator.Business.Filters
     {
         public static bool MeetsSalaryCap(this LineupModel lineup, RulesModel rules)
         {
+            if (!rules.SalaryCap.IsEnabled)
+            {
+                return true;
+            }
+
             return lineup.Salary <= rules.SalaryCap.MaxValue && lineup.Salary >= rules.SalaryCap.MinValue;
         }
 
