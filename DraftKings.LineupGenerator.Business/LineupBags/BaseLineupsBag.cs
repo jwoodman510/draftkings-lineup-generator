@@ -11,6 +11,8 @@ namespace DraftKings.LineupGenerator.Business.LinupBags
 
         public abstract IEnumerable<LineupModel> GetBestLineups(int count);
 
+        public abstract void UpdateLineups(LineupModel lineup, int max);
+
         public static string GetUniqueLineupId(LineupModel lineup)
         {
             return string.Join(".", lineup.Draftables.Select(x => x.Id).OrderBy(x => x));
