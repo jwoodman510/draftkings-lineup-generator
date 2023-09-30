@@ -91,7 +91,6 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 
                     var lineup = new LineupModel
                     {
-                        Description= LineupsBag.Description,
                         Draftables = potentialLineup
                             .Select(player => player.ToDisplayModel(rules, draftables))
                             .ToList()

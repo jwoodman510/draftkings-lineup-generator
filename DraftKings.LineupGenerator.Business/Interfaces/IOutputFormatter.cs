@@ -11,8 +11,6 @@ namespace DraftKings.LineupGenerator.Business.Interfaces
 
         Task<string> FormatAsync<T>(T value, CancellationToken cancellationToken = default) where T : class;
 
-        Task<string> FormatLineupsAsync(IEnumerable<LineupsModel> lineups, CancellationToken cancellationToken = default);
-
         Task<string> FormatLineupsAsync(IEnumerable<LineupModel> lineups, CancellationToken cancellationToken = default);
     }
 }

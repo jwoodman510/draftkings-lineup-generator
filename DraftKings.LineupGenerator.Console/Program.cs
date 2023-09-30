@@ -126,7 +126,12 @@ namespace DraftKings.LineupGenerator
                 if (lineups.Any(x => x.Lineups?.Count > 0))
                 {
                     WriteLine("Lineups Generated:", ConsoleColor.Green);
-                    Console.WriteLine(await formatter.FormatLineupsAsync(lineups));
+
+                    foreach (var lineupsModel in lineups)
+                    {
+                        WriteLine($"Generator: {lineupsModel.Description}", ConsoleColor.Green);
+                        WriteLine(await formatter.FormatLineupsAsync(lineupsModel.Lineups), ConsoleColor.Cyan);
+                    }
                 }
                 else
                 {
