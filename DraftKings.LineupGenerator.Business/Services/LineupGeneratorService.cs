@@ -38,11 +38,11 @@ namespace DraftKings.LineupGenerator.Business.Services
                 return new List<LineupsModel>();
             }
 
-            var generateLineups = _lineupGenerators
-                .Where(x => x.CanGenerate(contest, rules))
-                .Select(x => x.GenerateAsync(request, rules, draftables, cancellationToken));
+            var generators = _lineupGenerators.Where(x => x.CanGenerate(contest, rules)).AsParallel();
 
-            var lineups = await Task.WhenAll(generateLineups);
+            var tasks = generators.Select(x => x.GenerateAsync(request, rules, draftables, cancellationToken));
+
+            var lineups = await Task.WhenAll(tasks);
 
             return lineups.ToList();
         }

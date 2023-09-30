@@ -3,20 +3,19 @@ using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Rules;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 
 namespace DraftKings.LineupGenerator.Business.Extensions
 {
     public static class DraftableModelExtensions
     {
-        public static string GetDraftStatAttribute(this DraftableModel player, DraftStatModel draftStat)
+        public static DraftStatAttributeModel GetDraftStatAttribute(this DraftableModel player, DraftStatModel draftStat)
         {
             if (draftStat == null)
             {
                 return null;
             }
 
-            return player.DraftStatAttributes.FirstOrDefault(x => x.Id == draftStat.Id)?.Value;
+            return player.DraftStatAttributes.FirstOrDefault(x => x.Id == draftStat.Id);
         }
 
         public static string GetRosterPosition(this DraftableModel player, RulesModel rules)
@@ -33,7 +32,16 @@ namespace DraftKings.LineupGenerator.Business.Extensions
 
             var stat = player.GetDraftStatAttribute(fppgDraftStat);
 
-            return decimal.TryParse(stat, out var val) ? val : default;
+            return decimal.TryParse(stat.Value, out var val) ? val : default;
+        }
+
+        public static int GetOpponentRank(this DraftableModel player, List<DraftStatModel> draftStats)
+        {
+            var oppRankStat = draftStats.Single(x => x.Name == DraftStats.OpponentRank);
+
+            var stat = player.GetDraftStatAttribute(oppRankStat);
+
+            return int.TryParse(stat.SortValue, out var val) ? val : default;
         }
 
         public static decimal GetProjectedSalary(this DraftableModel player, DraftablesModel draftables, RulesModel rules)
@@ -57,7 +65,8 @@ namespace DraftKings.LineupGenerator.Business.Extensions
                 player.GetFppg(draftables.DraftStats),
                 player.Salary,
                 player.GetRosterPosition(rules),
-                player.GetProjectedSalary(draftables, rules));
+                player.GetProjectedSalary(draftables, rules),
+                player.GetOpponentRank(draftables.DraftStats));
         }
     }
 }

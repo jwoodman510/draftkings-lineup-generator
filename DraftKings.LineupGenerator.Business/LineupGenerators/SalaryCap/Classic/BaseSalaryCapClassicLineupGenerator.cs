@@ -1,7 +1,7 @@
 ﻿using DraftKings.LineupGenerator.Business.Constants;
 using DraftKings.LineupGenerator.Business.Filters;
 using DraftKings.LineupGenerator.Business.Interfaces;
-using DraftKings.LineupGenerator.Business.LineupBags;
+using DraftKings.LineupGenerator.Business.LinupBags;
 using DraftKings.LineupGenerator.Constants;
 using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Draftables;
@@ -12,16 +12,13 @@ using System.Linq;
 
 namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 {
-    /// <summary>
-    /// The default lineup generator for salary cap showdown contests based on FPPG.
-    /// Currently only supports Madden, NFL, and XFL game types.
-    /// </summary>
-    public class DefaultSalaryCapShowdownLineupGenerator : BaseLineupGenerator
+    public abstract class BaseSalaryCapClassicLineupGenerator : BaseLineupGenerator
     {
-        public DefaultSalaryCapShowdownLineupGenerator(
-            IShowdownLineupService showdownLineupService,
+        public BaseSalaryCapClassicLineupGenerator(
+            BaseLineupsBag lineupsBag,
+            IClassicLineupService classicLineupService,
             IIncrementalLineupLogger incrementalLogger)
-            : base(new ProjectedPointsLineupsBag("FPPG"), showdownLineupService, incrementalLogger)
+            : base(lineupsBag, classicLineupService, incrementalLogger)
         {
 
         }
@@ -40,10 +37,10 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
             }
 
             return
-                rules.GameTypeName == GameTypes.Showdown ||
-                rules.GameTypeName == GameTypes.NflShowdown ||
-                rules.GameTypeName == GameTypes.XflShowdown ||
-                rules.GameTypeName == GameTypes.MaddenShowdown;
+                rules.GameTypeName == GameTypes.Classic ||
+                rules.GameTypeName == GameTypes.NflClassic ||
+                rules.GameTypeName == GameTypes.XflClassic ||
+                rules.GameTypeName == GameTypes.MaddenClassic;
         }
 
         protected override List<DraftableModel> GetEligiblePlayers(LineupRequestModel request, RulesModel rules, DraftablesModel draftables)
@@ -64,20 +61,22 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             if (!request.IncludeBaseSalary)
             {
-                eligiblePlayers = eligiblePlayers.ExcludeBaseSalary();
+                eligiblePlayers = eligiblePlayers.ExcludeBaseSalaryByPosition();
             }
 
-            if (request.ExcludeDefense)
-            {
-                eligiblePlayers = eligiblePlayers.Where(x => x.Position != RosterSlots.Dst);
-            }
+            var dstRosterSlot = rules.LineupTemplate.Single(x => x.RosterSlot.Name == RosterSlots.Dst).RosterSlot;
 
-            if (request.ExcludeKickers)
-            {
-                eligiblePlayers = eligiblePlayers.Where(x => x.Position != RosterSlots.Kicker);
-            }
+            var remainingPlayers = eligiblePlayers
+                .Where(x => x.RosterSlotId != dstRosterSlot.Id)
+                .Where(x => x.Position != RosterSlots.Quarterback)
+                .MinimumFppg(draftables.DraftStats, request.MinFppg);
 
-            return eligiblePlayers.ToList();
+            var dstPlayers = eligiblePlayers.Where(x => x.RosterSlotId == dstRosterSlot.Id);
+            var quarterbacks = eligiblePlayers.Where(x => x.Position == RosterSlots.Quarterback);
+
+            var highestSalaryQuarterbacksByTeam = quarterbacks.GroupBy(x => x.TeamId).Select(x => x.OrderByDescending(y => y.Salary).First());
+
+            return remainingPlayers.Concat(dstPlayers).Concat(highestSalaryQuarterbacksByTeam).ToList();
         }
     }
 }

@@ -34,6 +34,26 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 
         protected abstract List<DraftableModel> GetEligiblePlayers(LineupRequestModel request, RulesModel rules, DraftablesModel draftables);
 
+        protected virtual bool IsValidLineup(LineupRequestModel request, RulesModel rules, DraftablesModel draftables, LineupModel lineup)
+        {
+            if (!lineup.MeetsSalaryCap(rules))
+            {
+                return false;
+            }
+
+            if (!lineup.IncludesPlayerRequests(request.PlayerRequests))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        protected virtual void ModifyLineup(LineupRequestModel request, RulesModel rules, DraftablesModel draftables, LineupModel lineup)
+        {
+
+        }
+
         public LineupsModel GetCurrentLineups() => new LineupsModel
         {
             Description = LineupsBag.Description,
@@ -56,7 +76,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 
             var potentialLineups = LineupService.GetPotentialLineups(request, rules, draftables, eligiblePlayers);
 
-            await IncrementalLogger.StartAsync(cancellationToken);
+            await IncrementalLogger.StartAsync(LineupsBag.Description, cancellationToken);
 
             try
             {
@@ -76,15 +96,12 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
                             .ToList()
                     };
 
-                    if (!lineup.MeetsSalaryCap(rules))
+                    if (!IsValidLineup(request, rules, draftables, lineup))
                     {
                         return;
                     }
 
-                    if (!lineup.IncludesPlayerRequests(request.PlayerRequests))
-                    {
-                        return;
-                    }
+                    ModifyLineup(request, rules, draftables, lineup);
 
                     IncrementalLogger.IncrementValidLineups();
 

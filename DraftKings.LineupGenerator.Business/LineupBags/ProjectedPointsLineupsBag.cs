@@ -8,7 +8,7 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
 {
     public class ProjectedPointsLineupsBag : BaseLineupsBag
     {
-        public ProjectedPointsLineupsBag() : base("Projected FPPG") { }
+        public ProjectedPointsLineupsBag(string description) : base(description) { }
 
         public override LineupModel GetBestLineup()
         {

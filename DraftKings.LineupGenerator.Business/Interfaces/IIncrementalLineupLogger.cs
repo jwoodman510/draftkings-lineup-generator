@@ -5,7 +5,7 @@ namespace DraftKings.LineupGenerator.Business.Interfaces
 {
     public interface IIncrementalLineupLogger
     {
-        Task StartAsync(CancellationToken cancellationToken);
+        Task StartAsync(string logger, CancellationToken cancellationToken);
 
         Task StopAsync(CancellationToken cancellationToken);
 
