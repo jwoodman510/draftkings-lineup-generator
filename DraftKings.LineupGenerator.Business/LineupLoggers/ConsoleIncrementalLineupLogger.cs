@@ -17,7 +17,7 @@ namespace DraftKings.LineupGenerator.Business.LineupLoggers
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public Task StartAsync(string logger, CancellationToken cancellationToken)
         {
             _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
@@ -32,7 +32,7 @@ namespace DraftKings.LineupGenerator.Business.LineupLoggers
                         break;
                     }
 
-                    await LogIterationAsync(_cancellationTokenSource.Token);
+                    await LogIterationAsync(logger, _cancellationTokenSource.Token);
                 }
             }, TaskCreationOptions.LongRunning);
 
@@ -53,9 +53,9 @@ namespace DraftKings.LineupGenerator.Business.LineupLoggers
 
         public void IncrementValidLineups() => Interlocked.Add(ref _validLineupCount, 1);
 
-        private Task LogIterationAsync(CancellationToken cancellationToken)
+        private Task LogIterationAsync(string logger, CancellationToken cancellationToken)
         {
-            Console.WriteLine($"[{DateTime.Now:T}]\tIterations: {_iterationCount:n0} | Valid Lineups: {_validLineupCount:n0}");
+            Console.WriteLine($"[{DateTime.Now:T}] | {logger} | Iterations: {_iterationCount:n0} | Valid Lineups: {_validLineupCount:n0}");
 
             return Task.CompletedTask;
         }

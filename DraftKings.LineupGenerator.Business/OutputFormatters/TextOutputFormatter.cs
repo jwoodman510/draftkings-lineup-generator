@@ -28,25 +28,6 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
             return Task.FromResult(output.ToString());
         }
 
-        public Task<string> FormatLineupsAsync(IEnumerable<LineupsModel> lineups, CancellationToken cancellationToken = default)
-        {
-            var lineupsModel = lineups.ToList();
-
-            if (!lineupsModel.Any(x => x.Lineups?.Count > 0))
-            {
-                return Task.FromResult(string.Empty);
-            }
-
-            var records = lineupsModel
-                .SelectMany(x => x.Lineups)
-                .OrderByDescending(x => x.Draftables.Sum(x => x.ProjectedFppg))
-                .Select(GetRecords);
-
-            var output = Format(records);
-
-            return Task.FromResult(output);
-        }
-
         public Task<string> FormatLineupsAsync(IEnumerable<LineupModel> lineups, CancellationToken cancellationToken = default)
         {
             var lineupsList = lineups.ToList();

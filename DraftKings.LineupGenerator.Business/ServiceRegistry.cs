@@ -32,19 +32,20 @@ namespace DraftKings.LineupGenerator.Business
 
             // Add Business Services
             services
-                .AddScoped<IClassicLineupService, ClassicLineupService>()
-                .AddScoped<IShowdownLineupService, ShowdownLineupService>()
-                .AddScoped<ILineupGeneratorService, LineupGeneratorService>();
+                .AddTransient<IClassicLineupService, ClassicLineupService>()
+                .AddTransient<IShowdownLineupService, ShowdownLineupService>()
+                .AddTransient<ILineupGeneratorService, LineupGeneratorService>();
 
             // Add Lineup Generators
             services
                 .AddScoped<ILineupGenerator, DefaultSalaryCapClassicLineupGenerator>()
+                .AddScoped<ILineupGenerator, WeightedSalaryCapClassicLineupGenerator>()
                 .AddScoped<ILineupGenerator, DefaultSalaryCapShowdownLineupGenerator>();
 
             // Add Formatters
             services
-                .AddScoped<IOutputFormatter, TextOutputFormatter>()
-                .AddScoped<IOutputFormatter, JsonOutputFormatter>();
+                .AddTransient<IOutputFormatter, TextOutputFormatter>()
+                .AddTransient<IOutputFormatter, JsonOutputFormatter>();
 
             // Add Lineup Loggers
             services

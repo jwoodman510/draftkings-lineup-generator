@@ -16,11 +16,6 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
             return Task.FromResult(JsonConvert.SerializeObject(value, Formatting.Indented));
         }
 
-        public Task<string> FormatLineupsAsync(IEnumerable<LineupsModel> lineups, CancellationToken cancellationToken = default)
-        {
-            return Task.FromResult(JsonConvert.SerializeObject(lineups, Formatting.Indented));
-        }
-
         public Task<string> FormatLineupsAsync(IEnumerable<LineupModel> lineups, CancellationToken cancellationToken = default)
         {
             return Task.FromResult(JsonConvert.SerializeObject(lineups, Formatting.Indented));

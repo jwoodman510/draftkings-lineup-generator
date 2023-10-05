@@ -18,6 +18,8 @@
 
         public string RosterPosition { get; set; }
 
+        public int OpponentRank { get; set; }
+
         public DraftableDisplayModel(
             long id,
             string name,
@@ -26,7 +28,8 @@
             decimal fppg,
             decimal salary,
             string rosterPosition,
-            decimal projectedFppg)
+            decimal projectedFppg,
+            int opponentRank)
         {
             Id = id;
             Name = name;
@@ -36,6 +39,7 @@
             Salary = salary;
             ProjectedFppg = projectedFppg;
             RosterPosition = rosterPosition;
+            OpponentRank = opponentRank;
         }
     }
 }
