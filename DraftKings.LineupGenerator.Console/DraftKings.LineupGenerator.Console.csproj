@@ -7,11 +7,11 @@
     <ToolCommandName>dkgen</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <PackageId>Woodman.DKGen</PackageId>
-    <PackageVersion>1.2.0</PackageVersion>
+    <PackageVersion>1.3.0</PackageVersion>
     <RepositoryUrl>https://github.com/jwoodman510/draftkings-lineup-generator</RepositoryUrl>
     <ReleaseNotes>
-      Performance improvements when generating lineups with player requests.
-      Added ability to print all current lineups ('p') through the console.
+      Added command aliases.
+      Added weighted classic salary cap lineup generator.
     </ReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
