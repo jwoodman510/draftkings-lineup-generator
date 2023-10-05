@@ -18,19 +18,19 @@ namespace DraftKings.LineupGenerator
         {
             var rootCommand = new RootCommand();
 
-            var contestIdOption = new Option<int>("--contestId", "[REQUIRED] The DraftKings contest identifier.")
+            var contestIdOption = new Option<int>(new[] { "--contestId", "-c" }, "[REQUIRED] The DraftKings contest identifier.")
             {
                 IsRequired = true
             };
 
-            var includeQuestionableOption = new Option<bool>("--include-questionable", "[default=false] Includes draftables with a questionable status.");
-            var includeBaseSalaryOption = new Option<bool>("--include-base-salary", "[default=false] Includes draftables with the base salary (lowest possible).");
-            var minFppgOption = new Option<decimal>("--min-fppg", "(Classic Only) [default=10.0] Minimum fantasy points per game (per player - excluding defense & kickers).");
-            var excludeDefenseOption = new Option<bool>("--exclude-defense", "(Showdown Only) [default: false] Excludes DST positions from lineups.");
-            var excludeKickersOption = new Option<bool>("--exclude-kickers", "(Showdown Only) [default=false] Excludes Kicker positions from lineups.");
-            var outputFormatOption = new Option<string>("--output-format", "[default=text] The console output format. One of (json | text)");
-            var lineupCountOption = new Option<int>("--lineup-count", "[default=5] The number of lineups to output for each generator (max is 100).");
-            var giveMeOption = new Option<string>("--give-me", "The names of players to include in generated lineups (comma delimited)");
+            var includeQuestionableOption = new Option<bool>(new string[] { "--include-questionable", "-iq" }, "[default=false] Includes draftables with a questionable status.");
+            var includeBaseSalaryOption = new Option<bool>(new string[] { "--include-base-salary", "-ibs" }, "[default=false] Includes draftables with the base salary (lowest possible).");
+            var minFppgOption = new Option<decimal>(new string[] { "--min-fppg", "-mp" }, "(Classic Only) [default=10.0] Minimum fantasy points per game (per player - excluding defense & kickers).");
+            var excludeDefenseOption = new Option<bool>(new string[] { "--exclude-defense", "-ed" }, "(Showdown Only) [default: false] Excludes DST positions from lineups.");
+            var excludeKickersOption = new Option<bool>(new string[] { "--exclude-kickers", "-ek" }, "(Showdown Only) [default=false] Excludes Kicker positions from lineups.");
+            var outputFormatOption = new Option<string>(new string[] { "--output-format", "-f" }, "[default=text] The console output format. One of (json | text)");
+            var lineupCountOption = new Option<int>(new string[] { "--lineup-count", "-lc" }, "[default=5] The number of lineups to output for each generator (max is 100).");
+            var giveMeOption = new Option<string>(new string[] { "--give-me", "-g" }, "The names of players to include in generated lineups (comma delimited)");
 
             minFppgOption.SetDefaultValue(new LineupRequestModel(default).MinFppg);
             outputFormatOption.SetDefaultValue(new LineupRequestModel(default).OutputFormat);
