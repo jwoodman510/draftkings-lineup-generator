@@ -16,7 +16,10 @@ namespace DraftKings.LineupGenerator
 
         static async Task Main(string[] args)
         {
-            var rootCommand = new RootCommand();
+            var rootCommand = new RootCommand
+            {
+                Description = ".NET tool used to generate DraftKings lineups."
+            };
 
             var contestIdOption = new Option<int>(new[] { "--contestId", "-c" }, "[REQUIRED] The DraftKings contest identifier.")
             {
