@@ -7,13 +7,23 @@
     <ToolCommandName>dkgen</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <PackageId>Woodman.DKGen</PackageId>
-    <PackageVersion>1.4.0</PackageVersion>
+    <VersionPrefix>$(VersionPrefix)</VersionPrefix>
     <RepositoryUrl>https://github.com/jwoodman510/draftkings-lineup-generator</RepositoryUrl>
-    <ReleaseNotes>
-      Added player captain requests for showdown contests.
-      Added weighted showdown salary cap lineup generator.
-    </ReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Version>1.4.1</Version>
+    <Authors>jwoodman510</Authors>
+    <Company>jwoodman510</Company>
+    <Description>dotnet global tool used to generate draftkings lineups</Description>
+    <PackageProjectUrl>https://github.com/jwoodman510/draftkings-lineup-generator</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>Update Project Attributes</PackageReleaseNotes>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
   </ItemGroup>
