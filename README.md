@@ -15,4 +15,4 @@
   - Option (Showdown Only):
     - `--exclude-defense` *[default: false]* Excludes DST positions from lineups.
     - `--exclude-kickers` *[default: false]* Excludes Kicker positions from lineups.
-    - `--give-me-captain` The names of captain players to include in generated lineups (comma delimited) e.g. `--give-me "mahomes, travis kelce"`
+    - `--give-me-captain` The names of captain players to include in generated lineups (comma delimited) e.g. `--give-me-captain "mahomes, travis kelce"`
