@@ -34,6 +34,7 @@ namespace DraftKings.LineupGenerator
             var outputFormatOption = new Option<string>(new string[] { "--output-format", "-f" }, "[default=text] The console output format. One of (json | text)");
             var lineupCountOption = new Option<int>(new string[] { "--lineup-count", "-lc" }, "[default=5] The number of lineups to output for each generator (max is 100).");
             var giveMeOption = new Option<string>(new string[] { "--give-me", "-g" }, "The names of players to include in generated lineups (comma delimited)");
+            var giveMeCaptainOption = new Option<string>(new string[] { "--give-me-captain", "-gc" }, "(Showdown Only) The names of captain players to include in generated lineups (comma delimited)");
 
             minFppgOption.SetDefaultValue(new LineupRequestModel(default).MinFppg);
             outputFormatOption.SetDefaultValue(new LineupRequestModel(default).OutputFormat);
@@ -60,6 +61,7 @@ namespace DraftKings.LineupGenerator
             rootCommand.AddOption(outputFormatOption);
             rootCommand.AddOption(lineupCountOption);
             rootCommand.AddOption(giveMeOption);
+            rootCommand.AddOption(giveMeCaptainOption);
 
             var modelBinder = new LineupRequestModelBinder(
                 contestIdOption,
@@ -70,7 +72,8 @@ namespace DraftKings.LineupGenerator
                 excludeKickersOption,
                 outputFormatOption,
                 lineupCountOption,
-                giveMeOption);
+                giveMeOption,
+                giveMeCaptainOption);
 
             rootCommand.SetHandler(async request =>
             {

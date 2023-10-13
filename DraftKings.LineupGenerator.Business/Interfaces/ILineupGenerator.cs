@@ -13,6 +13,6 @@ namespace DraftKings.LineupGenerator.Business.Interfaces
 
         LineupsModel GetCurrentLineups();
 
-        Task<LineupsModel> GenerateAsync(LineupRequestModel request, RulesModel rules, DraftablesModel draftables, CancellationToken cancellationToken);
+        Task<LineupsModel> GenerateAsync(LineupRequestModel request, ContestModel contest, RulesModel rules, DraftablesModel draftables, CancellationToken cancellationToken);
     }
 }

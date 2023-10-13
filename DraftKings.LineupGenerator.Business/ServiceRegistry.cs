@@ -40,7 +40,8 @@ namespace DraftKings.LineupGenerator.Business
             services
                 .AddScoped<ILineupGenerator, DefaultSalaryCapClassicLineupGenerator>()
                 .AddScoped<ILineupGenerator, WeightedSalaryCapClassicLineupGenerator>()
-                .AddScoped<ILineupGenerator, DefaultSalaryCapShowdownLineupGenerator>();
+                .AddScoped<ILineupGenerator, DefaultSalaryCapShowdownLineupGenerator>()
+                .AddScoped<ILineupGenerator, WeightedSalaryCapShowdownLineupGenerator>();
 
             // Add Formatters
             services

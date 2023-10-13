@@ -26,7 +26,8 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
         public override bool CanGenerate(ContestModel contest, RulesModel rules)
         {
             if (contest.ContestDetail.Sport != Sports.Nfl &&
-                contest.ContestDetail.Sport != Sports.Xfl)
+                contest.ContestDetail.Sport != Sports.Xfl &&
+                contest.ContestDetail.Sport != Sports.Cfb)
             {
                 return false;
             }
@@ -64,14 +65,14 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 eligiblePlayers = eligiblePlayers.ExcludeBaseSalaryByPosition();
             }
 
-            var dstRosterSlot = rules.LineupTemplate.Single(x => x.RosterSlot.Name == RosterSlots.Dst).RosterSlot;
+            var dstRosterSlot = rules.LineupTemplate.SingleOrDefault(x => x.RosterSlot.Name == RosterSlots.Dst)?.RosterSlot;
 
             var remainingPlayers = eligiblePlayers
-                .Where(x => x.RosterSlotId != dstRosterSlot.Id)
+                .Where(x => x.RosterSlotId != dstRosterSlot?.Id)
                 .Where(x => x.Position != RosterSlots.Quarterback)
                 .MinimumFppg(draftables.DraftStats, request.MinFppg);
 
-            var dstPlayers = eligiblePlayers.Where(x => x.RosterSlotId == dstRosterSlot.Id);
+            var dstPlayers = eligiblePlayers.Where(x => x.RosterSlotId == dstRosterSlot?.Id);
             var quarterbacks = eligiblePlayers.Where(x => x.Position == RosterSlots.Quarterback);
 
             var highestSalaryQuarterbacksByTeam = quarterbacks.GroupBy(x => x.TeamId).Select(x => x.OrderByDescending(y => y.Salary).First());

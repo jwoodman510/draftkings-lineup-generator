@@ -9,15 +9,15 @@ using DraftKings.LineupGenerator.Models.Rules;
 namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 {
     /// <summary>
-    /// The weighted lineup generator for salary cap classic contests based on FPPG with an opponent ranking multiplier
+    /// The weighted lineup generator for salary cap showdown contests based on FPPG with an opponent ranking multiplier
     /// Currently only supports CFB, Madden, NFL, and XFL game types.
     /// </summary>
-    public class WeightedSalaryCapClassicLineupGenerator : BaseSalaryCapClassicLineupGenerator
+    public class WeightedSalaryCapShowdownLineupGenerator : BaseSalaryCapShowdownLineupGenerator
     {
-        public WeightedSalaryCapClassicLineupGenerator(
-            IClassicLineupService classicLineupService,
+        public WeightedSalaryCapShowdownLineupGenerator(
+            IShowdownLineupService showdownLineupService,
             IIncrementalLineupLogger incrementalLogger)
-            : base(new ProjectedPointsLineupsBag("Opponent Weighted FPPG"), classicLineupService, incrementalLogger)
+            : base(new ProjectedPointsLineupsBag("Opponent Weighted FPPG"), showdownLineupService, incrementalLogger)
         {
 
         }
