@@ -7,11 +7,11 @@
     <ToolCommandName>dkgen</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <PackageId>Woodman.DKGen</PackageId>
-    <PackageVersion>1.3.0</PackageVersion>
+    <PackageVersion>1.4.0</PackageVersion>
     <RepositoryUrl>https://github.com/jwoodman510/draftkings-lineup-generator</RepositoryUrl>
     <ReleaseNotes>
-      Added command aliases.
-      Added weighted classic salary cap lineup generator.
+      Added player captain requests for showdown contests.
+      Added weighted showdown salary cap lineup generator.
     </ReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
