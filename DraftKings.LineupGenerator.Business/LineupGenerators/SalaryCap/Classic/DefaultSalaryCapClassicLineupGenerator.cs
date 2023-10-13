@@ -5,7 +5,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 {
     /// <summary>
     /// The default lineup generator for salary cap classic contests based on FPPG.
-    /// Currently only supports Madden, NFL, and XFL game types.
+    /// Currently only supports CFB, Madden, NFL, and XFL game types.
     /// </summary>
     public class DefaultSalaryCapClassicLineupGenerator : BaseSalaryCapClassicLineupGenerator
     {

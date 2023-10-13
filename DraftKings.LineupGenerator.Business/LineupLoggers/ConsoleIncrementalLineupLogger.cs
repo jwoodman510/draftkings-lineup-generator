@@ -19,6 +19,8 @@ namespace DraftKings.LineupGenerator.Business.LineupLoggers
 
         public Task StartAsync(string logger, CancellationToken cancellationToken)
         {
+            WriteLine($"Running Generator: {logger}", ConsoleColor.Yellow);
+
             _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
             _consoleLoggerTask = Task.Factory.StartNew(async () =>
