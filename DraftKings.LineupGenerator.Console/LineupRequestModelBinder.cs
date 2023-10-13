@@ -18,6 +18,7 @@ namespace DraftKings.LineupGenerator
         private readonly Option<string> _outputFormat;
         private readonly Option<int> _lineupCountOption;
         private readonly Option<string> _giveMeOption;
+        private readonly Option<string> _giveMeCaptainOption;
 
         public LineupRequestModelBinder(
             Option<int> contestIdOption,
@@ -28,7 +29,8 @@ namespace DraftKings.LineupGenerator
             Option<bool> excludeKickers,
             Option<string> outputFormat,
             Option<int> lineupCountOption,
-            Option<string> giveMeOption)
+            Option<string> giveMeOption,
+            Option<string> giveMeCaptainOption)
         {
             _contestIdOption = contestIdOption;
             _includeQuestionableOption = includeQuestionableOption;
@@ -39,6 +41,7 @@ namespace DraftKings.LineupGenerator
             _outputFormat = outputFormat;
             _lineupCountOption = lineupCountOption;
             _giveMeOption = giveMeOption;
+            _giveMeCaptainOption = giveMeCaptainOption;
         }
 
         protected override LineupRequestModel GetBoundValue(BindingContext bindingContext)
@@ -57,6 +60,12 @@ namespace DraftKings.LineupGenerator
                 PlayerRequests = new PlayerRequestsModel
                 {
                     PlayerNameRequests = bindingContext.ParseResult.GetValueForOption(_giveMeOption)
+                        ?.Split(',')
+                        ?.Select(x => x.Trim())
+                        ?.Where(x => !string.IsNullOrEmpty(x))
+                        ?.ToHashSet(StringComparer.OrdinalIgnoreCase)
+                        ?? new HashSet<string>(),
+                    CaptainPlayerNameRequests = bindingContext.ParseResult.GetValueForOption(_giveMeCaptainOption)
                         ?.Split(',')
                         ?.Select(x => x.Trim())
                         ?.Where(x => !string.IsNullOrEmpty(x))

@@ -7,6 +7,7 @@ using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -42,6 +43,42 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 rules.GameTypeName == GameTypes.NflShowdown ||
                 rules.GameTypeName == GameTypes.XflShowdown ||
                 rules.GameTypeName == GameTypes.MaddenShowdown;
+        }
+
+        protected override bool IsValidLineup(LineupRequestModel request, RulesModel rules, DraftablesModel draftables, LineupModel lineup)
+        {
+            if (!base.IsValidLineup(request, rules, draftables, lineup))
+            {
+                return false;
+            }
+
+            if (request.PlayerRequests?.CaptainPlayerNameRequests == null ||
+                request.PlayerRequests.CaptainPlayerNameRequests.Count == 0)
+            {
+                return true;
+            }
+
+            var captainRequests = request.PlayerRequests.CaptainPlayerNameRequests;
+
+            foreach (var player in lineup.Draftables.Where(x => x.RosterPosition == RosterSlots.Captain))
+            {
+                if (captainRequests.Contains(player.Name))
+                {
+                    return true;
+                }
+
+                if (captainRequests.Contains(player.FirstName))
+                {
+                    return true;
+                }
+
+                if (captainRequests.Contains(player.LastName))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         protected override List<DraftableModel> GetEligiblePlayers(LineupRequestModel request, RulesModel rules, DraftablesModel draftables)
