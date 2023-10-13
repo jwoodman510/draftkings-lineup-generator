@@ -78,7 +78,12 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
 
             lineup.Draftables.Sort(new DraftableRosterPositionComparer());
 
-            records.AddRange(lineup.Draftables.Select(draftable => $"[{draftable.RosterPosition}]\t{draftable.Name} ({draftable.ProjectedFppg})"));
+            records.AddRange(lineup.Draftables.Select(draftable =>
+            {
+                var position = $"[{draftable.RosterPosition}]";
+
+                return $"{position.PadRight(10)}\t{draftable.Name} ({draftable.ProjectedFppg})";
+            }));
 
             return records;
         }

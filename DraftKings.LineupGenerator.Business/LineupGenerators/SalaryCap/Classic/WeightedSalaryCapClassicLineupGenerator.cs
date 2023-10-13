@@ -1,8 +1,12 @@
-﻿using DraftKings.LineupGenerator.Business.Interfaces;
+﻿using DraftKings.LineupGenerator.Business.Constants;
+using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Business.LineupBags;
+using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
+using System;
+using System.Numerics;
 
 namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 {
@@ -20,25 +24,69 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
         }
 
-        protected override void ModifyLineup(LineupRequestModel request, RulesModel rules, DraftablesModel draftables, LineupModel lineup)
+        protected override void ModifyLineup(LineupRequestModel request, ContestModel contest, RulesModel rules, DraftablesModel draftables, LineupModel lineup)
         {
             foreach (var player in lineup.Draftables)
             {
                 if (player.OpponentRank <= 0)
                 {
-                    continue;
+                    return;
                 }
 
-                if (player.OpponentRank > 16)
+                switch (contest.ContestDetail.Sport)
                 {
-                    // Bonus 0.5 points, max bonus of 16 if the rank is last
-                    player.ProjectedFppg += player.OpponentRank * 0.5m;
+                    case Sports.Nfl:
+                        ModifyNflPlayer(player);
+                        break;
+                    case Sports.Xfl:
+                        ModifyXflPlayer(player);
+                        break;
+                    case Sports.Cfb:
+                        ModifyCfbPlayer(player);
+                        break;
                 }
-                else
-                {
-                    // Bonus -0.5 points, max bonus of -8 if the rank is first
-                    player.ProjectedFppg -= (17 - player.OpponentRank) * 0.5m;
-                }
+            }
+        }
+
+        private static void ModifyNflPlayer(DraftableDisplayModel player)
+        {
+            if (player.OpponentRank > 16)
+            {
+                player.ProjectedFppg += player.OpponentRank * 0.05m;
+            }
+            else
+            {
+                // Subtract 0.5 * 2
+                player.ProjectedFppg -= (17 - player.OpponentRank) * 0.05m;
+            }
+        }
+
+        private static void ModifyXflPlayer(DraftableDisplayModel player)
+        {
+            if (player.OpponentRank > 5)
+            {
+                player.ProjectedFppg += player.OpponentRank;
+            }
+            else if (player.OpponentRank < 4)
+            {
+                player.ProjectedFppg -= player.OpponentRank;
+            }
+        }
+
+        private static void ModifyCfbPlayer(DraftableDisplayModel player)
+        {
+            if (player.OpponentRank >= 50)
+            {
+                var bonus = player.OpponentRank / 10;
+
+                player.ProjectedFppg += bonus * 0.05m;
+
+                return;
+            }
+
+            if (player.OpponentRank <= 10)
+            {
+                player.ProjectedFppg -= player.OpponentRank * 0.05m;
             }
         }
     }

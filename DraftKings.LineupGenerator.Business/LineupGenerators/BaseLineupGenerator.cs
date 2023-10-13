@@ -49,7 +49,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
             return true;
         }
 
-        protected virtual void ModifyLineup(LineupRequestModel request, RulesModel rules, DraftablesModel draftables, LineupModel lineup)
+        protected virtual void ModifyLineup(LineupRequestModel request, ContestModel contest, RulesModel rules, DraftablesModel draftables, LineupModel lineup)
         {
 
         }
@@ -60,7 +60,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
             Lineups = LineupsBag.GetBestLineups(int.MaxValue).ToList()
         };
 
-        public async Task<LineupsModel> GenerateAsync(LineupRequestModel request, RulesModel rules, DraftablesModel draftables, CancellationToken cancellationToken)
+        public async Task<LineupsModel> GenerateAsync(LineupRequestModel request, ContestModel contest, RulesModel rules, DraftablesModel draftables, CancellationToken cancellationToken)
         {
             var result = new LineupsModel
             {
@@ -101,7 +101,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
                         return;
                     }
 
-                    ModifyLineup(request, rules, draftables, lineup);
+                    ModifyLineup(request, contest, rules, draftables, lineup);
 
                     IncrementalLogger.IncrementValidLineups();
 

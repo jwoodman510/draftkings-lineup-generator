@@ -40,7 +40,7 @@ namespace DraftKings.LineupGenerator.Business.Services
 
             var generators = _lineupGenerators.Where(x => x.CanGenerate(contest, rules)).AsParallel();
 
-            var tasks = generators.Select(x => x.GenerateAsync(request, rules, draftables, cancellationToken));
+            var tasks = generators.Select(x => x.GenerateAsync(request, contest, rules, draftables, cancellationToken));
 
             var lineups = await Task.WhenAll(tasks);
 
