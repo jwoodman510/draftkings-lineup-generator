@@ -1,25 +1,30 @@
-﻿using DraftKings.LineupGenerator.Business.Interfaces;
+﻿using DraftKings.LineupGenerator.Business.Extensions;
+using DraftKings.LineupGenerator.Business.Interfaces;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DraftKings.LineupGenerator.Business.LineupLoggers
+namespace DraftKings.LineupGenerator.Business.Logging
 {
-    public class ConsoleIncrementalLineupLogger : IIncrementalLineupLogger
+    public class IncrementalLineupLogger : IIncrementalLineupLogger
     {
         private long _iterationCount = 0;
         private long _validLineupCount = 0;
         private Task _consoleLoggerTask;
         private CancellationTokenSource _cancellationTokenSource;
 
-        public ConsoleIncrementalLineupLogger()
+        private readonly ILogger<IncrementalLineupLogger> _logger;
+
+        public IncrementalLineupLogger(ILogger<IncrementalLineupLogger> logger)
         {
+            _logger = logger;
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
         public Task StartAsync(string logger, CancellationToken cancellationToken)
         {
-            WriteLine($"Running Generator: {logger}", ConsoleColor.Yellow);
+            _logger?.LogInformationGreen($"Running Generator: {logger}");
 
             _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
@@ -55,22 +60,13 @@ namespace DraftKings.LineupGenerator.Business.LineupLoggers
 
         public void IncrementValidLineups() => Interlocked.Add(ref _validLineupCount, 1);
 
-        private Task LogIterationAsync(string logger, CancellationToken cancellationToken)
+        private Task LogIterationAsync(string logger, CancellationToken _)
         {
-            Console.WriteLine($"[{DateTime.Now:T}] | {logger} | Iterations: {_iterationCount:n0} | Valid Lineups: {_validLineupCount:n0}");
+            var now = TimeOnly.FromDateTime(DateTime.Now);
+
+            _logger?.LogInformation($"[{{0}}] | {{1}} | Iterations: {{2}} | Valid Lineups: {{3}}", now, logger, _iterationCount, _validLineupCount);
 
             return Task.CompletedTask;
-        }
-
-        private static void WriteLine(string message, ConsoleColor foregroundColor)
-        {
-            var defaultColor = Console.ForegroundColor;
-
-            Console.ForegroundColor = foregroundColor;
-
-            Console.WriteLine(message);
-
-            Console.ForegroundColor = defaultColor;
         }
     }
 }

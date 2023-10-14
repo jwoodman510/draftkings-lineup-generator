@@ -8,7 +8,8 @@ using DraftKings.LineupGenerator.Business.Services;
 using DraftKings.LineupGenerator.Caching;
 using DraftKings.LineupGenerator.Caching.Services;
 using Microsoft.Extensions.DependencyInjection;
-using DraftKings.LineupGenerator.Business.LineupLoggers;
+using Serilog;
+using DraftKings.LineupGenerator.Business.Logging;
 
 namespace DraftKings.LineupGenerator.Business
 {
@@ -16,6 +17,9 @@ namespace DraftKings.LineupGenerator.Business
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
+            // Add Logging
+            services.AddLogging(x => x.AddSerilog(dispose: true));
+
             // Add Caching
             services
                 .AddMemoryCache()
@@ -34,7 +38,7 @@ namespace DraftKings.LineupGenerator.Business
             services
                 .AddTransient<IClassicLineupService, ClassicLineupService>()
                 .AddTransient<IShowdownLineupService, ShowdownLineupService>()
-                .AddTransient<ILineupGeneratorService, LineupGeneratorService>();
+                .AddScoped<ILineupGeneratorService, LineupGeneratorService>();
 
             // Add Lineup Generators
             services
@@ -50,7 +54,7 @@ namespace DraftKings.LineupGenerator.Business
 
             // Add Lineup Loggers
             services
-                .AddScoped<IIncrementalLineupLogger, ConsoleIncrementalLineupLogger>();
+                .AddScoped<IIncrementalLineupLogger, IncrementalLineupLogger>();
 
             return services;
         }
