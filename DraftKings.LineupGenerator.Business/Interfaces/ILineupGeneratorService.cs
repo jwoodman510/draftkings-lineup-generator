@@ -8,5 +8,7 @@ namespace DraftKings.LineupGenerator.Business.Interfaces
     public interface ILineupGeneratorService
     {
         Task<List<LineupsModel>> GetAsync(LineupRequestModel request, CancellationToken cancellationToken);
+
+        Task LogProgressAsync(LineupRequestModel request, CancellationToken cancellationToken);
     }
 }

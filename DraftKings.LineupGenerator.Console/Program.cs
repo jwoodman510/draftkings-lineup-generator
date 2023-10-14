@@ -1,7 +1,11 @@
 ﻿using DraftKings.LineupGenerator.Business;
+using DraftKings.LineupGenerator.Business.Extensions;
 using DraftKings.LineupGenerator.Business.Interfaces;
+using DraftKings.LineupGenerator.Business.Logging;
 using DraftKings.LineupGenerator.Models.Lineups;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
 using System.CommandLine;
 using System.Linq;
@@ -16,6 +20,8 @@ namespace DraftKings.LineupGenerator
 
         static async Task Main(string[] args)
         {
+            Log.Logger = SerilogConfiguration.Build().CreateLogger();
+
             var rootCommand = new RootCommand
             {
                 Description = ".NET tool used to generate DraftKings lineups."
@@ -81,12 +87,8 @@ namespace DraftKings.LineupGenerator
                     .RegisterServices()
                     .BuildServiceProvider();
 
-                var formatters = serviceProvider.GetServices<IOutputFormatter>();
-                var formatter = formatters.FirstOrDefault(x => x.Type.Equals(request.OutputFormat, StringComparison.OrdinalIgnoreCase)) ?? formatters.First();
-
-                WriteLine("Generating Lineups for Configuration:", ConsoleColor.Green);
-
-                WriteLine(await formatter.FormatAsync(request), ConsoleColor.Cyan);
+                var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+                var lineupGeneratorService = serviceProvider.GetRequiredService<ILineupGeneratorService>();                
 
                 _ = Task.Factory.StartNew(async () =>
                 {
@@ -96,69 +98,33 @@ namespace DraftKings.LineupGenerator
                     {
                         if (key is 'q')
                         {
-                            Console.WriteLine();
                             CancellationTokenSource.Cancel();
                         }
                         else if (key is 'p')
                         {
-                            Console.WriteLine();
-
-                            var lineupsModels = serviceProvider.GetServices<ILineupGenerator>()
-                                .Select(x => x.GetCurrentLineups())
-                                .Where(x => x?.Lineups?.Count > 0)
-                                .ToList();
-
-                            if (lineupsModels.Count > 0)
-                            {
-                                foreach (var lineupsModel in lineupsModels)
-                                {
-                                    WriteLine($"Generator: {lineupsModel.Description}", ConsoleColor.Green);
-                                    WriteLine(await formatter.FormatLineupsAsync(lineupsModel.Lineups), ConsoleColor.Cyan);
-                                }
-                            }
-                            else
-                            {
-                                WriteLine("No Lineups Found.", ConsoleColor.Yellow);
-                            }
+                            await lineupGeneratorService.LogProgressAsync(request, CancellationTokenSource.Token);
                         }
 
                         key = Console.ReadKey().KeyChar;
                     }
                 });
 
-                var lineups = await serviceProvider.GetRequiredService<ILineupGeneratorService>()
-                    .GetAsync(request, CancellationTokenSource.Token);
+                var lineups = await lineupGeneratorService.GetAsync(request, CancellationTokenSource.Token);
 
                 if (lineups.Any(x => x.Lineups?.Count > 0))
                 {
-                    WriteLine("Lineups Generated:", ConsoleColor.Green);
-
-                    foreach (var lineupsModel in lineups)
-                    {
-                        WriteLine($"Generator: {lineupsModel.Description}", ConsoleColor.Green);
-                        WriteLine(await formatter.FormatLineupsAsync(lineupsModel.Lineups), ConsoleColor.Cyan);
-                    }
+                    await lineupGeneratorService.LogProgressAsync(request, CancellationTokenSource.Token);
                 }
                 else
                 {
-                    WriteLine("No Lineups Found.", ConsoleColor.Red);
+                    logger.LogError("No Lineups Found.");
                 }
 
+                Log.CloseAndFlush();
 
             }, modelBinder);
 
             await rootCommand.InvokeAsync(args);
-        }
-
-        private static void WriteLine(string message, ConsoleColor foregroundColor)
-        {
-            var defaultColor = Console.ForegroundColor;
-
-            Console.ForegroundColor = foregroundColor;
-
-            Console.WriteLine(message);
-
-            Console.ForegroundColor = defaultColor;
         }
     }
 }
