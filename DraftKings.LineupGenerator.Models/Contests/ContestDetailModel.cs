@@ -7,5 +7,7 @@
         public int GameTypeId { get; set; }
 
         public string Sport { get; set; }
+
+        public string Name { get; set; }
     }
 }

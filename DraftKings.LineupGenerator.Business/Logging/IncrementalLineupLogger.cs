@@ -64,7 +64,7 @@ namespace DraftKings.LineupGenerator.Business.Logging
         {
             var now = TimeOnly.FromDateTime(DateTime.Now);
 
-            _logger?.LogInformation($"[{{0}}] | {logger} | Iterations: {{1}} | Valid Lineups: {{2}}", now, _iterationCount, _validLineupCount);
+            _logger?.LogInformation($"[{{0}}] | {{1}} | Iterations: {{2}} | Valid Lineups: {{3}}", now, logger, _iterationCount, _validLineupCount);
 
             return Task.CompletedTask;
         }
