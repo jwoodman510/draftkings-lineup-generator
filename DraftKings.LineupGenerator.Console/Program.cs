@@ -6,7 +6,9 @@ using DraftKings.LineupGenerator.Models.Lineups;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Serilog.Core;
 using System;
+using System.Collections.Generic;
 using System.CommandLine;
 using System.Linq;
 using System.Threading;
@@ -88,6 +90,12 @@ namespace DraftKings.LineupGenerator
                     .BuildServiceProvider();
 
                 var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
+
+                using var scope = logger.BeginScope(new Dictionary<string, object>
+                {
+                    { "correlationId", Guid.NewGuid() }
+                });
+
                 var lineupGeneratorService = serviceProvider.GetRequiredService<ILineupGeneratorService>();                
 
                 _ = Task.Factory.StartNew(async () =>

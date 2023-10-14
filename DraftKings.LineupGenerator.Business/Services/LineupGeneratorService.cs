@@ -2,12 +2,10 @@
 using DraftKings.LineupGenerator.Business.Extensions;
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Models.Lineups;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -49,11 +47,6 @@ namespace DraftKings.LineupGenerator.Business.Services
 
         public async Task<List<LineupsModel>> GetAsync(LineupRequestModel request, CancellationToken cancellationToken)
         {
-            using var scope = _logger.BeginScope(new Dictionary<string, object>
-            {
-                { "correlationId", Guid.NewGuid() }
-            });
-
             var formatter = _formatters.FirstOrDefault(x => x.Type.Equals(request.OutputFormat, StringComparison.OrdinalIgnoreCase))
                 ?? _formatters.First();
 
