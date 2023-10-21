@@ -61,7 +61,7 @@ namespace DraftKings.LineupGenerator.Business.Services
                 return new List<LineupsModel>();
             }
 
-            _logger.LogInformation("Contest Found: {0}", contest.ContestDetail.Name);
+            _logger.LogInformation("Contest Found: {ContestName}", contest.ContestDetail.Name);
 
             var rules = await _draftKingsClient.Rules.GetAsync(contest.ContestDetail.GameTypeId, cancellationToken);
             var draftables = await _draftKingsClient.Draftables.GetAsync(contest.ContestDetail.DraftGroupId, cancellationToken);

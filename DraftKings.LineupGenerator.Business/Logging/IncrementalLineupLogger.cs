@@ -26,7 +26,7 @@ namespace DraftKings.LineupGenerator.Business.Logging
 
         public Task StartAsync(string logger, List<DraftableModel> players, CancellationToken cancellationToken)
         {
-            _logger?.LogInformationGreen($"Running Generator: {logger} for {players.Count} players");
+            _logger?.LogInformation("Running Generator: {Generator} for {EligiblePlayerCount} players.", logger, players.Count);
 
             _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
@@ -66,7 +66,7 @@ namespace DraftKings.LineupGenerator.Business.Logging
         {
             var now = TimeOnly.FromDateTime(DateTime.Now);
 
-            _logger?.LogInformation($"[{{0}}] | {{1}} | Iterations: {{2}} | Valid Lineups: {{3}}", now, logger, _iterationCount, _validLineupCount);
+            _logger?.LogInformation($"[{{Time}}] | {{Generator}} | Iterations: {{IterationCount}} | Valid Lineups: {{ValidLineupCount}}", now, logger, _iterationCount, _validLineupCount);
 
             return Task.CompletedTask;
         }
