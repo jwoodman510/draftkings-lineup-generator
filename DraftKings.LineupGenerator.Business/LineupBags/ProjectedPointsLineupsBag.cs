@@ -8,6 +8,8 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
 {
     public class ProjectedPointsLineupsBag : BaseLineupsBag
     {
+        private decimal MinKey => Keys.Count == 0 ? 0 : Keys.Min();
+
         public ProjectedPointsLineupsBag(string description) : base(description) { }
 
         public override LineupModel GetBestLineup()
@@ -43,9 +45,7 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
 
         public override void UpdateLineups(LineupModel lineup, int max)
         {
-            var minKey = Keys.Count == 0 ? 0 : Keys.Min();
-
-            if (lineup.ProjectedFppg < minKey)
+            if (lineup.ProjectedFppg < MinKey)
             {
                 return;
             }
@@ -56,7 +56,7 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
 
             if (Keys.Count > max)
             {
-                TryRemove(minKey, out _);
+                TryRemove(MinKey, out _);
             }
         }
     }

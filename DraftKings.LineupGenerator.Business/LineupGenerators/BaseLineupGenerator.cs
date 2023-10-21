@@ -54,10 +54,10 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 
         }
 
-        public LineupsModel GetCurrentLineups() => new LineupsModel
+        public LineupsModel GetCurrentLineups(LineupRequestModel request) => new LineupsModel
         {
             Description = LineupsBag.Description,
-            Lineups = LineupsBag.GetBestLineups(int.MaxValue).ToList()
+            Lineups = LineupsBag.GetBestLineups(request.LineupCount).ToList()
         };
 
         public async Task<LineupsModel> GenerateAsync(LineupRequestModel request, ContestModel contest, RulesModel rules, DraftablesModel draftables, CancellationToken cancellationToken)

@@ -86,7 +86,7 @@ namespace DraftKings.LineupGenerator.Business.Services
                 ?? _formatters.First();
 
             var lineupsModels = _lineupGenerators
-                .Select(x => x.GetCurrentLineups())
+                .Select(x => x.GetCurrentLineups(request))
                 .Where(x => x?.Lineups?.Count > 0)
                 .ToList();
 
