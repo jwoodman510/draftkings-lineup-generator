@@ -110,10 +110,12 @@ namespace DraftKings.LineupGenerator
                     {
                         if (key is 'q')
                         {
+                            Console.WriteLine();
                             CancellationTokenSource.Cancel();
                         }
                         else if (key is 'p')
                         {
+                            Console.WriteLine();
                             await lineupGeneratorService.LogProgressAsync(request, CancellationTokenSource.Token);
                         }
 

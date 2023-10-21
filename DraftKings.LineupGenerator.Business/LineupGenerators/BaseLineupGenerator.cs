@@ -76,13 +76,14 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 
             var potentialLineups = LineupService.GetPotentialLineups(request, rules, draftables, eligiblePlayers);
 
-            await IncrementalLogger.StartAsync(LineupsBag.Description, cancellationToken);
+            await IncrementalLogger.StartAsync(LineupsBag.Description, eligiblePlayers, cancellationToken);
 
             try
             {
                 var opts = new ParallelOptions
                 {
-                    CancellationToken = cancellationToken
+                    CancellationToken = cancellationToken,
+                    MaxDegreeOfParallelism = 4
                 };
 
                 Parallel.ForEach(potentialLineups, opts, potentialLineup =>

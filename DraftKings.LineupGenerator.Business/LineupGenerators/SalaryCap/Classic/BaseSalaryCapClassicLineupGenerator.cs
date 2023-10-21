@@ -77,7 +77,9 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
             var highestSalaryQuarterbacksByTeam = quarterbacks.GroupBy(x => x.TeamId).Select(x => x.OrderByDescending(y => y.Salary).First());
 
-            return remainingPlayers.Concat(dstPlayers).Concat(highestSalaryQuarterbacksByTeam).ToList();
+            return remainingPlayers.Concat(dstPlayers).Concat(highestSalaryQuarterbacksByTeam)
+                .OrderBy(x => x.Salary)
+                .ToList();
         }
     }
 }
