@@ -52,7 +52,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 .ExcludeZeroSalary()
                 .ExcludeDoubtful()
                 .ExcludeInjuredReserve()
-                .ExcludeZeroSalary()
+                .ApplyRequestExclusions(request, rules)
                 .ExcludeZeroFppg(draftables.DraftStats);
 
             if (!request.IncludeQuestionable)
