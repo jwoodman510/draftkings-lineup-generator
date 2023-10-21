@@ -54,10 +54,10 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 
         }
 
-        public LineupsModel GetCurrentLineups() => new LineupsModel
+        public LineupsModel GetCurrentLineups(LineupRequestModel request) => new LineupsModel
         {
             Description = LineupsBag.Description,
-            Lineups = LineupsBag.GetBestLineups(int.MaxValue).ToList()
+            Lineups = LineupsBag.GetBestLineups(request.LineupCount).ToList()
         };
 
         public async Task<LineupsModel> GenerateAsync(LineupRequestModel request, ContestModel contest, RulesModel rules, DraftablesModel draftables, CancellationToken cancellationToken)
@@ -76,13 +76,14 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 
             var potentialLineups = LineupService.GetPotentialLineups(request, rules, draftables, eligiblePlayers);
 
-            await IncrementalLogger.StartAsync(LineupsBag.Description, cancellationToken);
+            await IncrementalLogger.StartAsync(LineupsBag.Description, eligiblePlayers, cancellationToken);
 
             try
             {
                 var opts = new ParallelOptions
                 {
-                    CancellationToken = cancellationToken
+                    CancellationToken = cancellationToken,
+                    MaxDegreeOfParallelism = 4
                 };
 
                 Parallel.ForEach(potentialLineups, opts, potentialLineup =>

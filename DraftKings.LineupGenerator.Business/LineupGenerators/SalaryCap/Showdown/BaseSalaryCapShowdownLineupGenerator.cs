@@ -7,7 +7,6 @@ using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -89,7 +88,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
                 .ExcludeZeroSalary()
                 .ExcludeDoubtful()
                 .ExcludeInjuredReserve()
-                .ExcludeZeroSalary()
+                .ApplyRequestExclusions(request, rules)
                 .ExcludeZeroFppg(draftables.DraftStats);
 
             if (!request.IncludeQuestionable)

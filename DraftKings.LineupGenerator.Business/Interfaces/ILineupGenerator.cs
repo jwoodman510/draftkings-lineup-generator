@@ -11,7 +11,7 @@ namespace DraftKings.LineupGenerator.Business.Interfaces
     {
         bool CanGenerate(ContestModel contest, RulesModel rules);
 
-        LineupsModel GetCurrentLineups();
+        LineupsModel GetCurrentLineups(LineupRequestModel request);
 
         Task<LineupsModel> GenerateAsync(LineupRequestModel request, ContestModel contest, RulesModel rules, DraftablesModel draftables, CancellationToken cancellationToken);
     }

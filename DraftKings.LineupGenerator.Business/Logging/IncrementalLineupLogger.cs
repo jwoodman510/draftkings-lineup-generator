@@ -1,7 +1,9 @@
 ﻿using DraftKings.LineupGenerator.Business.Extensions;
 using DraftKings.LineupGenerator.Business.Interfaces;
+using DraftKings.LineupGenerator.Models.Draftables;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,9 +24,9 @@ namespace DraftKings.LineupGenerator.Business.Logging
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
-        public Task StartAsync(string logger, CancellationToken cancellationToken)
+        public Task StartAsync(string logger, List<DraftableModel> players, CancellationToken cancellationToken)
         {
-            _logger?.LogInformationGreen($"Running Generator: {logger}");
+            _logger?.LogInformation("Running Generator: {Generator} for {EligiblePlayerCount} players.", logger, players.Count);
 
             _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
@@ -64,7 +66,7 @@ namespace DraftKings.LineupGenerator.Business.Logging
         {
             var now = TimeOnly.FromDateTime(DateTime.Now);
 
-            _logger?.LogInformation($"[{{0}}] | {{1}} | Iterations: {{2}} | Valid Lineups: {{3}}", now, logger, _iterationCount, _validLineupCount);
+            _logger?.LogInformation($"[{{Time}}] | {{Generator}} | Iterations: {{IterationCount}} | Valid Lineups: {{ValidLineupCount}}", now, logger, _iterationCount, _validLineupCount);
 
             return Task.CompletedTask;
         }

@@ -10,7 +10,7 @@ namespace DraftKings.LineupGenerator.Business.Extensions
             // Trick serilog into thinking this is a scalar value
             try
             {
-                logger.LogInformation("{0}", new Uri(message, UriKind.Relative));
+                logger.LogInformation("{Message}", new Uri(message, UriKind.Relative));
             }
             catch
             {

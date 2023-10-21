@@ -18,7 +18,9 @@ namespace DraftKings.LineupGenerator
         private readonly Option<string> _outputFormat;
         private readonly Option<int> _lineupCountOption;
         private readonly Option<string> _giveMeOption;
+        private readonly Option<string> _excludePlayerOption;
         private readonly Option<string> _giveMeCaptainOption;
+        private readonly Option<string> _excludeCaptainOption;
 
         public LineupRequestModelBinder(
             Option<int> contestIdOption,
@@ -30,7 +32,9 @@ namespace DraftKings.LineupGenerator
             Option<string> outputFormat,
             Option<int> lineupCountOption,
             Option<string> giveMeOption,
-            Option<string> giveMeCaptainOption)
+            Option<string> excludePlayerOption,
+            Option<string> giveMeCaptainOption,
+            Option<string> excludeCaptainOption)
         {
             _contestIdOption = contestIdOption;
             _includeQuestionableOption = includeQuestionableOption;
@@ -41,7 +45,9 @@ namespace DraftKings.LineupGenerator
             _outputFormat = outputFormat;
             _lineupCountOption = lineupCountOption;
             _giveMeOption = giveMeOption;
+            _excludePlayerOption = excludePlayerOption;
             _giveMeCaptainOption = giveMeCaptainOption;
+            _excludeCaptainOption = excludeCaptainOption;
         }
 
         protected override LineupRequestModel GetBoundValue(BindingContext bindingContext)
@@ -59,20 +65,22 @@ namespace DraftKings.LineupGenerator
                 LineupCount = bindingContext.ParseResult.GetValueForOption(_lineupCountOption),
                 PlayerRequests = new PlayerRequestsModel
                 {
-                    PlayerNameRequests = bindingContext.ParseResult.GetValueForOption(_giveMeOption)
-                        ?.Split(',')
-                        ?.Select(x => x.Trim())
-                        ?.Where(x => !string.IsNullOrEmpty(x))
-                        ?.ToHashSet(StringComparer.OrdinalIgnoreCase)
-                        ?? new HashSet<string>(),
-                    CaptainPlayerNameRequests = bindingContext.ParseResult.GetValueForOption(_giveMeCaptainOption)
-                        ?.Split(',')
-                        ?.Select(x => x.Trim())
-                        ?.Where(x => !string.IsNullOrEmpty(x))
-                        ?.ToHashSet(StringComparer.OrdinalIgnoreCase)
-                        ?? new HashSet<string>()
+                    PlayerNameRequests = ParseCommaDelimitedOption(bindingContext, _giveMeOption),
+                    CaptainPlayerNameRequests = ParseCommaDelimitedOption(bindingContext, _giveMeCaptainOption),
+                    PlayerNameExclusionRequests = ParseCommaDelimitedOption(bindingContext, _excludePlayerOption),
+                    CaptainPlayerNameExclusionRequests = ParseCommaDelimitedOption(bindingContext, _excludeCaptainOption)
                 }
             };
+        }
+
+        private HashSet<string> ParseCommaDelimitedOption(BindingContext bindingContext, Option<string> option)
+        {
+            return bindingContext.ParseResult.GetValueForOption(option)
+                        ?.Split(',')
+                        ?.Select(x => x.Trim())
+                        ?.Where(x => !string.IsNullOrEmpty(x))
+                        ?.ToHashSet(StringComparer.OrdinalIgnoreCase)
+                        ?? new HashSet<string>();
         }
     }
 }

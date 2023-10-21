@@ -48,13 +48,13 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 
         private static void ModifyNflPlayer(DraftableDisplayModel player)
         {
+            // max multiplier: 8
             if (player.OpponentRank > 16)
             {
                 player.ProjectedFppg += player.OpponentRank * 0.05m;
             }
             else
             {
-                // Subtract 0.5 * 2
                 player.ProjectedFppg -= (17 - player.OpponentRank) * 0.05m;
             }
         }

@@ -1,12 +1,10 @@
 ﻿using DraftKings.LineupGenerator.Business;
-using DraftKings.LineupGenerator.Business.Extensions;
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Business.Logging;
 using DraftKings.LineupGenerator.Models.Lineups;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using Serilog.Core;
 using System;
 using System.Collections.Generic;
 using System.CommandLine;
@@ -42,7 +40,9 @@ namespace DraftKings.LineupGenerator
             var outputFormatOption = new Option<string>(new string[] { "--output-format", "-f" }, "[default=text] The console output format. One of (json | text)");
             var lineupCountOption = new Option<int>(new string[] { "--lineup-count", "-lc" }, "[default=5] The number of lineups to output for each generator (max is 100).");
             var giveMeOption = new Option<string>(new string[] { "--give-me", "-g" }, "The names of players to include in generated lineups (comma delimited)");
+            var excludePlayerOption = new Option<string>(new string[] { "--exclude-player", "-ep" }, "The names of players to exclude in generated lineups (comma delimited)");
             var giveMeCaptainOption = new Option<string>(new string[] { "--give-me-captain", "-gc" }, "(Showdown Only) The names of captain players to include in generated lineups (comma delimited)");
+            var excludeCaptainOption = new Option<string>(new string[] { "--exclude-captain", "-ec" }, "(Showdown Only) The names of captain players to exclude in generated lineups (comma delimited)");
 
             minFppgOption.SetDefaultValue(new LineupRequestModel(default).MinFppg);
             outputFormatOption.SetDefaultValue(new LineupRequestModel(default).OutputFormat);
@@ -69,7 +69,9 @@ namespace DraftKings.LineupGenerator
             rootCommand.AddOption(outputFormatOption);
             rootCommand.AddOption(lineupCountOption);
             rootCommand.AddOption(giveMeOption);
+            rootCommand.AddOption(excludePlayerOption);
             rootCommand.AddOption(giveMeCaptainOption);
+            rootCommand.AddOption(excludeCaptainOption);
 
             var modelBinder = new LineupRequestModelBinder(
                 contestIdOption,
@@ -81,7 +83,9 @@ namespace DraftKings.LineupGenerator
                 outputFormatOption,
                 lineupCountOption,
                 giveMeOption,
-                giveMeCaptainOption);
+                excludePlayerOption,
+                giveMeCaptainOption,
+                excludeCaptainOption);
 
             rootCommand.SetHandler(async request =>
             {
@@ -106,10 +110,12 @@ namespace DraftKings.LineupGenerator
                     {
                         if (key is 'q')
                         {
+                            Console.WriteLine();
                             CancellationTokenSource.Cancel();
                         }
                         else if (key is 'p')
                         {
+                            Console.WriteLine();
                             await lineupGeneratorService.LogProgressAsync(request, CancellationTokenSource.Token);
                         }
 
