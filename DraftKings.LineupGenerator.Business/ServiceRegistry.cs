@@ -10,6 +10,7 @@ using DraftKings.LineupGenerator.Caching.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using DraftKings.LineupGenerator.Business.Logging;
+using DraftKings.LineupGenerator.Business.Metrics;
 
 namespace DraftKings.LineupGenerator.Business
 {
@@ -19,6 +20,10 @@ namespace DraftKings.LineupGenerator.Business
         {
             // Add Logging
             services.AddLogging(x => x.AddSerilog(dispose: true));
+
+            // Add Metrics
+            services
+                .AddTransient<IMetricsService, MetricsService>();
 
             // Add Caching
             services
@@ -54,7 +59,7 @@ namespace DraftKings.LineupGenerator.Business
 
             // Add Lineup Loggers
             services
-                .AddScoped<IIncrementalLineupLogger, IncrementalLineupLogger>();
+                .AddTransient<IIncrementalLineupLogger, IncrementalLineupLogger>();
 
             return services;
         }
