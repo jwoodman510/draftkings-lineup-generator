@@ -17,6 +17,8 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 {
     public abstract class BaseLineupGenerator : ILineupGenerator
     {
+        protected abstract string Description { get; }
+
         protected readonly ILineupService LineupService;
         protected readonly IIncrementalLineupLogger IncrementalLogger;
         protected readonly ConcurrentDictionary<string, BaseLineupsBag> LineupsBags;
@@ -75,10 +77,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 
             var potentialLineups = LineupService.GetPotentialLineups(request, rules, draftables, eligiblePlayers);
 
-            foreach (var lineupsBag in LineupsBags.Values)
-            {
-                await IncrementalLogger.StartAsync(lineupsBag.Description, eligiblePlayers, cancellationToken);
-            }
+            await IncrementalLogger.StartAsync(Description, eligiblePlayers, cancellationToken);
 
             try
             {

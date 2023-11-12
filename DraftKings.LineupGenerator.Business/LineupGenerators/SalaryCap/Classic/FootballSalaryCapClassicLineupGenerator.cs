@@ -15,6 +15,8 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 {
     public class FootballSalaryCapClassicLineupGenerator : BaseLineupGenerator
     {
+        protected override string Description => "Salary Cap Classic (Football)";
+
         public FootballSalaryCapClassicLineupGenerator(
             IClassicLineupService classicLineupService,
             IIncrementalLineupLogger incrementalLogger)
