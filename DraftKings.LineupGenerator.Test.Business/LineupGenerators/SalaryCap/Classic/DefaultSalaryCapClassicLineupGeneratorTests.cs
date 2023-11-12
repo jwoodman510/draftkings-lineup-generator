@@ -22,7 +22,7 @@ namespace DraftKings.LineupGenerator.Test.Business
         {
             _generator = new DefaultSalaryCapClassicLineupGenerator(
                 new ClassicLineupService(),
-                new IncrementalLineupLogger(default));
+                new IncrementalLineupLogger(default, default));
         }
 
         [Theory]
