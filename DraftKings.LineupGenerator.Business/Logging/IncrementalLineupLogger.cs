@@ -37,7 +37,7 @@ namespace DraftKings.LineupGenerator.Business.Logging
             _action = $"Generator: {logger}";
             _actionStopwatch = Stopwatch.StartNew();
 
-            _metricsService.StartAction(_action);
+            _metricsService?.StartAction(_action);
 
             _logger?.LogInformation("Running Generator: {Generator} for {EligiblePlayerCount} players.", logger, players.Count);
 
@@ -63,7 +63,7 @@ namespace DraftKings.LineupGenerator.Business.Logging
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            _metricsService.EndAction(_action);
+            _metricsService?.EndAction(_action);
             _cancellationTokenSource?.Cancel();
 
             if (_consoleLoggerTask != null)
@@ -84,7 +84,7 @@ namespace DraftKings.LineupGenerator.Business.Logging
             {
                 _actionStopwatch.Stop();
 
-                _metricsService.LogAction($"{_action}: {metricsInterval}", _actionStopwatch.Elapsed);
+                _metricsService?.LogAction($"{_action}: {metricsInterval}", _actionStopwatch.Elapsed);
 
                 _actionStopwatch.Restart();
             }

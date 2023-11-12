@@ -11,23 +11,24 @@ using System.Linq;
 using System;
 using DraftKings.LineupGenerator.Business.Extensions;
 using DraftKings.LineupGenerator.Business.LinupBags;
+using System.Collections.Concurrent;
 
 namespace DraftKings.LineupGenerator.Business.LineupGenerators
 {
     public abstract class BaseLineupGenerator : ILineupGenerator
     {
-        protected readonly BaseLineupsBag LineupsBag;
         protected readonly ILineupService LineupService;
         protected readonly IIncrementalLineupLogger IncrementalLogger;
+        protected readonly ConcurrentDictionary<string, BaseLineupsBag> LineupsBags;
 
         protected BaseLineupGenerator(
-            BaseLineupsBag lineupsBag,
             ILineupService lineupService,
-            IIncrementalLineupLogger incrementalLogger)
+            IIncrementalLineupLogger incrementalLogger,
+            params BaseLineupsBag[] lineupsBags)
         {
-            LineupsBag = lineupsBag;
             LineupService = lineupService;
             IncrementalLogger = incrementalLogger;
+            LineupsBags = new ConcurrentDictionary<string, BaseLineupsBag>(lineupsBags.Select(x => new KeyValuePair<string, BaseLineupsBag>(x.Description, x)));
         }
 
         public abstract bool CanGenerate(ContestModel contest, RulesModel rules);
@@ -54,29 +55,30 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 
         }
 
-        public LineupsModel GetCurrentLineups(LineupRequestModel request) => new LineupsModel
+        public IEnumerable<LineupsModel> GetCurrentLineups(LineupRequestModel request) => LineupsBags.Select(lineupsBag => new LineupsModel
         {
-            Description = LineupsBag.Description,
-            Lineups = LineupsBag.GetBestLineups(request.LineupCount).ToList()
-        };
+            Description = lineupsBag.Key,
+            Lineups = lineupsBag.Value.GetBestLineups(request.LineupCount).ToList()
+        });
 
-        public async Task<LineupsModel> GenerateAsync(LineupRequestModel request, ContestModel contest, RulesModel rules, DraftablesModel draftables, CancellationToken cancellationToken)
+        public async Task<IEnumerable<LineupsModel>> GenerateAsync(LineupRequestModel request, ContestModel contest, RulesModel rules, DraftablesModel draftables, CancellationToken cancellationToken)
         {
-            var result = new LineupsModel
+            if (LineupsBags.Count == 0 || draftables.Draftables.All(x => x.Salary == default))
             {
-                Description = LineupsBag.Description
-            };
-
-            if (draftables.Draftables.All(x => x.Salary == default))
-            {
-                return result;
+                return LineupsBags.Select(x => new LineupsModel
+                {
+                    Description = x.Key
+                });
             }
 
             var eligiblePlayers = GetEligiblePlayers(request, rules, draftables);
 
             var potentialLineups = LineupService.GetPotentialLineups(request, rules, draftables, eligiblePlayers);
 
-            await IncrementalLogger.StartAsync(LineupsBag.Description, eligiblePlayers, cancellationToken);
+            foreach (var lineupsBag in LineupsBags.Values)
+            {
+                await IncrementalLogger.StartAsync(lineupsBag.Description, eligiblePlayers, cancellationToken);
+            }
 
             try
             {
@@ -106,7 +108,10 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 
                     IncrementalLogger.IncrementValidLineups();
 
-                    LineupsBag.UpdateLineups(contest, lineup, request.LineupCount);
+                    foreach (var lineupsBag in LineupsBags.Values)
+                    {
+                        lineupsBag.UpdateLineups(contest, lineup, request.LineupCount);
+                    }
                 });
             }
             catch (OperationCanceledException) { }
@@ -115,9 +120,11 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
                 await IncrementalLogger.StopAsync(cancellationToken);
             }
 
-            result.Lineups.AddRange(LineupsBag.GetBestLineups(request.LineupCount));
-
-            return result;
+            return LineupsBags.Select(x => new LineupsModel
+            {
+                Description = x.Key,
+                Lineups = x.Value.GetBestLineups(request.LineupCount).ToList()
+            });
         }
     }
 }
