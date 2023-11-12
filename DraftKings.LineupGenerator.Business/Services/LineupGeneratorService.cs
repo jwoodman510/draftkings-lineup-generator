@@ -30,21 +30,6 @@ namespace DraftKings.LineupGenerator.Business.Services
             _lineupGenerators = lineupGenerators;
         }
 
-        private class Tester : Uri
-        {
-            public string Value { get; }
-
-            public Tester(string value) : base("https://localhost")
-            {
-                Value = value;
-            }
-
-            public override string ToString()
-            {
-                return Value;
-            }
-        }
-
         public async Task<List<LineupsModel>> GetAsync(LineupRequestModel request, CancellationToken cancellationToken)
         {
             var formatter = _formatters.FirstOrDefault(x => x.Type.Equals(request.OutputFormat, StringComparison.OrdinalIgnoreCase))
@@ -77,7 +62,7 @@ namespace DraftKings.LineupGenerator.Business.Services
 
             var lineups = await Task.WhenAll(tasks);
 
-            return lineups.ToList();
+            return lineups.SelectMany(x => x).ToList();
         }
 
         public async Task LogProgressAsync(LineupRequestModel request, CancellationToken cancellationToken)
@@ -87,6 +72,7 @@ namespace DraftKings.LineupGenerator.Business.Services
 
             var lineupsModels = _lineupGenerators
                 .Select(x => x.GetCurrentLineups(request))
+                .SelectMany(x => x)
                 .Where(x => x?.Lineups?.Count > 0)
                 .ToList();
 

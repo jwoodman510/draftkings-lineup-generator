@@ -11,23 +11,26 @@ using System.Linq;
 using System;
 using DraftKings.LineupGenerator.Business.Extensions;
 using DraftKings.LineupGenerator.Business.LinupBags;
+using System.Collections.Concurrent;
 
 namespace DraftKings.LineupGenerator.Business.LineupGenerators
 {
     public abstract class BaseLineupGenerator : ILineupGenerator
     {
-        protected readonly BaseLineupsBag LineupsBag;
+        protected abstract string Description { get; }
+
         protected readonly ILineupService LineupService;
         protected readonly IIncrementalLineupLogger IncrementalLogger;
+        protected readonly ConcurrentDictionary<string, BaseLineupsBag> LineupsBags;
 
         protected BaseLineupGenerator(
-            BaseLineupsBag lineupsBag,
             ILineupService lineupService,
-            IIncrementalLineupLogger incrementalLogger)
+            IIncrementalLineupLogger incrementalLogger,
+            params BaseLineupsBag[] lineupsBags)
         {
-            LineupsBag = lineupsBag;
             LineupService = lineupService;
             IncrementalLogger = incrementalLogger;
+            LineupsBags = new ConcurrentDictionary<string, BaseLineupsBag>(lineupsBags.Select(x => new KeyValuePair<string, BaseLineupsBag>(x.Description, x)));
         }
 
         public abstract bool CanGenerate(ContestModel contest, RulesModel rules);
@@ -49,34 +52,27 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
             return true;
         }
 
-        protected virtual void ModifyLineup(LineupRequestModel request, ContestModel contest, RulesModel rules, DraftablesModel draftables, LineupModel lineup)
+        public IEnumerable<LineupsModel> GetCurrentLineups(LineupRequestModel request) => LineupsBags.Select(lineupsBag => new LineupsModel
         {
+            Description = lineupsBag.Key,
+            Lineups = lineupsBag.Value.GetBestLineups(request.LineupCount).ToList()
+        });
 
-        }
-
-        public LineupsModel GetCurrentLineups(LineupRequestModel request) => new LineupsModel
+        public async Task<IEnumerable<LineupsModel>> GenerateAsync(LineupRequestModel request, ContestModel contest, RulesModel rules, DraftablesModel draftables, CancellationToken cancellationToken)
         {
-            Description = LineupsBag.Description,
-            Lineups = LineupsBag.GetBestLineups(request.LineupCount).ToList()
-        };
-
-        public async Task<LineupsModel> GenerateAsync(LineupRequestModel request, ContestModel contest, RulesModel rules, DraftablesModel draftables, CancellationToken cancellationToken)
-        {
-            var result = new LineupsModel
+            if (LineupsBags.Count == 0 || draftables.Draftables.All(x => x.Salary == default))
             {
-                Description = LineupsBag.Description
-            };
-
-            if (draftables.Draftables.All(x => x.Salary == default))
-            {
-                return result;
+                return LineupsBags.Select(x => new LineupsModel
+                {
+                    Description = x.Key
+                });
             }
 
             var eligiblePlayers = GetEligiblePlayers(request, rules, draftables);
 
             var potentialLineups = LineupService.GetPotentialLineups(request, rules, draftables, eligiblePlayers);
 
-            await IncrementalLogger.StartAsync(LineupsBag.Description, eligiblePlayers, cancellationToken);
+            await IncrementalLogger.StartAsync(Description, eligiblePlayers, cancellationToken);
 
             try
             {
@@ -102,11 +98,12 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
                         return;
                     }
 
-                    ModifyLineup(request, contest, rules, draftables, lineup);
-
                     IncrementalLogger.IncrementValidLineups();
 
-                    LineupsBag.UpdateLineups(lineup, request.LineupCount);
+                    foreach (var lineupsBag in LineupsBags.Values)
+                    {
+                        lineupsBag.UpdateLineups(contest, lineup, request.LineupCount);
+                    }
                 });
             }
             catch (OperationCanceledException) { }
@@ -115,9 +112,11 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
                 await IncrementalLogger.StopAsync(cancellationToken);
             }
 
-            result.Lineups.AddRange(LineupsBag.GetBestLineups(request.LineupCount));
-
-            return result;
+            return LineupsBags.Select(x => new LineupsModel
+            {
+                Description = x.Key,
+                Lineups = x.Value.GetBestLineups(request.LineupCount).ToList()
+            });
         }
     }
 }

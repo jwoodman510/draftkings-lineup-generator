@@ -43,14 +43,12 @@ namespace DraftKings.LineupGenerator.Business
             services
                 .AddTransient<IClassicLineupService, ClassicLineupService>()
                 .AddTransient<IShowdownLineupService, ShowdownLineupService>()
-                .AddScoped<ILineupGeneratorService, LineupGeneratorService>();
+                .AddTransient<ILineupGeneratorService, LineupGeneratorService>();
 
             // Add Lineup Generators
             services
-                .AddScoped<ILineupGenerator, DefaultSalaryCapClassicLineupGenerator>()
-                .AddScoped<ILineupGenerator, WeightedSalaryCapClassicLineupGenerator>()
-                .AddScoped<ILineupGenerator, DefaultSalaryCapShowdownLineupGenerator>()
-                .AddScoped<ILineupGenerator, WeightedSalaryCapShowdownLineupGenerator>();
+                .AddTransient<ILineupGenerator, FootballSalaryCapClassicLineupGenerator>()
+                .AddTransient<ILineupGenerator, FootballSalaryCapShowdownLineupGenerator>();
 
             // Add Formatters
             services
