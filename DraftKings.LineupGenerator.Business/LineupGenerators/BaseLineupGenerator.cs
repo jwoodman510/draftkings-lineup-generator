@@ -52,11 +52,6 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
             return true;
         }
 
-        protected virtual void ModifyLineup(LineupRequestModel request, ContestModel contest, RulesModel rules, DraftablesModel draftables, LineupModel lineup)
-        {
-
-        }
-
         public IEnumerable<LineupsModel> GetCurrentLineups(LineupRequestModel request) => LineupsBags.Select(lineupsBag => new LineupsModel
         {
             Description = lineupsBag.Key,
@@ -102,8 +97,6 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
                     {
                         return;
                     }
-
-                    ModifyLineup(request, contest, rules, draftables, lineup);
 
                     IncrementalLogger.IncrementValidLineups();
 
