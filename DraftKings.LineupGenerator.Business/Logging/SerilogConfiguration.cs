@@ -6,6 +6,8 @@ namespace DraftKings.LineupGenerator.Business.Logging
 {
     public static class SerilogConfiguration
     {
+        private const string MetricsNamespace = "DraftKings.LineupGenerator.Business.Metrics";
+
         public static LoggerConfiguration Build()
         {
             var configuration = new LoggerConfiguration();
@@ -18,11 +20,37 @@ namespace DraftKings.LineupGenerator.Business.Logging
 
         private static void AddFileSink(LoggerConfiguration configuration)
         {
-            configuration.WriteTo.Async(wt => wt.File(
-                "./logs/log.txt",
-                rollingInterval: RollingInterval.Day,
-                retainedFileCountLimit: 1,
-                outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{correlationId}] [{Level:u3}] {Message:lj}{NewLine}{Exception}"));
+            configuration.WriteTo.Logger(subLogger =>
+            {
+                subLogger.Filter.ByIncludingOnly(logEvent =>
+                {
+                    return logEvent.Properties.TryGetValue("SourceContext", out var logEventProperty) &&
+                        logEventProperty is ScalarValue scalarValue &&
+                        scalarValue.Value.ToString().StartsWith(MetricsNamespace);
+                });
+
+                subLogger.WriteTo.Async(wt => wt.File(
+                    "./logs/metrics.txt",
+                    rollingInterval: RollingInterval.Day,
+                    retainedFileCountLimit: 1,
+                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{correlationId}] [{Level:u3}] {Message:lj}{NewLine}{Exception}"));
+            });
+
+            configuration.WriteTo.Logger(subLogger =>
+            {
+                subLogger.Filter.ByExcluding(logEvent =>
+                {
+                    return logEvent.Properties.TryGetValue("SourceContext", out var logEventProperty) &&
+                        logEventProperty is ScalarValue scalarValue &&
+                        scalarValue.Value.ToString().StartsWith(MetricsNamespace);
+                });
+
+                subLogger.WriteTo.Async(wt => wt.File(
+                    "./logs/log.txt",
+                    rollingInterval: RollingInterval.Day,
+                    retainedFileCountLimit: 1,
+                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{correlationId}] [{Level:u3}] {Message:lj}{NewLine}{Exception}"));
+            });
         }
 
         private static void AddConsoleSink(LoggerConfiguration configuration)
@@ -33,7 +61,8 @@ namespace DraftKings.LineupGenerator.Business.Logging
                 {
                     return logEvent.Properties.TryGetValue("SourceContext", out var logEventProperty) &&
                         logEventProperty is ScalarValue scalarValue &&
-                        scalarValue.Value.ToString().StartsWith("DraftKings");
+                        scalarValue.Value.ToString().StartsWith("DraftKings") &&
+                        !scalarValue.Value.ToString().StartsWith(MetricsNamespace);
                 });
 
                 subLogger.WriteTo.Async(sink =>
