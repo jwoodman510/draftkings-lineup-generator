@@ -1,4 +1,5 @@
-﻿using DraftKings.LineupGenerator.Models.Lineups;
+﻿using DraftKings.LineupGenerator.Models.Contests;
+using DraftKings.LineupGenerator.Models.Lineups;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace DraftKings.LineupGenerator.Business.LinupBags
 
         public abstract IEnumerable<LineupModel> GetBestLineups(int count);
 
-        public abstract void UpdateLineups(LineupModel lineup, int max);
+        public abstract void UpdateLineups(ContestModel contest, LineupModel lineup, int max);
 
         public static string GetUniqueLineupId(LineupModel lineup)
         {

@@ -41,5 +41,19 @@
             RosterPosition = rosterPosition;
             OpponentRank = opponentRank;
         }
+
+        public DraftableDisplayModel WithWeightedProjectedFppg(decimal projectedFppg)
+        {
+            return new DraftableDisplayModel(
+                Id,
+                Name,
+                FirstName,
+                LastName,
+                Fppg,
+                Salary,
+                RosterPosition,
+                projectedFppg,
+                OpponentRank);
+        }
     }
 }

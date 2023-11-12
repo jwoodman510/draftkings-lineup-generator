@@ -106,7 +106,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 
                     IncrementalLogger.IncrementValidLineups();
 
-                    LineupsBag.UpdateLineups(lineup, request.LineupCount);
+                    LineupsBag.UpdateLineups(contest, lineup, request.LineupCount);
                 });
             }
             catch (OperationCanceledException) { }

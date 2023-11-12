@@ -1,4 +1,5 @@
 ﻿using DraftKings.LineupGenerator.Business.LinupBags;
+using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Lineups;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
             return bestLineups;
         }
 
-        public override void UpdateLineups(LineupModel lineup, int max)
+        public override void UpdateLineups(ContestModel contest, LineupModel lineup, int max)
         {
             if (lineup.ProjectedFppg < MinKey)
             {
