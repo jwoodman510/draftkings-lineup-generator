@@ -1,7 +1,9 @@
 ﻿using DraftKings.LineupGenerator.Business.Constants;
 using DraftKings.LineupGenerator.Business.Filters;
 using DraftKings.LineupGenerator.Business.Interfaces;
+using DraftKings.LineupGenerator.Business.LineupBags;
 using DraftKings.LineupGenerator.Business.LinupBags;
+using DraftKings.LineupGenerator.Business.Services;
 using DraftKings.LineupGenerator.Constants;
 using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Draftables;
@@ -12,13 +14,16 @@ using System.Linq;
 
 namespace DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic
 {
-    public abstract class BaseSalaryCapShowdownLineupGenerator : BaseLineupGenerator
+    public class FootballSalaryCapShowdownLineupGenerator : BaseLineupGenerator
     {
-        protected BaseSalaryCapShowdownLineupGenerator(
-            BaseLineupsBag lineupsBag,
+        protected override string Description => "Salary Cap Showdown (Football)";
+
+        public FootballSalaryCapShowdownLineupGenerator(
             IShowdownLineupService showdownLineupService,
             IIncrementalLineupLogger incrementalLogger)
-            : base(lineupsBag, showdownLineupService, incrementalLogger)
+            : base(showdownLineupService, incrementalLogger,
+                  new ProjectedPointsLineupsBag("FPPG"),
+                  new FootballWeightedProjectedPointsLineupsBag("Opponent Weighted FPPG"))
         {
 
         }
