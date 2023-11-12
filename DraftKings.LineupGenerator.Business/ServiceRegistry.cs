@@ -23,7 +23,7 @@ namespace DraftKings.LineupGenerator.Business
 
             // Add Metrics
             services
-                .AddScoped<IMetricsService, MetricsService>();
+                .AddTransient<IMetricsService, MetricsService>();
 
             // Add Caching
             services
@@ -59,7 +59,7 @@ namespace DraftKings.LineupGenerator.Business
 
             // Add Lineup Loggers
             services
-                .AddScoped<IIncrementalLineupLogger, IncrementalLineupLogger>();
+                .AddTransient<IIncrementalLineupLogger, IncrementalLineupLogger>();
 
             return services;
         }
