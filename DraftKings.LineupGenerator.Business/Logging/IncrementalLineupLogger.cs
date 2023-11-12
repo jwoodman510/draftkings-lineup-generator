@@ -95,8 +95,9 @@ namespace DraftKings.LineupGenerator.Business.Logging
         private Task LogIterationAsync(string logger, CancellationToken _)
         {
             var now = TimeOnly.FromDateTime(DateTime.Now);
+            var timespan = new TimeSpan(now.Hour, now.Minute, now.Second);
 
-            _logger?.LogInformation($"[{{Time}}] | {{Generator}} | Iterations: {{IterationCount}} | Valid Lineups: {{ValidLineupCount}}", now, logger, _iterationCount, _validLineupCount);
+            _logger?.LogInformation($"[{{Time}}] | {{Generator}} | Iterations: {{IterationCount}} | Valid Lineups: {{ValidLineupCount}}", timespan, logger, _iterationCount, _validLineupCount);
 
             return Task.CompletedTask;
         }
