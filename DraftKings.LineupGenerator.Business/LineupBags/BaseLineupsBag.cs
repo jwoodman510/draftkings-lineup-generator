@@ -15,8 +15,6 @@ namespace DraftKings.LineupGenerator.Business.LinupBags
             Description = description;
         }
 
-        public abstract LineupModel GetBestLineup();
-
         public abstract IEnumerable<LineupModel> GetBestLineups(int count);
 
         public abstract void UpdateLineups(ContestModel contest, LineupModel lineup, int max);

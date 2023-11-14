@@ -2,7 +2,6 @@
 using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
-using System;
 using System.Linq;
 
 namespace DraftKings.LineupGenerator.Business.LineupBags
@@ -21,7 +20,7 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
             base.UpdateLineups(contest, updatedLineup, max);
         }
 
-        private LineupModel GetUpdatedLineup(ContestModel contest, LineupModel lineupModel) => new LineupModel
+        private static LineupModel GetUpdatedLineup(ContestModel contest, LineupModel lineupModel) => new LineupModel
         {
             Description = lineupModel.Description,
             Draftables = lineupModel.Draftables.Select(player =>
