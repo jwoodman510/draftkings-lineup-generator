@@ -41,11 +41,11 @@ namespace DraftKings.LineupGenerator.Models.Draftables
                 DisplayName,
                 FirstName,
                 LastName,
-                this.GetFppg(draftables.DraftStats),
+                Fppg,
                 Salary,
-                this.GetRosterPosition(rules),
-                this.GetProjectedSalary(draftables, rules),
-                this.GetOpponentRank(draftables.DraftStats));
+                RosterPosition,
+                ProjectedSalary,
+                OpponentRank);
         }
     }
 }
