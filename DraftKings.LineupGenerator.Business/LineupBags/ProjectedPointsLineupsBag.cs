@@ -34,9 +34,10 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
         public override void UpdateLineups(ContestModel contest, LineupModel lineup, int max)
         {
             var keys = Keys;
-            var minKey = keys.Count == 0 ? 0 : keys.Min();
+            var keyCount = keys.Count;
+            var minKey = keyCount == 0 ? 0 : keys.Min();
 
-            if (lineup.ProjectedFppg < minKey)
+            if (lineup.ProjectedFppg < minKey && keyCount >= max)
             {
                 return;
             }
@@ -45,7 +46,7 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
 
             lineups.TryAdd(GetUniqueLineupId(lineup), lineup);
 
-            if (keys.Count + 1 > max)
+            if (++keyCount > max)
             {
                 TryRemove(minKey, out _);
             }
