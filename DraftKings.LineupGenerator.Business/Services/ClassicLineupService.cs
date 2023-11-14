@@ -5,6 +5,7 @@ using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 namespace DraftKings.LineupGenerator.Business.Services
 {
@@ -24,7 +25,7 @@ namespace DraftKings.LineupGenerator.Business.Services
             return GetAllPotentialLineups(rules, eligiblePlayers);
         }
 
-        public IEnumerable<IEnumerable<T>> GetPotentialLineupsWithPlayerRequests<T>(
+        public static IEnumerable<IEnumerable<T>> GetPotentialLineupsWithPlayerRequests<T>(
             HashSet<string> playerRequests,
             RulesModel rules,
             List<T> eligiblePlayers) where T : DraftableModel
@@ -71,12 +72,12 @@ namespace DraftKings.LineupGenerator.Business.Services
 
                 permutations = permutations
                     .CombinePermutations(rosterSlotPermutations)
-                    .Where(x => x.DistinctBy(y => y.PlayerId).SequenceEqual(x));
+                    .Where(x => !HasDuplicatePlayer(x));
             }
 
             permutations = permutations
                     .CombinePermutations(new[] { singleSlotRequestedPlayers })
-                    .Where(x => x.DistinctBy(y => y.PlayerId).SequenceEqual(x));
+                    .Where(x => !HasDuplicatePlayer(x));
 
             return permutations;
         }
@@ -101,7 +102,7 @@ namespace DraftKings.LineupGenerator.Business.Services
 
                 permutations = permutations
                     .CombinePermutations(rosterSlotPermutations)
-                    .Where(x => x.DistinctBy(y => y.PlayerId).SequenceEqual(x));
+                    .Where(x => !HasDuplicatePlayer(x));
             }
 
             return permutations;
@@ -118,8 +119,23 @@ namespace DraftKings.LineupGenerator.Business.Services
             {
                 return rosterSlotPermutation
                     .CombinePermutations(aggregate)
-                    .Where(x => x.DistinctBy(y => y.PlayerId).SequenceEqual(x));
+                    .Where(x => !HasDuplicatePlayer(x));
             });
+        }
+
+        private static bool HasDuplicatePlayer<T>(IEnumerable<T> players) where T : DraftableModel
+        {
+            var hashset = new HashSet<int>();
+
+            foreach (var player in players)
+            {
+                if (!hashset.Add(player.PlayerId))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
