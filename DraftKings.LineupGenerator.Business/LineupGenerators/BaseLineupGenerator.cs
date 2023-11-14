@@ -85,12 +85,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
                 {
                     IncrementalLogger.IncrementIterations();
 
-                    var lineup = new LineupModel
-                    {
-                        Draftables = potentialLineup
-                            .Select(player => player.ToDisplayModel(rules, draftables))
-                            .ToList()
-                    };
+                    var lineup = new LineupModel(potentialLineup.Select(player => player.ToDisplayModel(rules, draftables)));
 
                     if (!IsValidLineup(request, rules, draftables, lineup))
                     {

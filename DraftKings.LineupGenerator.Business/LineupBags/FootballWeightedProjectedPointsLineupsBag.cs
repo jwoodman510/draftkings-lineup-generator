@@ -20,10 +20,9 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
             base.UpdateLineups(contest, updatedLineup, max);
         }
 
-        private static LineupModel GetUpdatedLineup(ContestModel contest, LineupModel lineupModel) => new LineupModel
+        private static LineupModel GetUpdatedLineup(ContestModel contest, LineupModel lineupModel)
         {
-            Description = lineupModel.Description,
-            Draftables = lineupModel.Draftables.Select(player =>
+            var draftables = lineupModel.Draftables.Select(player =>
             {
                 if (player.OpponentRank <= 0)
                 {
@@ -41,8 +40,10 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
                     default:
                         return player;
                 }
-            }).ToList()
-        };
+            });
+
+            return new LineupModel(draftables);
+        }
 
         private static DraftableDisplayModel ModifyNflPlayer(DraftableDisplayModel player)
         {

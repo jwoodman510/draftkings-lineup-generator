@@ -67,14 +67,10 @@ namespace DraftKings.LineupGenerator.Business.OutputFormatters
 
         private static IEnumerable<string> GetRecords(LineupModel lineup)
         {
-            var records = new List<string>();
-
-            if (!string.IsNullOrEmpty(lineup.Description))
+            var records = new List<string>
             {
-                records.Add($"Generator: {lineup.Description}");
-            }
-
-            records.Add($"Projected Points: {lineup.Draftables.Sum(x => x.ProjectedFppg)}");
+                $"Projected Points: {lineup.ProjectedFppg}"
+            };
 
             lineup.Draftables.Sort(new DraftableRosterPositionComparer());
 
