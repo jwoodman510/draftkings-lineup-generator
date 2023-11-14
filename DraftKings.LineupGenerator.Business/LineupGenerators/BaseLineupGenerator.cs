@@ -9,13 +9,12 @@ using System.Collections.Generic;
 using DraftKings.LineupGenerator.Business.Filters;
 using System.Linq;
 using System;
-using DraftKings.LineupGenerator.Business.Extensions;
 using DraftKings.LineupGenerator.Business.LinupBags;
 using System.Collections.Concurrent;
 
 namespace DraftKings.LineupGenerator.Business.LineupGenerators
 {
-    public abstract class BaseLineupGenerator : ILineupGenerator
+    public abstract class BaseLineupGenerator<TDraftableModel> : ILineupGenerator where TDraftableModel : DraftableModel
     {
         protected abstract string Description { get; }
 
@@ -35,7 +34,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 
         public abstract bool CanGenerate(ContestModel contest, RulesModel rules);
 
-        protected abstract List<DraftableModel> GetEligiblePlayers(LineupRequestModel request, RulesModel rules, DraftablesModel draftables);
+        protected abstract List<TDraftableModel> GetEligiblePlayers(LineupRequestModel request, RulesModel rules, DraftablesModel draftables);
 
         protected virtual bool IsValidLineup(LineupRequestModel request, RulesModel rules, DraftablesModel draftables, LineupModel lineup)
         {
@@ -86,12 +85,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
                 {
                     IncrementalLogger.IncrementIterations();
 
-                    var lineup = new LineupModel
-                    {
-                        Draftables = potentialLineup
-                            .Select(player => player.ToDisplayModel(rules, draftables))
-                            .ToList()
-                    };
+                    var lineup = new LineupModel(potentialLineup.Select(player => player.ToDisplayModel(rules, draftables)));
 
                     if (!IsValidLineup(request, rules, draftables, lineup))
                     {
@@ -100,9 +94,9 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 
                     IncrementalLogger.IncrementValidLineups();
 
-                    foreach (var lineupsBag in LineupsBags.Values)
+                    foreach (var lineupsBag in LineupsBags)
                     {
-                        lineupsBag.UpdateLineups(contest, lineup, request.LineupCount);
+                        lineupsBag.Value.UpdateLineups(contest, lineup, request.LineupCount);
                     }
                 });
             }

@@ -1,4 +1,4 @@
-﻿using DraftKings.LineupGenerator.Business.Constants;
+﻿using DraftKings.LineupGenerator.Models.Constants;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;

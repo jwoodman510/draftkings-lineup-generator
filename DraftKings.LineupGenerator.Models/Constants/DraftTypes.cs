@@ -1,4 +1,4 @@
-﻿namespace DraftKings.LineupGenerator.Constants
+﻿namespace DraftKings.LineupGenerator.Models.Constants
 {
     public static class DraftTypes
     {
