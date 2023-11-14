@@ -7,10 +7,10 @@ namespace DraftKings.LineupGenerator.Business.Interfaces
 {
     public interface ILineupService
     {
-        IEnumerable<IEnumerable<DraftableModel>> GetPotentialLineups(
+        IEnumerable<IEnumerable<T>> GetPotentialLineups<T>(
             LineupRequestModel request,
             RulesModel rules,
             DraftablesModel draftables,
-            List<DraftableModel> eligiblePlayers);
+            List<T> eligiblePlayers) where T : DraftableModel;
     }
 }
