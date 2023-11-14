@@ -1,9 +1,9 @@
-﻿using DraftKings.LineupGenerator.Business.Constants;
+﻿using DraftKings.LineupGenerator.Models.Constants;
 using DraftKings.LineupGenerator.Models.Draftables;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DraftKings.LineupGenerator.Business.Filters
+namespace DraftKings.LineupGenerator.Models.Filters
 {
     public static class StatusFilter
     {

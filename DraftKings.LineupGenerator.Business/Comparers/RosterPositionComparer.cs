@@ -1,4 +1,4 @@
-﻿using DraftKings.LineupGenerator.Business.Constants;
+﻿using DraftKings.LineupGenerator.Models.Constants;
 using System.Collections.Generic;
 
 namespace DraftKings.LineupGenerator.Business.Comparers

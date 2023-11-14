@@ -1,10 +1,10 @@
-﻿using DraftKings.LineupGenerator.Business.Constants;
+﻿using DraftKings.LineupGenerator.Models.Constants;
 using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Rules;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DraftKings.LineupGenerator.Business.Extensions
+namespace DraftKings.LineupGenerator.Models.Extensions
 {
     public static class DraftableModelExtensions
     {
@@ -53,20 +53,6 @@ namespace DraftKings.LineupGenerator.Business.Extensions
             return captainSlot != null && player.RosterSlotId == captainSlot.RosterSlot.Id
                 ? projectedFppg * 1.5m
                 : projectedFppg;
-        }
-
-        public static DraftableDisplayModel ToDisplayModel(this DraftableModel player, RulesModel rules, DraftablesModel draftables)
-        {
-            return new DraftableDisplayModel(
-                player.PlayerId,
-                player.DisplayName,
-                player.FirstName,
-                player.LastName,
-                player.GetFppg(draftables.DraftStats),
-                player.Salary,
-                player.GetRosterPosition(rules),
-                player.GetProjectedSalary(draftables, rules),
-                player.GetOpponentRank(draftables.DraftStats));
         }
     }
 }

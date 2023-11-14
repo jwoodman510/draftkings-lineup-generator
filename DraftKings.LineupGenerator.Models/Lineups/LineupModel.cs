@@ -6,14 +6,24 @@ namespace DraftKings.LineupGenerator.Models.Lineups
 {
     public class LineupModel
     {
-        public string Description { get; set; }
+        public decimal Salary { get; }
 
-        public decimal Salary => Draftables.Sum(x => x.Salary);
+        public decimal Fppg { get; }
 
-        public decimal Fppg => Draftables.Sum(x => x.Fppg);
+        public decimal ProjectedFppg { get; }
 
-        public decimal ProjectedFppg => Draftables.Sum(x => x.ProjectedFppg);
+        public List<DraftableDisplayModel> Draftables { get; }
 
-        public List<DraftableDisplayModel> Draftables { get; set; }
+        public LineupModel(IEnumerable<DraftableDisplayModel> draftables)
+        {
+            Draftables = draftables.ToList();
+
+            foreach (var draftable in draftables)
+            {
+                Salary += draftable.Salary;
+                Fppg += draftable.Fppg;
+                ProjectedFppg += draftable.ProjectedFppg;
+            }
+        }
     }
 }

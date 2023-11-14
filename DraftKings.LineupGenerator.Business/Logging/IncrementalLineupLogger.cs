@@ -1,5 +1,4 @@
 ﻿using DraftKings.LineupGenerator.Business.Interfaces;
-using DraftKings.LineupGenerator.Business.Metrics;
 using DraftKings.LineupGenerator.Models.Draftables;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
 
 namespace DraftKings.LineupGenerator.Business.Logging
 {
@@ -32,7 +30,7 @@ namespace DraftKings.LineupGenerator.Business.Logging
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
-        public Task StartAsync(string logger, List<DraftableModel> players, CancellationToken cancellationToken)
+        public Task StartAsync<T>(string logger, List<T> players, CancellationToken cancellationToken) where T : DraftableModel
         {
             _action = $"Generator: {logger}";
             _actionStopwatch = Stopwatch.StartNew();
@@ -76,9 +74,7 @@ namespace DraftKings.LineupGenerator.Business.Logging
         {
             const int metricsInterval = 1000000;
 
-            Interlocked.Add(ref _iterationCount, 1);
-
-            var iterations = Interlocked.Read(ref _iterationCount);
+            var iterations = Interlocked.Increment(ref _iterationCount);
 
             if (iterations >= metricsInterval && iterations % metricsInterval == 0)
             {
@@ -90,7 +86,7 @@ namespace DraftKings.LineupGenerator.Business.Logging
             }
         }
 
-        public void IncrementValidLineups() => Interlocked.Add(ref _validLineupCount, 1);
+        public void IncrementValidLineups() => Interlocked.Increment(ref _validLineupCount);
 
         private Task LogIterationAsync(string logger, CancellationToken _)
         {
