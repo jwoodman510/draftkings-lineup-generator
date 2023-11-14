@@ -99,9 +99,9 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
 
                     IncrementalLogger.IncrementValidLineups();
 
-                    foreach (var lineupsBag in LineupsBags.Values)
+                    foreach (var lineupsBag in LineupsBags)
                     {
-                        lineupsBag.UpdateLineups(contest, lineup, request.LineupCount);
+                        lineupsBag.Value.UpdateLineups(contest, lineup, request.LineupCount);
                     }
                 });
             }

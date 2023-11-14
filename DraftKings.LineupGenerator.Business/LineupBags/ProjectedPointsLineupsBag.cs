@@ -33,7 +33,7 @@ namespace DraftKings.LineupGenerator.Business.LineupBags
 
         public override void UpdateLineups(ContestModel contest, LineupModel lineup, int max)
         {
-            var keys = Keys;
+            var keys = this.Select(x => x.Key).ToList();
             var keyCount = keys.Count;
             var minKey = keyCount == 0 ? 0 : keys.Min();
 
