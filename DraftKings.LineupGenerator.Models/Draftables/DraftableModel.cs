@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using DraftKings.LineupGenerator.Models.Extensions;
+using DraftKings.LineupGenerator.Models.Rules;
+using System.Collections.Generic;
 
 namespace DraftKings.LineupGenerator.Models.Draftables
 {
@@ -27,5 +29,19 @@ namespace DraftKings.LineupGenerator.Models.Draftables
         public string LastName { get; set; }
 
         public List<DraftStatAttributeModel> DraftStatAttributes { get; set; }
+
+        public virtual DraftableDisplayModel ToDisplayModel(RulesModel rules, DraftablesModel draftables)
+        {
+            return new DraftableDisplayModel(
+                PlayerId,
+                DisplayName,
+                FirstName,
+                LastName,
+                this.GetFppg(draftables.DraftStats),
+                Salary,
+                this.GetRosterPosition(rules),
+                this.GetProjectedSalary(draftables, rules),
+                this.GetOpponentRank(draftables.DraftStats));
+        }
     }
 }

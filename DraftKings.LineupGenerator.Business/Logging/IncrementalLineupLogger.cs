@@ -1,5 +1,4 @@
 ﻿using DraftKings.LineupGenerator.Business.Interfaces;
-using DraftKings.LineupGenerator.Business.Metrics;
 using DraftKings.LineupGenerator.Models.Draftables;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
 
 namespace DraftKings.LineupGenerator.Business.Logging
 {
@@ -32,7 +30,7 @@ namespace DraftKings.LineupGenerator.Business.Logging
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
-        public Task StartAsync(string logger, List<DraftableModel> players, CancellationToken cancellationToken)
+        public Task StartAsync<T>(string logger, List<T> players, CancellationToken cancellationToken) where T : DraftableModel
         {
             _action = $"Generator: {logger}";
             _actionStopwatch = Stopwatch.StartNew();

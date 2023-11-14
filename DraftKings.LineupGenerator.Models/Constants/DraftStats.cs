@@ -1,4 +1,4 @@
-﻿namespace DraftKings.LineupGenerator.Business.Constants
+﻿namespace DraftKings.LineupGenerator.Models.Constants
 {
     public static class DraftStats
     {

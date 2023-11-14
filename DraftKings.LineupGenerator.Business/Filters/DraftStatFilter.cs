@@ -1,5 +1,5 @@
-﻿using DraftKings.LineupGenerator.Business.Extensions;
-using DraftKings.LineupGenerator.Models.Draftables;
+﻿using DraftKings.LineupGenerator.Models.Draftables;
+using DraftKings.LineupGenerator.Models.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 

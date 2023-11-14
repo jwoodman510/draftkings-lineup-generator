@@ -1,8 +1,7 @@
-using DraftKings.LineupGenerator.Business.Constants;
 using DraftKings.LineupGenerator.Business.LineupGenerators.SalaryCap.Classic;
 using DraftKings.LineupGenerator.Business.Logging;
 using DraftKings.LineupGenerator.Business.Services;
-using DraftKings.LineupGenerator.Constants;
+using DraftKings.LineupGenerator.Models.Constants;
 using DraftKings.LineupGenerator.Models.Contests;
 using DraftKings.LineupGenerator.Models.Lineups;
 using DraftKings.LineupGenerator.Models.Rules;
