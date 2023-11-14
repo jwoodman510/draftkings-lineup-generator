@@ -74,9 +74,7 @@ namespace DraftKings.LineupGenerator.Business.Logging
         {
             const int metricsInterval = 1000000;
 
-            Interlocked.Add(ref _iterationCount, 1);
-
-            var iterations = Interlocked.Read(ref _iterationCount);
+            var iterations = Interlocked.Increment(ref _iterationCount);
 
             if (iterations >= metricsInterval && iterations % metricsInterval == 0)
             {
@@ -88,7 +86,7 @@ namespace DraftKings.LineupGenerator.Business.Logging
             }
         }
 
-        public void IncrementValidLineups() => Interlocked.Add(ref _validLineupCount, 1);
+        public void IncrementValidLineups() => Interlocked.Increment(ref _validLineupCount);
 
         private Task LogIterationAsync(string logger, CancellationToken _)
         {
