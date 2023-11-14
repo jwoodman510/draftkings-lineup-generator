@@ -10,13 +10,13 @@
     <VersionPrefix>$(VersionPrefix)</VersionPrefix>
     <RepositoryUrl>https://github.com/jwoodman510/draftkings-lineup-generator</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Version>1.7.0</Version>
+    <Version>1.8.0</Version>
     <Authors>jwoodman510</Authors>
     <Company>jwoodman510</Company>
     <Description>dotnet global tool used to generate draftkings lineups</Description>
     <PackageProjectUrl>https://github.com/jwoodman510/draftkings-lineup-generator</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>Update Project Attributes</PackageReleaseNotes>
+    <PackageReleaseNotes>Performance Improvments</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\README.md">
