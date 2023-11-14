@@ -17,9 +17,13 @@ namespace DraftKings.LineupGenerator.Models.Lineups
         public LineupModel(IEnumerable<DraftableDisplayModel> draftables)
         {
             Draftables = draftables.ToList();
-            Salary = Draftables.Sum(x => x.Salary);
-            Fppg = Draftables.Sum(x => x.Fppg);
-            ProjectedFppg = Draftables.Sum(x => x.ProjectedFppg);
+
+            foreach (var draftable in draftables)
+            {
+                Salary += draftable.Salary;
+                Fppg += draftable.Fppg;
+                ProjectedFppg += draftable.ProjectedFppg;
+            }
         }
     }
 }
