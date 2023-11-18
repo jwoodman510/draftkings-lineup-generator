@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DraftKings.LineupGenerator.UI", "DraftKings.LineupGenerator.UI\DraftKings.LineupGenerator.UI.csproj", "{862D457F-5BF0-4A91-A349-11579A832175}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,12 @@ Global
 		{6AF557C9-F57E-40D1-AAAA-C282D028C774}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AF557C9-F57E-40D1-AAAA-C282D028C774}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AF557C9-F57E-40D1-AAAA-C282D028C774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{862D457F-5BF0-4A91-A349-11579A832175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{862D457F-5BF0-4A91-A349-11579A832175}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{862D457F-5BF0-4A91-A349-11579A832175}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{862D457F-5BF0-4A91-A349-11579A832175}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{862D457F-5BF0-4A91-A349-11579A832175}.Release|Any CPU.Build.0 = Release|Any CPU
+		{862D457F-5BF0-4A91-A349-11579A832175}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
