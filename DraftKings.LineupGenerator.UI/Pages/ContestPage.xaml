@@ -67,6 +67,20 @@
             </HorizontalStackLayout>
         </Grid>
 
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <HorizontalStackLayout IsVisible="False" x:Name="IterationsGrp">
+                <Label Text="Iterations Performed: "/>
+                <Label x:Name="IterationCountLbl" TextColor="{StaticResource Orange}" Margin="10, 0, 0, 0"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout IsVisible="False" x:Name="ValidLineupsGrp" Margin="50, 0, 0, 0">
+                <Label Text="Valid Lineups Found: "/>
+                <Label x:Name="ValidLineupCountLbl" TextColor="{StaticResource Orange}" Margin="10, 0, 0, 0"/>
+            </HorizontalStackLayout>
+        </HorizontalStackLayout>
+
+
+
         <Button
             x:Name="GenerateBtn"
             Text="Generate Lineups"

@@ -10,5 +10,7 @@ namespace DraftKings.LineupGenerator.Business.Interfaces
         Task<List<LineupsModel>> GetAsync(LineupRequestModel request, CancellationToken cancellationToken);
 
         Task LogProgressAsync(LineupRequestModel request, CancellationToken cancellationToken);
+
+        IEnumerable<(string generator, long iterationCount, long validLineupCount)> GetProgress();
     }
 }

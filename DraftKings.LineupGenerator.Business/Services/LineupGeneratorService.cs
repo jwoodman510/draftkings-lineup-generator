@@ -102,5 +102,17 @@ namespace DraftKings.LineupGenerator.Business.Services
                 _logger.LogWarning("No Lineups Found.");
             }
         }
+
+        public IEnumerable<(string generator, long iterationCount, long validLineupCount)> GetProgress()
+        {
+            return _lineupGenerators
+                .Select(x => new
+                {
+                    Generator = x.GetType().Name,
+                    Progress = x.GetProgress()
+                })
+                .Where(x => x.Progress.iterationCount > 0)
+                .Select(x => (x.Generator, x.Progress.iterationCount, x.Progress.validLineupCount));
+        }
     }
 }

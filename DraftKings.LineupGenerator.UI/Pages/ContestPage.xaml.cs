@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
 using System;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -53,11 +55,29 @@ namespace DraftKings.LineupGenerator.UI.Pages
 
             ToggleActivity(true);
 
-            LineupGeneratorService ??= Handler.MauiContext.Services.GetRequiredService<ILineupGeneratorService>();
+            LineupGeneratorService = Handler.MauiContext.Services.GetRequiredService<ILineupGeneratorService>();
 
             GeneratorTask = Task.Factory.StartNew(async () =>
             {
                 await GenerateAsync();
+            }, TaskCreationOptions.LongRunning);
+
+            Task.Factory.StartNew(async () =>
+            {
+                while (!_cancellationTokenSource.IsCancellationRequested)
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(3), _cancellationTokenSource.Token);
+
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        var (generator, iterationCount, validLineupCount) = LineupGeneratorService.GetProgress().FirstOrDefault();
+
+                        if (iterationCount > 0)
+                        {
+                            UpdateProgress(iterationCount, validLineupCount);
+                        }
+                    });
+                }
             }, TaskCreationOptions.LongRunning);
         }
 
@@ -73,7 +93,11 @@ namespace DraftKings.LineupGenerator.UI.Pages
 
         private void ToggleActivity(bool isRunning)
         {
+            UpdateProgress(0, 0);
+            IterationsGrp.IsVisible = ValidLineupsGrp.IsVisible = isRunning;
+
             ActivityGrp.IsVisible = ActivityInd.IsRunning = isRunning;
+
             GenerateBtn.IsVisible = !isRunning;
         }
 
@@ -89,10 +113,13 @@ namespace DraftKings.LineupGenerator.UI.Pages
 
             await LineupGeneratorService.GetAsync(request, _cancellationTokenSource.Token);
 
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                ToggleActivity(false);
-            });
+            MainThread.BeginInvokeOnMainThread(() => ToggleActivity(false));
+        }
+
+        private void UpdateProgress(long iterationCount, long validLineupCount)
+        {
+            IterationCountLbl.Text = iterationCount.ToString("n0");
+            ValidLineupCountLbl.Text = validLineupCount.ToString("n0");
         }
     }
 }

@@ -112,5 +112,7 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
                 Lineups = x.Value.GetBestLineups(request.LineupCount).ToList()
             });
         }
+
+        public (long iterationCount, long validLineupCount) GetProgress() => IncrementalLogger.GetProgress();
     }
 }
