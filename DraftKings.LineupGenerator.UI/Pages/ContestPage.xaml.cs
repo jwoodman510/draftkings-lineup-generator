@@ -1,4 +1,5 @@
 using DraftKings.LineupGenerator.Models.Contests;
+using DraftKings.LineupGenerator.Models.Draftables;
 using DraftKings.LineupGenerator.Models.Rules;
 using Microsoft.Maui.Controls;
 
@@ -8,13 +9,16 @@ namespace DraftKings.LineupGenerator.UI.Pages
     {
         private readonly RulesModel _rules;
         private readonly ContestModel _contest;
+        private readonly DraftablesModel _draftables;
 
         public ContestPage(
             RulesModel rules,
-            ContestModel contest)
+            ContestModel contest,
+            DraftablesModel draftables)
         {
             _rules = rules;
             _contest = contest;
+            _draftables = draftables;
 
             InitializeComponent();
 
