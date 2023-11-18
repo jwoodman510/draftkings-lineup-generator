@@ -2,7 +2,6 @@
 using DraftKings.LineupGenerator.UI.Pages;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
-using Newtonsoft.Json;
 using System;
 
 namespace DraftKings.LineupGenerator.UI
@@ -39,12 +38,7 @@ namespace DraftKings.LineupGenerator.UI
 
             if (contest == null)
             {
-                var text = JsonConvert.SerializeObject(new
-                {
-
-                });
-
-                await DisplayAlert("Alert", text, "OK");
+                await DisplayAlert("Alert", "No contest was found.", "OK");
 
                 return;
             }
