@@ -55,14 +55,6 @@
                 Clicked="OnFindContestClicked"
                 HorizontalOptions="Center" />
 
-            <Label
-                FontSize="20"
-                IsVisible="false"
-                x:Name="NotFoundLbl"
-                HorizontalOptions="Center"
-                Style="{StaticResource InvalidEntryStyle}"
-                Text="No Contest was found with that ID."/>
-
         </VerticalStackLayout>
     </ScrollView>
 

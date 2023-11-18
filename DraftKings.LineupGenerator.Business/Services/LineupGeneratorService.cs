@@ -3,6 +3,7 @@ using DraftKings.LineupGenerator.Business.Extensions;
 using DraftKings.LineupGenerator.Business.Interfaces;
 using DraftKings.LineupGenerator.Models.Lineups;
 using Microsoft.Extensions.Logging;
+using Serilog.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,16 @@ namespace DraftKings.LineupGenerator.Business.Services
 
         public async Task<List<LineupsModel>> GetAsync(LineupRequestModel request, CancellationToken cancellationToken)
         {
+            IDisposable logScope = null;
+
+            if (request.CorrelationId == null)
+            {
+                logScope = _logger.BeginScope(new Dictionary<string, object>
+                {
+                    { "correlationId", Guid.NewGuid() }
+                });
+            }
+
             var formatter = _formatters.FirstOrDefault(x => x.Type.Equals(request.OutputFormat, StringComparison.OrdinalIgnoreCase))
                 ?? _formatters.First();
 
@@ -61,6 +72,8 @@ namespace DraftKings.LineupGenerator.Business.Services
             var tasks = generators.Select(x => x.GenerateAsync(request, contest, rules, draftables, cancellationToken));
 
             var lineups = await Task.WhenAll(tasks);
+
+            logScope?.Dispose();
 
             return lineups.SelectMany(x => x).ToList();
         }

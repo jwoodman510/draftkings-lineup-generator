@@ -7,6 +7,7 @@
         <Label
             x:Name="ContestNameLbl"
             FontSize="24"
+            Text="{Binding Contest.ContestDetail.Name}"
             Margin="0, 20, 0, 0"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
@@ -29,5 +30,62 @@
             Margin="0, 10, 0, 0"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <Grid x:Name="OptionsGrid"
+              RowSpacing="10"
+              ColumnSpacing="10"
+              Margin="0, 20, 0, 0"
+              HorizontalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <HorizontalStackLayout Grid.Column="0">
+                <CheckBox IsChecked="True" x:Name="IncludeQuestionableCtrl"/>
+                <Label Text="Include Questionable" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Grid.Column="1">
+                <CheckBox IsChecked="False" x:Name="IncludeBaseSalaryCtrl"/>
+                <Label Text="Include Base Salary" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout x:Name="ExcludeDefenseGrp" Grid.Row="1" Grid.Column="0">
+                <CheckBox IsChecked="False" x:Name="ExcludeDefenseCtrl"/>
+                <Label Text="Exclude Defense" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout x:Name="ExcludeKickersGrp" Grid.Row="1" Grid.Column="1">
+                <CheckBox IsChecked="False" x:Name="ExcludeKickersCtrl"/>
+                <Label Text="Exclude Kickers" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </Grid>
+
+        <Button
+            x:Name="GenerateBtn"
+            Text="Generate Lineups"
+            Margin="0, 20, 0, 0"
+            StyleClass="PrimaryBtn"
+            Clicked="OnGenerateClicked"
+            HorizontalOptions="Center" />
+
+
+        <HorizontalStackLayout IsVisible="False" x:Name="ActivityGrp" Margin="0, 20, 0, 0" HorizontalOptions="Center">
+            <ActivityIndicator
+                x:Name="ActivityInd"
+                IsRunning="False"
+                Color="{StaticResource Orange}"/>
+            <Button
+                x:Name="CancelBtn"
+                Text="Cancel"
+                Margin="20, 0, 0, 0"
+                Clicked="OnCancelClicked"/>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

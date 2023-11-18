@@ -1,11 +1,9 @@
 ﻿using DraftKings.LineupGenerator.Api;
-using DraftKings.LineupGenerator.Api.Draftables;
-using DraftKings.LineupGenerator.Api.Rules;
 using DraftKings.LineupGenerator.UI.Pages;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
+using Newtonsoft.Json;
 using System;
-using System.Threading;
 
 namespace DraftKings.LineupGenerator.UI
 {
@@ -14,12 +12,17 @@ namespace DraftKings.LineupGenerator.UI
         public MainPage()
         {
             InitializeComponent();
+
+#if DEBUG
+            if (ContestEntry != null)
+            {
+                ContestEntry.Text = "154230362";
+            }
+#endif
         }
 
         private async void OnFindContestClicked(object sender, EventArgs e)
         {
-            NotFoundLbl.IsVisible = false;
-
             if (string.IsNullOrEmpty(ContestEntry?.Text))
             {
                 return;
@@ -36,7 +39,12 @@ namespace DraftKings.LineupGenerator.UI
 
             if (contest == null)
             {
-                NotFoundLbl.IsVisible = true;
+                var text = JsonConvert.SerializeObject(new
+                {
+
+                });
+
+                await DisplayAlert("Alert", text, "OK");
 
                 return;
             }

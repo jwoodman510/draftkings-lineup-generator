@@ -13,7 +13,16 @@ namespace DraftKings.LineupGenerator.Api.Draftables
             IHttpClientFactory httpClientFactory)
             : base(cacheService, httpClientFactory) { }
 
-        public Task<ContestModel> GetAsync(int contestId, CancellationToken cancellationToken) =>
-            GetAsync<ContestModel>($"https://api.draftkings.com/contests/v1/contests/{contestId}?format=json", cancellationToken);
+        public async Task<ContestModel> GetAsync(int contestId, CancellationToken cancellationToken)
+        {
+            var contest = await GetAsync<ContestModel>($"https://api.draftkings.com/contests/v1/contests/{contestId}?format=json", cancellationToken);
+
+            if (contest != null)
+            {
+                contest.Id = contestId;
+            }
+
+            return contest;
+        }
     }
 }
