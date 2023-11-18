@@ -19,11 +19,11 @@ namespace DraftKings.LineupGenerator.UI.Pages
     {
         private Task GeneratorTask { get; set; }
         private ILineupGeneratorService LineupGeneratorService { get; set; }
+        private CancellationTokenSource CancellationTokenSource { get; set; } = new CancellationTokenSource();
 
         private readonly RulesModel _rules;
         private readonly ContestModel _contest;
         private readonly DraftablesModel _draftables;
-        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         public ContestPage(
             RulesModel rules,
@@ -51,7 +51,7 @@ namespace DraftKings.LineupGenerator.UI.Pages
 
         private void OnGenerateClicked(object sender, EventArgs e)
         {
-            _cancellationTokenSource.TryReset();
+            CancellationTokenSource = new CancellationTokenSource();
 
             ToggleActivity(true);
 
@@ -64,9 +64,9 @@ namespace DraftKings.LineupGenerator.UI.Pages
 
             Task.Factory.StartNew(async () =>
             {
-                while (!_cancellationTokenSource.IsCancellationRequested)
+                while (!CancellationTokenSource.IsCancellationRequested)
                 {
-                    await Task.Delay(TimeSpan.FromSeconds(3), _cancellationTokenSource.Token);
+                    await Task.Delay(TimeSpan.FromSeconds(3), CancellationTokenSource.Token);
 
                     MainThread.BeginInvokeOnMainThread(() =>
                     {
@@ -83,7 +83,7 @@ namespace DraftKings.LineupGenerator.UI.Pages
 
         private async void OnCancelClicked(object sender, EventArgs e)
         {
-            _cancellationTokenSource.Cancel();
+            CancellationTokenSource.Cancel();
             
             if (GeneratorTask != null)
             {
@@ -111,7 +111,7 @@ namespace DraftKings.LineupGenerator.UI.Pages
                 ExcludeKickers = ExcludeKickersCtrl.IsChecked
             };
 
-            await LineupGeneratorService.GetAsync(request, _cancellationTokenSource.Token);
+            await LineupGeneratorService.GetAsync(request, CancellationTokenSource.Token);
 
             MainThread.BeginInvokeOnMainThread(() => ToggleActivity(false));
         }
