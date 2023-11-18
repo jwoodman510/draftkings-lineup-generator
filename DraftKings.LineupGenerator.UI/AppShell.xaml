@@ -7,7 +7,7 @@
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
-        Title="Home"
+        Title="DKGEN"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
