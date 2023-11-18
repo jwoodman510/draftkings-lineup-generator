@@ -1,5 +1,6 @@
 ﻿using DraftKings.LineupGenerator.Api.Draftables;
-using DraftKings.LineupGenerator.Models.Contests;
+using DraftKings.LineupGenerator.Api.Rules;
+using DraftKings.LineupGenerator.UI.Pages;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
 using System;
@@ -27,18 +28,22 @@ namespace DraftKings.LineupGenerator.UI
                 return;
             }
 
-            var contestClient = Handler.MauiContext.Services.GetService<IContestsClient>();
-
-            var contest = await contestClient.GetAsync(contestId, default);
+            var contest = await Handler.MauiContext.Services
+                .GetService<IContestsClient>()
+                .GetAsync(contestId, default);
 
             if (contest == null)
             {
                 NotFoundLbl.IsVisible = true;
+
+                return;
             }
-            else
-            {
-                // TODO: Route to generator page with ID
-            }
+
+            var rules = await Handler.MauiContext.Services
+                .GetService<IRulesClient>()
+                .GetAsync(contest.ContestDetail.GameTypeId, default);
+
+            await Navigation.PushAsync(new ContestPage(rules, contest), true);
         }
     }
 }

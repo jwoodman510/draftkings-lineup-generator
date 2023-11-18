@@ -6,6 +6,6 @@ namespace DraftKings.LineupGenerator.Api.Rules
 {
     public interface IRulesClient
     {
-        Task<RulesModel> GetAsync(int contestId, CancellationToken cancellationToken);
+        Task<RulesModel> GetAsync(int gameTypeId, CancellationToken cancellationToken);
     }
 }
