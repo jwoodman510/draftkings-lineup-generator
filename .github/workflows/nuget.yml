@@ -32,3 +32,4 @@ jobs:
 
       - name: Push NuGet package
         run: dotnet nuget push ./DraftKings.LineupGenerator.Console/out/*.nupkg --api-key ${{secrets.NUGET_TOKEN}} --skip-duplicate --no-symbols true
+        continue-on-error: true
