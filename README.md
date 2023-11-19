@@ -18,3 +18,9 @@
     - `--exclude-kickers` *[default: false]* Excludes Kicker positions from lineups.
     - `--give-me-captain` The names of captain players to include in generated lineups (comma delimited) e.g. `--give-me-captain "mahomes, travis kelce"`
     - `--exclude-captain` The names of captain players to exclude in generated lineups (comma delimited)
+
+#### Install from NuGet
+```
+dotnet tool install --global Woodman.DKGen
+```
+
