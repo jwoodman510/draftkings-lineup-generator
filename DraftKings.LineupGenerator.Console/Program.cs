@@ -93,11 +93,12 @@ namespace DraftKings.LineupGenerator
                     .RegisterServices()
                     .BuildServiceProvider();
 
+                request.CorrelationId = Guid.NewGuid();
                 var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
 
                 using var scope = logger.BeginScope(new Dictionary<string, object>
                 {
-                    { "correlationId", Guid.NewGuid() }
+                    { "correlationId", request.CorrelationId }
                 });
 
                 var lineupGeneratorService = serviceProvider.GetRequiredService<ILineupGeneratorService>();                

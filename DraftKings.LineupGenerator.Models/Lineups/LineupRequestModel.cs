@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DraftKings.LineupGenerator.Models.Lineups
 {
@@ -28,5 +29,7 @@ namespace DraftKings.LineupGenerator.Models.Lineups
         public int LineupCount { get; set; } = 5;
 
         public PlayerRequestsModel PlayerRequests { get; set; }
+
+        public Guid? CorrelationId { get; set; }
     }
 }

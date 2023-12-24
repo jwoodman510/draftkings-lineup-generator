@@ -16,5 +16,7 @@ namespace DraftKings.LineupGenerator.Business.Interfaces
         IEnumerable<LineupsModel> GetCurrentLineups(LineupRequestModel request);
 
         Task<IEnumerable<LineupsModel>> GenerateAsync(LineupRequestModel request, ContestModel contest, RulesModel rules, DraftablesModel draftables, CancellationToken cancellationToken);
+
+        (long iterationCount, long validLineupCount) GetProgress();
     }
 }

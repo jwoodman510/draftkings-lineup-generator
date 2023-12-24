@@ -14,5 +14,7 @@ namespace DraftKings.LineupGenerator.Business.Interfaces
         void IncrementIterations();
 
         void IncrementValidLineups();
+
+        (long iterationCount, long validLineupCount) GetProgress();
     }
 }
