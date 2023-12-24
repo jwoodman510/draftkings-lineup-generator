@@ -1,0 +1,6 @@
+﻿<Project>
+  <PropertyGroup>
+    <Deterministic>true</Deterministic>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+</Project>
