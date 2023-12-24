@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using DraftKings.LineupGenerator.Business;
+using Microsoft.Extensions.Logging;
 
 namespace DraftKings.LineupGenerator.App
 {
@@ -20,6 +21,8 @@ namespace DraftKings.LineupGenerator.App
     		builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
 #endif
+
+            builder.Services.RegisterServices();
 
             return builder.Build();
         }

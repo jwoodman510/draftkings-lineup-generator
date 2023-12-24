@@ -65,6 +65,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DraftKings.LineupGenerator.Business\DraftKings.LineupGenerator.Business.csproj" />
       <ProjectReference Include="..\DraftKings.LineupGenerator.Razor\DraftKings.LineupGenerator.Razor.csproj" />
     </ItemGroup>
 
