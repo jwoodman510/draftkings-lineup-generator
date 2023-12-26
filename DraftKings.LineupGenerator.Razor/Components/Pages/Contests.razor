@@ -1,16 +1,39 @@
 ﻿@page "/contests"
 
-<h1>Contests</h1>
+@using DraftKings.LineupGenerator.Api.Draftables
+@using DraftKings.LineupGenerator.Models.Contests
 
-<p role="status">Current count: @currentCount</p>
+@inject IContestsClient ContestsClient
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+@if (contestsSearchModel == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contest in contestsSearchModel.Contests)
+            {
+                <tr>
+                    <td>@contest.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
 
 @code {
-    private int currentCount = 0;
+    private ContestsSearchModel? contestsSearchModel;
 
-    private void IncrementCount()
+    protected override async Task OnInitializedAsync()
     {
-        currentCount++;
+        contestsSearchModel = await ContestsClient.SearchAsync("NFL", default);
     }
 }

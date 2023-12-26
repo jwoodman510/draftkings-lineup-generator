@@ -1,31 +1,31 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace DraftKings.LineupGenerator.Models.Contests
 {
     public class ContestSearchModel
     {
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public int Id { get; set; }
 
-        [JsonPropertyName("n")]
+        [JsonProperty("n")]
         public string Name { get; set; }
 
-        [JsonPropertyName ("mec")]
+        [JsonProperty("mec")]
         public int MultiEntries { get; set; }
 
-        [JsonPropertyName("nt")]
+        [JsonProperty("nt")]
         public int Entries { get; set; }
 
-        [JsonPropertyName("m")]
+        [JsonProperty("m")]
         public int MaxEntries { get; set; }
 
-        [JsonPropertyName("po")]
+        [JsonProperty("po")]
         public decimal Prizes { get; set; }
 
-        [JsonPropertyName("sdstring")]
+        [JsonProperty("sdstring")]
         public string StartDateTimeDecription { get; set; }
 
-        [JsonPropertyName("gameType")]
+        [JsonProperty("gameType")]
         public string GameType { get; set; }
     }
 }

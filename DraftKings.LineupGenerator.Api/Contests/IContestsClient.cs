@@ -1,5 +1,4 @@
 ﻿using DraftKings.LineupGenerator.Models.Contests;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,6 +8,6 @@ namespace DraftKings.LineupGenerator.Api.Draftables
     {
         Task<ContestModel> GetAsync(int contestId, CancellationToken cancellationToken);
 
-        Task<IEnumerable<ContestSearchModel>> SearchAsync(string sport, CancellationToken cancellation);
+        Task<ContestsSearchModel> SearchAsync(string sport, CancellationToken cancellation);
     }
 }
