@@ -1,39 +1,70 @@
 ﻿@page "/contests"
 
+@using BlazorBootstrap
 @using DraftKings.LineupGenerator.Api.Draftables
+@using DraftKings.LineupGenerator.Models.Constants
 @using DraftKings.LineupGenerator.Models.Contests
 
 @inject IContestsClient ContestsClient
 
-@if (contestsSearchModel == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var contest in contestsSearchModel.Contests)
-            {
-                <tr>
-                    <td>@contest.Name</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-
+<Tabs EnableFadeEffect="true" OnShowing="@(args => OnTabShowingAsync(args))">
+    @foreach (var sportType in availableSports)
+    {
+            <Tab Title="@sportType" IsActive="availableSports.IndexOf(sportType) == 0">
+                <Content>
+                    @if (!contestsDictionary.TryGetValue(sportType, out var contestsSearchModel))
+                    {
+                    <p><em>Loading...</em></p>
+                    }
+                    else if (contestsSearchModel == null || contestsSearchModel.Contests.Count == 0)
+                    {
+                        <p><em>No results found...</em></p>
+                    }
+                    else
+                    {
+                        <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var contest in contestsDictionary[sportType].Contests)
+                            {
+                                <tr>
+                                    <td>@contest.Name</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    }
+                </Content>
+            </Tab>
+    }
+</Tabs>
 
 @code {
-    private ContestsSearchModel? contestsSearchModel;
+    private readonly List<string> availableSports = new List<string>
+    {
+        Sports.Nfl,
+        Sports.Xfl,
+        Sports.Cfb
+    };
+
+    private readonly Dictionary<string, ContestsSearchModel> contestsDictionary = new Dictionary<string, ContestsSearchModel>();
 
     protected override async Task OnInitializedAsync()
     {
-        contestsSearchModel = await ContestsClient.SearchAsync("NFL", default);
+        contestsDictionary[availableSports[0]] = await ContestsClient.SearchAsync(availableSports[0], default);
+    }
+
+    private async Task OnTabShowingAsync(TabsEventArgs args)
+    {
+        if (contestsDictionary.ContainsKey(args.ActiveTabTitle))
+        {
+            return;
+        }
+
+        contestsDictionary[args.ActiveTabTitle] = await ContestsClient.SearchAsync(args.ActiveTabTitle, default);
     }
 }

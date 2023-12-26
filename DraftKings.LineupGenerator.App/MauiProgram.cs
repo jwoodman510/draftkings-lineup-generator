@@ -23,6 +23,7 @@ namespace DraftKings.LineupGenerator.App
 #endif
 
             builder.Services.RegisterServices();
+            builder.Services.AddBlazorBootstrap();
 
             return builder.Build();
         }

@@ -35,6 +35,11 @@ namespace DraftKings.LineupGenerator.Caching.Services
                     return JsonConvert.DeserializeObject<T>(text);
                 }
 
+                if (File.Exists(filepath) && DateTime.UtcNow > DateTime.Parse(absoluteExpiration))
+                {
+                    absoluteExpiration = DateTime.UtcNow.Add(expiration).ToString();
+                }
+
                 var value = await valueFactory();
                 var json = JsonConvert.SerializeObject(value);
                 await File.WriteAllTextAsync(filepath, json, cancellationToken);
