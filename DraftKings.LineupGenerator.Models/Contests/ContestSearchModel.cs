@@ -19,6 +19,9 @@ namespace DraftKings.LineupGenerator.Models.Contests
         [JsonProperty("m")]
         public int MaxEntries { get; set; }
 
+        [JsonProperty("a")]
+        public decimal EntryFee { get; set; }
+
         [JsonProperty("po")]
         public decimal Prizes { get; set; }
 

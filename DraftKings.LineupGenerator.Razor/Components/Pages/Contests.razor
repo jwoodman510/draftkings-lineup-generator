@@ -4,6 +4,7 @@
 @using DraftKings.LineupGenerator.Api.Draftables
 @using DraftKings.LineupGenerator.Models.Constants
 @using DraftKings.LineupGenerator.Models.Contests
+@using Newtonsoft.Json
 
 @inject IContestsClient ContestsClient
 
@@ -12,59 +13,118 @@
     {
             <Tab Title="@sportType" IsActive="availableSports.IndexOf(sportType) == 0">
                 <Content>
-                    @if (!contestsDictionary.TryGetValue(sportType, out var contestsSearchModel))
-                    {
+                @if (!contestsDictionary.TryGetValue(sportType, out var contestsSearchModel))
+                {
                     <p><em>Loading...</em></p>
-                    }
-                    else if (contestsSearchModel == null || contestsSearchModel.Contests.Count == 0)
-                    {
-                        <p><em>No results found...</em></p>
-                    }
-                    else
-                    {
-                        <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var contest in contestsDictionary[sportType].Contests)
-                            {
-                                <tr>
-                                    <td>@contest.Name</td>
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
-                    }
-                </Content>
+                }
+                else
+                {
+                    <Grid TItem="ContestSearchModel"
+                          DataProvider="ContestDataProvider"
+                          AllowFiltering="true"
+                          AllowPaging="true"
+                          PageSize="10"
+                          AllowSorting="true"
+                          Responsive="true"
+                          AllowRowClick="true"
+                          ItemsPerPageText="Items per page"
+                          PageSizeSelectorVisible="true"
+                          PaginationItemsTextFormat="{0} - {1} of {2} items"
+                          PageSizeSelectorItems="new int[] { 10, 20, 50 }"
+                          Class="table table-hover table-bordered table-striped"
+                          SettingsProvider="GridSettingsProvider"
+                          GridSettingsChanged="OnGridSettingsChanged"
+                          OnRowDoubleClick="OnRowDoubleClick">
+
+                        <GridColumn TItem="ContestSearchModel" HeaderText="Name" PropertyName="Name" SortKeySelector="x => x.Name">
+                            @context.Name
+                        </GridColumn>
+                        <GridColumn TItem="ContestSearchModel" HeaderText="Game Type" PropertyName="GameType" SortKeySelector="x => x.GameType">
+                            @context.GameType
+                        </GridColumn>
+                        <GridColumn TItem="ContestSearchModel" HeaderText="Prizes" PropertyName="Prizes" SortKeySelector="x => x.Prizes">
+                            $@context.Prizes.ToString("N2")
+                        </GridColumn>
+                        <GridColumn TItem="ContestSearchModel" HeaderText="Entry Fee" PropertyName="EntryFee" SortKeySelector="x => x.EntryFee">
+                            $@context.EntryFee.ToString("N2")
+                        </GridColumn>
+                        <GridColumn TItem="ContestSearchModel" HeaderText="Entries" PropertyName="Entries" SortKeySelector="x => x.Entries + '/' + x.MaxEntries">
+                            @context.Entries/@context.MaxEntries
+                        </GridColumn>
+                        <GridColumn TItem="ContestSearchModel" HeaderText="Start Time" PropertyName="StartTime" SortKeySelector="x => x.StartDateTimeDecription">
+                            @context.StartDateTimeDecription
+                        </GridColumn>
+                    </Grid>
+                }
+            </Content>
             </Tab>
     }
 </Tabs>
 
 @code {
-    private readonly List<string> availableSports = new List<string>
+    [Inject] public IJSRuntime JS { get; set; } = default!;
+
+    public GridSettings? Settings { get; set; }
+
+    private static readonly List<string> availableSports = new List<string>
     {
         Sports.Nfl,
         Sports.Xfl,
         Sports.Cfb
     };
 
+    private string activeTab = availableSports[0];
+
     private readonly Dictionary<string, ContestsSearchModel> contestsDictionary = new Dictionary<string, ContestsSearchModel>();
 
     protected override async Task OnInitializedAsync()
     {
-        contestsDictionary[availableSports[0]] = await ContestsClient.SearchAsync(availableSports[0], default);
+        contestsDictionary[activeTab] = await ContestsClient.SearchAsync(activeTab, default);
     }
 
     private async Task OnTabShowingAsync(TabsEventArgs args)
     {
+        activeTab = args.ActiveTabTitle;
+
         if (contestsDictionary.ContainsKey(args.ActiveTabTitle))
         {
             return;
         }
 
         contestsDictionary[args.ActiveTabTitle] = await ContestsClient.SearchAsync(args.ActiveTabTitle, default);
+    }
+
+    private Task<GridDataProviderResult<ContestSearchModel>> ContestDataProvider(GridDataProviderRequest<ContestSearchModel> request)
+    {
+        var contests = contestsDictionary[activeTab].Contests;
+
+        return Task.FromResult<GridDataProviderResult<ContestSearchModel>>(request.ApplyTo(contests));
+    }
+
+    private async Task<GridSettings> GridSettingsProvider()
+    {
+        var settingsJson = await JS.InvokeAsync<string>("window.localStorage.getItem", "grid-settings");
+
+        if (string.IsNullOrWhiteSpace(settingsJson))
+        {
+            return new GridSettings();
+        }
+
+        return JsonConvert.DeserializeObject<GridSettings>(settingsJson) ?? new GridSettings();
+    }
+
+    private async Task OnGridSettingsChanged(GridSettings settings)
+    {
+        if (settings is null)
+        {
+            return;
+        }
+
+        await JS.InvokeVoidAsync("window.localStorage.setItem", "grid-settings", JsonConvert.SerializeObject(settings));
+    }
+
+    private async Task OnRowDoubleClick(GridRowEventArgs<ContestSearchModel> args)
+    {
+        await JS.InvokeAsync<string>("alert", $"{args.Item.Name} selected");
     }
 }
