@@ -6,14 +6,18 @@ a, .btn-link {
     color: #006bb7;
 }
 
-.btn-primary {
+.btn-primary, .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
     color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    background-color: #f3601b;
+    border-color: #f3601b;
+}
+
+.btn-primary:active, .btn-primary:focus, .btn-primary:hover {
+    border-color: #53d337;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #f3601b;
 }
 
 .content {
