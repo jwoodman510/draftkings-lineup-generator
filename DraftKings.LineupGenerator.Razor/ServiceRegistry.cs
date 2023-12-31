@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using DraftKings.LineupGenerator.Razor.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DraftKings.LineupGenerator.Razor
@@ -9,7 +10,8 @@ namespace DraftKings.LineupGenerator.Razor
         {
             return services
                 .AddBlazorBootstrap()
-                .AddBlazoredLocalStorage();
+                .AddBlazoredLocalStorage()
+                .AddTransient<IContestService, ContestService>();
         }
     }
 }

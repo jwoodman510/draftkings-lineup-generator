@@ -15,21 +15,17 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-a, .btn-link {
-    color: #006bb7;
-}
-
-.btn-primary, .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
+button.btn-primary, button.btn-primary:active, button.btn-primary:focus, button.btn-primary:hover {
     color: #fff;
     background-color: var(--orange);
     border-color: var(--orange);
 }
 
-.btn-primary:active, .btn-primary:focus, .btn-primary:hover {
-    border-color: #53d337;
+button.btn-primary:active, button.btn-primary:focus, button.btn-primary:hover {
+    border-color: var(--money-green);
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+button.btn:focus, button.btn:active:focus, button.btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem var(--orange);
 }
 

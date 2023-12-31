@@ -21,5 +21,7 @@ namespace DraftKings.LineupGenerator.Models.Contests
         public int Entries { get; set; }
 
         public int MaxEntries { get; set; }
+
+        public int MaximumEntriesPerUser { get; set; }
     }
 }

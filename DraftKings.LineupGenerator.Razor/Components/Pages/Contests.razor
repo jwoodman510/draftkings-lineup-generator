@@ -1,15 +1,15 @@
 ﻿@page "/contests"
 
 @using BlazorBootstrap
-@using Blazored.LocalStorage
 @using DraftKings.LineupGenerator.Api.Draftables
 @using DraftKings.LineupGenerator.Models.Constants
 @using DraftKings.LineupGenerator.Models.Contests
+@using DraftKings.LineupGenerator.Razor.Services
 @using Newtonsoft.Json
 
-@inject NavigationManager Navigation
-@inject IContestsClient ContestsClient
-@inject ILocalStorageService LocalStorageService
+@inject NavigationManager Navigation;
+@inject IContestsClient ContestsClient;
+@inject IContestService ContestService;
 
 <Tabs EnableFadeEffect="true" OnShowing="@(args => OnTabShowingAsync(args))">
     @foreach (var sportType in availableSports)
@@ -139,12 +139,7 @@
 
     private async Task ContestSelectedAsync(ContestSearchModel contest)
     {
-        var contests = await LocalStorageService.GetItemAsync<Dictionary<int, ContestSearchModel>>(Constants.LocalStorage.Contests)
-            ?? new Dictionary<int, ContestSearchModel>();
-
-        contests[contest.Id] = contest;
-
-        await LocalStorageService.SetItemAsync(Constants.LocalStorage.Contests, contests);
+        await ContestService.AddRecentContestAsync(contest);
 
         Navigation.NavigateTo($"contest/{contest.Id}");
     }

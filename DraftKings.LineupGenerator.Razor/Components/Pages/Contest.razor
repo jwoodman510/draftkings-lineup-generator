@@ -1,13 +1,16 @@
 ﻿@page "/contest/{id:int}"
 
 @using BlazorBootstrap
-@using Blazored.LocalStorage
 @using DraftKings.LineupGenerator.Api.Draftables
+@using DraftKings.LineupGenerator.Business.Interfaces
 @using DraftKings.LineupGenerator.Models.Contests
+@using DraftKings.LineupGenerator.Models.Lineups
+@using DraftKings.LineupGenerator.Razor.Services
 
 @inject IContestsClient ContestsClient;
+@inject IContestService ContestService;
 @inject NavigationManager NavigationManager;
-@inject ILocalStorageService LocalStorageService;
+@inject ILineupGeneratorService LineupGeneratorService;
 
 @if (contest == null || contestSearchModel == null)
 {
@@ -28,7 +31,7 @@ else
                 <b>Game Type: </b> @contestSearchModel.GameType
             </div>
             <div class="col-sm-4">
-                <b>Entries: </b> @contestSearchModel.Entries / @contestSearchModel.MaxEntries
+                <b>Entries: </b> @contest.ContestDetail.Entries / @contest.ContestDetail.MaxEntries
             </div>
             <div class="col-sm-4">
                 <b>Start Time: </b> @contestSearchModel.StartDateTimeDecription
@@ -36,7 +39,7 @@ else
         </div>
         <div class="row">
             <div class="col-sm-4">
-                <b>Multi-Entries: </b> @contestSearchModel.MultiEntries
+                <b>Multi-Entries: </b> @contest.ContestDetail.MaximumEntriesPerUser
             </div>
             <div class="col-sm-4 money">
                 <b>Entry Fee: </b> @contestSearchModel.EntryFee.ToString("C")
@@ -45,6 +48,9 @@ else
                 <b>Prize Pool: </b> @contestSearchModel.Prizes.ToString("C")
             </div>
         </div>
+    </div>
+    <div class="actions">
+        <Button Color="ButtonColor.Primary">Generate</Button>
     </div>
 }
 
@@ -57,24 +63,19 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
-        var contests = await LocalStorageService.GetItemAsync<Dictionary<int, ContestSearchModel>>(Constants.LocalStorage.Contests);
+        contestSearchModel = await ContestService.GetRecentContestAsync(Id);
 
-        if (!contests.ContainsKey(Id))
+        if (contestSearchModel == null)
         {
             NavigationManager.NavigateTo("/");
         }
 
-        contestSearchModel = contests[Id];
         contest = await ContestsClient.GetAsync(Id, default);
     }
 
     private async Task RemoveContestAsync()
     {
-        var contests = await LocalStorageService.GetItemAsync<Dictionary<int, ContestSearchModel>>(Constants.LocalStorage.Contests);
-
-        contests.Remove(Id);
-
-        await LocalStorageService.SetItemAsync(Constants.LocalStorage.Contests, contests);
+        await ContestService.RemoveRecentContestAsync(Id);
 
         NavigationManager.NavigateTo("/", replace: true);
     }
