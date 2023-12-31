@@ -5,9 +5,11 @@
              x:Class="DraftKings.LineupGenerator.App.MainPage"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
 
+    
+
     <BlazorWebView x:Name="blazorWebView" HostPage="wwwroot/index.html">
         <BlazorWebView.RootComponents>
-            <RootComponent Selector="#app" ComponentType="{x:Type local:Routes}" />
+            <RootComponent x:Name="rootComponent" Selector="#app" ComponentType="{x:Type local:Routes}" />
         </BlazorWebView.RootComponents>
     </BlazorWebView>
 
