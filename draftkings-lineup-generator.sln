@@ -25,9 +25,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DraftKings.LineupGenerator.App", "DraftKings.LineupGenerator.App\DraftKings.LineupGenerator.App.csproj", "{CBBFF879-4D58-487A-BF42-4249728B0E6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DraftKings.LineupGenerator.App", "DraftKings.LineupGenerator.App\DraftKings.LineupGenerator.App.csproj", "{CBBFF879-4D58-487A-BF42-4249728B0E6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DraftKings.LineupGenerator.Razor", "DraftKings.LineupGenerator.Razor\DraftKings.LineupGenerator.Razor.csproj", "{60797607-6BEF-497C-8AA9-2E3B316E57F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DraftKings.LineupGenerator.Razor", "DraftKings.LineupGenerator.Razor\DraftKings.LineupGenerator.Razor.csproj", "{60797607-6BEF-497C-8AA9-2E3B316E57F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

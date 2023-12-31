@@ -34,6 +34,12 @@
     background-size: cover;
 }
 
+.contest-nav-item {
+    font-size: 1rem;
+    padding: 10px 0;
+    cursor: pointer;
+}
+
 .nav-item {
     font-size: 0.9rem;
     padding-bottom: 0.5rem;
@@ -69,6 +75,11 @@
         .nav-item ::deep a:hover {
             background-color: rgba(255,255,255,0.1);
             color: white;
+        }
+
+        .contest-nav-item ::deep a {
+            height: unset;
+            line-height: unset;
         }
 
 .nav-scrollable {

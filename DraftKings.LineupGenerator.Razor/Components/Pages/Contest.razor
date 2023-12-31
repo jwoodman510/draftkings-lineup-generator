@@ -1,0 +1,50 @@
+﻿@page "/contest/{id:int}"
+
+@using BlazorBootstrap
+@using Blazored.LocalStorage
+@using DraftKings.LineupGenerator.Api.Draftables
+@using DraftKings.LineupGenerator.Models.Contests
+
+@inject NavigationManager NavigationManager;
+@inject ILocalStorageService LocalStorageService
+
+@if (contest == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="trash-container">
+        <Button @onclick="RemoveContestAsync">
+            <Icon Name="IconName.Trash3Fill" Size="IconSize.x3" />
+        </Button>
+    </div>
+    <h3>@contest.Name</h3>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private ContestSearchModel? contest;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var contests = await LocalStorageService.GetItemAsync<Dictionary<int, ContestSearchModel>>(Constants.LocalStorage.Contests);
+
+        contest = contests.ContainsKey(Id)
+            ? contests[Id]
+            : default;
+    }
+
+    private async Task RemoveContestAsync()
+    {
+        var contests = await LocalStorageService.GetItemAsync<Dictionary<int, ContestSearchModel>>(Constants.LocalStorage.Contests);
+
+        contests.Remove(Id);
+
+        await LocalStorageService.SetItemAsync(Constants.LocalStorage.Contests, contests);
+
+        NavigationManager.NavigateTo("/");
+    }
+}

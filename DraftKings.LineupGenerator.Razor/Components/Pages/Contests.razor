@@ -1,12 +1,15 @@
 ﻿@page "/contests"
 
 @using BlazorBootstrap
+@using Blazored.LocalStorage
 @using DraftKings.LineupGenerator.Api.Draftables
 @using DraftKings.LineupGenerator.Models.Constants
 @using DraftKings.LineupGenerator.Models.Contests
 @using Newtonsoft.Json
 
+@inject NavigationManager Navigation
 @inject IContestsClient ContestsClient
+@inject ILocalStorageService LocalStorageService
 
 <Tabs EnableFadeEffect="true" OnShowing="@(args => OnTabShowingAsync(args))">
     @foreach (var sportType in availableSports)
@@ -15,7 +18,7 @@
                 <Content>
                 @if (!contestsDictionary.TryGetValue(sportType, out var contestsSearchModel))
                 {
-                    <p><em>Loading...</em></p>
+                    <Button Color="ButtonColor.Primary" Loading="true" Style="margin:20px" />
                 }
                 else
                 {
@@ -37,7 +40,7 @@
                           OnRowDoubleClick="OnRowDoubleClick">
 
                         <GridColumn TItem="ContestSearchModel" HeaderText="Name" PropertyName="Name" SortKeySelector="x => x.Name">
-                            @context.Name
+                            <a href="/" @onclick:preventDefault @onclick="@(() => ContestSelectedAsync(context))">@context.Name</a>
                         </GridColumn>
                         <GridColumn TItem="ContestSearchModel" HeaderText="Game Type" PropertyName="GameType" SortKeySelector="x => x.GameType">
                             @context.GameType
@@ -96,9 +99,15 @@
 
     private Task<GridDataProviderResult<ContestSearchModel>> ContestDataProvider(GridDataProviderRequest<ContestSearchModel> request)
     {
-        var contests = contestsDictionary[activeTab].Contests;
+        if (!contestsDictionary.TryGetValue(activeTab, out var contestsSearchModel))
+        {
+            contestsSearchModel = new ContestsSearchModel
+            {
+                Contests = new List<ContestSearchModel>()
+            };
+        }
 
-        return Task.FromResult<GridDataProviderResult<ContestSearchModel>>(request.ApplyTo(contests));
+        return Task.FromResult<GridDataProviderResult<ContestSearchModel>>(request.ApplyTo(contestsSearchModel.Contests));
     }
 
     private async Task<GridSettings> GridSettingsProvider()
@@ -125,6 +134,18 @@
 
     private async Task OnRowDoubleClick(GridRowEventArgs<ContestSearchModel> args)
     {
-        await JS.InvokeAsync<string>("alert", $"{args.Item.Name} selected");
+        await ContestSelectedAsync(args.Item);
+    }
+
+    private async Task ContestSelectedAsync(ContestSearchModel contest)
+    {
+        var contests = await LocalStorageService.GetItemAsync<Dictionary<int, ContestSearchModel>>(Constants.LocalStorage.Contests)
+            ?? new Dictionary<int, ContestSearchModel>();
+
+        contests[contest.Id] = contest;
+
+        await LocalStorageService.SetItemAsync(Constants.LocalStorage.Contests, contests);
+
+        Navigation.NavigateTo($"contest/{contest.Id}");
     }
 }

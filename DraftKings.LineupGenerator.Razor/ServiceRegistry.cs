@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Blazored.LocalStorage;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DraftKings.LineupGenerator.Razor
 {
@@ -6,9 +7,9 @@ namespace DraftKings.LineupGenerator.Razor
     {
         public static IServiceCollection RegisterRazorServices(this IServiceCollection services)
         {
-            services.AddBlazorBootstrap();
-
-            return services;
+            return services
+                .AddBlazorBootstrap()
+                .AddBlazoredLocalStorage();
         }
     }
 }
