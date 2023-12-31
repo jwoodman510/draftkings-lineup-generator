@@ -6,13 +6,15 @@
 @using DraftKings.LineupGenerator.Models.Contests
 @using DraftKings.LineupGenerator.Models.Lineups
 @using DraftKings.LineupGenerator.Razor.Services
+@using DraftKings.LineupGenerator.Razor.State
 
-@inject IContestsClient ContestsClient;
-@inject IContestService ContestService;
+@implements IDisposable
+
 @inject NavigationManager NavigationManager;
-@inject ILineupGeneratorService LineupGeneratorService;
+@inject ContestStateProvider ContestStateProvider;
+@inject IRecentContestService RecentContestService;
 
-@if (contest == null || contestSearchModel == null)
+@if (state?.ContestModel == null || searchModel == null)
 {
     <Button Color="ButtonColor.Primary" Loading="true" Style="margin:20px" />
 }
@@ -23,34 +25,51 @@ else
             <Icon Name="IconName.Trash3Fill" Size="IconSize.x3" />
         </Button>
     </div>
-    <h3>@contest.ContestDetail.Name</h3>
+    <h3>@state.ContestModel.ContestDetail.Name</h3>
     <div class="contest-detail">
-        <p class="summary">@contest.ContestDetail.ContestSummary</p>
+        <p class="summary">@state.ContestModel.ContestDetail.ContestSummary</p>
         <div class="row">
             <div class="col-sm-4">
-                <b>Game Type: </b> @contestSearchModel.GameType
+                <b>Game Type: </b> @searchModel.GameType
             </div>
             <div class="col-sm-4">
-                <b>Entries: </b> @contest.ContestDetail.Entries / @contest.ContestDetail.MaxEntries
+                <b>Entries: </b> @state.ContestModel.ContestDetail.Entries / @state.ContestModel.ContestDetail.MaxEntries
             </div>
             <div class="col-sm-4">
-                <b>Start Time: </b> @contestSearchModel.StartDateTimeDecription
+                <b>Start Time: </b> @searchModel.StartDateTimeDecription
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
-                <b>Multi-Entries: </b> @contest.ContestDetail.MaximumEntriesPerUser
+                <b>Multi-Entries: </b> @state.ContestModel.ContestDetail.MaximumEntriesPerUser
             </div>
             <div class="col-sm-4 money">
-                <b>Entry Fee: </b> @contestSearchModel.EntryFee.ToString("C")
+                <b>Entry Fee: </b> @searchModel.EntryFee.ToString("C")
             </div>
             <div class="col-sm-4 money">
-                <b>Prize Pool: </b> @contestSearchModel.Prizes.ToString("C")
+                <b>Prize Pool: </b> @searchModel.Prizes.ToString("C")
             </div>
         </div>
     </div>
+    <div class="generator-progress">
+        @foreach (var item in state.Progress)
+        {
+            <div class="row">
+                <div class="col-sm-4">
+                    <b>Generator: </b> @item.generator
+                </div>
+                <div class="col-sm-4">
+                    <b>Iterations: </b> @item.iterationCount
+                </div>
+                <div class="col-sm-4">
+                    <b>Valid Lineups Found: </b> @item.validLineupCount
+                </div>
+            </div>
+        }
+    </div>
     <div class="actions">
-        <Button Color="ButtonColor.Primary">Generate</Button>
+        <Button Color="ButtonColor.Primary" @onclick="Generate">Generate</Button>
+        <Button Color="ButtonColor.Secondary" @onclick="Cancel">Cancel</Button>
     </div>
 }
 
@@ -58,25 +77,50 @@ else
     [Parameter]
     public int Id { get; set; }
 
-    private ContestModel? contest;
-    private ContestSearchModel? contestSearchModel;
+    private Timer? timer;
+    private ContestState? state;
+    private ContestSearchModel? searchModel;
+
+    protected override void OnInitialized()
+    {
+        timer = new Timer(async _ =>
+        {
+            await InvokeAsync(StateHasChanged);
+        }, null, 0, 10000);
+    }
 
     protected override async Task OnParametersSetAsync()
     {
-        contestSearchModel = await ContestService.GetRecentContestAsync(Id);
+        state = await ContestStateProvider.GetOrCreateAsync(Id);
+        searchModel = await RecentContestService.GetRecentContestAsync(Id);
 
-        if (contestSearchModel == null)
+        if (state?.ContestModel == null || searchModel == null)
         {
-            NavigationManager.NavigateTo("/");
+            await RemoveContestAsync();
         }
+    }
 
-        contest = await ContestsClient.GetAsync(Id, default);
+    private void Cancel()
+    {
+        state?.Cancel();
+        StateHasChanged();
+    }
+
+    private void Generate()
+    {
+        state?.Generate();
+        StateHasChanged();
     }
 
     private async Task RemoveContestAsync()
     {
-        await ContestService.RemoveRecentContestAsync(Id);
+        await RecentContestService.RemoveRecentContestAsync(Id);
 
         NavigationManager.NavigateTo("/", replace: true);
+    }
+
+    void IDisposable.Dispose()
+    {
+        timer?.Dispose();
     }
 }

@@ -22,3 +22,13 @@ h3 {
     .contest-detail .money {
         color: var(--money-green);
     }
+
+.generator-progress {
+    margin: 20px 0;
+    min-height: 40px;
+    background-color: var(--mid-grey);
+}
+
+.actions {
+    text-align: end;
+}

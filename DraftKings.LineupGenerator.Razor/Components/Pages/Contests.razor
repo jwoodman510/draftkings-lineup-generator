@@ -9,7 +9,7 @@
 
 @inject NavigationManager Navigation;
 @inject IContestsClient ContestsClient;
-@inject IContestService ContestService;
+@inject IRecentContestService ContestService;
 
 <Tabs EnableFadeEffect="true" OnShowing="@(args => OnTabShowingAsync(args))">
     @foreach (var sportType in availableSports)

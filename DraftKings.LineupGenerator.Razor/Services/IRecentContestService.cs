@@ -2,7 +2,7 @@
 
 namespace DraftKings.LineupGenerator.Razor.Services
 {
-    public interface IContestService
+    public interface IRecentContestService
     {
         Task AddRecentContestAsync(ContestSearchModel contestSearchModel);
 

@@ -1,5 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using DraftKings.LineupGenerator.Razor.Services;
+using DraftKings.LineupGenerator.Razor.State;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DraftKings.LineupGenerator.Razor
@@ -11,7 +12,8 @@ namespace DraftKings.LineupGenerator.Razor
             return services
                 .AddBlazorBootstrap()
                 .AddBlazoredLocalStorage()
-                .AddTransient<IContestService, ContestService>();
+                .AddSingleton<ContestStateProvider>()
+                .AddTransient<IRecentContestService, RecentContestService>();
         }
     }
 }

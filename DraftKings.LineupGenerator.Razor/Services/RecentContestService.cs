@@ -3,11 +3,11 @@ using DraftKings.LineupGenerator.Models.Contests;
 
 namespace DraftKings.LineupGenerator.Razor.Services
 {
-    public class ContestService : IContestService
+    public class RecentContestService : IRecentContestService
     {
         private readonly ILocalStorageService _localStorageService;
 
-        public ContestService(ILocalStorageService localStorageService)
+        public RecentContestService(ILocalStorageService localStorageService)
         {
             _localStorageService = localStorageService;
         }
