@@ -52,6 +52,12 @@ else
         </div>
     </div>
     <div class="generator-progress">
+        @if (state.IsRunning)
+        {
+            <Progress Class="mb-3">
+                <ProgressBar Type="ProgressType.StripedAndAnimated" Color="ProgressColor.Dark" Width="70" />
+            </Progress>
+        }
         @foreach (var item in state.Progress)
         {
             <div class="row">

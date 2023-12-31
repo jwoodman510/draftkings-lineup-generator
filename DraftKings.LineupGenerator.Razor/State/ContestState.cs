@@ -7,6 +7,8 @@ namespace DraftKings.LineupGenerator.Razor.State
 {
     public class ContestState : IDisposable
     {
+        public bool IsRunning => _generatorTask != null && !_cancellationTokenSource.IsCancellationRequested;
+
         public readonly ContestModel ContestModel;
 
         public readonly LineupRequestModel RequestModel;
