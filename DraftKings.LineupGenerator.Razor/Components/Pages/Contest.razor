@@ -9,7 +9,7 @@
 @inject NavigationManager NavigationManager;
 @inject ILocalStorageService LocalStorageService;
 
-@if (contest == null)
+@if (contest == null || contestSearchModel == null)
 {
     <Button Color="ButtonColor.Primary" Loading="true" Style="margin:20px" />
 }
@@ -22,8 +22,28 @@ else
     </div>
     <h3>@contest.ContestDetail.Name</h3>
     <div class="contest-detail">
-        <div class="row description">
-            <p>@contest.ContestDetail.ContestSummary</p>
+        <p class="summary">@contest.ContestDetail.ContestSummary</p>
+        <div class="row">
+            <div class="col-sm-4">
+                <b>Game Type: </b> @contestSearchModel.GameType
+            </div>
+            <div class="col-sm-4">
+                <b>Entries: </b> @contestSearchModel.Entries / @contestSearchModel.MaxEntries
+            </div>
+            <div class="col-sm-4">
+                <b>Start Time: </b> @contestSearchModel.StartDateTimeDecription
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 money">
+                <b>Prize Pool: </b> @contestSearchModel.Prizes.ToString("C")
+            </div>
+            <div class="col-sm-4 money">
+                <b>Entry Fee: </b> @contestSearchModel.EntryFee.ToString("C")
+            </div>
+            <div class="col-sm-4">
+                <b>Multi-Entries: </b> @contestSearchModel.MultiEntries
+            </div>
         </div>
     </div>
 }
@@ -33,9 +53,18 @@ else
     public int Id { get; set; }
 
     private ContestModel? contest;
+    private ContestSearchModel? contestSearchModel;
 
     protected override async Task OnParametersSetAsync()
     {
+        var contests = await LocalStorageService.GetItemAsync<Dictionary<int, ContestSearchModel>>(Constants.LocalStorage.Contests);
+
+        if (!contests.ContainsKey(Id))
+        {
+            NavigationManager.NavigateTo("/");
+        }
+
+        contestSearchModel = contests[Id];
         contest = await ContestsClient.GetAsync(Id, default);
     }
 
@@ -47,6 +76,6 @@ else
 
         await LocalStorageService.SetItemAsync(Constants.LocalStorage.Contests, contests);
 
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo("/", replace: true);
     }
 }

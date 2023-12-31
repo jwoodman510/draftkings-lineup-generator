@@ -2,12 +2,23 @@
     text-align: end;
 }
 
-.contest-detail {
-    border: 1px solid var(--mid-grey);
-    border-radius: 10px;
-    padding: 10px;
+h3 {
+    font-family: var(--font-title);
 }
 
-.contest-detail .description {
-    color: var(--orange);
+.contest-detail {
+    margin: 20px 0;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    color: var(--font-light);
+    background-color: var(--dark);
 }
+
+    .contest-detail .summary {
+        color: var(--orange);
+    }
+
+    .contest-detail .money {
+        color: var(--money-green);
+    }
