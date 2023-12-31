@@ -1,4 +1,16 @@
-﻿html, body {
+﻿:root {
+    --orange: #f3601b;
+    --light-grey: #f7f7f7;
+    --mid-grey: #d6d5d5;
+    --font-light: #d7d7d7;
+    --money-green: #abe300;
+    --gold: #fcc700;
+    --font-title: nimbus,HelveticaNeue-CondensedBold,"Helvetica Neue","Arial Black",Arial,"Lucida Grande",sans-serif;
+    --font-label: 16px/30px nimbus,HelveticaNeue-CondensedBold,"Helvetica Neue","Arial Black",Arial,"Lucida Grande",sans-serif;
+    --font-text: 18px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -8,8 +20,8 @@ a, .btn-link {
 
 .btn-primary, .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
     color: #fff;
-    background-color: #f3601b;
-    border-color: #f3601b;
+    background-color: var(--orange);
+    border-color: var(--orange);
 }
 
 .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
@@ -17,7 +29,7 @@ a, .btn-link {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #f3601b;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem var(--orange);
 }
 
 .content {

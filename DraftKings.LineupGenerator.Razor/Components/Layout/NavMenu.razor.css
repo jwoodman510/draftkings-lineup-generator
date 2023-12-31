@@ -22,6 +22,7 @@
 
 .navbar-brand {
     font-size: 1.1rem;
+    font-family: var(--font-title);
 }
 
 .bi {
@@ -59,12 +60,14 @@
     }
 
     .nav-item ::deep a {
-        color: #d7d7d7;
+        color: var(--font-light);
         border-radius: 4px;
         height: 3rem;
         display: flex;
         align-items: center;
         line-height: 3rem;
+        font-family: var(--font-label);
+        text-transform: uppercase;
     }
 
         .nav-item ::deep a.active {
@@ -80,6 +83,7 @@
         .contest-nav-item ::deep a {
             height: unset;
             line-height: unset;
+            text-transform: unset;
         }
 
 .nav-scrollable {

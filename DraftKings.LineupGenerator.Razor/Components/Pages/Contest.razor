@@ -5,12 +5,13 @@
 @using DraftKings.LineupGenerator.Api.Draftables
 @using DraftKings.LineupGenerator.Models.Contests
 
+@inject IContestsClient ContestsClient;
 @inject NavigationManager NavigationManager;
-@inject ILocalStorageService LocalStorageService
+@inject ILocalStorageService LocalStorageService;
 
 @if (contest == null)
 {
-    <p><em>Loading...</em></p>
+    <Button Color="ButtonColor.Primary" Loading="true" Style="margin:20px" />
 }
 else
 {
@@ -19,22 +20,23 @@ else
             <Icon Name="IconName.Trash3Fill" Size="IconSize.x3" />
         </Button>
     </div>
-    <h3>@contest.Name</h3>
+    <h3>@contest.ContestDetail.Name</h3>
+    <div class="contest-detail">
+        <div class="row description">
+            <p>@contest.ContestDetail.ContestSummary</p>
+        </div>
+    </div>
 }
 
 @code {
     [Parameter]
     public int Id { get; set; }
 
-    private ContestSearchModel? contest;
+    private ContestModel? contest;
 
     protected override async Task OnParametersSetAsync()
     {
-        var contests = await LocalStorageService.GetItemAsync<Dictionary<int, ContestSearchModel>>(Constants.LocalStorage.Contests);
-
-        contest = contests.ContainsKey(Id)
-            ? contests[Id]
-            : default;
+        contest = await ContestsClient.GetAsync(Id, default);
     }
 
     private async Task RemoveContestAsync()

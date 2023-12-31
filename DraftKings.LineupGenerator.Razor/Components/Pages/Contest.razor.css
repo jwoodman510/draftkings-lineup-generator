@@ -1,3 +1,13 @@
 ﻿.trash-container {
     text-align: end;
 }
+
+.contest-detail {
+    border: 1px solid var(--mid-grey);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.contest-detail .description {
+    color: var(--orange);
+}
