@@ -21,7 +21,7 @@
 else
 {
     <div class="trash-container">
-        <Button @onclick="RemoveContestAsync">
+        <Button @onclick="RemoveContestAsync" Disabled="state.IsRunning">
             <Icon Name="IconName.Trash3Fill" Size="IconSize.x3" />
         </Button>
     </div>
@@ -64,10 +64,10 @@ else
             <div class="row">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-4">
-                    <b>Iterations: </b> @item.iterationCount
+                    <b>Iterations: </b> @item.iterationCount.ToString("n0")
                 </div>
                 <div class="col-sm-4">
-                    <b>Valid Lineups Found: </b> @item.validLineupCount
+                    <b>Valid Lineups Found: </b> @item.validLineupCount.ToString("n0")
                 </div>
                 <div class="col-sm-2"></div>
             </div>
