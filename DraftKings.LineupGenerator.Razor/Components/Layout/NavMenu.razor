@@ -1,11 +1,13 @@
 ﻿@using BlazorBootstrap
 @using DraftKings.LineupGenerator.Models.Contests
 @using DraftKings.LineupGenerator.Razor.Services
+@using DraftKings.LineupGenerator.Razor.State
 
 @implements IDisposable
 
 @inject IRecentContestService ContestService;
 @inject NavigationManager NavigationManager;
+@inject ContestStateProvider ContestStateProvider;
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
@@ -39,6 +41,10 @@
         {
             <div class="contest-nav-item nav-item px-3">
                 <NavLink class="nav-link" href="@($"contest/{contest.Id}")">
+                    @if (runningContests.Contains(contest.Id))
+                    {
+                        <Icon Name="IconName.Activity" Size="IconSize.x5" />
+                    }
                     <span class="nav-item-text">@contest.Name</span>
                 </NavLink>
             </div>
@@ -46,11 +52,32 @@
     </nav>
 </div>
 @code {
+    private Timer? timer;
+    private HashSet<int> runningContests = new HashSet<int>();
     private List<ContestSearchModel> contests = new List<ContestSearchModel>();
 
     protected override async Task OnInitializedAsync()
     {
         await UpdateContestsAsync();
+
+        timer = new Timer(async _ =>
+        {
+            await InvokeAsync(async () =>
+            {
+                runningContests.Clear();
+                foreach (var contest in contests)
+                {
+                    var contestState = await ContestStateProvider.GetOrCreateAsync(contest.Id);
+
+                    if (contestState.IsRunning)
+                    {
+                        runningContests.Add(contest.Id);
+                    }
+                }
+
+                StateHasChanged();
+            });
+        }, null, 0, 3000);
 
         NavigationManager.LocationChanged += LocationChanged;
         base.OnInitialized();
@@ -64,12 +91,13 @@
     async Task UpdateContestsAsync()
     {
         contests = (await ContestService.GetRecentContestsAsync()).ToList();
+
         StateHasChanged();
     }
 
     void IDisposable.Dispose()
     {
-        // Unsubscribe from the event when our component is disposed
+        timer?.Dispose();
         NavigationManager.LocationChanged -= LocationChanged;
     }
 }
