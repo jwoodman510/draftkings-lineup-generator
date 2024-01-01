@@ -64,6 +64,7 @@
     async Task UpdateContestsAsync()
     {
         contests = (await ContestService.GetRecentContestsAsync()).ToList();
+        StateHasChanged();
     }
 
     void IDisposable.Dispose()

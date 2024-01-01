@@ -26,6 +26,10 @@ else
         </Button>
     </div>
     <h3>@state.ContestModel.ContestDetail.Name</h3>
+    <div class="actions">
+        <Button Color="ButtonColor.Primary" @onclick="Generate" Disabled="state.IsRunning">Generate</Button>
+        <Button Color="ButtonColor.Secondary" @onclick="Cancel">Cancel</Button>
+    </div>
     <div class="contest-detail">
         <p class="summary">@state.ContestModel.ContestDetail.ContestSummary</p>
         <div class="row">
@@ -52,31 +56,67 @@ else
         </div>
     </div>
     <div class="generator-progress">
-        @if (state.IsRunning)
-        {
-            <Progress Class="mb-3">
-                <ProgressBar Type="ProgressType.StripedAndAnimated" Color="ProgressColor.Dark" Width="70" />
-            </Progress>
-        }
+        <Progress Class="mb-3">
+            <ProgressBar Type="ProgressType.StripedAndAnimated" Color="ProgressColor.Dark" Width="@(state.IsRunning ? 80 : 0)" />
+        </Progress>
         @foreach (var item in state.Progress)
         {
             <div class="row">
-                <div class="col-sm-4">
-                    <b>Generator: </b> @item.generator
-                </div>
+                <div class="col-sm-2"></div>
                 <div class="col-sm-4">
                     <b>Iterations: </b> @item.iterationCount
                 </div>
                 <div class="col-sm-4">
                     <b>Valid Lineups Found: </b> @item.validLineupCount
                 </div>
+                <div class="col-sm-2"></div>
             </div>
         }
     </div>
-    <div class="actions">
-        <Button Color="ButtonColor.Primary" @onclick="Generate">Generate</Button>
-        <Button Color="ButtonColor.Secondary" @onclick="Cancel">Cancel</Button>
-    </div>
+    @foreach (var lineupResult in state.Results.OrderBy(x => x.Description))
+    {
+        <h4>Generator: @lineupResult.Description</h4>
+        <div class="lineups-container row">
+            @foreach (var lineup in lineupResult.Lineups)
+            {
+                <div class="lineup-container col-md-6">
+                    <div class="lineup-card">
+                        <div class="row">
+                            <div class="aggregate projected-points col-md-6">
+                                <b>Projected Points: </b>@lineup.ProjectedFppg.ToString("F")
+                            </div>
+                            @if (lineup.Salary > 0)
+                            {
+                                <div class="aggregate salary col-md-6">
+                                    <b>Salary: </b>@lineup.Salary.ToString("C")
+                                </div>
+                            }
+                        </div>
+                        @foreach (var draftable in lineup.Draftables)
+                        {
+                            <div class="row draftable">
+                                <b class="col-md-2">
+                                    @draftable.RosterPosition
+                                </b>
+                                <span class="col-md-4">
+                                    @draftable.FirstName @draftable.LastName
+                                </span>
+                                <b class="projected-points col-md-3">
+                                    @draftable.ProjectedFppg.ToString("F")
+                                </b>
+                                @if (draftable.Salary > 0)
+                                {
+                                    <b class="salary col-md-3">
+                                        @draftable.Salary.ToString("C")
+                                    </b>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
 }
 
 @code {

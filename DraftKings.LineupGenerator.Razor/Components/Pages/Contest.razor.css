@@ -25,10 +25,35 @@ h3 {
 
 .generator-progress {
     margin: 20px 0;
+    padding: 20px;
     min-height: 40px;
     background-color: var(--mid-grey);
+}
+
+.lineup-container {
+    padding: 20px;
 }
 
 .actions {
     text-align: end;
 }
+
+.lineup-card {
+    padding: 10px 20px;
+    min-height: 200px;
+    border-radius: 30px;
+    background: var(--dark);
+    color: var(--font-light);
+}
+
+    .lineup-card .aggregate {
+        text-align: center;
+    }
+
+    .lineup-card .projected-points {
+        color: var(--gold);
+    }
+
+    .lineup-card .salary {
+        color: var(--money-green);
+    }

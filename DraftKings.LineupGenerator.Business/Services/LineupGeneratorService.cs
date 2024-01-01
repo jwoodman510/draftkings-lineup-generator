@@ -102,6 +102,11 @@ namespace DraftKings.LineupGenerator.Business.Services
             }
         }
 
+        public IEnumerable<LineupsModel> GetCurrentLineups()
+        {
+            return _lineupGenerators.SelectMany(x => x.GetCurrentLineups()).Where(x => x.Lineups.Count > 0);
+        }
+
         public IEnumerable<(string generator, long iterationCount, long validLineupCount)> GetProgress()
         {
             return _lineupGenerators

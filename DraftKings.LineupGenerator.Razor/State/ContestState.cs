@@ -44,7 +44,11 @@ namespace DraftKings.LineupGenerator.Razor.State
 
             _generatorTask = Task.Factory.StartNew(async () =>
             {
-                Results = await _lineupGeneratorService.GetAsync(RequestModel, _cancellationTokenSource.Token);
+                var results = await _lineupGeneratorService.GetAsync(RequestModel, _cancellationTokenSource.Token);
+
+                _cancellationTokenSource.Cancel();
+
+                Results = results;
             }, TaskCreationOptions.LongRunning);
 
             _progressTask = Task.Factory.StartNew(async () =>
@@ -52,6 +56,7 @@ namespace DraftKings.LineupGenerator.Razor.State
                 while (!_cancellationTokenSource.IsCancellationRequested)
                 {
                     Progress = _lineupGeneratorService.GetProgress().ToList();
+                    Results = _lineupGeneratorService.GetCurrentLineups().ToList();
 
                     await Task.Delay(TimeSpan.FromSeconds(10), _cancellationTokenSource.Token);
                 }
@@ -60,8 +65,6 @@ namespace DraftKings.LineupGenerator.Razor.State
 
         public void Cancel()
         {
-            Results.Clear();
-            Progress.Clear();
             _cancellationTokenSource.Cancel();
             _progressTask = null;
             _generatorTask = null;

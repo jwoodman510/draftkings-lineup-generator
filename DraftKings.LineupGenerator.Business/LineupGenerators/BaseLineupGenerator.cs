@@ -113,6 +113,12 @@ namespace DraftKings.LineupGenerator.Business.LineupGenerators
             });
         }
 
+        public IEnumerable<LineupsModel> GetCurrentLineups() => LineupsBags.Select(lineupsBag => new LineupsModel
+        {
+            Description = lineupsBag.Key,
+            Lineups = lineupsBag.Value.GetBestLineups(int.MaxValue).ToList()
+        });
+
         public (long iterationCount, long validLineupCount) GetProgress() => IncrementalLogger.GetProgress();
     }
 }
