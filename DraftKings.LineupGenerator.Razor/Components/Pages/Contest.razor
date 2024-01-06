@@ -5,14 +5,15 @@
 @using DraftKings.LineupGenerator.Business.Interfaces
 @using DraftKings.LineupGenerator.Models.Contests
 @using DraftKings.LineupGenerator.Models.Lineups
+@using DraftKings.LineupGenerator.Razor.Contests
 @using DraftKings.LineupGenerator.Razor.Services
-@using DraftKings.LineupGenerator.Razor.State
 
 @implements IDisposable
 
 @inject NavigationManager NavigationManager;
 @inject ContestStateProvider ContestStateProvider;
 @inject IRecentContestService RecentContestService;
+@inject IContestHistoryService ContestHistoryService;
 
 @if (state?.ContestModel == null || searchModel == null)
 {
@@ -144,6 +145,12 @@ else
         {
             await RemoveContestAsync();
         }
+
+        if (state != null)
+        {
+            state.ResultsChanged -= UpdateContestHistoryAsync;
+            state.ResultsChanged += UpdateContestHistoryAsync;
+        }
     }
 
     private void Cancel()
@@ -158,6 +165,33 @@ else
         StateHasChanged();
     }
 
+    private async void UpdateContestHistoryAsync(object sender, ContestState contestState)
+    {
+        await InvokeAsync(StateHasChanged);
+
+        var history = await ContestHistoryService.GetAsync(contestState.Id);
+
+        if (history == null)
+        {
+            history = new ContestHistoryModel
+            {
+                Id = contestState.Id,
+                ContestModel = contestState.ContestModel,
+                RequestModel = contestState.RequestModel,
+                Results = contestState.Results
+            };
+
+            await ContestHistoryService.CreateAsync(history);
+        }
+        else
+        {
+            history.RequestModel = contestState.RequestModel;
+            history.Results = contestState.Results;
+
+            await ContestHistoryService.UpdateAsync(history);
+        }
+    }
+
     private async Task RemoveContestAsync()
     {
         await RecentContestService.RemoveRecentContestAsync(Id);
@@ -168,5 +202,10 @@ else
     void IDisposable.Dispose()
     {
         timer?.Dispose();
+
+        if (state != null)
+        {
+            state.ResultsChanged -= UpdateContestHistoryAsync;
+        }
     }
 }

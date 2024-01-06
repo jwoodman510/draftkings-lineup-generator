@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Concurrent;
 
-namespace DraftKings.LineupGenerator.Razor.State
+namespace DraftKings.LineupGenerator.Razor.Contests
 {
     public class ContestStateProvider
     {

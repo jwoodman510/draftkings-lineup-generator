@@ -14,11 +14,11 @@ namespace DraftKings.LineupGenerator.Razor.Services
 
         public async Task AddRecentContestAsync(ContestSearchModel contestSearchModel)
         {
-            var contests = await _localStorageService.GetItemAsync<Dictionary<int, ContestSearchModel>>(Constants.LocalStorage.Contests) ?? [];
+            var contests = await _localStorageService.GetItemAsync<Dictionary<int, ContestSearchModel>>(Constants.LocalStorage.RecentContests) ?? [];
 
             contests[contestSearchModel.Id] = contestSearchModel;
 
-            await _localStorageService.SetItemAsync(Constants.LocalStorage.Contests, contests);
+            await _localStorageService.SetItemAsync(Constants.LocalStorage.RecentContests, contests);
         }
 
         public async Task<ContestSearchModel?> GetRecentContestAsync(int id)
@@ -30,14 +30,14 @@ namespace DraftKings.LineupGenerator.Razor.Services
 
         public async Task<IEnumerable<ContestSearchModel>> GetRecentContestsAsync()
         {
-            var currentContests = await _localStorageService.GetItemAsync<Dictionary<int, ContestSearchModel>>(Constants.LocalStorage.Contests);
+            var currentContests = await _localStorageService.GetItemAsync<Dictionary<int, ContestSearchModel>>(Constants.LocalStorage.RecentContests);
 
             return currentContests?.Values?.ToList() ?? [];
         }
 
         public async Task RemoveRecentContestAsync(int id)
         {
-            var contests = await _localStorageService.GetItemAsync<Dictionary<int, ContestSearchModel>>(Constants.LocalStorage.Contests);
+            var contests = await _localStorageService.GetItemAsync<Dictionary<int, ContestSearchModel>>(Constants.LocalStorage.RecentContests);
 
             if (contests == null)
             {
@@ -46,7 +46,7 @@ namespace DraftKings.LineupGenerator.Razor.Services
 
             contests.Remove(id);
 
-            await _localStorageService.SetItemAsync(Constants.LocalStorage.Contests, contests);
+            await _localStorageService.SetItemAsync(Constants.LocalStorage.RecentContests, contests);
         }
     }
 }

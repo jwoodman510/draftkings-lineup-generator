@@ -4,7 +4,8 @@
     {
         public static class LocalStorage
         {
-            public const string Contests = "Contests";
+            public const string RecentContests = "RecentContests";
+            public const string ContestHistory = "ContestHistory";
         }
     }
 }

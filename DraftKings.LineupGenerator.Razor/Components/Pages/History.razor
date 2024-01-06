@@ -1,6 +1,19 @@
 ﻿@page "/history"
 
+@using DraftKings.LineupGenerator.Razor.Contests
+@using DraftKings.LineupGenerator.Razor.Services
+
+@inject IContestHistoryService ContestHistoryService;
+
 <h1>History</h1>
 
 <p>This page is going to show recently generated lineups</p>
 
+@code {
+    private List<ContestHistoryModel> history = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        history = (await ContestHistoryService.GetAsync()).ToList();
+    }
+}
