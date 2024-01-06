@@ -1,0 +1,172 @@
+﻿@page "/contest/{id:int}"
+
+@using BlazorBootstrap
+@using DraftKings.LineupGenerator.Api.Draftables
+@using DraftKings.LineupGenerator.Business.Interfaces
+@using DraftKings.LineupGenerator.Models.Contests
+@using DraftKings.LineupGenerator.Models.Lineups
+@using DraftKings.LineupGenerator.Razor.Services
+@using DraftKings.LineupGenerator.Razor.State
+
+@implements IDisposable
+
+@inject NavigationManager NavigationManager;
+@inject ContestStateProvider ContestStateProvider;
+@inject IRecentContestService RecentContestService;
+
+@if (state?.ContestModel == null || searchModel == null)
+{
+    <Button Color="ButtonColor.Primary" Loading="true" Style="margin:20px" />
+}
+else
+{
+    <div class="trash-container">
+        <Button @onclick="RemoveContestAsync" Disabled="state.IsRunning">
+            <Icon Name="IconName.Trash3Fill" Size="IconSize.x3" />
+        </Button>
+    </div>
+    <h3>@state.ContestModel.ContestDetail.Name</h3>
+    <div class="actions">
+        <Button Color="ButtonColor.Primary" @onclick="Generate" Disabled="state.IsRunning">Generate</Button>
+        <Button Color="ButtonColor.Secondary" @onclick="Cancel" Disabled="!state.IsRunning">Cancel</Button>
+    </div>
+    <div class="contest-detail">
+        <p class="summary">@state.ContestModel.ContestDetail.ContestSummary</p>
+        <div class="row">
+            <div class="col-sm-4">
+                <b>Game Type: </b> @searchModel.GameType
+            </div>
+            <div class="col-sm-4">
+                <b>Entries: </b> @state.ContestModel.ContestDetail.Entries / @state.ContestModel.ContestDetail.MaxEntries
+            </div>
+            <div class="col-sm-4">
+                <b>Start Time: </b> @searchModel.StartDateTimeDecription
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <b>Multi-Entries: </b> @state.ContestModel.ContestDetail.MaximumEntriesPerUser
+            </div>
+            <div class="col-sm-4 money">
+                <b>Entry Fee: </b> @searchModel.EntryFee.ToString("C")
+            </div>
+            <div class="col-sm-4 money">
+                <b>Prize Pool: </b> @searchModel.Prizes.ToString("C")
+            </div>
+        </div>
+    </div>
+    <div class="generator-progress">
+        <Progress Class="mb-3">
+            <ProgressBar Type="@(state.IsRunning ? ProgressType.StripedAndAnimated : ProgressType.Default)" Color="ProgressColor.Dark" Width="@(state.IsRunning ? 80 : state.Results.Count > 0 ? 100 : 0)" />
+        </Progress>
+        @foreach (var item in state.Progress)
+        {
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <b>Iterations: </b> @item.iterationCount.ToString("n0")
+                </div>
+                <div class="col-sm-4">
+                    <b>Valid Lineups Found: </b> @item.validLineupCount.ToString("n0")
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        }
+    </div>
+    @foreach (var lineupResult in state.Results.OrderBy(x => x.Description))
+    {
+        <h4>Generator: @lineupResult.Description</h4>
+        <div class="lineups-container row">
+            @foreach (var lineup in lineupResult.Lineups)
+            {
+                <div class="lineup-container col-12 col-lg-6">
+                    <div class="lineup-card">
+                        <div class="row">
+                            <div class="aggregate projected-points col-md-6">
+                                <b>Projected Points: </b>@lineup.ProjectedFppg.ToString("F")
+                            </div>
+                            @if (lineup.Salary > 0)
+                            {
+                                <div class="aggregate salary col-md-6">
+                                    <b>Salary: </b>@lineup.Salary.ToString("C")
+                                </div>
+                            }
+                        </div>
+                        @foreach (var draftable in lineup.Draftables)
+                        {
+                            <div class="row draftable">
+                                <b class="col-2 col-md-2">
+                                    @draftable.RosterPosition
+                                </b>
+                                <span class="col-4 col-md-4">
+                                    @draftable.FirstName @draftable.LastName
+                                </span>
+                                <b class="projected-points col-2 col-md-3">
+                                    @draftable.ProjectedFppg.ToString("F")
+                                </b>
+                                @if (draftable.Salary > 0)
+                                {
+                                    <b class="salary col-2 col-md-3">
+                                        @draftable.Salary.ToString("C")
+                                    </b>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Timer? timer;
+    private ContestState? state;
+    private ContestSearchModel? searchModel;
+
+    protected override void OnInitialized()
+    {
+        timer = new Timer(async _ =>
+        {
+            await InvokeAsync(StateHasChanged);
+        }, null, 0, 10000);
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        state = await ContestStateProvider.GetOrCreateAsync(Id);
+        searchModel = await RecentContestService.GetRecentContestAsync(Id);
+
+        if (state?.ContestModel == null || searchModel == null)
+        {
+            await RemoveContestAsync();
+        }
+    }
+
+    private void Cancel()
+    {
+        state?.Cancel();
+        StateHasChanged();
+    }
+
+    private void Generate()
+    {
+        state?.Generate();
+        StateHasChanged();
+    }
+
+    private async Task RemoveContestAsync()
+    {
+        await RecentContestService.RemoveRecentContestAsync(Id);
+
+        NavigationManager.NavigateTo("/", replace: true);
+    }
+
+    void IDisposable.Dispose()
+    {
+        timer?.Dispose();
+    }
+}
