@@ -1,5 +1,6 @@
 ﻿@page "/history"
 
+@using BlazorBootstrap
 @using DraftKings.LineupGenerator.Razor.Contests
 @using DraftKings.LineupGenerator.Razor.Services
 
@@ -7,13 +8,57 @@
 
 <h1>History</h1>
 
-<p>This page is going to show recently generated lineups</p>
+<Grid @ref="grid"
+      TItem="ContestHistoryModel"
+      DataProvider="ContestHistoryDataProvider"
+      Responsive="true"
+      ItemsPerPageText="Items per page"
+      PageSizeSelectorVisible="false"
+      PaginationItemsTextFormat=""
+      PageSizeSelectorItems="new int[0]"
+      Class="table table-hover table-bordered table-striped">
+    <GridColumn TItem="ContestHistoryModel" HeaderText="Name" PropertyName="Name" SortKeySelector="x => x.ContestModel.ContestDetail.Name">
+        @context.ContestModel.ContestDetail.Name
+    </GridColumn>
+    <GridColumn TItem="ContestHistoryModel" HeaderText="Entry Fee" PropertyName="EntryFee" SortKeySelector="x => x.ContestModel.ContestDetail.EntryFee">
+        @context.ContestModel.ContestDetail.EntryFee.ToString("C")
+    </GridColumn>
+    <GridColumn TItem="ContestHistoryModel" HeaderText="Generated At" PropertyName="UpdatedDateTime" SortKeySelector="x => x.UpdatedDateTime">
+        @context.UpdatedDateTime.ToLocalTime().ToShortDateString() @@ @context.UpdatedDateTime.ToLocalTime().ToLongTimeString()
+    </GridColumn>
+    <GridColumn TItem="ContestHistoryModel" HeaderText="Results" PropertyName="Results" SortKeySelector="x => x.Results.Sum(y => y.Lineups.Count)">
+        @context.Results.Sum(y => y.Lineups.Count)
+    </GridColumn>
+    <GridColumn TItem="ContestHistoryModel" HeaderText="Start Time" PropertyName="ContestStartTime" SortKeySelector="x => x.ContestModel.ContestDetail.ContestStartTime">
+        @context.ContestModel.ContestDetail.ContestStartTime.ToLocalTime().ToShortDateString() @@ @context.ContestModel.ContestDetail.ContestStartTime.ToLocalTime().ToLongTimeString()
+    </GridColumn>
+    <GridColumn TItem="ContestHistoryModel" HeaderText="">
+        <Button @onclick="@(() => DeleteItemAsync(@context))">
+            <Icon Name="IconName.Trash3Fill" Size="IconSize.x5" />
+        </Button>
+    </GridColumn>
+</Grid>
 
 @code {
-    private List<ContestHistoryModel> history = [];
+    private Grid<ContestHistoryModel> grid = default!;
+    private List<ContestHistoryModel>? history = null;
 
-    protected override async Task OnInitializedAsync()
+    private async Task<GridDataProviderResult<ContestHistoryModel>> ContestHistoryDataProvider(GridDataProviderRequest<ContestHistoryModel> request)
     {
-        history = (await ContestHistoryService.GetAsync()).ToList();
+        if (history == null)
+        {
+            history = (await ContestHistoryService.GetAsync())
+                .OrderByDescending(x => x.UpdatedDateTime)
+                .ToList();
+        }
+
+        return request.ApplyTo(history);
+    }
+
+    private async Task DeleteItemAsync(ContestHistoryModel item)
+    {
+        await ContestHistoryService.DeleteAsync(item);
+        history?.Remove(item);
+        await grid.RefreshDataAsync();
     }
 }

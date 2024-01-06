@@ -169,6 +169,7 @@ else
     {
         await InvokeAsync(StateHasChanged);
 
+        var now = DateTime.UtcNow;
         var history = await ContestHistoryService.GetAsync(contestState.Id);
 
         if (history == null)
@@ -178,7 +179,9 @@ else
                 Id = contestState.Id,
                 ContestModel = contestState.ContestModel,
                 RequestModel = contestState.RequestModel,
-                Results = contestState.Results
+                Results = contestState.Results,
+                CreatedDateTime = now,
+                UpdatedDateTime = now
             };
 
             await ContestHistoryService.CreateAsync(history);
@@ -187,6 +190,7 @@ else
         {
             history.RequestModel = contestState.RequestModel;
             history.Results = contestState.Results;
+            history.UpdatedDateTime = now;
 
             await ContestHistoryService.UpdateAsync(history);
         }

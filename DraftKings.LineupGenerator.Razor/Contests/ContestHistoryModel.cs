@@ -7,10 +7,14 @@ namespace DraftKings.LineupGenerator.Razor.Contests
     {
         public Guid Id { get; set; }
 
-        public ContestModel ContestModel { get; set; }
+        public DateTime CreatedDateTime { get; set; }
 
-        public LineupRequestModel RequestModel { get; set; }
+        public DateTime UpdatedDateTime { get; set; }
 
-        public List<LineupsModel> Results { get; set; }
+        public ContestModel ContestModel { get; set; } = default!;
+
+        public LineupRequestModel RequestModel { get; set; } = default!;
+
+        public List<LineupsModel> Results { get; set; } = default!;
     }
 }
