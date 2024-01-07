@@ -9,6 +9,7 @@ namespace DraftKings.LineupGenerator.Razor.Contests
         private readonly IContestsClient _contestsClient;
         private readonly IServiceProvider _serviceProvider;
         private readonly ConcurrentDictionary<int, ContestState> _stateDictionary = new();
+        private readonly ConcurrentDictionary<Guid, ContestState> _historyDictionary = new();
 
         public ContestStateProvider(
             IContestsClient contestsClient,
@@ -32,6 +33,20 @@ namespace DraftKings.LineupGenerator.Razor.Contests
             _stateDictionary[Id] = state;
 
             return state;
+        }
+
+        public Task<ContestState> GetOrCreateAsync(ContestHistoryModel contestHistoryModel)
+        {
+            if (_historyDictionary.TryGetValue(contestHistoryModel.Id, out var state))
+            {
+                return Task.FromResult(state);
+            }
+
+            state = new ContestState(contestHistoryModel, _serviceProvider.CreateScope());
+
+            _historyDictionary[contestHistoryModel.Id] = state;
+
+            return Task.FromResult(state);
         }
     }
 }

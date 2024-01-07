@@ -29,12 +29,12 @@
 
     protected override async Task<ContestState?> GetOrCreateContestStateAsync()
     {
-        if (history?.ContestModel == null)
+        if (history == null)
         {
             return default;
         }
 
-        return await ContestStateProvider.GetOrCreateAsync(history.ContestModel.Id);
+        return await ContestStateProvider.GetOrCreateAsync(history);
     }
 
     protected override Task<ContestSearchModel?> GetContestSearchModelAsync()
