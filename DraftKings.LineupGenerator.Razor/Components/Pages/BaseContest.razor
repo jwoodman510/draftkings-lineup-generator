@@ -98,6 +98,39 @@ else
             </div>
         </div>
         <hr />
+        <div class="row">
+            <div class="col-6">
+                <label class="form-label">Include Players</label>
+                <InputText @bind-Value="@playerInclusionRequests"
+                           class="form-control"
+                           title="Comma delimited list of players to include in lineups."/>
+            </div>
+            <div class="col-6">
+                <label class="form-label">Exclude Players</label>
+                <InputText @bind-Value="@playerExclusionRequests"
+                           class="form-control"
+                           title="Comma delimited list of players to exclude from lineups." />
+            </div>
+        </div>
+        <hr />
+        @if (state.SearchModel.GameType.Contains("showdown", StringComparison.OrdinalIgnoreCase))
+        {
+            <div class="row">
+                <div class="col-6">
+                    <label class="form-label">Include Captains</label>
+                    <InputText @bind-Value="@captainInclusionRequests"
+                               class="form-control"
+                               title="Comma delimited list of captains to include in lineups." />
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Exclude Captains</label>
+                    <InputText @bind-Value="@captainExclusionRequests"
+                               class="form-control"
+                               title="Comma delimited list of captains to exclude from lineups." />
+                </div>
+            </div>
+        }
+        <hr />
     </div>
     <div class="generator-progress">
         <Progress Class="mb-3">
@@ -172,6 +205,11 @@ else
     private ContestState? state;
     private ContestSearchModel? searchModel;
 
+    private string? playerInclusionRequests;
+    private string? playerExclusionRequests;
+    private string? captainInclusionRequests;
+    private string? captainExclusionRequests;
+
     protected override void OnInitialized()
     {
         timer = new Timer(async _ =>
@@ -205,6 +243,11 @@ else
             await RemoveContestAsync();
         }
 
+        playerInclusionRequests = GetPlayerRequests(state?.RequestModel?.PlayerRequests?.CaptainPlayerNameRequests);
+        playerExclusionRequests = GetPlayerRequests(state?.RequestModel?.PlayerRequests?.CaptainPlayerNameRequests);
+        captainInclusionRequests = GetPlayerRequests(state?.RequestModel?.PlayerRequests?.CaptainPlayerNameRequests);
+        captainExclusionRequests = GetPlayerRequests(state?.RequestModel?.PlayerRequests?.CaptainPlayerNameRequests);
+
         if (state != null)
         {
             state.SearchModel = searchModel;
@@ -221,8 +264,34 @@ else
 
     private void Generate()
     {
-        state?.Generate();
+        if (state != null)
+        {
+            state.RequestModel.PlayerRequests = new PlayerRequestsModel
+                {
+                    PlayerNameRequests = ParsePlayerRequests(playerInclusionRequests),
+                    PlayerNameExclusionRequests = ParsePlayerRequests(playerExclusionRequests),
+                    CaptainPlayerNameRequests = ParsePlayerRequests(captainInclusionRequests),
+                    CaptainPlayerNameExclusionRequests = ParsePlayerRequests(captainExclusionRequests)
+                };
+
+            state?.Generate();
+        }
+
         StateHasChanged();
+    }
+
+    private string? GetPlayerRequests(HashSet<string>? values)
+    {
+        return values == null ? default : string.Join(',', values);
+    }
+
+    private HashSet<string> ParsePlayerRequests(string input)
+    {
+        return input?.Split(',')
+                    ?.Select(x => x.Trim())
+                    ?.Where(x => !string.IsNullOrEmpty(x))
+                    ?.ToHashSet(StringComparer.OrdinalIgnoreCase)
+                    ?? new HashSet<string>();
     }
 
     private async void UpdateContestHistoryAsync(object sender, ContestState contestState)
