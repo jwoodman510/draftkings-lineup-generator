@@ -55,6 +55,7 @@ else
         </div>
     </div>
     <div class="options-container">
+        <hr />
         <div class="row">
             <div class="col-6 col-lg-3">
                 <Switch Label="Include Questionable"
@@ -81,6 +82,22 @@ else
                 </Switch>
             </div>
         </div>
+        <hr />
+        <div class="row">
+            <div class="col-6">
+                <label class="form-label">Lineup Count</label>
+                <NumberInput TValue="int" @bind-Value="state.RequestModel.LineupCount"
+                            title="The number of lineups each generator should create."
+                             Placeholder="Lineup Count" EnableMinMax="true" Min="1" Max="100" />
+            </div>
+            <div class="col-6">
+                <label class="form-label">Min FPPG</label>
+                <NumberInput TValue="decimal" @bind-Value="state.RequestModel.MinFppg"
+                             title="Filters players by their minimum fantasy points per game."
+                             Placeholder="Min FPPG" EnableMinMax="true" Min="0" Max="decimal.MaxValue" />
+            </div>
+        </div>
+        <hr />
     </div>
     <div class="generator-progress">
         <Progress Class="mb-3">
