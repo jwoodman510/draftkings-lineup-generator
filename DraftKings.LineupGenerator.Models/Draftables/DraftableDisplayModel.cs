@@ -16,6 +16,8 @@
 
         public decimal Salary { get; set; }
 
+        public string Position { get; set; }
+
         public string RosterPosition { get; set; }
 
         public int OpponentRank { get; set; }
@@ -27,6 +29,7 @@
             string lastName,
             decimal fppg,
             decimal salary,
+            string position,
             string rosterPosition,
             decimal projectedFppg,
             int opponentRank)
@@ -37,6 +40,7 @@
             LastName = lastName;
             Fppg = fppg;
             Salary = salary;
+            Position = position;
             ProjectedFppg = projectedFppg;
             RosterPosition = rosterPosition;
             OpponentRank = opponentRank;
@@ -51,6 +55,7 @@
                 LastName,
                 Fppg,
                 Salary,
+                Position,
                 RosterPosition,
                 projectedFppg,
                 OpponentRank);

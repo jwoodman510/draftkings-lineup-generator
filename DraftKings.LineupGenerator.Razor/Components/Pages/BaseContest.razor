@@ -143,7 +143,11 @@ else
                                     @draftable.RosterPosition
                                 </b>
                                 <span class="col-4 col-md-4">
-                                    @draftable.FirstName @draftable.LastName
+                                    @if (draftable.RosterPosition != draftable.Position)
+                                    {
+                                        <b>(@draftable.Position) </b>
+                                    }
+                                    <span>@draftable.FirstName @draftable.LastName</span>
                                 </span>
                                 <b class="projected-points col-2 col-md-3">
                                     @draftable.ProjectedFppg.ToString("F")

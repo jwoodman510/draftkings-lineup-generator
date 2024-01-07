@@ -16,6 +16,26 @@ namespace DraftKings.LineupGenerator.Caching.Services
         private static string CacheExpirationsFilepath => Path.Combine(CacheDirectory, "_expirations.json");
         private static string CacheDirectory => Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "cache");
 
+        public async Task ClearAsync(CancellationToken cancellationToken)
+        {
+            await _keySemaphore.WaitAsync(cancellationToken);
+
+            try
+            {
+                if (Directory.Exists(CacheDirectory))
+                {
+                    foreach (var fileInfo in new DirectoryInfo(CacheDirectory).GetFiles())
+                    {
+                        fileInfo.Delete();
+                    }
+                }
+            }
+            finally
+            {
+                _keySemaphore.Release();
+            }
+        }
+
         public async Task<T> GetOrCreateAsync<T>(string key, TimeSpan expiration, Func<Task<T>> valueFactory, CancellationToken cancellationToken)
             where T : class
         {
