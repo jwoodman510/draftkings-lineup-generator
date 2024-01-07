@@ -4,6 +4,7 @@
 @using DraftKings.LineupGenerator.Razor.Contests
 @using DraftKings.LineupGenerator.Razor.Services
 
+@inject NavigationManager Navigation;
 @inject IContestHistoryService ContestHistoryService;
 
 <h1>History</h1>
@@ -18,7 +19,7 @@
       PageSizeSelectorItems="new int[0]"
       Class="table table-hover table-bordered table-striped">
     <GridColumn TItem="ContestHistoryModel" HeaderText="Name" PropertyName="Name" SortKeySelector="x => x.ContestModel.ContestDetail.Name">
-        @context.ContestModel.ContestDetail.Name
+        <a href="/" @onclick:preventDefault @onclick="@(() => ItemSelected(context))">@context.ContestModel.ContestDetail.Name</a>
     </GridColumn>
     <GridColumn TItem="ContestHistoryModel" HeaderText="Entry Fee" PropertyName="EntryFee" SortKeySelector="x => x.ContestModel.ContestDetail.EntryFee">
         @context.ContestModel.ContestDetail.EntryFee.ToString("C")
@@ -60,5 +61,10 @@
         await ContestHistoryService.DeleteAsync(item);
         history?.Remove(item);
         await grid.RefreshDataAsync();
+    }
+
+    private void ItemSelected(ContestHistoryModel item)
+    {
+        Navigation.NavigateTo($"history/{item.Id}");
     }
 }

@@ -15,6 +15,8 @@ namespace DraftKings.LineupGenerator.Razor.Contests
 
         public readonly LineupRequestModel RequestModel;
 
+        public ContestSearchModel SearchModel { get; set; }
+
         public List<LineupsModel> Results { get; private set; } = [];
 
         public event EventHandler<ContestState> ResultsChanged

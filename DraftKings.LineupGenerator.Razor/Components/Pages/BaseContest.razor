@@ -1,6 +1,4 @@
-﻿@page "/contest/{id:int}"
-
-@using BlazorBootstrap
+﻿@using BlazorBootstrap
 @using DraftKings.LineupGenerator.Api.Draftables
 @using DraftKings.LineupGenerator.Business.Interfaces
 @using DraftKings.LineupGenerator.Models.Contests
@@ -121,9 +119,6 @@ else
 }
 
 @code {
-    [Parameter]
-    public int Id { get; set; }
-
     private Timer? timer;
     private ContestState? state;
     private ContestSearchModel? searchModel;
@@ -136,10 +131,25 @@ else
         }, null, 0, 10000);
     }
 
+    protected virtual Task<ContestState?> GetOrCreateContestStateAsync()
+    {
+        return Task.FromResult<ContestState?>(null);
+    }
+
+    protected virtual Task<ContestSearchModel?> GetContestSearchModelAsync()
+    {
+        return Task.FromResult<ContestSearchModel?>(null);
+    }
+
+    protected virtual Task RemoveContestAsync()
+    {
+        return Task.CompletedTask;
+    }
+
     protected override async Task OnParametersSetAsync()
     {
-        state = await ContestStateProvider.GetOrCreateAsync(Id);
-        searchModel = await RecentContestService.GetRecentContestAsync(Id);
+        state = await GetOrCreateContestStateAsync();
+        searchModel = await GetContestSearchModelAsync();
 
         if (state?.ContestModel == null || searchModel == null)
         {
@@ -148,6 +158,7 @@ else
 
         if (state != null)
         {
+            state.SearchModel = searchModel;
             state.ResultsChanged -= UpdateContestHistoryAsync;
             state.ResultsChanged += UpdateContestHistoryAsync;
         }
@@ -177,6 +188,7 @@ else
             history = new ContestHistoryModel
             {
                 Id = contestState.Id,
+                SearchModel = contestState.SearchModel,
                 ContestModel = contestState.ContestModel,
                 RequestModel = contestState.RequestModel,
                 Results = contestState.Results,
@@ -194,13 +206,6 @@ else
 
             await ContestHistoryService.UpdateAsync(history);
         }
-    }
-
-    private async Task RemoveContestAsync()
-    {
-        await RecentContestService.RemoveRecentContestAsync(Id);
-
-        NavigationManager.NavigateTo("/", replace: true);
     }
 
     void IDisposable.Dispose()

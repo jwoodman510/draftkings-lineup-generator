@@ -13,6 +13,8 @@ namespace DraftKings.LineupGenerator.Razor.Contests
 
         public ContestModel ContestModel { get; set; } = default!;
 
+        public ContestSearchModel SearchModel { get; set; } = default!;
+
         public LineupRequestModel RequestModel { get; set; } = default!;
 
         public List<LineupsModel> Results { get; set; } = default!;
