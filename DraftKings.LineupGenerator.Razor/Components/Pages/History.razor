@@ -1,8 +1,10 @@
 ﻿@page "/history"
 
 @using BlazorBootstrap
+@using DraftKings.LineupGenerator.Models.Lineups
 @using DraftKings.LineupGenerator.Razor.Contests
 @using DraftKings.LineupGenerator.Razor.Services
+@using Newtonsoft.Json
 
 @inject NavigationManager Navigation;
 @inject IContestHistoryService ContestHistoryService;
@@ -31,7 +33,10 @@
         @context.UpdatedDateTime.ToLocalTime().ToShortDateString() @@ @context.UpdatedDateTime.ToLocalTime().ToLongTimeString()
     </GridColumn>
     <GridColumn TItem="ContestHistoryModel" HeaderText="Results" PropertyName="Results" SortKeySelector="x => x.Results.Sum(y => y.Lineups.Count)">
-        @context.Results.Sum(y => y.Lineups.Count)
+        <Tooltip Title="@(JsonConvert.SerializeObject(context.RequestModel, Formatting.Indented))"
+                 role="button" @onclick="@(() => ShowFiltersModalAsync(context))" Style="color:var(--orange)">
+            @context.Results.Sum(y => y.Lineups.Count)
+        </Tooltip>
     </GridColumn>
     <GridColumn TItem="ContestHistoryModel" HeaderText="Start Time" PropertyName="ContestStartTime" SortKeySelector="x => x.ContestModel.ContestDetail.ContestStartTime">
         @context.ContestModel.ContestDetail.ContestStartTime.ToLocalTime().ToShortDateString() @@ @context.ContestModel.ContestDetail.ContestStartTime.ToLocalTime().ToLongTimeString()
@@ -42,8 +47,86 @@
         </Button>
     </GridColumn>
 </Grid>
+<Modal @ref="filtersModal" Size="ModalSize.ExtraLarge" Title="@(selectedItem?.ContestModel?.ContestDetail?.Name)">
+    <BodyTemplate>
+        @if (selectedItem != null)
+        {
+            <div class="row">
+                <div class="col-6 col-lg-3">
+                    <Switch Label="Include Questionable"
+                            Disabled="true"
+                            @bind-Value="selectedItem.RequestModel.IncludeQuestionable">
+                    </Switch>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <Switch Label="Include Base Salary"
+                            Disabled="true"
+                            @bind-Value="selectedItem.RequestModel.IncludeBaseSalary">
+                    </Switch>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <Switch Label="Exclude Defense"
+                            Disabled="true"
+                            @bind-Value="selectedItem.RequestModel.ExcludeDefense">
+                    </Switch>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <Switch Label="Exclude Kickers"
+                            Disabled="true"
+                            @bind-Value="selectedItem.RequestModel.ExcludeKickers">
+                    </Switch>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-6">
+                    <label class="form-label">Lineup Count</label>
+                    <NumberInput TValue="int" @bind-Value="selectedItem.RequestModel.LineupCount"
+                                 Disabled="true"
+                                 Placeholder="Lineup Count" EnableMinMax="true" Min="1" Max="100" />
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Min FPPG</label>
+                    <NumberInput TValue="decimal" @bind-Value="selectedItem.RequestModel.MinFppg"
+                                 Disabled="true"
+                                 Placeholder="Min FPPG" EnableMinMax="true" Min="0" Max="decimal.MaxValue" />
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-6">
+                    <label class="form-label">Include Players</label>
+                    <input class="form-control" disabled value="@(string.Join(',', selectedItem.RequestModel?.PlayerRequests?.PlayerNameRequests ?? new HashSet<string>()))" />
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Exclude Players</label>
+                    <input class="form-control" disabled value="@(string.Join(',', selectedItem.RequestModel?.PlayerRequests?.PlayerNameExclusionRequests ?? new HashSet<string>()))" />
+                </div>
+            </div>
+            @if (selectedItem.SearchModel?.GameType?.Contains("showdown", StringComparison.OrdinalIgnoreCase) == true)
+            {
+                <div class="row">
+                    <div class="col-6">
+                        <label class="form-label">Include Captains</label>
+                        <input class="form-control" disabled value="@(string.Join(',', selectedItem.RequestModel?.PlayerRequests?.CaptainPlayerNameRequests ?? new HashSet<string>()))" />
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">Exclude Captains</label>
+                        <input class="form-control" disabled value="@(string.Join(',', selectedItem.RequestModel?.PlayerRequests?.CaptainPlayerNameExclusionRequests ?? new HashSet<string>()))" />
+                    </div>
+                </div>
+            }
+        }
+    </BodyTemplate>
+    <FooterTemplate>
+        <Button Color="ButtonColor.Secondary" @onclick="HideFiltersModalAsync">Close</Button>
+    </FooterTemplate>
+</Modal>
 
 @code {
+    private Modal filtersModal = default!;
+    private ContestHistoryModel? selectedItem = default;
+
     private Grid<ContestHistoryModel> grid = default!;
     private List<ContestHistoryModel>? history = null;
 
@@ -69,5 +152,17 @@
     private void ItemSelected(ContestHistoryModel item)
     {
         Navigation.NavigateTo($"history/{item.Id}");
+    }
+
+    private async Task ShowFiltersModalAsync(ContestHistoryModel item)
+    {
+        selectedItem = item;
+        await filtersModal.ShowAsync();
+    }
+
+    private async Task HideFiltersModalAsync()
+    {
+        selectedItem = null;
+        await filtersModal.HideAsync();
     }
 }

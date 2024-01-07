@@ -11,6 +11,8 @@
 @inject IContestsClient ContestsClient;
 @inject IRecentContestService ContestService;
 
+<h1>Contests</h1>
+
 <Tabs EnableFadeEffect="true" OnShowing="@(args => OnTabShowingAsync(args))">
     @foreach (var sportType in availableSports)
     {

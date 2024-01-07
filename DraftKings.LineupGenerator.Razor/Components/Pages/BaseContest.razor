@@ -113,7 +113,7 @@ else
             </div>
         </div>
         <hr />
-        @if (state.SearchModel.GameType.Contains("showdown", StringComparison.OrdinalIgnoreCase))
+        @if (state?.SearchModel?.GameType?.Contains("showdown", StringComparison.OrdinalIgnoreCase) == true)
         {
             <div class="row">
                 <div class="col-6">
@@ -243,10 +243,10 @@ else
             await RemoveContestAsync();
         }
 
-        playerInclusionRequests = GetPlayerRequests(state?.RequestModel?.PlayerRequests?.CaptainPlayerNameRequests);
-        playerExclusionRequests = GetPlayerRequests(state?.RequestModel?.PlayerRequests?.CaptainPlayerNameRequests);
+        playerInclusionRequests = GetPlayerRequests(state?.RequestModel?.PlayerRequests?.PlayerNameRequests);
+        playerExclusionRequests = GetPlayerRequests(state?.RequestModel?.PlayerRequests?.PlayerNameExclusionRequests);
         captainInclusionRequests = GetPlayerRequests(state?.RequestModel?.PlayerRequests?.CaptainPlayerNameRequests);
-        captainExclusionRequests = GetPlayerRequests(state?.RequestModel?.PlayerRequests?.CaptainPlayerNameRequests);
+        captainExclusionRequests = GetPlayerRequests(state?.RequestModel?.PlayerRequests?.CaptainPlayerNameExclusionRequests);
 
         if (state != null)
         {
@@ -285,7 +285,7 @@ else
         return values == null ? default : string.Join(',', values);
     }
 
-    private HashSet<string> ParsePlayerRequests(string input)
+    private HashSet<string> ParsePlayerRequests(string? input)
     {
         return input?.Split(',')
                     ?.Select(x => x.Trim())
