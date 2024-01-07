@@ -21,6 +21,9 @@
     <GridColumn TItem="ContestHistoryModel" HeaderText="Name" PropertyName="Name" SortKeySelector="x => x.ContestModel.ContestDetail.Name">
         <a href="/" @onclick:preventDefault @onclick="@(() => ItemSelected(context))">@context.ContestModel.ContestDetail.Name</a>
     </GridColumn>
+    <GridColumn TItem="ContestHistoryModel" HeaderText="Game Type" PropertyName="GameType" SortKeySelector="x => x.SearchModel.GameType">
+        @context.SearchModel.GameType
+    </GridColumn>
     <GridColumn TItem="ContestHistoryModel" HeaderText="Entry Fee" PropertyName="EntryFee" SortKeySelector="x => x.ContestModel.ContestDetail.EntryFee">
         @context.ContestModel.ContestDetail.EntryFee.ToString("C")
     </GridColumn>

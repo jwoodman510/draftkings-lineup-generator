@@ -23,6 +23,10 @@ h3 {
         color: var(--money-green);
     }
 
+.options-container {
+    padding: 20px;
+}
+
 .generator-progress {
     margin: 20px 0;
     padding: 20px;
