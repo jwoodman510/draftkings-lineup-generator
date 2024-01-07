@@ -1,4 +1,7 @@
 ﻿@page "/"
+@using Blazored.LocalStorage
+
+@inject ILocalStorageService LocalStorageService;
 
 <h1>Hello, world!</h1>
 
@@ -15,3 +18,15 @@ TODO:
 <li>
     some history items
 </li>
+<div>
+    <Button @onclick="ClearHistoryAsync">
+            Clear History
+    </Button>
+</div>
+
+@code {
+    private async Task ClearHistoryAsync()
+    {
+        await LocalStorageService.RemoveItemAsync(Constants.LocalStorage.ContestHistory);
+    }
+}
