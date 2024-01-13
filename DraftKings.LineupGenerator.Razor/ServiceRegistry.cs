@@ -12,7 +12,7 @@ namespace DraftKings.LineupGenerator.Razor
             return services
                 .AddBlazorBootstrap()
                 .AddBlazoredLocalStorage()
-                .AddSingleton<ContestStateProvider>()
+                .AddScoped<ContestStateProvider>()
                 .AddTransient<IRecentContestService, RecentContestService>()
                 .AddTransient<IContestHistoryService, ContestHistoryService>();
         }
