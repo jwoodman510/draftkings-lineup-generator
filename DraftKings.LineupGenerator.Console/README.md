@@ -1,24 +1,40 @@
 ## DraftKings.LineupGenerator.Console
 
-### Command Line Arguments:
-  - Required:
-    - `--contestId {int}` Contest identifier from URL
-  - Optional:
-    - `--include-questionable` *[default: false]* Includes draftables with a questionable status.
-    - `--include-base-salary` *[default: false]* Includes draftables with the base salary (lowest possible).
-    - `--output-format` *[default=text]* The console output format. One of (json | text).
-    - `--give-me` The names of players to include in generated lineups (comma delimited) e.g. `--give-me "mahomes, travis kelce"`
-    - `--exclude-player` The names of players to exclude in generated lineups (comma delimited)
-  - Option (Classic Only):
-    - `--min-fppg` *[default: 10.0]* Minimum fantasy points per game (per player - excluding DST).
-  - Option (Showdown Only):
-    - `--exclude-defense` *[default: false]* Excludes DST positions from lineups.
-    - `--exclude-kickers` *[default: false]* Excludes Kicker positions from lineups.
-    - `--give-me-captain` The names of captain players to include in generated lineups (comma delimited) e.g. `--give-me-captain "mahomes, travis kelce"`
-    - `--exclude-captain` The names of captain players to exclude in generated lineups (comma delimited)
-
-### Install from NuGet
+### Install as a .NET CLI tool from [NuGet](https://www.nuget.org/packages/Woodman.DKGen/)
 ```
 dotnet tool install --global Woodman.DKGen
+```
+
+## Command Line Arguments
+
+| Name | Description | Default | Short Alias |
+| ---- | ----------- | ------- | ----------- |
+| --contestId | Required DraftKings contest numeric identifier |  | -c |
+| --include-questionable | Includes draftables with a questionable status. | false | -iq |
+| --include-base-salary | Includes draftables with the base salary (lowest possible). | false | -ibs |
+| --output-format | The console output format (json or text). | text | -f |
+| --give-me | The names of players to include in generated lineups (comma delimited) | | -g |
+| --exclude-player | The names of players to exclude in generated lineups (comma delimited) | | -ep |
+
+## Classic Contest Command Line Arguments
+| Name | Description | Default | Short Alias |
+| ---- | ----------- | ------- | ----------- |
+| --min-fppg | Minimum fantasy points per game (per player - excluding DST). | 10.0 | -mp |
+
+## Showdown Contest Command Line Arguments
+| Name | Description | Default | Short Alias |
+| ---- | ----------- | ------- | ----------- |
+| --exclude-defense | Excludes DST positions from lineups. | false | -ed |
+| --exclude-kickers | Excludes Kicker positions from lineups. | false | -ek |
+| --give-me-captain | The names of captain players to include in generated lineups (comma delimited) | | -gc |
+| --exclude-captain | The names of captain players to exclude in generated lineups (comma delimited) | | -ec |
+
+## Example Command:
+The following command will generate lineups including questionable players, only including lineups with Josh Allen and Travic Kelce
+
+```
+dotnet tool install --global Woodman.DKGen
+
+dkgen -c 1234 -iq -g "Josh Allen, Kelce"
 ```
 
