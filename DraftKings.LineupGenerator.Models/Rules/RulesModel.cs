@@ -6,6 +6,8 @@ namespace DraftKings.LineupGenerator.Models.Rules
     {
         public string GameTypeName { get; set; }
 
+        public string GameTypeDescription { get; set; }
+
         public string DraftType { get; set; }
 
         public SalaryCapModel SalaryCap { get; set; }

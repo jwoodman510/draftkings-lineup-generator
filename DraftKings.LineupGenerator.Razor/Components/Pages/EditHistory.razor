@@ -1,0 +1,54 @@
+﻿@page "/history/{historyId:guid}"
+
+@using DraftKings.LineupGenerator.Models.Contests
+@using DraftKings.LineupGenerator.Razor.Contests
+@using DraftKings.LineupGenerator.Razor.Services
+
+@inherits BaseContest
+
+@inject NavigationManager NavigationManager;
+@inject ContestStateProvider ContestStateProvider;
+@inject IContestHistoryService ContestHistoryService;
+
+@{
+    base.BuildRenderTree(__builder);
+}
+
+@code {
+    [Parameter]
+    public Guid HistoryId { get; set; }
+
+    private ContestHistoryModel? history;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        history = await ContestHistoryService.GetAsync(HistoryId);
+
+        await base.OnParametersSetAsync();
+    }
+
+    protected override async Task<ContestState?> GetOrCreateContestStateAsync()
+    {
+        if (history == null)
+        {
+            return default;
+        }
+
+        return await ContestStateProvider.GetOrCreateAsync(history);
+    }
+
+    protected override Task<ContestSearchModel?> GetContestSearchModelAsync()
+    {
+        return Task.FromResult<ContestSearchModel?>(history?.SearchModel);
+    }
+
+    protected override async Task RemoveContestAsync()
+    {
+        if (history != null)
+        {
+            await ContestHistoryService.DeleteAsync(history);
+        }
+
+        NavigationManager.NavigateTo("/", replace: true);
+    }
+}

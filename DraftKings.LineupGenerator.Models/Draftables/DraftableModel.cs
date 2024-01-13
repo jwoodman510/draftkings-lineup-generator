@@ -39,6 +39,7 @@ namespace DraftKings.LineupGenerator.Models.Draftables
                 LastName,
                 this.GetFppg(draftables.DraftStats),
                 Salary,
+                Position,
                 this.GetRosterPosition(rules),
                 this.GetProjectedSalary(draftables, rules),
                 this.GetOpponentRank(draftables.DraftStats));

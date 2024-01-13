@@ -13,7 +13,7 @@ namespace DraftKings.LineupGenerator.Api.Rules
             IHttpClientFactory httpClientFactory)
             : base(cacheService, httpClientFactory) { }
 
-        public Task<RulesModel> GetAsync(int contestId, CancellationToken cancellationToken) =>
-            GetAsync<RulesModel>($"https://api.draftkings.com/lineups/v1/gametypes/{contestId}/rules?format=json", cancellationToken);
+        public Task<RulesModel> GetAsync(int gameTypeId, CancellationToken cancellationToken) =>
+            GetAsync<RulesModel>($"https://api.draftkings.com/lineups/v1/gametypes/{gameTypeId}/rules?format=json", cancellationToken);
     }
 }

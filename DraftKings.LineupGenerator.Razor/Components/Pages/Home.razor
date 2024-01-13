@@ -1,0 +1,32 @@
+﻿@page "/"
+@using Blazored.LocalStorage
+@using DraftKings.LineupGenerator.Caching
+
+@inject ICacheService CacheService;
+@inject ILocalStorageService LocalStorageService;
+
+<h1>Hello, world!</h1>
+
+TODO:
+<li>
+    some app description here
+</li>
+<li>
+    start by looking for a contest -- router link here
+</li>
+<li>
+    some recent contests
+</li>
+<li>
+    some history items
+</li>
+<div>
+    <Button @onclick="@(() => CacheService.ClearAsync(default))">
+            Clear Cache
+    </Button>
+</div>
+<div>
+    <Button @onclick="@(() => LocalStorageService.RemoveItemAsync(Constants.LocalStorage.ContestHistory))">
+        Clear History
+    </Button>
+</div>

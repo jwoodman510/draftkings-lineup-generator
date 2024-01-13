@@ -32,6 +32,16 @@ namespace DraftKings.LineupGenerator.Business.Services
 
         public async Task<List<LineupsModel>> GetAsync(LineupRequestModel request, CancellationToken cancellationToken)
         {
+            IDisposable logScope = null;
+
+            if (request.CorrelationId == null)
+            {
+                logScope = _logger.BeginScope(new Dictionary<string, object>
+                {
+                    { "correlationId", Guid.NewGuid() }
+                });
+            }
+
             var formatter = _formatters.FirstOrDefault(x => x.Type.Equals(request.OutputFormat, StringComparison.OrdinalIgnoreCase))
                 ?? _formatters.First();
 
@@ -62,6 +72,8 @@ namespace DraftKings.LineupGenerator.Business.Services
 
             var lineups = await Task.WhenAll(tasks);
 
+            logScope?.Dispose();
+
             return lineups.SelectMany(x => x).ToList();
         }
 
@@ -88,6 +100,23 @@ namespace DraftKings.LineupGenerator.Business.Services
             {
                 _logger.LogWarning("No Lineups Found.");
             }
+        }
+
+        public IEnumerable<LineupsModel> GetCurrentLineups()
+        {
+            return _lineupGenerators.SelectMany(x => x.GetCurrentLineups()).Where(x => x.Lineups.Count > 0);
+        }
+
+        public IEnumerable<(string generator, long iterationCount, long validLineupCount)> GetProgress()
+        {
+            return _lineupGenerators
+                .Select(x => new
+                {
+                    Generator = x.GetType().Name,
+                    Progress = x.GetProgress()
+                })
+                .Where(x => x.Progress.iterationCount > 0)
+                .Select(x => (x.Generator, x.Progress.iterationCount, x.Progress.validLineupCount));
         }
     }
 }

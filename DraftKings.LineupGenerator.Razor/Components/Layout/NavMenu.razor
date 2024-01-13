@@ -1,0 +1,103 @@
+﻿@using BlazorBootstrap
+@using DraftKings.LineupGenerator.Models.Contests
+@using DraftKings.LineupGenerator.Razor.Contests
+@using DraftKings.LineupGenerator.Razor.Services
+
+@implements IDisposable
+
+@inject IRecentContestService ContestService;
+@inject NavigationManager NavigationManager;
+@inject ContestStateProvider ContestStateProvider;
+
+<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">DKGEN</a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <Icon Name="IconName.HouseDoor" Size="IconSize.x3" />
+                <span class="nav-item-text">Home</span>
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="contests">
+                <Icon Name="IconName.Search" Size="IconSize.x3" />
+                <span class="nav-item-text">Contests</span>
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="history">
+                <Icon Name="IconName.ClockHistory" Size="IconSize.x3" />
+                <span class="nav-item-text">History</span>
+            </NavLink>
+        </div>
+        @foreach (var contest in contests)
+        {
+            <div class="contest-nav-item nav-item px-3">
+                <NavLink class="nav-link" href="@($"contest/{contest.Id}")">
+                    @if (runningContests.Contains(contest.Id))
+                    {
+                        <Icon Name="IconName.Activity" Size="IconSize.x5" />
+                    }
+                    <span class="nav-item-text">@contest.Name</span>
+                </NavLink>
+            </div>
+        }
+    </nav>
+</div>
+@code {
+    private Timer? timer;
+    private HashSet<int> runningContests = new HashSet<int>();
+    private List<ContestSearchModel> contests = new List<ContestSearchModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdateContestsAsync();
+
+        timer = new Timer(async _ =>
+        {
+            await InvokeAsync(async () =>
+            {
+                runningContests.Clear();
+                foreach (var contest in contests)
+                {
+                    var contestState = await ContestStateProvider.GetOrCreateAsync(contest.Id);
+
+                    if (contestState.IsRunning)
+                    {
+                        runningContests.Add(contest.Id);
+                    }
+                }
+
+                StateHasChanged();
+            });
+        }, null, 0, 3000);
+
+        NavigationManager.LocationChanged += LocationChanged;
+        base.OnInitialized();
+    }
+
+    async void LocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        await UpdateContestsAsync();
+    }
+
+    async Task UpdateContestsAsync()
+    {
+        contests = (await ContestService.GetRecentContestsAsync()).ToList();
+
+        StateHasChanged();
+    }
+
+    void IDisposable.Dispose()
+    {
+        timer?.Dispose();
+        NavigationManager.LocationChanged -= LocationChanged;
+    }
+}

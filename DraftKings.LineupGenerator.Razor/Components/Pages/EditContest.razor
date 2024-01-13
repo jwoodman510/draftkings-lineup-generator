@@ -1,0 +1,38 @@
+﻿@page "/contest/{contestId:int}"
+
+@using DraftKings.LineupGenerator.Models.Contests
+@using DraftKings.LineupGenerator.Razor.Contests
+@using DraftKings.LineupGenerator.Razor.Services
+
+@inherits BaseContest
+
+@inject NavigationManager NavigationManager;
+@inject ContestStateProvider ContestStateProvider;
+@inject IRecentContestService RecentContestService;
+@inject IContestHistoryService ContestHistoryService;
+
+@{
+    base.BuildRenderTree(__builder);
+}
+
+@code {
+    [Parameter]
+    public int ContestId { get; set; }
+
+    protected override async Task<ContestState?> GetOrCreateContestStateAsync()
+    {
+        return await ContestStateProvider.GetOrCreateAsync(ContestId);
+    }
+
+    protected override async Task<ContestSearchModel?> GetContestSearchModelAsync()
+    {
+        return await RecentContestService.GetRecentContestAsync(ContestId);
+    }
+
+    protected override async Task RemoveContestAsync()
+    {
+        await RecentContestService.RemoveRecentContestAsync(ContestId);
+
+        NavigationManager.NavigateTo("/", replace: true);
+    }
+}

@@ -88,6 +88,8 @@ namespace DraftKings.LineupGenerator.Business.Logging
 
         public void IncrementValidLineups() => Interlocked.Increment(ref _validLineupCount);
 
+        public (long iterationCount, long validLineupCount) GetProgress() => (Interlocked.Read(ref _iterationCount), Interlocked.Read(ref _validLineupCount));
+
         private Task LogIterationAsync(string logger, CancellationToken _)
         {
             var now = TimeOnly.FromDateTime(DateTime.Now);

@@ -14,6 +14,16 @@ namespace DraftKings.LineupGenerator.Caching.Services
             _cache = cache;
         }
 
+        public Task ClearAsync(CancellationToken cancellationToken)
+        {
+            if (_cache is MemoryCache memoryCache)
+            {
+                memoryCache.Clear();
+            }
+
+            return Task.CompletedTask;
+        }
+
         public async Task<T> GetOrCreateAsync<T>(string key, TimeSpan expiration, Func<Task<T>> valueFactory, CancellationToken cancellationToken)
             where T : class
         {

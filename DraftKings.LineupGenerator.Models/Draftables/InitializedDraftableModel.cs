@@ -43,6 +43,7 @@ namespace DraftKings.LineupGenerator.Models.Draftables
                 LastName,
                 Fppg,
                 Salary,
+                Position,
                 RosterPosition,
                 ProjectedSalary,
                 OpponentRank);
