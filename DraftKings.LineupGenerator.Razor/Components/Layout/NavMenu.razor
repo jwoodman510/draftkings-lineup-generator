@@ -90,7 +90,7 @@
 
     async Task UpdateContestsAsync()
     {
-        contests = (await ContestService.GetRecentContestsAsync()).ToList();
+        contests = (await ContestService.GetRecentContestsAsync()).Reverse().Take(5).ToList();
 
         StateHasChanged();
     }
