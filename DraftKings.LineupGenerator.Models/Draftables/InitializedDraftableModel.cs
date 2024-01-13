@@ -7,8 +7,6 @@ namespace DraftKings.LineupGenerator.Models.Draftables
     {
         public decimal Fppg { get; }
 
-        public string Position { get; }
-
         public string RosterPosition { get; }
 
         public decimal ProjectedSalary { get; }
