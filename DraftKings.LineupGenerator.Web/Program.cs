@@ -7,6 +7,10 @@ using DraftKings.LineupGenerator.Caching;
 using DraftKings.LineupGenerator.Razor.Services;
 using Microsoft.Extensions.Http;
 using DraftKings.LineupGenerator.Web.Services;
+using DraftKings.LineupGenerator.Business.Logging;
+using Serilog;
+
+Log.Logger = SerilogConfiguration.Build(logToFile: false).CreateLogger();
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

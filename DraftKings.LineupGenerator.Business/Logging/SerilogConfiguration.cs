@@ -8,12 +8,19 @@ namespace DraftKings.LineupGenerator.Business.Logging
     {
         private const string MetricsNamespace = "DraftKings.LineupGenerator.Business.Metrics";
 
-        public static LoggerConfiguration Build()
+        public static LoggerConfiguration Build(bool logToConsole = true, bool logToFile = true)
         {
             var configuration = new LoggerConfiguration();
 
-            AddFileSink(configuration);
-            AddConsoleSink(configuration);
+            if (logToFile)
+            {
+                AddFileSink(configuration);
+            }
+
+            if (logToConsole)
+            {
+                AddConsoleSink(configuration);
+            }
 
             return configuration;
         }
