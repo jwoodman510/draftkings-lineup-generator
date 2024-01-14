@@ -30,6 +30,7 @@ h1 {
     font-family: var(--font-label);
 }
 
+.btn.btn-primary,
 .btn-primary {
     --bs-btn-bg: var(--orange);
     --bs-btn-border-color: var(--orange);
@@ -41,6 +42,7 @@ h1 {
     --bs-btn-disabled-border-color: var(--orange);
 }
 
+    .btn.btn-primary:focus,
     .btn-primary:focus {
         background-color: var(--orange);
         border-color: var(--orange);
