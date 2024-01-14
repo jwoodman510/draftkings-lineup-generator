@@ -19,19 +19,32 @@ h1 {
     font-family: var(--font-title);
 }
 
-button.btn-primary, button.btn-primary:active, button.btn-primary:focus, button.btn-primary:hover {
-    color: #fff;
-    background-color: var(--orange);
-    border-color: var(--orange);
+.accordion {
+    --bs-accordion-active-color: var(--dark);
+    --bs-accordion-active-bg: var(--mid-grey);
+    --bs-accordion-btn-focus-border-color: var(--money-green);
+    --bs-accordion-btn-focus-box-shadow: var(--money-green);
 }
 
-button.btn-primary:active, button.btn-primary:focus, button.btn-primary:hover {
-    border-color: var(--money-green);
+.accordion .accordion-header {
+    font-family: var(--font-label);
 }
 
-button.btn:focus, button.btn:active:focus, button.btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem var(--orange);
+.btn-primary {
+    --bs-btn-bg: var(--orange);
+    --bs-btn-border-color: var(--orange);
+    --bs-btn-hover-bg: var(--orange);
+    --bs-btn-hover-border-color: var(--orange);
+    --bs-btn-active-bg: var(--orange);
+    --bs-btn-active-border-color: var(--orange);
+    --bs-btn-disabled-bg: var(--orange);
+    --bs-btn-disabled-border-color: var(--orange);
 }
+
+    .btn-primary:focus {
+        background-color: var(--orange);
+        border-color: var(--orange);
+    }
 
 input.form-check-input:checked {
     border-color: var(--orange);

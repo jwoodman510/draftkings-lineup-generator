@@ -1,0 +1,59 @@
+﻿@page "/settings"
+
+@using BlazorBootstrap;
+@using Blazored.LocalStorage
+@using DraftKings.LineupGenerator.Caching
+@using DraftKings.LineupGenerator.Razor.Contests
+@using DraftKings.LineupGenerator.Razor.Services
+
+@inject ICacheService CacheService;
+@inject ILocalStorageService LocalStorageService;
+@inject IRecentContestService RecentContestService;
+@inject ContestStateProvider ContestStateProvider;
+
+<h1>Settings</h1>
+
+<Accordion Class="settings-accordion">
+    <AccordionItem IsActive="true">
+        <TitleTemplate>
+            <h4>
+                <Icon Name="IconName.Database" />Data
+            </h4>            
+        </TitleTemplate>
+        <Content>
+            <div class="settings-data">
+                <Button Color="ButtonColor.Primary" @onclick="@(() => LocalStorageService.RemoveItemAsync(Constants.LocalStorage.ContestHistory))">
+                    Clear History
+                </Button>
+                <Button Color="ButtonColor.Primary" @onclick="@(() => RecentContestService.RemoveAllAsync())">
+                    Clear Recent Contests
+                </Button>
+                <Button Color="ButtonColor.Primary" @onclick="@(() => CacheService.ClearAsync(default))">
+                    Clear Cache
+                </Button>
+                <Button Color="ButtonColor.Primary" @onclick="clearDataModal.ShowAsync">
+                    Clear All Data
+                </Button>
+            </div>
+        </Content>
+    </AccordionItem>
+</Accordion>
+<Modal @ref="clearDataModal" Title="Are you sure you want to clear all of your data?">
+    <FooterTemplate>
+        <Button Color="ButtonColor.Primary" @onclick="ClearAllDataAsync">Confirm</Button>
+        <Button Color="ButtonColor.Secondary" @onclick="clearDataModal.HideAsync">Cancel</Button>
+    </FooterTemplate>
+</Modal>
+
+@code {
+    private Modal clearDataModal = default!;
+
+    private async Task ClearAllDataAsync()
+    {
+        await RecentContestService.RemoveAllAsync();
+        await CacheService.ClearAsync(default);
+        await LocalStorageService.ClearAsync(default);
+        ContestStateProvider.Reset();
+        await clearDataModal.HideAsync();
+    }
+}

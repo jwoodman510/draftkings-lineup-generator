@@ -48,5 +48,17 @@ namespace DraftKings.LineupGenerator.Razor.Contests
 
             return Task.FromResult(state);
         }
+
+        public void Reset()
+        {
+            _historyDictionary.Clear();
+            
+            foreach (var state in _stateDictionary.Values)
+            {
+                state.Dispose();
+            }
+
+            _stateDictionary.Clear();
+        }
     }
 }

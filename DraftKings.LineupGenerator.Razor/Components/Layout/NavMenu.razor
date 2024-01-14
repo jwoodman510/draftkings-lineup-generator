@@ -37,8 +37,15 @@
                 <span class="nav-item-text">History</span>
             </NavLink>
         </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="settings">
+                <Icon Name="IconName.Gear" Size="IconSize.x3" />
+                <span class="nav-item-text">Settings</span>
+            </NavLink>
+        </div>
         @foreach (var contest in contests)
         {
+            <hr />
             <div class="contest-nav-item nav-item px-3">
                 <NavLink class="nav-link" href="@($"contest/{contest.Id}")">
                     @if (runningContests.Contains(contest.Id))
@@ -65,6 +72,12 @@
             await InvokeAsync(async () =>
             {
                 runningContests.Clear();
+
+                if ((await ContestService.GetRecentContestsAsync()).Count() == 0)
+                {
+                    contests.Clear();
+                }
+
                 foreach (var contest in contests)
                 {
                     var contestState = await ContestStateProvider.GetOrCreateAsync(contest.Id);

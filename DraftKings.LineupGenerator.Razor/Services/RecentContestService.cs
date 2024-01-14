@@ -48,5 +48,10 @@ namespace DraftKings.LineupGenerator.Razor.Services
 
             await _localStorageService.SetItemAsync(Constants.LocalStorage.RecentContests, contests);
         }
+
+        public async Task RemoveAllAsync()
+        {
+            await _localStorageService.RemoveItemAsync(Constants.LocalStorage.RecentContests);
+        }
     }
 }

@@ -1,0 +1,6 @@
+.settings-data {
+    display: grid;
+    grid-row-gap: 20px;
+    grid-column-gap: 20px;
+    grid-template-columns: 1fr 1fr;
+}

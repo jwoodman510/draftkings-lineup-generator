@@ -66,8 +66,14 @@ namespace DraftKings.LineupGenerator.Business.Logging
             {
                 subLogger.Filter.ByIncludingOnly(logEvent =>
                 {
-                    return logEvent.Properties.TryGetValue("SourceContext", out var logEventProperty) &&
-                        logEventProperty is ScalarValue scalarValue &&
+                    if (!logEvent.Properties.ContainsKey("SourceContext"))
+                    {
+                        return false;
+                    }
+
+                    var logEventProperty = logEvent.Properties["SourceContext"];
+
+                    return logEventProperty is ScalarValue scalarValue &&
                         scalarValue.Value.ToString().StartsWith("DraftKings") &&
                         !scalarValue.Value.ToString().StartsWith(MetricsNamespace);
                 });
