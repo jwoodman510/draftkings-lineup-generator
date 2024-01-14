@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Components\Pages\Home.razor.css" />
     <None Remove="README.md" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Components\Pages\Home.razor.css" />
     <Content Include="README.md" />
   </ItemGroup>
 

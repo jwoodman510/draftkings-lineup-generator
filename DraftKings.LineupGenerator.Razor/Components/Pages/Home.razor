@@ -1,18 +1,21 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+@using BlazorBootstrap;
 
-TODO:
-<li>
-    some app description here
-</li>
-<li>
-    start by looking for a contest -- router link here
-</li>
-<li>
-    some recent contests
-</li>
-<li>
-    some history items
-</li>
+<h1>Welcome to DKGEN</h1>
+
+<div class="contest-search">
+    <Card>
+        <img class="rounded-top" src="_content/DraftKings.LineupGenerator.Razor/images/turf.jpeg" />
+        <CardBody>
+            <CardTitle>Find a Contest</CardTitle>
+            <CardText Class="text-muted">
+                Get started by searching for a contest from one of the sports below
+            </CardText>
+            <CardLink To="contests?sportType=NFL">NFL</CardLink>
+            <CardLink To="contests?sportType=CFB">CFB</CardLink>
+            <CardLink To="contests?sportType=XFL">XFL</CardLink>
+        </CardBody>
+    </Card>
+</div>
 

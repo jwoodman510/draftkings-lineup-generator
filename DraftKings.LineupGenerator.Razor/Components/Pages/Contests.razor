@@ -13,10 +13,10 @@
 
 <h1>Contests</h1>
 
-<Tabs EnableFadeEffect="true" OnShowing="@(args => OnTabShowingAsync(args))">
+<Tabs @ref="Tabs" EnableFadeEffect="true" OnShowing="@(args => OnTabShowingAsync(args))">
     @foreach (var sportType in availableSports)
     {
-            <Tab Title="@sportType" IsActive="availableSports.IndexOf(sportType) == 0">
+            <Tab Name="@sportType" Title="@sportType" IsActive="availableSports.IndexOf(sportType) == 0">
                 <Content>
                 @if (!contestsDictionary.TryGetValue(sportType, out var contestsSearchModel))
                 {
@@ -69,6 +69,11 @@
 @code {
     [Inject] public IJSRuntime JS { get; set; } = default!;
 
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? SportType { get; set; }
+
+    public Tabs? Tabs { get; set; }
     public GridSettings? Settings { get; set; }
 
     private static readonly List<string> availableSports = new List<string>
@@ -85,6 +90,11 @@
     protected override async Task OnInitializedAsync()
     {
         contestsDictionary[activeTab] = await ContestsClient.SearchAsync(activeTab, default);
+
+        if (!string.IsNullOrEmpty(SportType) && availableSports.Contains(SportType) && Tabs != null)
+        {
+            await Tabs.ShowTabByNameAsync(SportType);
+        }
     }
 
     private async Task OnTabShowingAsync(TabsEventArgs args)
