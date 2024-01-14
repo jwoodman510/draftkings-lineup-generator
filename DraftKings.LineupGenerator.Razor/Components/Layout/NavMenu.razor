@@ -96,7 +96,7 @@
         base.OnInitialized();
     }
 
-    async void LocationChanged(object sender, LocationChangedEventArgs e)
+    async void LocationChanged(object? sender, LocationChangedEventArgs e)
     {
         await UpdateContestsAsync();
     }
