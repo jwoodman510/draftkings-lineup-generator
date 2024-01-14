@@ -51,6 +51,15 @@ input.form-check-input:checked {
     background-color: var(--orange);
 }
 
+.card-container {
+    margin: 20px;
+    display: flex;
+    min-width: 200px;
+    max-width: 600px;
+    justify-content: center;
+}
+
+
 .content {
     padding-top: 1.1rem;
 }
