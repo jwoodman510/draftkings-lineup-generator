@@ -11,5 +11,7 @@ namespace DraftKings.LineupGenerator.Razor.Services
         Task<IEnumerable<ContestSearchModel>> GetRecentContestsAsync();
 
         Task RemoveRecentContestAsync(int id);
+
+        Task RemoveAllAsync();
     }
 }

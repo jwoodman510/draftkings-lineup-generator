@@ -4,6 +4,7 @@
 @using DraftKings.LineupGenerator.Models.Contests
 @using DraftKings.LineupGenerator.Models.Lineups
 @using DraftKings.LineupGenerator.Razor.Contests
+@using DraftKings.LineupGenerator.Razor.Logging
 @using DraftKings.LineupGenerator.Razor.Services
 
 @implements IDisposable
@@ -13,7 +14,7 @@
 @inject IRecentContestService RecentContestService;
 @inject IContestHistoryService ContestHistoryService;
 
-@if (state?.ContestModel == null || searchModel == null)
+@if (state == null || state.ContestModel == null || searchModel == null)
 {
     <Button Color="ButtonColor.Primary" Loading="true" Style="margin:20px" />
 }
@@ -134,23 +135,32 @@ else
     </div>
     <div class="generator-progress">
         <Progress Class="mb-3">
-            <ProgressBar Type="@(state.IsRunning ? ProgressType.StripedAndAnimated : ProgressType.Default)" Color="ProgressColor.Dark" Width="@(state.IsRunning ? 80 : state.Results.Count > 0 ? 100 : 0)" />
+            <ProgressBar Type="@(state?.IsRunning == true ? ProgressType.StripedAndAnimated : ProgressType.Default)" Color="ProgressColor.Dark" Width="@(state?.IsRunning == true ? 80 : state?.Results?.Count > 0 ? 100 : 0)" />
         </Progress>
-        @foreach (var item in state.Progress)
+        @foreach (var item in state?.Progress ?? Enumerable.Empty<(string, long iterationCount, long validLineupCount)>())
         {
             <div class="row">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-4">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-5">
                     <b>Iterations: </b> @item.iterationCount.ToString("n0")
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-5">
                     <b>Valid Lineups Found: </b> @item.validLineupCount.ToString("n0")
                 </div>
-                <div class="col-sm-2"></div>
+                <div class="col-sm-1"></div>
+            </div>
+        }
+        @if (state?.IsRunning == true)
+        {
+            <div class="logs">
+                @foreach (var item in InMemorySink.LogEvents)
+                {
+                    <div>@item</div>
+                }
             </div>
         }
     </div>
-    @foreach (var lineupResult in state.Results.OrderBy(x => x.Description))
+    @foreach (var lineupResult in state?.Results?.OrderBy(x => x.Description) ?? Enumerable.Empty<LineupsModel>())
     {
         <h4>Generator: @lineupResult.Description</h4>
         <div class="lineups-container row">
@@ -250,9 +260,13 @@ else
 
         if (state != null)
         {
-            state.SearchModel = searchModel;
             state.ResultsChanged -= UpdateContestHistoryAsync;
             state.ResultsChanged += UpdateContestHistoryAsync;
+
+            if (searchModel != null)
+            {
+                state.SearchModel = searchModel;
+            }
         }
     }
 
@@ -294,7 +308,7 @@ else
                     ?? new HashSet<string>();
     }
 
-    private async void UpdateContestHistoryAsync(object sender, ContestState contestState)
+    private async void UpdateContestHistoryAsync(object? sender, ContestState contestState)
     {
         await InvokeAsync(StateHasChanged);
 

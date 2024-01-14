@@ -1,6 +1,7 @@
 ﻿using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
+using System;
 
 namespace DraftKings.LineupGenerator.Business.Logging
 {
@@ -8,12 +9,21 @@ namespace DraftKings.LineupGenerator.Business.Logging
     {
         private const string MetricsNamespace = "DraftKings.LineupGenerator.Business.Metrics";
 
-        public static LoggerConfiguration Build()
+        public static LoggerConfiguration Build(bool logToConsole = true, bool logToFile = true, Action<LoggerConfiguration> configure = null)
         {
             var configuration = new LoggerConfiguration();
 
-            AddFileSink(configuration);
-            AddConsoleSink(configuration);
+            if (logToFile)
+            {
+                AddFileSink(configuration);
+            }
+
+            if (logToConsole)
+            {
+                AddConsoleSink(configuration);
+            }
+
+            configure?.Invoke(configuration);
 
             return configuration;
         }
@@ -59,8 +69,14 @@ namespace DraftKings.LineupGenerator.Business.Logging
             {
                 subLogger.Filter.ByIncludingOnly(logEvent =>
                 {
-                    return logEvent.Properties.TryGetValue("SourceContext", out var logEventProperty) &&
-                        logEventProperty is ScalarValue scalarValue &&
+                    if (!logEvent.Properties.ContainsKey("SourceContext"))
+                    {
+                        return false;
+                    }
+
+                    var logEventProperty = logEvent.Properties["SourceContext"];
+
+                    return logEventProperty is ScalarValue scalarValue &&
                         scalarValue.Value.ToString().StartsWith("DraftKings") &&
                         !scalarValue.Value.ToString().StartsWith(MetricsNamespace);
                 });
