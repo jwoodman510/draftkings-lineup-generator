@@ -1,6 +1,7 @@
 ﻿using DraftKings.LineupGenerator.Business;
 using DraftKings.LineupGenerator.Business.Logging;
 using DraftKings.LineupGenerator.Razor;
+using DraftKings.LineupGenerator.Razor.Logging;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
@@ -10,7 +11,7 @@ namespace DraftKings.LineupGenerator.App
     {
         public static MauiApp CreateMauiApp()
         {
-            Log.Logger = SerilogConfiguration.Build().CreateLogger();
+            Log.Logger = SerilogConfiguration.Build(configure: x => x.ConfigureRazorLogging()).CreateLogger();
 
             var builder = MauiApp.CreateBuilder();
             builder

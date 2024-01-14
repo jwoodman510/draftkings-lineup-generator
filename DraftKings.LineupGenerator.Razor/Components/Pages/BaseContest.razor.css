@@ -34,6 +34,16 @@ h3 {
     background-color: var(--mid-grey);
 }
 
+    .generator-progress .logs {
+        padding: 0 5px;
+        color: var(--gold);
+        background: var(--dark);
+        height: 100px;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
 .lineup-container {
     padding: 20px;
 }

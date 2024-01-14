@@ -4,6 +4,7 @@
 @using DraftKings.LineupGenerator.Models.Contests
 @using DraftKings.LineupGenerator.Models.Lineups
 @using DraftKings.LineupGenerator.Razor.Contests
+@using DraftKings.LineupGenerator.Razor.Logging
 @using DraftKings.LineupGenerator.Razor.Services
 
 @implements IDisposable
@@ -139,14 +140,23 @@ else
         @foreach (var item in state.Progress)
         {
             <div class="row">
-                <div class="col-sm-2"></div>
-                <div class="col-sm-4">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-5">
                     <b>Iterations: </b> @item.iterationCount.ToString("n0")
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-5">
                     <b>Valid Lineups Found: </b> @item.validLineupCount.ToString("n0")
                 </div>
-                <div class="col-sm-2"></div>
+                <div class="col-sm-1"></div>
+            </div>
+        }
+        @if (state.IsRunning)
+        {
+            <div class="logs">
+                @foreach (var item in InMemorySink.LogEvents)
+                {
+                    <div>@item</div>
+                }
             </div>
         }
     </div>

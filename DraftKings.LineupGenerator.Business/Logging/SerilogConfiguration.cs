@@ -1,6 +1,7 @@
 ﻿using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
+using System;
 
 namespace DraftKings.LineupGenerator.Business.Logging
 {
@@ -8,7 +9,7 @@ namespace DraftKings.LineupGenerator.Business.Logging
     {
         private const string MetricsNamespace = "DraftKings.LineupGenerator.Business.Metrics";
 
-        public static LoggerConfiguration Build(bool logToConsole = true, bool logToFile = true)
+        public static LoggerConfiguration Build(bool logToConsole = true, bool logToFile = true, Action<LoggerConfiguration> configure = null)
         {
             var configuration = new LoggerConfiguration();
 
@@ -21,6 +22,8 @@ namespace DraftKings.LineupGenerator.Business.Logging
             {
                 AddConsoleSink(configuration);
             }
+
+            configure?.Invoke(configuration);
 
             return configuration;
         }

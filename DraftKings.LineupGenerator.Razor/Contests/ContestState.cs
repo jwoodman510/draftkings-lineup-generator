@@ -78,8 +78,7 @@ namespace DraftKings.LineupGenerator.Razor.Contests
 
                 _cancellationTokenSource.Cancel();
 
-                Results = results;
-                _resultsChanged?.Invoke(this, this);
+                SetResults(results);
             }, TaskCreationOptions.LongRunning);
 
             _progressTask = Task.Factory.StartNew(async () =>
@@ -87,8 +86,8 @@ namespace DraftKings.LineupGenerator.Razor.Contests
                 while (!_cancellationTokenSource.IsCancellationRequested)
                 {
                     Progress = _lineupGeneratorService.GetProgress().ToList();
-                    Results = _lineupGeneratorService.GetCurrentLineups().ToList();
-                    _resultsChanged?.Invoke(this, this);
+                    var results = _lineupGeneratorService.GetCurrentLineups().ToList();
+                    SetResults(results);
 
                     await Task.Delay(TimeSpan.FromSeconds(10), _cancellationTokenSource.Token);
                 }
@@ -110,6 +109,18 @@ namespace DraftKings.LineupGenerator.Razor.Contests
             _cancellationTokenSource.Cancel();
             _generatorTask = null;
             _serviceScope.Dispose();
+        }
+
+        private void SetResults(List<LineupsModel> results)
+        {            
+            foreach (var result in results)
+            {
+                result.Lineups = result.Lineups.Take(RequestModel.LineupCount).ToList();
+            }
+
+            Results = results;
+
+            _resultsChanged?.Invoke(this, this);
         }
     }
 }
