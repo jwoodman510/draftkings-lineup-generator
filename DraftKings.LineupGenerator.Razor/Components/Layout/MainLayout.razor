@@ -1,5 +1,15 @@
 ﻿@inherits LayoutComponentBase
+
 @using BlazorBootstrap
+@using Blazored.LocalStorage
+@using DraftKings.LineupGenerator.Caching
+@using DraftKings.LineupGenerator.Razor.Contests
+@using DraftKings.LineupGenerator.Razor.Services
+
+@inject ICacheService CacheService;
+@inject ILocalStorageService LocalStorageService;
+@inject IRecentContestService RecentContestService;
+@inject ContestStateProvider ContestStateProvider;
 
 <div class="page">
     <div class="sidebar">
@@ -19,4 +29,21 @@
 @code {
     [CascadingParameter]
     protected bool IsConnected { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        const string requiredStorageVersion = "v1";
+
+        var storageVersion = await LocalStorageService.GetItemAsStringAsync(nameof(requiredStorageVersion));
+
+        if (storageVersion != requiredStorageVersion)
+        {
+            await RecentContestService.RemoveAllAsync();
+            await CacheService.ClearAsync(default);
+            await LocalStorageService.ClearAsync(default);
+            ContestStateProvider.Reset();
+
+            await LocalStorageService.SetItemAsStringAsync(nameof(requiredStorageVersion), requiredStorageVersion);
+        }
+    }
 }
